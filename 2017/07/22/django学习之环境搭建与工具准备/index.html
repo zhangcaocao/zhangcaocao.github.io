@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Python_环境搭建," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="小火箭 | Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="生活所迫，学习web；人生苦短，我用Python。这篇文章总结的是学习Python的django框架之前所做的准备，主要包括两方面:   环境搭建 工具准备   环境搭建:1，Python的安装  版本 2.7.13 下载地址:python2.7.13 python环境变量配置   2，Python虚拟环境的安装:1，virtualenv安装:1pip install virtualenv  2，">
+<meta name="keywords" content="Python_环境搭建">
+<meta property="og:type" content="article">
+<meta property="og:title" content="django学习之环境搭建与工具准备">
+<meta property="og:url" content="http://www.oez-blog.space/2017/07/22/django学习之环境搭建与工具准备/index.html">
+<meta property="og:site_name" content="小火箭 | Blog">
+<meta property="og:description" content="生活所迫，学习web；人生苦短，我用Python。这篇文章总结的是学习Python的django框架之前所做的准备，主要包括两方面:   环境搭建 工具准备   环境搭建:1，Python的安装  版本 2.7.13 下载地址:python2.7.13 python环境变量配置   2，Python虚拟环境的安装:1，virtualenv安装:1pip install virtualenv  2，">
+<meta property="og:image" content="http://www.oez-blog.space/images/P_Virtualenv.png">
+<meta property="og:image" content="http://www.oez-blog.space/images/P_Virtualenvwrapper.png">
+<meta property="og:updated_time" content="2017-07-22T08:40:19.629Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="django学习之环境搭建与工具准备">
+<meta name="twitter:description" content="生活所迫，学习web；人生苦短，我用Python。这篇文章总结的是学习Python的django框架之前所做的准备，主要包括两方面:   环境搭建 工具准备   环境搭建:1，Python的安装  版本 2.7.13 下载地址:python2.7.13 python环境变量配置   2，Python虚拟环境的安装:1，virtualenv安装:1pip install virtualenv  2，">
+<meta name="twitter:image" content="http://www.oez-blog.space/images/P_Virtualenv.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.oez-blog.space/2017/07/22/django学习之环境搭建与工具准备/"/>
+
+
+
+
+
+  <title>django学习之环境搭建与工具准备 | 小火箭 | Blog</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?1e981ec3e81b1cff621d40bf6ca62d3f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta custom-logo">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小火箭 | Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archives"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.oez-blog.space/2017/07/22/django学习之环境搭建与工具准备/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="机智的小火箭">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小火箭 | Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">django学习之环境搭建与工具准备</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-22T13:28:00-12:00">
+                July 22nd 2017
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Django/" itemprop="url" rel="index">
+                    <span itemprop="name">Django</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>生活所迫，学习web；人生苦短，我用Python。<br>这篇文章总结的是学习Python的django框架之前所做的准备，主要包括两方面:</p>
+<blockquote>
+<ul>
+<li>环境搭建</li>
+<li>工具准备</li>
+</ul>
+</blockquote>
+<h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建:"></a>环境搭建:</h2><h4 id="1，Python的安装"><a href="#1，Python的安装" class="headerlink" title="1，Python的安装"></a>1，Python的安装</h4><blockquote>
+<ul>
+<li>版本 2.7.13</li>
+<li>下载地址:<a href="https://www.python.org/ftp/python/2.7.13/python-2.7.13.msi" target="_blank" rel="external">python2.7.13</a></li>
+<li><a href="http://www.cnblogs.com/dangeal/p/5455005.html" target="_blank" rel="external">python环境变量配置</a></li>
+</ul>
+</blockquote>
+<h4 id="2，Python虚拟环境的安装"><a href="#2，Python虚拟环境的安装" class="headerlink" title="2，Python虚拟环境的安装:"></a>2，Python虚拟环境的安装:</h4><h5 id="1，virtualenv安装"><a href="#1，virtualenv安装" class="headerlink" title="1，virtualenv安装:"></a>1，virtualenv安装:</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip install virtualenv</div></pre></td></tr></table></figure>
+<p><img src="http://www.oez-blog.space/images/P_Virtualenv.png" alt="virtualenv安装"></p>
+<h5 id="2，virtualenvwrapper安装"><a href="#2，virtualenvwrapper安装" class="headerlink" title="2，virtualenvwrapper安装:"></a>2，virtualenvwrapper安装:</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip install virtualenvwrapper-win  <span class="comment">#  linux 不用加上"-win"</span></div></pre></td></tr></table></figure>
+<p><img src="http://www.oez-blog.space/images/P_Virtualenvwrapper.png" alt="virtualenvwrapper安装"></p>
+<h5 id="3，virtualenvwrapper虚拟环境用法简介"><a href="#3，virtualenvwrapper虚拟环境用法简介" class="headerlink" title="3，virtualenvwrapper虚拟环境用法简介:"></a>3，virtualenvwrapper虚拟环境用法简介:</h5><h6 id="1，创建一个虚拟环境”testvir”"><a href="#1，创建一个虚拟环境”testvir”" class="headerlink" title="1，创建一个虚拟环境”testvir”:"></a>1，创建一个虚拟环境”testvir”:</h6><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mkvirtualenv testvir</div></pre></td></tr></table></figure>
+<h6 id="2，workon指令，查看所有的虚拟环境；"><a href="#2，workon指令，查看所有的虚拟环境；" class="headerlink" title="2，workon指令，查看所有的虚拟环境；"></a>2，<code>workon</code>指令，查看所有的虚拟环境；</h6><h6 id="3，-进入-退出testvir虚拟环境"><a href="#3，-进入-退出testvir虚拟环境" class="headerlink" title="3， 进入/退出testvir虚拟环境:"></a>3， 进入/退出<code>testvir</code>虚拟环境:</h6><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">workon testvir</div><div class="line">deactivate</div></pre></td></tr></table></figure>
+<h6 id="4，虚拟环境的所在的目录"><a href="#4，虚拟环境的所在的目录" class="headerlink" title="4，虚拟环境的所在的目录:"></a>4，虚拟环境的所在的目录:</h6><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">C:\Users\Username\Envs</div></pre></td></tr></table></figure>
+<h5 id="3，Django的安装"><a href="#3，Django的安装" class="headerlink" title="3，Django的安装:"></a>3，Django的安装:</h5><h6 id="1，创建虚拟环境，并且进入"><a href="#1，创建虚拟环境，并且进入" class="headerlink" title="1，创建虚拟环境，并且进入:"></a>1，创建虚拟环境，并且进入:</h6><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mkvirtualenv Django_Demo</div></pre></td></tr></table></figure>
+<h6 id="2，使用pip命令安装Django-1-9-8"><a href="#2，使用pip命令安装Django-1-9-8" class="headerlink" title="2，使用pip命令安装Django == 1.9.8"></a>2，使用<code>pip</code>命令安装Django == 1.9.8</h6><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip install django == <span class="number">1.9</span><span class="number">.8</span> <span class="comment"># 注意版本是1.9.8</span></div></pre></td></tr></table></figure>
+<h5 id="4，MySQL数据库的安装"><a href="#4，MySQL数据库的安装" class="headerlink" title="4，MySQL数据库的安装:"></a>4，MySQL数据库的安装:</h5><blockquote>
+<p>下载地址:  <a href="https://www.baidu.com/link?url=26Mx2tX1_khpUcXsV5Kgp_1XLTQaNSrJF2cpx3-1SfKCdcxVBE4kNDlKHaIPPnIkcQLc2e1o0uk7qc7wHdJbX4OSxLOE_hoXxPecwohA9fq&amp;wd=&amp;eqid=c64a3144000169000000000359735ea3" target="_blank" rel="external">MySQL for Windows</a></p>
+</blockquote>
+<h2 id="工具准备"><a href="#工具准备" class="headerlink" title="工具准备"></a>工具准备</h2><p>需要以下三个工具: </p>
+<blockquote>
+<ul>
+<li><a href="https://www.jetbrains.com/pycharm/download/#section=windows" target="_blank" rel="external">Pycharm专业版</a></li>
+<li><a href="https://www.baidu.com/link?url=Ic9hLREUPAGDu1IMXnyAF2p0xdKK4mAi7Hu3X-UKuO7fuYdi0YcIppnbH6_MrCSx80q2E6pXhrEXtjdgvJMM89_tNNdEHqplB6gi4HB3rra&amp;wd=&amp;eqid=9d60e04c000130fd0000000359735f91" target="_blank" rel="external">Navicat for MySQL</a></li>
+</ul>
+</blockquote>
+<h4 id="1，PyCharm注册码的获取"><a href="#1，PyCharm注册码的获取" class="headerlink" title="1，PyCharm注册码的获取:"></a>1，PyCharm注册码的获取:</h4><p><a href="http://idea.lanyus.com/" target="_blank" rel="external">传送门</a></p>
+<h4 id="2，Navicat破解方法"><a href="#2，Navicat破解方法" class="headerlink" title="2，Navicat破解方法:"></a>2，Navicat破解方法:</h4><p>。。。。。大约一小时后。。。。</p>
+<p>他喵的，那玩意的Windows版本太难破解了，惊了，不过找到了个更好的.2333</p>
+<p><a href="http://download.csdn.net/detail/hewuke2005/9846936" target="_blank" rel="external">获取链接</a> –拿走不谢</p>
+<h2 id="总结一下"><a href="#总结一下" class="headerlink" title="总结一下"></a>总结一下</h2><p>本篇文章总结了基本的环境搭建和工具安装，下一篇将带来具体的示例<code>Django的表单提交</code>来总结Django的操作。</p>
+<p>最后，如果有娃对<code>Navicat</code>那玩意恋恋不忘的话:</p>
+<blockquote>
+<p>1， 可以选择去弄一只Linux虚拟机，然后配置一下，Linux下的很好破解，<a href="http://tycomputer.iteye.com/blog/1499499" target="_blank" rel="external">教程</a>；<br>2， 当然是一直试用，不关软件啦，23333。</p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python-环境搭建/" rel="tag"># Python_环境搭建</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/19/双系统Windows下直接删除Linux分区后解决办法/" rel="next" title="双系统Windows下直接删除Linux分区后解决办法">
+                <i class="fa fa-chevron-left"></i> 双系统Windows下直接删除Linux分区后解决办法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/24/django学习之初识表单提交/" rel="prev" title="django学习之初识表单提交">
+                django学习之初识表单提交 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yOTU2My82MTMx"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="机智的小火箭" />
+          <p class="site-author-name" itemprop="name">机智的小火箭</p>
+           
+              <p class="site-description motion-element" itemprop="description">”任何没有输出的学习都只是对知识的意淫！“</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/ji-zhi-di-xiao-huo-jian/activities" target="_blank" title="Zhi_hu">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Zhi_hu
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/zhangcaocao" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.pemale.studio/" title="YQ_Gallery" target="_blank">YQ_Gallery</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://cuiqingcai.com/" title="静觅" target="_blank">静觅</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#环境搭建"><span class="nav-number">1.</span> <span class="nav-text">环境搭建:</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1，Python的安装"><span class="nav-number">1.0.1.</span> <span class="nav-text">1，Python的安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2，Python虚拟环境的安装"><span class="nav-number">1.0.2.</span> <span class="nav-text">2，Python虚拟环境的安装:</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1，virtualenv安装"><span class="nav-number">1.0.2.1.</span> <span class="nav-text">1，virtualenv安装:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2，virtualenvwrapper安装"><span class="nav-number">1.0.2.2.</span> <span class="nav-text">2，virtualenvwrapper安装:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3，virtualenvwrapper虚拟环境用法简介"><span class="nav-number">1.0.2.3.</span> <span class="nav-text">3，virtualenvwrapper虚拟环境用法简介:</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#1，创建一个虚拟环境”testvir”"><span class="nav-number">1.0.2.3.1.</span> <span class="nav-text">1，创建一个虚拟环境”testvir”:</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2，workon指令，查看所有的虚拟环境；"><span class="nav-number">1.0.2.3.2.</span> <span class="nav-text">2，workon指令，查看所有的虚拟环境；</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#3，-进入-退出testvir虚拟环境"><span class="nav-number">1.0.2.3.3.</span> <span class="nav-text">3， 进入/退出testvir虚拟环境:</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#4，虚拟环境的所在的目录"><span class="nav-number">1.0.2.3.4.</span> <span class="nav-text">4，虚拟环境的所在的目录:</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3，Django的安装"><span class="nav-number">1.0.2.4.</span> <span class="nav-text">3，Django的安装:</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#1，创建虚拟环境，并且进入"><span class="nav-number">1.0.2.4.1.</span> <span class="nav-text">1，创建虚拟环境，并且进入:</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2，使用pip命令安装Django-1-9-8"><span class="nav-number">1.0.2.4.2.</span> <span class="nav-text">2，使用pip命令安装Django == 1.9.8</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4，MySQL数据库的安装"><span class="nav-number">1.0.2.5.</span> <span class="nav-text">4，MySQL数据库的安装:</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工具准备"><span class="nav-number">2.</span> <span class="nav-text">工具准备</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1，PyCharm注册码的获取"><span class="nav-number">2.0.1.</span> <span class="nav-text">1，PyCharm注册码的获取:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2，Navicat破解方法"><span class="nav-number">2.0.2.</span> <span class="nav-text">2，Navicat破解方法:</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结一下"><span class="nav-number">3.</span> <span class="nav-text">总结一下</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2017.7.14 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">机智的小火箭</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
