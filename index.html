@@ -330,6 +330,163 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.oez-blog.space/2017/07/26/记使用VirtualBox-Windows7安装ubuntu-开机异常处理办法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="机智的小火箭">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小火箭 | Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/26/记使用VirtualBox-Windows7安装ubuntu-开机异常处理办法/" itemprop="url">记使用VirtualBox+Windows7安装ubuntu,开机异常处理办法</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-26T18:57:27-12:00">
+                July 26th 2017
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><img src="http://otneosm59.bkt.clouddn.com/fm_blog_2.jpg" alt="封面"><br>前几天,想在Windows下弄一只轻量级的C语言开发环境,然后配置了一天的<code>Vscode</code>(别问我为毛线,惊了),那些教程,甚至那只插件的官方文档,都和那个玩意有很大的区别,反正惊了,一气之下,决定弄一只虚拟机Linux:</p>
+<p>结果,他喵的,开始安装,启动的时候就出问题了:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">The virtual machine &apos;Ubuntu&apos; has terminated unexpectedly during startup with exit code 1 (0x1). More details may be available in &apos;C:\Users\pamela\VirtualBox VMs\Ubuntu\Logs\VBoxHardening.log&apos;.</div><div class="line"></div><div class="line"></div><div class="line">返回 代码:</div><div class="line">E_FAIL (0x80004005)</div><div class="line">组件:</div><div class="line">MachineWrap</div><div class="line">界面:</div><div class="line">IMachine &#123;b2547866-a0a1-4391-8b86-6952d82efaa0&#125;</div></pre></td></tr></table></figure></p>
+<p><img src="http://otneosm59.bkt.clouddn.com/2017_7_27_8.png" alt="问题"></p>
+<h4 id="这个相似问题的问题-网上剧他喵的多的教程"><a href="#这个相似问题的问题-网上剧他喵的多的教程" class="headerlink" title="这个相似问题的问题,网上剧他喵的多的教程:"></a>这个相似问题的问题,网上剧他喵的多的教程:</h4><blockquote>
+<ul>
+<li>大概就是找到安装目录下的vboxdrv文件夹，</li>
+<li>如D:\Program Files\Oracle\VirtualBox\drivers\vboxdrv，</li>
+<li>右击VBoxDrv.inf，选安装，然后重启。</li>
+</ul>
+</blockquote>
+<h4 id="历史的教训告诉我-没什么卵用-反正我的不行-然后发现-这只VirtualBox的启动还有几个选项"><a href="#历史的教训告诉我-没什么卵用-反正我的不行-然后发现-这只VirtualBox的启动还有几个选项" class="headerlink" title="历史的教训告诉我,没什么卵用(反正我的不行),  然后发现,这只VirtualBox的启动还有几个选项:"></a>历史的教训告诉我,没什么卵用(反正我的不行),  然后发现,这只<code>VirtualBox</code>的启动还有几个选项:</h4><blockquote>
+<ul>
+<li>正常启动(N)</li>
+<li>无界面启动(H)</li>
+<li>分离式启动(D)</li>
+</ul>
+</blockquote>
+<h4 id="随后果断放弃正常启动-N-选择无界面启动-H-然后-妥妥的-哈哈哈-机智如我"><a href="#随后果断放弃正常启动-N-选择无界面启动-H-然后-妥妥的-哈哈哈-机智如我" class="headerlink" title="随后果断放弃正常启动(N), 选择无界面启动(H),然后,妥妥的,哈哈哈,机智如我"></a>随后果断放弃<code>正常启动(N)</code>, 选择<code>无界面启动(H)</code>,然后,妥妥的,哈哈哈,机智如我</h4><p>看图就知道啦,点显示就可以了<br><img src="http://otneosm59.bkt.clouddn.com/2017_7_27_11.png" alt="无界面启动"></p>
+<p>这也许就是男人的直觉吧….</p>
+<h4 id="说明一下嗷"><a href="#说明一下嗷" class="headerlink" title="说明一下嗷:"></a>说明一下嗷:</h4><blockquote>
+<ul>
+<li>此次异常原因不明,看一只慕课网上的教程,貌似可以重装系统;不过,我这样操作确实可以解决问题.</li>
+</ul>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://www.oez-blog.space/2017/07/26/记写某只小爬虫是遇到的坑及解决方法/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1712,7 +1869,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1723,7 +1880,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1734,7 +1891,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
