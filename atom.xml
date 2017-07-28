@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.oez-blog.space/"/>
-  <updated>2017-07-27T07:24:15.725Z</updated>
+  <updated>2017-07-28T00:18:33.413Z</updated>
   <id>http://www.oez-blog.space/</id>
   
   <author>
@@ -14,6 +14,78 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>linux环境下的C语言开发基础操作总结</title>
+    <link href="http://www.oez-blog.space/2017/07/27/linux%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84C%E8%AF%AD%E8%A8%80%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/"/>
+    <id>http://www.oez-blog.space/2017/07/27/linux环境下的C语言开发基础操作总结/</id>
+    <published>2017-07-27T22:01:52.000Z</published>
+    <updated>2017-07-28T00:18:33.413Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="http://otneosm59.bkt.clouddn.com/fem_blog_3.jpg" alt="封面"><br>前几天安装了<code>Linux</code>下的C语言开发环境,并且复习了一下<a href="http://www.imooc.com/learn/248" target="_blank" rel="external">慕课网</a>(传送门)上面的相关教程,良心老师,干货很多,因此在这里总结一下,以便于以后查看:</p>
+<h2 id="vim的多文件编辑"><a href="#vim的多文件编辑" class="headerlink" title="/vim的多文件编辑"></a>/<em>vim的多文件编辑</em></h2><blockquote>
+<ul>
+<li>:sp : 打开多个文件;</li>
+<li>Ctrl + w + ↑/↓: 移动光标;</li>
+<li>:wqa : 保存所有文件,并退出;</li>
+<li>dd : 复制;</li>
+<li>p:  粘贴;</li>
+</ul>
+</blockquote>
+<h2 id="make-file文件的创建"><a href="#make-file文件的创建" class="headerlink" title="/ make_file文件的创建"></a>/ <em>make_file文件的创建</em></h2><h4 id="首先创建Makefile文件"><a href="#首先创建Makefile文件" class="headerlink" title="首先创建Makefile文件"></a>首先创建<code>Makefile</code>文件</h4><blockquote>
+<ul>
+<li>vi Makefile</li>
+</ul>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">hello.out:max.o min.o hello.c</div><div class="line">	gcc max.o min.o hello.o</div><div class="line">max.o:max.c</div><div class="line">	gcc -c max.c</div><div class="line">min.o:min.c</div><div class="line">	gcc -c min.c</div></pre></td></tr></table></figure>
+<h4 id="然后完善文件结构"><a href="#然后完善文件结构" class="headerlink" title="然后完善文件结构:"></a>然后完善文件结构:</h4><p>此时当前文件夹内应该有以下文件:<br><code>main.c</code>, <code>max.c</code>, <code>max.h</code>, <code>Makefile</code>(注意,M是大写)<br>若缺少<code>max.h</code>文件,程序依然可以运行,但是会存在<code>warning</code>,如图所示:<br><img src="http://otneosm59.bkt.clouddn.com/2017_7_28_1.png" alt="warning"></p>
+<h4 id="warning解决方案"><a href="#warning解决方案" class="headerlink" title="warning解决方案:"></a><code>warning</code>解决方案:</h4><p>捕捉到一只博客上将得很清楚:<a href="http://blog.chinaunix.net/uid-21558711-id-34462.html" target="_blank" rel="external">传送门</a><br><img src="http://otneosm59.bkt.clouddn.com/2017_7_28_2.png" alt="解决方案"></p>
+<h4 id="最后直接运行make命令"><a href="#最后直接运行make命令" class="headerlink" title="最后直接运行make命令:"></a>最后直接运行<code>make</code>命令:</h4><blockquote>
+<ul>
+<li>make</li>
+</ul>
+</blockquote>
+<p><img src="http://otneosm59.bkt.clouddn.com/2017_7_28_3.png" alt="运行`make`命令"></p>
+<h2 id="main-函数"><a href="#main-函数" class="headerlink" title="/main 函数"></a>/<em>main 函数</em></h2><p>万万没想到,<code>main</code>函数还可以这样操作:</p>
+<h4 id="1-命令连接"><a href="#1-命令连接" class="headerlink" title="1,命令连接"></a>1,命令连接</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gcc main.c -o main.out &amp;&amp; ./main.out</div></pre></td></tr></table></figure>
+<h4 id="2-输出return后面的那个数字"><a href="#2-输出return后面的那个数字" class="headerlink" title="2,输出return后面的那个数字:"></a>2,输出<code>return</code>后面的那个数字:</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">echo $?</div></pre></td></tr></table></figure>
+<h4 id="3-main函数的参数"><a href="#3-main函数的参数" class="headerlink" title="3,main函数的参数:"></a>3,<code>main</code>函数的参数:</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argv, <span class="keyword">char</span>* argv[])</span></span></div><div class="line">&#123;</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"argv is %d \n"</span>, argv);  <span class="comment">//参数数量</span></div><div class="line">	<span class="built_in">printf</span>(<span class="string">"%s"</span>, argc[i]);</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><code>argv</code>就是总的参数的数目, <code>argc[]</code>则存储的是具体的参数:<br><img src="http://otneosm59.bkt.clouddn.com/2017_7_28_4.png" alt="`main`函数的参数"></p>
+<h2 id="标准输出流-输入流-错误流"><a href="#标准输出流-输入流-错误流" class="headerlink" title="/标准输出流,输入流,错误流"></a>/<em>标准输出流,输入流,错误流</em></h2><h4 id="1-标准的输出-输入"><a href="#1-标准的输出-输入" class="headerlink" title="1, 标准的输出,输入:"></a>1, 标准的输出,输入:</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line">	  <span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">	  &#123;</div><div class="line">		<span class="keyword">int</span> a;</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"hello word"</span>);</div><div class="line">		<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;a);</div><div class="line">		<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">	  &#125;</div></pre></td></tr></table></figure>
+<h4 id="2-头文件stdio-h包含的3部分"><a href="#2-头文件stdio-h包含的3部分" class="headerlink" title="2, 头文件stdio.h包含的3部分:"></a>2, 头文件<code>stdio.h</code>包含的3部分:</h4><blockquote>
+<ul>
+<li><code>stdin</code>: 标准的输入流, 键盘;</li>
+<li><code>stdout</code>: 标准的输出流, 显示器;</li>
+<li><code>stderr</code>: 标准的错误流;</li>
+</ul>
+</blockquote>
+<p>这里提供一只菜鸟教程的参考链接:<a href="http://www.runoob.com/cprogramming/c-input-output.html" target="_blank" rel="external">传送门</a></p>
+<h4 id="3-输入输出流的解释"><a href="#3-输入输出流的解释" class="headerlink" title="3, 输入输出流的解释:"></a>3, 输入输出流的解释:</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//printf("hello word");</span></div><div class="line"><span class="built_in">fprintf</span>(<span class="built_in">stdout</span>, <span class="string">"hello word"</span>); <span class="comment">// 第一个参数,选择的是输出流;</span></div><div class="line"><span class="comment">//scanf("%d", &amp;a);</span></div><div class="line"><span class="built_in">fscanf</span>(<span class="built_in">stdin</span>, <span class="string">"%d"</span>, &amp;a); <span class="comment">//第一个参数,选择的是输入流;</span></div></pre></td></tr></table></figure>
+<p>由此可见,第一个参数选择的是<code>输出</code>/<code>输入</code>的地址什么的,只需要改变第一个参数,便可以实现<code>重定向</code>.    </p>
+<h4 id="4-重定向"><a href="#4-重定向" class="headerlink" title="4,重定向:"></a>4,重定向:</h4><blockquote>
+<p>1,输出:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">./a.out (1)&gt;&gt; a.txt   //将标准输出流重定向到&quot;a.txt&quot;文件;括号表示可有可无</div><div class="line">cat a.txt           //查看a.txt文件内容</div><div class="line">ls /etc &gt;&gt; etc.txt</div><div class="line">cat etc.txt</div><div class="line">ls /etc &gt;&gt; etc.txt    //单箭头,覆盖原内容</div></pre></td></tr></table></figure></p>
+<p>2,输入:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">./a.out &lt; input.txt;</div><div class="line">./a.out 1&gt;t.txt 2.&gt;f.txt    //分开各处,标准输出流,错误流;</div></pre></td></tr></table></figure></p>
+</blockquote>
+<h2 id="Linux-C语言-管道原理及应用"><a href="#Linux-C语言-管道原理及应用" class="headerlink" title="/Linux C语言,管道原理及应用"></a>/<em>Linux C语言,管道原理及应用</em></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ls /etc/ | grep ab</div><div class="line">ps -e | grep ssh             // 查看进程</div><div class="line">./intput.out | ./avg.out     //   将`./input.out`的输入数据,传送到`./avg.out`这个进程</div></pre></td></tr></table></figure>
+<p>这个地方,就是利用<code>|</code>符号,增加一只管道,进行数据的传输;</p>
+<h2 id="源码"><a href="#源码" class="headerlink" title="/源码"></a>/<em>源码</em></h2><p>上面所用到的代码你可以在这里找到:</p>
+<blockquote>
+<p><a href="https://github.com/zhangcaocao/linux_C_basic-manipulation" target="_blank" rel="external">Github上</a></p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;http://otneosm59.bkt.clouddn.com/fem_blog_3.jpg&quot; alt=&quot;封面&quot;&gt;&lt;br&gt;前几天安装了&lt;code&gt;Linux&lt;/code&gt;下的C语言开发环境,并且复习了一下&lt;a href=&quot;http://www.imoo
+    
+    </summary>
+    
+      <category term="C语言" scheme="http://www.oez-blog.space/categories/C%E8%AF%AD%E8%A8%80/"/>
+    
+    
+      <category term="linux环境下的C语言开发" scheme="http://www.oez-blog.space/tags/linux%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84C%E8%AF%AD%E8%A8%80%E5%BC%80%E5%8F%91/"/>
+    
+  </entry>
   
   <entry>
     <title>记使用VirtualBox+Windows7安装ubuntu,开机异常处理办法</title>
@@ -290,7 +362,7 @@
     <link href="http://www.oez-blog.space/2017/07/19/%E5%8F%8C%E7%B3%BB%E7%BB%9FWindows%E4%B8%8B%E7%9B%B4%E6%8E%A5%E5%88%A0%E9%99%A4Linux%E5%88%86%E5%8C%BA%E5%90%8E%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/"/>
     <id>http://www.oez-blog.space/2017/07/19/双系统Windows下直接删除Linux分区后解决办法/</id>
     <published>2017-07-19T23:08:44.000Z</published>
-    <updated>2017-07-19T04:27:55.402Z</updated>
+    <updated>2017-07-27T22:04:19.644Z</updated>
     
     <content type="html"><![CDATA[<p>昨天晚上凌晨3点左右，发现win7的C盘空间不太够了，于是想删除一个系统，扩大C盘的空间，于是果断百度一下，然后直接删除Linux分区，表示网上那么多教程，怕啥，结果，嗯今天下午才弄好，使用在这里记录一下：</p>
 <h4 id="症状：开机之后面对我的是这样一串文字："><a href="#症状：开机之后面对我的是这样一串文字：" class="headerlink" title="症状：开机之后面对我的是这样一串文字："></a>症状：开机之后面对我的是这样一串文字：</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">GRUB loading </div><div class="line">error: unknow filesystem</div><div class="line">group rescue &gt; _</div></pre></td></tr></table></figure>
@@ -331,7 +403,7 @@
     
     </summary>
     
-      <category term="linux" scheme="http://www.oez-blog.space/categories/linux/"/>
+      <category term="Linux" scheme="http://www.oez-blog.space/categories/Linux/"/>
     
     
       <category term="双系统的坑" scheme="http://www.oez-blog.space/tags/%E5%8F%8C%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%9D%91/"/>
