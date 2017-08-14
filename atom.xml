@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.oez-blog.space/"/>
-  <updated>2017-07-28T00:18:33.413Z</updated>
+  <updated>2017-08-14T02:52:23.913Z</updated>
   <id>http://www.oez-blog.space/</id>
   
   <author>
@@ -14,6 +14,80 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>STM32_TIM知识点总结</title>
+    <link href="http://www.oez-blog.space/2017/08/08/STM32-TIM%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/"/>
+    <id>http://www.oez-blog.space/2017/08/08/STM32-TIM学习总结/</id>
+    <published>2017-08-09T07:09:26.000Z</published>
+    <updated>2017-08-14T02:52:23.913Z</updated>
+    
+    <content type="html"><![CDATA[<p>阅读之前,先听一首歌吧</p>
+<p><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="530" height="86" src="//music.163.com/outchain/player?type=2&id=32408263&auto=0&height=66"></iframe></p>
+<hr>
+<p>STM32  的定时器外设功能强大得1P, “STM32参考手册”中对定时器的介绍就已经占了100多页.由于在下能力有限，对高级定时器的理解与运用几乎为0，所以这里就没有总结了。</p>
+<h2 id="分类"><a href="#分类" class="headerlink" title="分类:"></a>分类:</h2><p>STM32一个有8个都为<code>16</code>位的定时器:</p>
+<blockquote>
+<p>基本定时器: TIM6, TIM7<br>通用定时器: TIM2, TIM3, TIM4, TIM5<br>高级定时器: TIM1, TIM8</p>
+</blockquote>
+<p>就是这些定时器使得STM32 具有定时, 信号的频率测量, 信号的PWM测量, PWM输出, 三相6步电机控制及编码器接口等功能. </p>
+<hr>
+<h2 id="定时器功能分析"><a href="#定时器功能分析" class="headerlink" title="定时器功能分析"></a>定时器功能分析</h2><h4 id="基本定时器"><a href="#基本定时器" class="headerlink" title="基本定时器:"></a>基本定时器:</h4><p><img src="~/基本定时器的结构.png" alt="基本定时器的结构"><br>首先我们先来看这张图:</p>
+<blockquote>
+<p>1, 内部的芯片与DAC外设相连: </p>
+</blockquote>
+<p>基本定时器TIM6 和 TIM7 只具备最基本的定时功能, 即累加的时钟脉冲数超过预定值时, 会触发中断也可以触发DMA请求; 由此便可通过触发输出驱动DAC, 也可作为其他通用定时器的时基标准.</p>
+<blockquote>
+<p>2, 流程图的分析</p>
+</blockquote>
+<p>这两个基本定时器都采用的是<code>TIMxCLK时钟源</code> , 时钟源经过<code>PSC预分频器</code>输出到<code>脉冲计数器TIMx_CNT</code>,在这里基本定时器只能工作在<code>向上计数模式</code>, 在<code>重载寄存器 TIMx_ARR</code>中保存的是定时器的溢出值.</p>
+<blockquote>
+<p>3, 工作过程:</p>
+</blockquote>
+<p>首先<code>脉冲计数器 TIMx_CNT</code>由时钟触发进行计数, 当<code>TIMx_CNT</code>的计数值 <code>x</code> 等于 <code>重载寄存器 TIMx_ARR</code>中保存的数值 <code>N</code>时, 产生溢出事件, 可<code>触发中断</code>或者<code>DMA请求</code>, 然后<code>TIMx_CNT</code>的值被重新置为0, 重新开始向上计数.</p>
+<h4 id="通用定时器"><a href="#通用定时器" class="headerlink" title="通用定时器:"></a>通用定时器:</h4><p><img src="~/高级定时器的结构.png" alt="高级定时器的结构"><br>要弄懂通用定时器的功能,结构, 我们当然还是要基于它的结构图来分析, 理解:</p>
+<blockquote>
+<p>1, 在分析结构图之前我们先了解一下通用定时器的功能:</p>
+</blockquote>
+<p>通用定时器的功能除了基本的定时之外, 它主要用在测量输入脉冲的频率, 脉冲宽与输出PWM脉冲的场合, 还具有编码器的接口.</p>
+<blockquote>
+<p>2, 捕获/比较寄存器</p>
+</blockquote>
+<p>由上图可以看出通用定时器的基本计时功能和基本定时器的工作方式一样, 同样是把时钟源经过<code>预分频器</code>输出到<code>脉冲计数器TIMx_CNT</code>累加, 溢出时产生<code>中断</code>或<code>DMA请求</code>；<br>然后从图可以看到， <code>CNT计数器</code>下面还有4个<code>捕获/比较x寄存器</code>，他们分别对应着<code>TIM</code>的4个通道，<code>通用计时器</code>的功能强大于<code>基本定时器</code>也就是因为多了这4个<code>捕获/比较寄存器</code>，下面咱们来详细的讲解一下这只寄存器的工作方式；<br><code>捕获/比较x寄存器 TIMx_CCR(capture/compare register)</code>顾名思义同时具有<code>捕获</code>， <code>比较</code>的功能：</p>
+<blockquote>
+<ul>
+<li><code>捕获</code>可以理解为“捕捉”，“获取”相对于寄存器即为“储存”， TIMx_CCR通过在时刻a储存只进行计数的<code>脉冲计数器TIMx_CNT</code>的值x1， 并且在时刻b储存<code>脉冲计数器TIMx_CNT</code>的值x2， 如此若知道<code>脉冲计数器TIMx_CNT</code>的计数频率f1，并且选择的是合适的时间点a,b （E.g：选择输入脉冲在电平翻转时刻），如此便可测量计算出目标脉冲的周期；</li>
+<li><code>比较</code>则是让TIMx_CCR在输出时储存一个脉冲值N， 并且与<code>脉冲计数器TIMx_CNT</code>的当前计数值进行比较，根据比较结果进行不同的电平输出；</li>
+</ul>
+</blockquote>
+<p>总之，<code>脉冲计数器TIMx_CNT</code>就是一个计数功能，一直在一个范围（0 到重载寄存器TIMx_ARR配置的值N）内，从0开始循环增加；而在<code>捕获/比较x寄存TIMx_CCR(capture/compare register)</code>捕获阶段， TIMx_CCR存储的是脉冲计数器TIMx_CNT的值，目的是计算脉冲周期； 比较阶段储存的是脉冲值， 目的是确定输出的电平高低；</p>
+<blockquote>
+<p>3, PWM 输出/输入过程分析：</p>
+</blockquote>
+<p>只要认真理解了上面<code>捕获/比较寄存器</code>的功能，理解PWM的输入/输出过程都不会太难，下面我们以一个示例着重讲解几个基本物理量的计算方法和意义：</p>
+<blockquote>
+<ul>
+<li>在PWM输出过程中，若采用向上计数模式，重载寄存器TIMx_ARR设置的值为N，则得到的输出脉冲周期为（N+1）乘以触发脉冲的时钟周期； 脉冲宽度为比较寄存器TIMx_CCR的值A乘以触发脉冲的时钟周期，由此可得到PWM输出的占空比为 A/(N+1);</li>
+<li>在PWM输入过程中， 采用<code>捕获/比较寄存器</code>的捕获功能， 在第一个上升沿到达时，触发捕获中断，将TIMx_CNT的计数值复位为0， 于是TIMx_CNT开始从0开始计数， 直到出现第一个下降沿时，触发捕获事件，捕获寄存器将此时TIMx_CNT的值x1储存起来；<br>直到出现第二个上升沿，储存x2；由此可以得到，（X1+1）若为高电平，则可以得到高电平持续的时间为（x1+1）* TIMx_CCR的周期，而 （X2+1） 乘TIMx_CCR的周期即为待检测的PWM波的输入周期， 由此便可以测量计算出占空比。 </li>
+</ul>
+</blockquote>
+<h4 id="重要名词的解释"><a href="#重要名词的解释" class="headerlink" title="重要名词的解释:"></a>重要名词的解释:</h4><p>相信很多同学像我一样已经被上面的各种寄存器，各种名词弄晕了吧，弄晕了没关系，好好罗列一下，也可以对应他们的英文，就清楚了嘛：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">TIMxCLK时钟源；</div><div class="line">PSC预分频器；</div><div class="line">捕获/比较x寄存器 TIMx_CCR(capture/compare register)；</div><div class="line">脉冲计数器TIMx_CNT  / CNT计数器；</div><div class="line">重载寄存器TIMx_ARR；</div><div class="line">脉冲宽度；</div><div class="line">脉冲周期；</div><div class="line">PWM的占空比；</div></pre></td></tr></table></figure></p>
+<p>好啦，上面已经很详细的讲解了<code>基本定时器</code>和<code>通用定时器</code>的功能了，下一篇再结合代码，理解一下。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;阅读之前,先听一首歌吧&lt;/p&gt;
+&lt;p&gt;&lt;iframe frameborder=&quot;no&quot; border=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; width=&quot;530&quot; height=&quot;86&quot; src=&quot;//music.163.com/outc
+    
+    </summary>
+    
+      <category term="STM32" scheme="http://www.oez-blog.space/categories/STM32/"/>
+    
+    
+      <category term="STM32_TIM学习总结" scheme="http://www.oez-blog.space/tags/STM32-TIM%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
   
   <entry>
     <title>linux环境下的C语言开发基础操作总结</title>
