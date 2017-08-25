@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.oez-blog.space/"/>
-  <updated>2017-08-25T13:21:28.448Z</updated>
+  <updated>2017-08-25T13:25:01.888Z</updated>
   <id>http://www.oez-blog.space/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://www.oez-blog.space/2017/08/25/STM32-TIM%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B/"/>
     <id>http://www.oez-blog.space/2017/08/25/STM32-TIM学习总结-代码示例/</id>
     <published>2017-08-25T11:42:29.000Z</published>
-    <updated>2017-08-25T13:21:28.448Z</updated>
+    <updated>2017-08-25T13:25:01.888Z</updated>
     
     <content type="html"><![CDATA[<p>安利一首歌 。。。。</p>
 <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="530" height="86" src="//music.163.com/outchain/player?type=2&id=442016694&auto=0&height=66"></iframe>
@@ -67,7 +67,7 @@
 <td style="text-align:left">TIM3_CH1</td>
 <td style="text-align:left">TIM3_CH2</td>
 <td style="text-align:left">TIM3_CH3</td>
-<td style="text-align:left">TIM_CH4</td>
+<td style="text-align:left">TIM3_CH4</td>
 </tr>
 </tbody>
 </table>
