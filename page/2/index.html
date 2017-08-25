@@ -330,6 +330,176 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.oez-blog.space/2017/07/17/Hexo+GitHub博客搭建总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="机智的小火箭">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小火箭 | Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/17/Hexo+GitHub博客搭建总结/" itemprop="url">Hexo_GitHub博客搭建总结</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-17T20:20:06+08:00">
+                July 17th 2017
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/博客完善/" itemprop="url" rel="index">
+                    <span itemprop="name">博客完善</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/07/17/Hexo+GitHub博客搭建总结/" class="leancloud_visitors" data-flag-title="Hexo_GitHub博客搭建总结">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>经过这几天的捣鼓，我的第一个正式的博客已经初显雏形了，鉴于网上教程很多，所以具体细节不再叙述，可以看看下面的几个参考链接，这里只是简单的总结一下：</p>
+<h4 id="1，工具准备"><a href="#1，工具准备" class="headerlink" title="1，工具准备"></a>1，工具准备</h4><blockquote>
+<ul>
+<li><a href="https://git-scm.com/downloads" target="_blank" rel="external">Git</a></li>
+<li><a href="https://nodejs.org/zh-cn/download/" target="_blank" rel="external">Nodejs</a></li>
+<li><a href="https://hexo.io/" target="_blank" rel="external">Hexo</a></li>
+<li><a href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="external">Hexo-theme-next</a></li>
+</ul>
+</blockquote>
+<h4 id="2，常用命令"><a href="#2，常用命令" class="headerlink" title="2，常用命令"></a>2，常用命令</h4><h6 id="gt-安装Hexo需要的命令："><a href="#gt-安装Hexo需要的命令：" class="headerlink" title="&gt;安装Hexo需要的命令："></a>&gt;安装Hexo需要的命令：</h6><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ npm install hexo-cli -g</div><div class="line">$ hexo init blog</div><div class="line">$ cd blog</div><div class="line">$ npm install</div><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+<h6 id="gt-编辑博客常用命令："><a href="#gt-编辑博客常用命令：" class="headerlink" title="&gt;编辑博客常用命令："></a>&gt;编辑博客常用命令：</h6><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ hexo generate (hexo g)   <span class="comment">#生成静态文件，会在当前目录下生成一个新的叫做public的文件夹</span></div><div class="line">$ hexo server (hexo s)     <span class="comment">#启动本地web服务，用于博客的预览</span></div><div class="line">$ hexo deploy (hexo d)     <span class="comment">#部署博客到远端服务器</span></div><div class="line">$ hexo new <span class="string">"postName"</span>      <span class="comment">#新建文章</span></div><div class="line">$ hexo new page <span class="string">"pageName"</span> <span class="comment">#新建页面</span></div></pre></td></tr></table></figure>
+<h4 id="3，遇到的坑"><a href="#3，遇到的坑" class="headerlink" title="3，遇到的坑"></a>3，遇到的坑</h4><h6 id="gt-提示ERROR-Deployer-not-found-git"><a href="#gt-提示ERROR-Deployer-not-found-git" class="headerlink" title="&gt;提示ERROR Deployer not found: git"></a>&gt;提示<code>ERROR Deployer not found: git</code></h6><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo npm install hexo-deployer-git --save <span class="comment">#在根目录运行</span></div></pre></td></tr></table></figure>
+<h6 id="gt-提示FATAL-Port-4000-has-been-used-Try-other-port-instead"><a href="#gt-提示FATAL-Port-4000-has-been-used-Try-other-port-instead" class="headerlink" title="&gt;提示FATAL Port 4000 has been used. Try other port instead."></a>&gt;提示<code>FATAL Port 4000 has been used. Try other port instead.</code></h6><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo hexo s -p <span class="number">5000</span> <span class="comment">#在根目录运行</span></div></pre></td></tr></table></figure>
+<h6 id="gt-博客更新上传后CNAME文件丢失"><a href="#gt-博客更新上传后CNAME文件丢失" class="headerlink" title="&gt;博客更新上传后CNAME文件丢失"></a>&gt;博客更新上传后<code>CNAME</code>文件丢失</h6><blockquote>
+<p>只需要在上传之前将该文件放入<code>public</code>文件夹即可;</p>
+</blockquote>
+<h4 id="4，参考链接"><a href="#4，参考链接" class="headerlink" title="4，参考链接"></a>4，参考链接</h4><blockquote>
+<ul>
+<li><a href="http://theme-next.iissnan.com/theme-settings.html" target="_blank" rel="external">Next 主题配置</a></li>
+<li><a href="http://www.jianshu.com/p/q81RER" target="_blank" rel="external">Markdown新手入门</a></li>
+<li><a href="http://markeditor.com/app/markeditor" target="_blank" rel="external">Markeditor编辑器</a></li>
+<li><a href="http://www.jianshu.com/p/c07ccdfba068" target="_blank" rel="external">用Hexo-nexT-GitHub搭建个人博客</a></li>
+<li><a href="http://xuhaoblog.com/hexo-github-pages.html" target="_blank" rel="external">基于Hexo+GitHub Pages 搭建个人博客教程</a></li>
+<li><a href="http://www.jianshu.com/p/42aa637f614a" target="_blank" rel="external">使用Hexo在Github上搭建专属博客之技术总结</a></li>
+</ul>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://www.oez-blog.space/2017/07/17/使用一根网线-笔记本连接树莓派-技术总结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -361,7 +531,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-17T04:16:21-12:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-17T04:16:21+08:00">
                 July 17th 2017
               </time>
             
@@ -525,7 +695,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

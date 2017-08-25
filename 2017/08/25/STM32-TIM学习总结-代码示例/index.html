@@ -95,7 +95,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="STM32_GPIO操作与原理," />
+  <meta name="keywords" content="STM32_TIM学习总结," />
 
 
 
@@ -113,24 +113,17 @@
 
 
 
-<meta name="description" content="上一篇文章讲解了GPIO和相对应的寄存器的基础知识，这一篇则是对上一篇知识点的应用： 几点说明： 1, 由于硬件上的不统一，加之GPIO口的通用性，此处采用模拟仿真的方法，观察内部寄存器的数据变化；2，本次实验所用到的操作主要有：位绑定，寄存器的操作，基本的位运算3，本次实验的目的是：控制GPIOA低8位的输出，并且使高8位的对应位输入相同的电平：E.g： 若2位输出 0，则对应的10位输入 0；">
-<meta name="keywords" content="STM32_GPIO操作与原理">
+<meta name="description" content="安利一首歌 。。。。    上一篇文章 说好的“结合代码示例，理解一下”，所以这里就不错废话啦/(神他喵的逻辑/滑稽)下面直接讲一下代码逻辑：  实验描述：  目的：    1通过定时器TIM3，输出占空比固定的PWM波形；   使用到的3.5版本固件库：   123456startup/start_stm32f10x_hd.cCMSIS/core_cm3.cCMSIS/system_stm32f">
+<meta name="keywords" content="STM32_TIM学习总结">
 <meta property="og:type" content="article">
-<meta property="og:title" content="STM32_初识GPIO操作_程序示例">
-<meta property="og:url" content="http://www.oez-blog.space/2017/07/18/STM32-初识GPIO操作-程序示例/index.html">
+<meta property="og:title" content="STM32_TIM学习总结_代码示例">
+<meta property="og:url" content="http://www.oez-blog.space/2017/08/25/STM32-TIM学习总结-代码示例/index.html">
 <meta property="og:site_name" content="小火箭 | Blog">
-<meta property="og:description" content="上一篇文章讲解了GPIO和相对应的寄存器的基础知识，这一篇则是对上一篇知识点的应用： 几点说明： 1, 由于硬件上的不统一，加之GPIO口的通用性，此处采用模拟仿真的方法，观察内部寄存器的数据变化；2，本次实验所用到的操作主要有：位绑定，寄存器的操作，基本的位运算3，本次实验的目的是：控制GPIOA低8位的输出，并且使高8位的对应位输入相同的电平：E.g： 若2位输出 0，则对应的10位输入 0；">
-<meta property="og:image" content="http://www.oez-blog.space/images/GPIO_3.PNG">
-<meta property="og:image" content="http://www.oez-blog.space/images/GPIO_4.PNG">
-<meta property="og:image" content="http://www.oez-blog.space/images/GPIO_5.PNG">
-<meta property="og:image" content="http://www.oez-blog.space/images/GPIO_6.PNG">
-<meta property="og:image" content="http://www.oez-blog.space/images/GPIO_7.PNG">
-<meta property="og:image" content="http://www.oez-blog.space/images/GPIO_8.PNG">
-<meta property="og:updated_time" content="2017-07-17T23:15:13.578Z">
+<meta property="og:description" content="安利一首歌 。。。。    上一篇文章 说好的“结合代码示例，理解一下”，所以这里就不错废话啦/(神他喵的逻辑/滑稽)下面直接讲一下代码逻辑：  实验描述：  目的：    1通过定时器TIM3，输出占空比固定的PWM波形；   使用到的3.5版本固件库：   123456startup/start_stm32f10x_hd.cCMSIS/core_cm3.cCMSIS/system_stm32f">
+<meta property="og:updated_time" content="2017-08-25T13:21:28.448Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="STM32_初识GPIO操作_程序示例">
-<meta name="twitter:description" content="上一篇文章讲解了GPIO和相对应的寄存器的基础知识，这一篇则是对上一篇知识点的应用： 几点说明： 1, 由于硬件上的不统一，加之GPIO口的通用性，此处采用模拟仿真的方法，观察内部寄存器的数据变化；2，本次实验所用到的操作主要有：位绑定，寄存器的操作，基本的位运算3，本次实验的目的是：控制GPIOA低8位的输出，并且使高8位的对应位输入相同的电平：E.g： 若2位输出 0，则对应的10位输入 0；">
-<meta name="twitter:image" content="http://www.oez-blog.space/images/GPIO_3.PNG">
+<meta name="twitter:title" content="STM32_TIM学习总结_代码示例">
+<meta name="twitter:description" content="安利一首歌 。。。。    上一篇文章 说好的“结合代码示例，理解一下”，所以这里就不错废话啦/(神他喵的逻辑/滑稽)下面直接讲一下代码逻辑：  实验描述：  目的：    1通过定时器TIM3，输出占空比固定的PWM波形；   使用到的3.5版本固件库：   123456startup/start_stm32f10x_hd.cCMSIS/core_cm3.cCMSIS/system_stm32f">
 
 
 
@@ -158,13 +151,13 @@
 
 
 
-  <link rel="canonical" href="http://www.oez-blog.space/2017/07/18/STM32-初识GPIO操作-程序示例/"/>
+  <link rel="canonical" href="http://www.oez-blog.space/2017/08/25/STM32-TIM学习总结-代码示例/"/>
 
 
 
 
 
-  <title>STM32_初识GPIO操作_程序示例 | 小火箭 | Blog</title>
+  <title>STM32_TIM学习总结_代码示例 | 小火箭 | Blog</title>
   
 
 
@@ -337,7 +330,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.oez-blog.space/2017/07/18/STM32-初识GPIO操作-程序示例/">
+    <link itemprop="mainEntityOfPage" href="http://www.oez-blog.space/2017/08/25/STM32-TIM学习总结-代码示例/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="机智的小火箭">
@@ -354,7 +347,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">STM32_初识GPIO操作_程序示例</h1>
+          <h1 class="post-title" itemprop="name headline">STM32_TIM学习总结_代码示例</h1>
         
 
         <div class="post-meta">
@@ -366,8 +359,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-18T04:40:57+08:00">
-                July 18th 2017
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-25T19:42:29+08:00">
+                August 25th 2017
               </time>
             
 
@@ -406,7 +399,7 @@
 
           
           
-             <span id="/2017/07/18/STM32-初识GPIO操作-程序示例/" class="leancloud_visitors" data-flag-title="STM32_初识GPIO操作_程序示例">
+             <span id="/2017/08/25/STM32-TIM学习总结-代码示例/" class="leancloud_visitors" data-flag-title="STM32_TIM学习总结_代码示例">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -434,32 +427,86 @@
       
 
       
-        <p><a href="http://www.oez-blog.space/2017/07/17/STM32_GPIO_%E6%80%BB%E7%BB%93/">上一篇文章</a>讲解了<code>GPIO</code>和相对应的<code>寄存器</code>的基础知识，这一篇则是对上一篇知识点的应用：</p>
-<h4 id="几点说明："><a href="#几点说明：" class="headerlink" title="几点说明："></a>几点说明：</h4><blockquote>
-<p>1, 由于硬件上的不统一，加之GPIO口的通用性，此处采用模拟仿真的方法，观察内部寄存器的数据变化；<br>2，本次实验所用到的操作主要有：<code>位绑定</code>，<code>寄存器的操作</code>，<code>基本的位运算</code><br>3，本次实验的目的是：控制GPIOA低8位的输出，并且使高8位的对应位输入相同的电平：<br>E.g： 若2位输出 0，则对应的10位输入 0；</p>
-</blockquote>
-<h4 id="实验内容："><a href="#实验内容：" class="headerlink" title="实验内容："></a>实验内容：</h4><h6 id="1，参考文档中对GPIO口的基本配置："><a href="#1，参考文档中对GPIO口的基本配置：" class="headerlink" title="1，参考文档中对GPIO口的基本配置："></a>1，参考文档中对GPIO口的基本配置：</h6><blockquote>
+        <p>安利一首歌 。。。。</p>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="530" height="86" src="//music.163.com/outchain/player?type=2&id=442016694&auto=0&height=66"></iframe>
+
+<hr>
+<p><a href="http://www.oez-blog.space/2017/08/08/STM32-TIM%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">上一篇文章</a> 说好的“结合代码示例，理解一下”，所以这里就不错废话啦/(神他喵的逻辑/滑稽)<br>下面直接讲一下代码逻辑：</p>
+<hr>
+<h2 id="实验描述："><a href="#实验描述：" class="headerlink" title="实验描述："></a>实验描述：</h2><blockquote>
 <ul>
-<li><a href="https://pan.baidu.com/s/1cGob62" target="_blank" rel="external">文档</a>中对STM32的IO口的配置：<br><img src="http://www.oez-blog.space/images/GPIO_3.PNG" alt="GPIO端口位配置表"></li>
-<li><a href="https://pan.baidu.com/s/1cGob62" target="_blank" rel="external">文档</a>中对端口配置低寄存器(GPIOx_CRL)的配置：<br><img src="http://www.oez-blog.space/images/GPIO_4.PNG" alt="端口配置低寄存器(GPIOx_CRL)的配置"></li>
+<li>目的： </li>
 </ul>
 </blockquote>
-<h6 id="2，程序的大致思路："><a href="#2，程序的大致思路：" class="headerlink" title="2，程序的大致思路："></a>2，程序的大致思路：</h6><blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">通过定时器TIM3，输出占空比固定的PWM波形；</div></pre></td></tr></table></figure>
+<blockquote>
 <ul>
-<li><p>PA.0 ~ PA.7 为通用的推挽输出，速度为50MHz， PA.8 ~ PA.15位浮空输入；</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">GPIOA-&gt;CRL = <span class="number">0x33333333</span>; <span class="comment">//通用的退挽输出 00； 50MHz 11； 0011 -&gt; 3 -&gt; 0x3333 3333;</span></div><div class="line">GPIOA-&gt;CRH = <span class="number">0x44444444</span>; <span class="comment">//浮空输入 0100 -&gt; 4 -&gt; 0x4444 4444;</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>输入状态反映到对应的引脚的输出；</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">while</span>(<span class="number">1</span>)</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">if</span> ((GPIOA-&gt;IDR &amp; <span class="number">0x0100</span>)== <span class="number">0x0100</span>)	</div><div class="line">		      GPIOA-&gt;BSRR = <span class="number">0x01</span>; </div><div class="line">		<span class="keyword">else</span>	                            </div><div class="line">		       GPIOA-&gt;BRR = <span class="number">0x01</span>;</div><div class="line">		<span class="keyword">if</span> ((GPIOA-&gt;IDR &amp; <span class="number">0x0200</span>)== <span class="number">0x0200</span>)	</div><div class="line">		      GPIOA-&gt;BSRR = <span class="number">0x02</span>;              </div><div class="line">		<span class="keyword">else</span>	                           </div><div class="line">		      GPIOA-&gt;BRR =<span class="number">0x02</span>;</div><div class="line">		<span class="keyword">if</span> ((GPIOA-&gt;IDR &amp; <span class="number">0x0400</span>)== <span class="number">0x0400</span>)	</div><div class="line">		      GPIOA-&gt;ODR = GPIOA-&gt;ODR | <span class="number">0x04</span>; </div><div class="line">		<span class="keyword">else</span>								</div><div class="line">		      GPIOA-&gt;ODR = GPIOA-&gt;ODR &amp; (~<span class="number">0x04</span>);</div><div class="line">		</div><div class="line">		<span class="comment">/*位绑定*/</span>	</div><div class="line">		<span class="comment">// A = GPIOA_BASE + ODR偏移地址 = GPIOA_BASE + 0x0C ; n = 3</span></div><div class="line">		<span class="comment">// A = GPIOA_BASE + IDR偏移地址 = GPIOA_BASE + 0x08 ; n = 3</span></div><div class="line"></div><div class="line">		<span class="comment">//if ((GPIOA-&gt;IDR &amp; 0x0800)== 0x0800)</span></div><div class="line">		<span class="keyword">if</span>(*PA_I_11==<span class="number">1</span>)		                    </div><div class="line">		      *PA_0_3 = <span class="number">3</span>;     <span class="comment">//只看低位</span></div><div class="line">		<span class="keyword">else</span>									</div><div class="line">		      *PA_0_3 = <span class="number">2</span>;</div><div class="line">		<span class="comment">/*此处不能使用直接的赋值方法，应该采用位运算的方法进行设置*/</span></div><div class="line">		<span class="keyword">if</span> ((GPIOA-&gt;IDR &amp; <span class="number">0x1000</span>)== <span class="number">0x1000</span>)</div><div class="line">			GPIOA-&gt;ODR = GPIOA-&gt;ODR | <span class="number">0x10</span>; </div><div class="line">		<span class="keyword">else</span>								</div><div class="line">	        GPIOA-&gt;ODR = GPIOA-&gt;ODR &amp; (~<span class="number">0x10</span>);</div><div class="line"></div><div class="line">		<span class="keyword">if</span> ((GPIOA-&gt;IDR &amp; <span class="number">0x2000</span>)== <span class="number">0x2000</span>)	</div><div class="line">		      GPIOA-&gt;ODR = GPIOA-&gt;ODR | <span class="number">0x20</span>; </div><div class="line">		<span class="keyword">else</span>								</div><div class="line">		      GPIOA-&gt;ODR = GPIOA-&gt;ODR &amp; (~<span class="number">0x20</span>);</div><div class="line"></div><div class="line">		<span class="keyword">if</span> ((GPIOA-&gt;IDR &amp; <span class="number">0x4000</span>)== <span class="number">0x4000</span>)!</div><div class="line">		      GPIOA-&gt;ODR = GPIOA-&gt;ODR | <span class="number">0x40</span>;</div><div class="line">		<span class="keyword">else</span>								</div><div class="line">		      GPIOA-&gt;ODR = GPIOA-&gt;ODR &amp; (~<span class="number">0x40</span>);</div><div class="line"></div><div class="line">		<span class="keyword">if</span> ((GPIOA-&gt;IDR &amp; <span class="number">0x8000</span>)== <span class="number">0x8000</span>)	</div><div class="line">		      GPIOA-&gt;ODR = GPIOA-&gt;ODR | <span class="number">0x80</span>;  </div><div class="line">		<span class="keyword">else</span>								</div><div class="line">		      GPIOA-&gt;ODR = GPIOA-&gt;ODR &amp; (~<span class="number">0x80</span>);			</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
-</li>
+<li>使用到的3.5版本固件库：</li>
 </ul>
 </blockquote>
-<h6 id="3，对上面程序的说明："><a href="#3，对上面程序的说明：" class="headerlink" title="3，对上面程序的说明："></a>3，对上面程序的说明：</h6><p>(1)位清除/位设置寄存器：<br><img src="http://www.oez-blog.space/images/GPIO_5.PNG" alt="置位复位寄存器"><br>1,首先是在<code>if</code>判断中，进行<code>与</code>运算，判断相应的位是否为1；<br>2,后面是对<code>位清除/位设置寄存器</code>的具体操作,由文档可以知道：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">0：对对应的ODRx位不产生影响 </div><div class="line">1：清除对应的ODRx位为0</div></pre></td></tr></table></figure></p>
-<p>3,将<code>GPIOA-&gt;BSRR</code>, <code>GPIOA-&gt;BRR</code>设置为相应的值，即使得相应的位为1，使得<code>BSRR</code>,<code>BRR</code>分别起到<code>置1</code>和<code>置0</code>的作用；</p>
-<p>(2)基本的位运算：<br><img src="http://www.oez-blog.space/images/GPIO_6.PNG" alt="基本的位运算"><br>1,通过基本的位运算，使相应的位<code>置1</code>或者<code>清0</code>;<br>2,程序中不能直接的赋值，因此采用位运算的方法;<br>(3)位绑定：<br><img src="http://www.oez-blog.space/images/GPIO_7.PNG" alt="位绑定"><br>1, 位绑定的公式<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">公式：&#123;</div><div class="line">		<span class="number">1</span>，清楚绑定区域：&#123;</div><div class="line">			<span class="number">1</span>，SPAM；</div><div class="line">			<span class="number">2</span>，片上外设；</div><div class="line">		&#125;</div><div class="line">		<span class="number">2</span>，公式：&#123;</div><div class="line">			SPAM；&#123;AliasAddress = <span class="number">0x2200</span> <span class="number">0000</span> + ((A<span class="number">-0x2200</span> <span class="number">0000</span>) * <span class="number">8</span>+ n) * <span class="number">4</span> <span class="comment"># AliasAddress为绑定后的地址， A 为原来的地址 n为第n位；</span></div><div class="line">						 = <span class="number">0x2200</span> <span class="number">0000</span> + (A<span class="number">-0x2200</span> <span class="number">0000</span>) * <span class="number">32</span> + n * <span class="number">4</span></div><div class="line">			&#125;</div><div class="line">			片上外设；&#123;AliasAddress = <span class="number">0x4200</span> <span class="number">0000</span> + ((A<span class="number">-0x4000</span> <span class="number">0000</span>) * <span class="number">8</span>+ n) * <span class="number">4</span> <span class="comment"># AliasAddress为绑定后的地址， A 为原来的地址 n为第n位；；</span></div><div class="line">						 = <span class="number">0x4200</span> <span class="number">0000</span> + (A<span class="number">-0x4000</span> <span class="number">0000</span>) * <span class="number">32</span> + n * <span class="number">4</span>				</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="number">3</span>，运用指针&#123;</div><div class="line">			u32 *PA_O_3 = (u32 *) (GPIOA_BASE + <span class="number">0x0C</span>)</div><div class="line">		&#125;</div></pre></td></tr></table></figure></p>
-<p>2, STM32中提供的<code>位绑定</code>操作可以极大的简化GPIO口的运算，可以向<code>51</code>那样对端口值进行直接的配置(0/1),后面的数字只看<code>低位</code>。</p>
-<h6 id="4，调试的结果："><a href="#4，调试的结果：" class="headerlink" title="4，调试的结果："></a>4，调试的结果：</h6><p>首先第一步，打开调试功能和GPIO口的窗口，如图所示：<br><img src="http://www.oez-blog.space/images/GPIO_8.PNG" alt="打开调试功能和GPIO口的窗口"><br>分别设置右下方的<code>勾勾</code>数量和位置，设置相应位的<code>置1</code>和<code>清0</code>;进行调试。</p>
-<h6 id="5，源码地址："><a href="#5，源码地址：" class="headerlink" title="5，源码地址："></a>5，源码地址：</h6><p>如果你需要源码，你可以在<a href="https://github.com/zhangcaocao/GPIO-/tree/master/GPIO_%E6%93%8D%E4%BD%9C%E4%B8%8E%E5%8E%9F%E7%90%86" target="_blank" rel="external">这里</a>找到他。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">startup/start_stm32f10x_hd.c</div><div class="line">CMSIS/core_cm3.c</div><div class="line">CMSIS/system_stm32f103x.c</div><div class="line">FWlib/stm32f10x_gpio.c</div><div class="line">FWlib/stm32f10x_rcc.c</div><div class="line">FWlib/stm32f10x_tim.c</div></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>用户文件:</li>
+</ul>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">USER/main.c</div><div class="line">USER/stm32f103x_it.c</div><div class="line">USER/pwm_output.c</div></pre></td></tr></table></figure>
+<hr>
+<h2 id="具体的代码分析"><a href="#具体的代码分析" class="headerlink" title="具体的代码分析:"></a>具体的代码分析:</h2><h4 id="main-函数"><a href="#main-函数" class="headerlink" title="main 函数:"></a>main 函数:</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    TIM3_PWM_Init();</div><div class="line">    <span class="keyword">while</span> (<span class="number">1</span>)</div><div class="line">    &#123;&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这个main函数的结构,流程很简单,一个初始化函数初始化之后, 内核将所有的工作都交给了TIM外设,完全由TIM控制GPIO引脚输出PWM波;</p>
+<h4 id="定时器的初始化"><a href="#定时器的初始化" class="headerlink" title="定时器的初始化:"></a>定时器的初始化:</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">TIM3_PWM_Init</span><span class="params">(<span class="keyword">void</span>)</span></span></div><div class="line">&#123;</div><div class="line">    TIM3_GPIO_Config();</div><div class="line">    TIM3_Mode_Config();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这个地方,首先是对TIM外设通道复用的GPIO的引脚初始化,再对TIM外设进行初始化;</p>
+<h4 id="GPIO-初始化-TIM3-GPIO-Config函数"><a href="#GPIO-初始化-TIM3-GPIO-Config函数" class="headerlink" title="GPIO 初始化,(TIM3_GPIO_Config函数):"></a>GPIO 初始化,(TIM3_GPIO_Config函数):</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line">使能了TIM3的时钟， 并且对GPIO引脚做出了相应的配置，使能了GPIO口的时钟， 配置为复用推挽输出， 翻转频率为50Hz。</div><div class="line">*/</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">TIM3_GPIO_Config</span><span class="params">(<span class="keyword">void</span>)</span></span></div><div class="line">&#123;</div><div class="line">	GPIO_InitTyDef GPIO_InitStructure;</div><div class="line">	</div><div class="line">	<span class="comment">/*TIM &amp; GPIO  CLOCK ENABLE*/</span></div><div class="line">	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);</div><div class="line">	RCC_APB2PeriphClockCmd(RCC_APB1Periph_GPIOA | RCC_APB1Periph_GPIOB, ENABLE);</div><div class="line">	</div><div class="line">	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6 | GPIO_Pin_7; </div><div class="line">	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz; </div><div class="line">	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP; </div><div class="line">	GPIO_Init(GPIOA, &amp;GPIO_InitStructure);</div><div class="line">	</div><div class="line">	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_1; </div><div class="line">	GPIO_Init(GPIOB, &amp;GPIO_InitStructure);   <span class="comment">//数据手册P71页</span></div><div class="line">	</div><div class="line">	</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在上面的代码中,我们首先使能了<code>TIM3外设的时钟</code>,<code>GPIO时钟</code>;然后对<code>TIM3</code>通道相应的GPIO口做了相应的配置,也就是PA6, PA7, PB0, PB1;他们的对应关系如下表:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">PA6</th>
+<th style="text-align:left">PA7</th>
+<th style="text-align:left">PB0</th>
+<th style="text-align:left">PB1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">TIM3_CH1</td>
+<td style="text-align:left">TIM3_CH2</td>
+<td style="text-align:left">TIM3_CH3</td>
+<td style="text-align:left">TIM_CH4</td>
+</tr>
+</tbody>
+</table>
+<p>然后是TIM的GPIO模式的配置:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">TIM2/3/4/5引脚</th>
+<th style="text-align:left">配置</th>
+<th style="text-align:left">GPIO配置</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">TIM2/3/4/5_CHx</td>
+<td style="text-align:left">输入捕获通道x</td>
+<td style="text-align:left">浮空输入</td>
+</tr>
+<tr>
+<td style="text-align:left">TIM2/3/4/5_CHx</td>
+<td style="text-align:left">输出比较通道x</td>
+<td style="text-align:left">推挽复用输出</td>
+</tr>
+<tr>
+<td style="text-align:left">TIM2/3/4/5_ETR</td>
+<td style="text-align:left">外部触发时钟输入</td>
+<td style="text-align:left">浮空输入</td>
+</tr>
+</tbody>
+</table>
+<p>额,这个玩意的语法还没有玩来,表有点丑,嗯→_→所以上面的配置就是<code>推挽复用输出</code>;</p>
+<h4 id="TIM3输出的PWM的配置-TIM3-Mode-Config函数"><a href="#TIM3输出的PWM的配置-TIM3-Mode-Config函数" class="headerlink" title="TIM3输出的PWM的配置(TIM3_Mode_Config函数)"></a>TIM3输出的PWM的配置(TIM3_Mode_Config函数)</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">TIM3_Mode_Config</span><span class="params">(<span class="keyword">void</span>)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="comment">/*捕获/比较x寄存器 TIMx_CCR(capture/compare register)*/</span></div><div class="line">	u16 CCR1_Val = <span class="number">500</span>;</div><div class="line">	</div><div class="line">	TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;</div><div class="line">	TIM_OCInitTypeDef       TIM_OCInitStructure; </div><div class="line">	</div><div class="line">	<span class="comment">/*Timbase configuration*/</span></div><div class="line">	TIM_TimeBaseStructure.TIM_Period = <span class="number">999</span>;        <span class="comment">//重载寄存器TIMx_ARR的数值;</span></div><div class="line">	TIM_TimeBaseStructure.TIM_Prescaler = <span class="number">0</span>;       <span class="comment">//预分频 </span></div><div class="line">	</div><div class="line">	<span class="comment">/*ETRP数字滤波器的作用是对外部时钟 TIMxETR 进行滤波*/</span></div><div class="line">	TIM_TimeBaseStructure.TIM_ClockDivision = TIM_CKD_DIV1; <span class="comment">//时钟分频系数, 分频后的时钟频率是fDTS, 是被输出到定时器的EFRP数字的滤波器部分, 会影响滤波器的采样频率;</span></div><div class="line">	TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up; <span class="comment">//TIMx_CNT脉冲计数器计数方式</span></div><div class="line">	TIM_TimeBaseInit(TIM2, &amp; TIM_TimeBaseStructure); </div><div class="line">		</div><div class="line">	<span class="comment">/*PWM1 Mode configuration: Channel1*/</span></div><div class="line"></div><div class="line">	TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_PWM1;           <span class="comment">//配置为PWM1模式, TIMx_CNT脉冲计数器 和 TIMx_CCRn(比较寄存器, 等于TIM_Pulse成员的内容)</span></div><div class="line">	TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable</div><div class="line">	TIM_OCInitStructure.TIM_Channel = TIM_Channel_1; </div><div class="line">	TIM_OCInitStructure.TIM_Pulse = CCR1_Val;                   <span class="comment">//设置跳变值, 当计数器计数到这个值时, 电平发生跳变; </span></div><div class="line">	TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_High;   <span class="comment">//有效电平的极性;  0/1  </span></div><div class="line">	TIM_OCInit(TIM3, &amp; TIM_OCInitStructure);</div><div class="line">	</div><div class="line">	<span class="comment">/*使能 TIM3 重载寄存器ARR*/</span></div><div class="line">	TIM_ARRPreloadConfig(TIM3, ENABLE);</div><div class="line">	</div><div class="line">	<span class="comment">/*TIM3 enable counter*/</span></div><div class="line">	TIM_Cmd(TIM3, ENABLE);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>首先是配置PWM的工作模式， 选择第一个TIM通道， 设置比较寄存器的值， 有效电平的极性， 占空比： ——.TIM_Period / ——.TIM_Pulse;上面的就是500/1000 == 50%;</p>
+<h2 id="最后说的话"><a href="#最后说的话" class="headerlink" title="最后说的话"></a>最后说的话</h2><p>然后大家可以结合<a href="http://www.oez-blog.space/2017/08/08/STM32-TIM%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">上一篇文章</a> 到讲到的PWM波分析和相关参数的计算方法以及代码中的注释,仔仔细细的推一遍;好啦今天就这样了,,溜溜球…</p>
 
       
     </div>
@@ -489,7 +536,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/STM32-GPIO操作与原理/" rel="tag"># STM32_GPIO操作与原理</a>
+            <a href="/tags/STM32-TIM学习总结/" rel="tag"># STM32_TIM学习总结</a>
           
         </div>
       
@@ -502,8 +549,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/07/17/STM32_GPIO_总结/" rel="next" title="STM32_初识GPIO操作">
-                <i class="fa fa-chevron-left"></i> STM32_初识GPIO操作
+              <a href="/2017/08/08/STM32-TIM学习总结/" rel="next" title="STM32_TIM知识点总结">
+                <i class="fa fa-chevron-left"></i> STM32_TIM知识点总结
               </a>
             
           </div>
@@ -511,10 +558,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/07/19/双系统Windows下直接删除Linux分区后解决办法/" rel="prev" title="双系统Windows下直接删除Linux分区后解决办法">
-                双系统Windows下直接删除Linux分区后解决办法 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -714,7 +757,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#几点说明："><span class="nav-number">1.</span> <span class="nav-text">几点说明：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实验内容："><span class="nav-number">2.</span> <span class="nav-text">实验内容：</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#1，参考文档中对GPIO口的基本配置："><span class="nav-number">2.0.1.</span> <span class="nav-text">1，参考文档中对GPIO口的基本配置：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2，程序的大致思路："><span class="nav-number">2.0.2.</span> <span class="nav-text">2，程序的大致思路：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#3，对上面程序的说明："><span class="nav-number">2.0.3.</span> <span class="nav-text">3，对上面程序的说明：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#4，调试的结果："><span class="nav-number">2.0.4.</span> <span class="nav-text">4，调试的结果：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#5，源码地址："><span class="nav-number">2.0.5.</span> <span class="nav-text">5，源码地址：</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#实验描述："><span class="nav-number">1.</span> <span class="nav-text">实验描述：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#具体的代码分析"><span class="nav-number">2.</span> <span class="nav-text">具体的代码分析:</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#main-函数"><span class="nav-number">2.0.1.</span> <span class="nav-text">main 函数:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#定时器的初始化"><span class="nav-number">2.0.2.</span> <span class="nav-text">定时器的初始化:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GPIO-初始化-TIM3-GPIO-Config函数"><span class="nav-number">2.0.3.</span> <span class="nav-text">GPIO 初始化,(TIM3_GPIO_Config函数):</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TIM3输出的PWM的配置-TIM3-Mode-Config函数"><span class="nav-number">2.0.4.</span> <span class="nav-text">TIM3输出的PWM的配置(TIM3_Mode_Config函数)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最后说的话"><span class="nav-number">3.</span> <span class="nav-text">最后说的话</span></a></li></ol></div>
             
 
           </div>
