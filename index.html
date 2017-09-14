@@ -330,6 +330,205 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.oez-blog.space/2017/09/14/使用Sublime-Text-MinGW-在Windows下搭建轻量级C语言开发环境/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="机智的小火箭">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小火箭 | Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/09/14/使用Sublime-Text-MinGW-在Windows下搭建轻量级C语言开发环境/" itemprop="url">使用Sublime Text + MinGW 在Windows下搭建轻量级C语言开发环境</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-14T12:31:46+08:00">
+                September 14th 2017
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C语言/" itemprop="url" rel="index">
+                    <span itemprop="name">C语言</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/09/14/使用Sublime-Text-MinGW-在Windows下搭建轻量级C语言开发环境/" class="leancloud_visitors" data-flag-title="使用Sublime Text + MinGW 在Windows下搭建轻量级C语言开发环境">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><img src="http://otneosm59.bkt.clouddn.com/china-2592294__340.jpg" alt="封面"></p>
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>迫于Windows下的各种IDE太’强大’, 对于一个只会写点’hello world’的C语言菜鸟的我来说,那些功能确实用不了,于是想搭建一个轻量级的,不占用我这个渣渣电脑太多资源的C语言开发环境,嗯昨天终于成功了,今天在这里分享一下;</p>
+<h2 id="工具-点击下载"><a href="#工具-点击下载" class="headerlink" title="工具(点击下载)"></a>工具(点击下载)</h2><blockquote>
+<ul>
+<li><a href="http://www.sublimetext.com/" target="_blank" rel="external">Sublime Text3</a></li>
+<li><a href="http://www.mingw.org" target="_blank" rel="external">MinGW</a></li>
+</ul>
+</blockquote>
+<h2 id="工具介绍"><a href="#工具介绍" class="headerlink" title="工具介绍"></a>工具介绍</h2><h4 id="Sublime-Text"><a href="#Sublime-Text" class="headerlink" title="Sublime Text"></a>Sublime Text</h4><p><img src="http://otneosm59.bkt.clouddn.com/sublime%20Text3.png" alt="Sublime Text3"></p>
+<blockquote>
+<ul>
+<li>IDE界的颜值担当, 支持多种主题;</li>
+<li>轻量级, 不会给你的电脑造成很大的负担;</li>
+<li>可以自定义任何东西, 快捷键, 菜单, 代码段等;</li>
+<li>这个IDE需要注册码, 不过可以永久试用, 而且功能一样;</li>
+</ul>
+</blockquote>
+<h4 id="MinGW"><a href="#MinGW" class="headerlink" title="MinGW"></a>MinGW</h4><p><img src="http://otneosm59.bkt.clouddn.com/MinGW.PNG" alt="MinGW"></p>
+<blockquote>
+<ul>
+<li>我们知道, windows下的大部分C语言IDE都是试用的gcc编译器;因此我们只需要在Windows下安装gcc/g++即可;</li>
+<li>MinGW就是一个为Windows提供这些工具的一个项目, 你可以在它的官网免费的下载;</li>
+<li>目测有些同志需要科学上网才能访问那个网址,这里我就直接把那个安装包放网盘了,<a href="https://pan.baidu.com/s/1jHFKV4M" target="_blank" rel="external">链接(点击下载)</a></li>
+<li>在网上看到有些同志用的DevC++里面的gcc, 个人觉得那个太老了,而且DevC++早就没有维护了,使用MinGW可以获得最新的gcc/g++;</li>
+</ul>
+</blockquote>
+<h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><h4 id="安装Sublime-Text"><a href="#安装Sublime-Text" class="headerlink" title="安装Sublime Text"></a>安装Sublime Text</h4><p>这个和一般的软件安装方法一样,而且还没有百度全家桶,就不多说了;</p>
+<h4 id="安装MinGW以及g"><a href="#安装MinGW以及g" class="headerlink" title="安装MinGW以及g++"></a>安装MinGW以及g++</h4><p><img src="http://otneosm59.bkt.clouddn.com/MinGW_anz.png" alt="安装MinGW"></p>
+<blockquote>
+<p>1,选择图片里面的几项;<br>2, 点击’Installation’ -&gt; ‘Apply Changes’;<br>3, 等待安装完成;</p>
+</blockquote>
+<h4 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量;"></a>配置环境变量;</h4><p><img src="http://otneosm59.bkt.clouddn.com/huanjingbianliang.jpg" alt="环境变量"></p>
+<blockquote>
+<p>1, 环境变量的基本添加过程如图所示;<br>2, 配置环境变量:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">- 变量名              变量值</div><div class="line">- C_INCLUDEDE_PATH   C:\MinGW\include </div><div class="line">- LIBRARY_PATH       C:\MinGW\lib </div><div class="line">- Path               C:\MinGW\bin</div></pre></td></tr></table></figure>
+<p>3, Windows下配置环境变量后,也许需要重启;<br>4, 验证环境变量是否配置成功, 在终端输入’g++ -v’:<br><img src="http://otneosm59.bkt.clouddn.com/gcc.png" alt="验证环境变量是否配置成功"><br>在这里可以看到g++的版本;</p>
+</blockquote>
+<h4 id="Sublime-Text3的配置"><a href="#Sublime-Text3的配置" class="headerlink" title="Sublime Text3的配置;"></a>Sublime Text3的配置;</h4><blockquote>
+<ul>
+<li>主要是实现在Sublime中调用 cmd.exe, 以及配置新的编译文件 C++.sublime-build(图片来自网络)</li>
+</ul>
+</blockquote>
+<p><img src="http://otneosm59.bkt.clouddn.com/sublime_Text3_pz1" alt="调用 cmd.exe"><br><img src="http://otneosm59.bkt.clouddn.com/sublime_Text3_pz2" alt="配置新的编译文件"></p>
+<blockquote>
+<ul>
+<li>新的编译文件内容, 复制粘贴即可:</li>
+</ul>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line"><span class="string">"cmd"</span>: [<span class="string">"g++"</span>, <span class="string">"$&#123;file&#125;"</span>, <span class="string">"-o"</span>,<span class="string">"$&#123;file_path&#125;/$&#123;file_base_name&#125;"</span>],</div><div class="line"><span class="string">"file_regex"</span>: <span class="string">"^(..[^:]*):([0-9]+):?([0-9]+)?:?(.*)$"</span>,</div><div class="line"><span class="string">"working_dir"</span>: <span class="string">"$&#123;file_path&#125;"</span>,</div><div class="line"><span class="string">"encoding"</span>:<span class="string">"cp936"</span>,</div><div class="line"><span class="string">"selector"</span>: <span class="string">"source.c"</span>,</div><div class="line"><span class="string">"variants"</span>:</div><div class="line">[</div><div class="line">&#123;</div><div class="line"><span class="string">"name"</span>: <span class="string">"Run"</span>,</div><div class="line"><span class="string">"cmd"</span>: [<span class="string">"cmd"</span>,<span class="string">"/C"</span>,<span class="string">"start"</span>,<span class="string">"cmd"</span>,<span class="string">"/c"</span>, <span class="string">"$&#123;file_path&#125;/$&#123;file_base_name&#125;.exe &amp;pause"</span>]</div><div class="line">&#125;</div><div class="line">]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="验证是否搭建成功"><a href="#验证是否搭建成功" class="headerlink" title="验证是否搭建成功"></a>验证是否搭建成功</h2><p>测试程序:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># <span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"hello world\n"</span>);</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>使用快捷键”Ctrl + Shift + B”调出编译命令, 生成最终生成可执行程序;<br><img src="http://otneosm59.bkt.clouddn.com/s.jpg" alt="测试程序"><br>输出”hello world”<br><img src="http://otneosm59.bkt.clouddn.com/C_kezhixing.png" alt="编译结果"></p>
+<h2 id="完善"><a href="#完善" class="headerlink" title="完善"></a>完善</h2><blockquote>
+<p>1, 这里实现了在命令行调用g++, 其实完全可以不需要在sublime, 可以参考我的那篇在Linux下<a href="http://www.oez-blog.space/2017/07/27/linux%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84C%E8%AF%AD%E8%A8%80%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/">开发C语言的文章</a>中的命令,直接在命令行中完成编译已经生成可执行文件;</p>
+<p>2, 这个只是一个轻量级的,适合新手, 没有强大的debug, debug全靠printf, 嗯 没毛病;<br>3, 我终于可以去卸载掉那个我为了写C语言装的虚拟机了, hhh;</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://www.oez-blog.space/2017/08/25/STM32-TIM学习总结-代码示例/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2030,187 +2229,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.oez-blog.space/2017/07/17/STM32_GPIO_总结/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="机智的小火箭">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="小火箭 | Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/07/17/STM32_GPIO_总结/" itemprop="url">STM32_初识GPIO操作</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-17T23:26:22+08:00">
-                July 17th 2017
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/STM32/" itemprop="url" rel="index">
-                    <span itemprop="name">STM32</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/07/17/STM32_GPIO_总结/" class="leancloud_visitors" data-flag-title="STM32_初识GPIO操作">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="一，GPIO寄存器"><a href="#一，GPIO寄存器" class="headerlink" title="一，GPIO寄存器"></a>一，GPIO寄存器</h4><p><img src="http://www.oez-blog.space/images/GPIO_2.PNG" alt="I/O端口位的基本结构"></p>
-<h5 id="由图我们可以知道下面一些信息："><a href="#由图我们可以知道下面一些信息：" class="headerlink" title="由图我们可以知道下面一些信息："></a>由图我们可以知道下面一些信息：</h5><h6 id="1，输出驱动电路："><a href="#1，输出驱动电路：" class="headerlink" title="1，输出驱动电路："></a>1，输出驱动电路：</h6><blockquote>
-<ul>
-<li><code>输出数据寄存器</code>有2种方式改变：一种是通过<code>直接读/写</code>，另一种是通过<code>位设置/位清除寄存器</code>来进行改变；</li>
-<li><code>选择开关</code>：选择的是复用功能 or GPIO的输出功能；</li>
-<li><code>输出控制</code>：一个<a href="http://blog.csdn.net/surgeddd/article/details/4683657" target="_blank" rel="external">锁存器</a>的电路</li>
-<li><code>CMOS管</code>: 正向的P-MOS &amp; N-MOS；二者输出相反01/10；VDD 通常为3.3V；通过<code>输出控制</code>的输出值，改变P_MOS和C_MOS的导通关系，从而改变整个的输出&lt;高电平/低电平&gt;；</li>
-</ul>
-</blockquote>
-<h6 id="2，输入驱动电路："><a href="#2，输入驱动电路：" class="headerlink" title="2，输入驱动电路："></a>2，输入驱动电路：</h6><blockquote>
-<ul>
-<li><code>上拉电阻</code>：上拉/下拉可以通过开关控制，通过<code>配置寄存器</code>里面进行设置；上拉/下拉开关都可以打开，也就是浮空： 模拟输入不希望有任何一点变化被上拉/下拉所修改；</li>
-<li><code>TTL施密特触发器</code>: 可以进行一定的滤波，整形，开关；</li>
-</ul>
-</blockquote>
-<h6 id="3，寄存器："><a href="#3，寄存器：" class="headerlink" title="3，寄存器："></a>3，寄存器：</h6><blockquote>
-<ul>
-<li><blockquote>
-<p>寄存器中的各个位的具体配置可参见<a href="https://pan.baidu.com/s/1cGob62" target="_blank" rel="external">技术手册</a>，这里不再赘述；</p>
-</blockquote>
-</li>
-<li>端口配置低寄存器(GPIOx_CRL)</li>
-<li>端口配置高寄存器(GPIOx_CRH)</li>
-<li>端口输入数据寄存器(GPIOx_IDR)</li>
-<li>端口输出数据寄存器(GPIOx_ODR) </li>
-<li>端口位设置/复位寄存器(GPIOx_BSRR)</li>
-<li>端口位复位寄存器(GPIOx_BRR)</li>
-<li>端口配置锁定寄存器(GPIOx_LCKR)</li>
-</ul>
-</blockquote>
-<h4 id="二，GPIO输入输出模式："><a href="#二，GPIO输入输出模式：" class="headerlink" title="二，GPIO输入输出模式："></a>二，GPIO输入输出模式：</h4><h6 id="1，在库函数中的定义："><a href="#1，在库函数中的定义：" class="headerlink" title="1，在库函数中的定义："></a>1，在库函数中的定义：</h6><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="keyword">enum</span></div><div class="line">&#123; GPIO_Mode_AIN = <span class="number">0x0</span>,						<span class="comment">//模拟输入；</span></div><div class="line">  GPIO_Mode_IN_FLOATING = <span class="number">0x04</span>,  	        <span class="comment">//浮空输入；</span></div><div class="line">  GPIO_Mode_IPD = <span class="number">0x28</span>,     			    <span class="comment">//下拉输入；</span></div><div class="line">  GPIO_Mode_IPU = <span class="number">0x48</span>,		  			    <span class="comment">//上拉输入；</span></div><div class="line">  GPIO_Mode_Out_OD = <span class="number">0x14</span>,				    <span class="comment">//Open-Drain通用开漏输出</span></div><div class="line">  GPIO_Mode_Out_PP = <span class="number">0x10</span>,				    <span class="comment">//Push-Pull通用推挽输出</span></div><div class="line">  GPIO_Mode_AF_OD = <span class="number">0x1C</span>,					<span class="comment">//复用功能</span></div><div class="line">  GPIO_Mode_AF_PP = <span class="number">0x18</span></div><div class="line">&#125;GPIOMode_TypeDef;</div></pre></td></tr></table></figure>
-<h6 id="2，对每种输入-输出方式的解释，详见逸嵌YuWendong的博客"><a href="#2，对每种输入-输出方式的解释，详见逸嵌YuWendong的博客" class="headerlink" title="2，对每种输入/输出方式的解释，详见逸嵌YuWendong的博客"></a>2，对每种输入/输出方式的解释，详见<a href="http://blog.sina.com.cn/s/blog_bf63e2650102wihq.html" target="_blank" rel="external">逸嵌YuWendong的博客</a></h6><h4 id="三，重要的库函数："><a href="#三，重要的库函数：" class="headerlink" title="三，重要的库函数："></a>三，重要的库函数：</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">GPIO_Init                           <span class="comment">//根据GPIO_InitStruct中指定的参数初始化外设GPIOx寄存器</span></div><div class="line">GPIO_ReadInputDataBit               <span class="comment">//读取指定端口管脚的输入</span></div><div class="line">GPIO_ReadInputData                  <span class="comment">//读取指定的GPIO端口输入</span></div><div class="line">GPIO_ReadOutputDataBit              <span class="comment">//读取指定端口管脚的输出</span></div><div class="line">GPIO_ReadOutputData                 <span class="comment">//读取指定的GPIO端口输出</span></div><div class="line">GPIO_SetBits                        <span class="comment">//设置指定的数据端口位</span></div><div class="line">GPIO_ResetBits                      <span class="comment">//清除指定的数据端口位</span></div><div class="line">GPIO_PinRemapConfig                 <span class="comment">//改变指定管脚的映射</span></div></pre></td></tr></table></figure>
-<h6 id="这里仍然只是罗列出名字，具体的用法可参见STM32固件库使用手册的中文翻译版-pdf"><a href="#这里仍然只是罗列出名字，具体的用法可参见STM32固件库使用手册的中文翻译版-pdf" class="headerlink" title="这里仍然只是罗列出名字，具体的用法可参见STM32固件库使用手册的中文翻译版.pdf"></a>这里仍然只是罗列出名字，具体的用法可参见<a href="https://pan.baidu.com/s/1slPmQT3" target="_blank" rel="external">STM32固件库使用手册的中文翻译版.pdf</a></h6><h4 id="四，总结说明"><a href="#四，总结说明" class="headerlink" title="四，总结说明"></a>四，总结说明</h4><blockquote>
-<ul>
-<li>这篇文章主要是罗列出GPIO的基础知识和一些基本的学习资料，具体的代码运用见下一篇文章</li>
-</ul>
-</blockquote>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2261,7 +2279,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2283,7 +2301,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

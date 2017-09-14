@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.oez-blog.space/"/>
-  <updated>2017-08-25T13:25:01.888Z</updated>
+  <updated>2017-09-14T05:47:04.565Z</updated>
   <id>http://www.oez-blog.space/</id>
   
   <author>
@@ -14,6 +14,84 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>使用Sublime Text + MinGW 在Windows下搭建轻量级C语言开发环境</title>
+    <link href="http://www.oez-blog.space/2017/09/14/%E4%BD%BF%E7%94%A8Sublime-Text-MinGW-%E5%9C%A8Windows%E4%B8%8B%E6%90%AD%E5%BB%BA%E8%BD%BB%E9%87%8F%E7%BA%A7C%E8%AF%AD%E8%A8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/"/>
+    <id>http://www.oez-blog.space/2017/09/14/使用Sublime-Text-MinGW-在Windows下搭建轻量级C语言开发环境/</id>
+    <published>2017-09-14T04:31:46.000Z</published>
+    <updated>2017-09-14T05:47:04.565Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="http://otneosm59.bkt.clouddn.com/china-2592294__340.jpg" alt="封面"></p>
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>迫于Windows下的各种IDE太’强大’, 对于一个只会写点’hello world’的C语言菜鸟的我来说,那些功能确实用不了,于是想搭建一个轻量级的,不占用我这个渣渣电脑太多资源的C语言开发环境,嗯昨天终于成功了,今天在这里分享一下;</p>
+<h2 id="工具-点击下载"><a href="#工具-点击下载" class="headerlink" title="工具(点击下载)"></a>工具(点击下载)</h2><blockquote>
+<ul>
+<li><a href="http://www.sublimetext.com/" target="_blank" rel="external">Sublime Text3</a></li>
+<li><a href="http://www.mingw.org" target="_blank" rel="external">MinGW</a></li>
+</ul>
+</blockquote>
+<h2 id="工具介绍"><a href="#工具介绍" class="headerlink" title="工具介绍"></a>工具介绍</h2><h4 id="Sublime-Text"><a href="#Sublime-Text" class="headerlink" title="Sublime Text"></a>Sublime Text</h4><p><img src="http://otneosm59.bkt.clouddn.com/sublime%20Text3.png" alt="Sublime Text3"></p>
+<blockquote>
+<ul>
+<li>IDE界的颜值担当, 支持多种主题;</li>
+<li>轻量级, 不会给你的电脑造成很大的负担;</li>
+<li>可以自定义任何东西, 快捷键, 菜单, 代码段等;</li>
+<li>这个IDE需要注册码, 不过可以永久试用, 而且功能一样;</li>
+</ul>
+</blockquote>
+<h4 id="MinGW"><a href="#MinGW" class="headerlink" title="MinGW"></a>MinGW</h4><p><img src="http://otneosm59.bkt.clouddn.com/MinGW.PNG" alt="MinGW"></p>
+<blockquote>
+<ul>
+<li>我们知道, windows下的大部分C语言IDE都是试用的gcc编译器;因此我们只需要在Windows下安装gcc/g++即可;</li>
+<li>MinGW就是一个为Windows提供这些工具的一个项目, 你可以在它的官网免费的下载;</li>
+<li>目测有些同志需要科学上网才能访问那个网址,这里我就直接把那个安装包放网盘了,<a href="https://pan.baidu.com/s/1jHFKV4M" target="_blank" rel="external">链接(点击下载)</a></li>
+<li>在网上看到有些同志用的DevC++里面的gcc, 个人觉得那个太老了,而且DevC++早就没有维护了,使用MinGW可以获得最新的gcc/g++;</li>
+</ul>
+</blockquote>
+<h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><h4 id="安装Sublime-Text"><a href="#安装Sublime-Text" class="headerlink" title="安装Sublime Text"></a>安装Sublime Text</h4><p>这个和一般的软件安装方法一样,而且还没有百度全家桶,就不多说了;</p>
+<h4 id="安装MinGW以及g"><a href="#安装MinGW以及g" class="headerlink" title="安装MinGW以及g++"></a>安装MinGW以及g++</h4><p><img src="http://otneosm59.bkt.clouddn.com/MinGW_anz.png" alt="安装MinGW"></p>
+<blockquote>
+<p>1,选择图片里面的几项;<br>2, 点击’Installation’ -&gt; ‘Apply Changes’;<br>3, 等待安装完成;</p>
+</blockquote>
+<h4 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量;"></a>配置环境变量;</h4><p><img src="http://otneosm59.bkt.clouddn.com/huanjingbianliang.jpg" alt="环境变量"></p>
+<blockquote>
+<p>1, 环境变量的基本添加过程如图所示;<br>2, 配置环境变量:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">- 变量名              变量值</div><div class="line">- C_INCLUDEDE_PATH   C:\MinGW\include </div><div class="line">- LIBRARY_PATH       C:\MinGW\lib </div><div class="line">- Path               C:\MinGW\bin</div></pre></td></tr></table></figure>
+<p>3, Windows下配置环境变量后,也许需要重启;<br>4, 验证环境变量是否配置成功, 在终端输入’g++ -v’:<br><img src="http://otneosm59.bkt.clouddn.com/gcc.png" alt="验证环境变量是否配置成功"><br>在这里可以看到g++的版本;</p>
+</blockquote>
+<h4 id="Sublime-Text3的配置"><a href="#Sublime-Text3的配置" class="headerlink" title="Sublime Text3的配置;"></a>Sublime Text3的配置;</h4><blockquote>
+<ul>
+<li>主要是实现在Sublime中调用 cmd.exe, 以及配置新的编译文件 C++.sublime-build(图片来自网络)</li>
+</ul>
+</blockquote>
+<p><img src="http://otneosm59.bkt.clouddn.com/sublime_Text3_pz1" alt="调用 cmd.exe"><br><img src="http://otneosm59.bkt.clouddn.com/sublime_Text3_pz2" alt="配置新的编译文件"></p>
+<blockquote>
+<ul>
+<li>新的编译文件内容, 复制粘贴即可:</li>
+</ul>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line"><span class="string">"cmd"</span>: [<span class="string">"g++"</span>, <span class="string">"$&#123;file&#125;"</span>, <span class="string">"-o"</span>,<span class="string">"$&#123;file_path&#125;/$&#123;file_base_name&#125;"</span>],</div><div class="line"><span class="string">"file_regex"</span>: <span class="string">"^(..[^:]*):([0-9]+):?([0-9]+)?:?(.*)$"</span>,</div><div class="line"><span class="string">"working_dir"</span>: <span class="string">"$&#123;file_path&#125;"</span>,</div><div class="line"><span class="string">"encoding"</span>:<span class="string">"cp936"</span>,</div><div class="line"><span class="string">"selector"</span>: <span class="string">"source.c"</span>,</div><div class="line"><span class="string">"variants"</span>:</div><div class="line">[</div><div class="line">&#123;</div><div class="line"><span class="string">"name"</span>: <span class="string">"Run"</span>,</div><div class="line"><span class="string">"cmd"</span>: [<span class="string">"cmd"</span>,<span class="string">"/C"</span>,<span class="string">"start"</span>,<span class="string">"cmd"</span>,<span class="string">"/c"</span>, <span class="string">"$&#123;file_path&#125;/$&#123;file_base_name&#125;.exe &amp;pause"</span>]</div><div class="line">&#125;</div><div class="line">]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="验证是否搭建成功"><a href="#验证是否搭建成功" class="headerlink" title="验证是否搭建成功"></a>验证是否搭建成功</h2><p>测试程序:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># <span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"hello world\n"</span>);</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>使用快捷键”Ctrl + Shift + B”调出编译命令, 生成最终生成可执行程序;<br><img src="http://otneosm59.bkt.clouddn.com/s.jpg" alt="测试程序"><br>输出”hello world”<br><img src="http://otneosm59.bkt.clouddn.com/C_kezhixing.png" alt="编译结果"></p>
+<h2 id="完善"><a href="#完善" class="headerlink" title="完善"></a>完善</h2><blockquote>
+<p>1, 这里实现了在命令行调用g++, 其实完全可以不需要在sublime, 可以参考我的那篇在Linux下<a href="http://www.oez-blog.space/2017/07/27/linux%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84C%E8%AF%AD%E8%A8%80%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/">开发C语言的文章</a>中的命令,直接在命令行中完成编译已经生成可执行文件;</p>
+<p>2, 这个只是一个轻量级的,适合新手, 没有强大的debug, debug全靠printf, 嗯 没毛病;<br>3, 我终于可以去卸载掉那个我为了写C语言装的虚拟机了, hhh;</p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;http://otneosm59.bkt.clouddn.com/china-2592294__340.jpg&quot; alt=&quot;封面&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;
+    
+    </summary>
+    
+      <category term="C语言" scheme="http://www.oez-blog.space/categories/C%E8%AF%AD%E8%A8%80/"/>
+    
+    
+      <category term="C语言" scheme="http://www.oez-blog.space/tags/C%E8%AF%AD%E8%A8%80/"/>
+    
+  </entry>
   
   <entry>
     <title>STM32_TIM学习总结_代码示例</title>
