@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.oez-blog.space/"/>
-  <updated>2017-09-14T05:47:04.565Z</updated>
+  <updated>2017-09-16T04:46:00.664Z</updated>
   <id>http://www.oez-blog.space/</id>
   
   <author>
@@ -14,6 +14,79 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>使用Sublime Text 实现C语言的debug</title>
+    <link href="http://www.oez-blog.space/2017/09/15/%E4%BD%BF%E7%94%A8Sublime-Text-%E5%AE%9E%E7%8E%B0C%E8%AF%AD%E8%A8%80%E7%9A%84debug/"/>
+    <id>http://www.oez-blog.space/2017/09/15/使用Sublime-Text-实现C语言的debug/</id>
+    <published>2017-09-15T10:17:23.000Z</published>
+    <updated>2017-09-16T04:46:00.664Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="http://otneosm59.bkt.clouddn.com/sublime_Text.png" alt="封面"><br><a href="http://www.oez-blog.space/2017/09/14/%E4%BD%BF%E7%94%A8Sublime-Text-MinGW-%E5%9C%A8Windows%E4%B8%8B%E6%90%AD%E5%BB%BA%E8%BD%BB%E9%87%8F%E7%BA%A7C%E8%AF%AD%E8%A8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/">上一篇文章</a>总结了在windows下搭建C语言编译的过程,但是没有办法打断点Debug, 那天FPGA课上搞了一下, 然后在这里总结一下</p>
+<h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><blockquote>
+<p>和上一篇所用的工具相同,只是要安装两个插件而已;</p>
+</blockquote>
+<h2 id="配置过程"><a href="#配置过程" class="headerlink" title="配置过程"></a>配置过程</h2><h4 id="安装Package-Control"><a href="#安装Package-Control" class="headerlink" title="安装Package Control"></a>安装Package Control</h4><p><img src="http://otneosm59.bkt.clouddn.com/Package%20Control.PNG" alt="Package Control"><br>这里可以直接在Python控制台中粘贴代码, 也可以直接下载离线包;<br>参考<a href="https://packagecontrol.io/installation#st3" target="_blank" rel="external">官网的安装方法</a></p>
+<h4 id="安装SublimeGDB插件"><a href="#安装SublimeGDB插件" class="headerlink" title="安装SublimeGDB插件"></a>安装SublimeGDB插件</h4><p>安装好Package Control之后, 通过菜单Preferneces -&gt; Package Control打开， 选择 Install Package</p>
+<p><img src="http://otneosm59.bkt.clouddn.com/package_install.jpg" alt=" Install Package"><br>安装好之后是这样子的:<br><img src="http://otneosm59.bkt.clouddn.com/sublime_Gdb.png" alt="sublimegdb"><br>输入”SublimeGDB”, 选择安装; 并且配置相应的配置文件:<br>依次选择Preferneces -&gt; Package Settings -&gt; SublimeGDB -&gt; Settings – User<br><img src="http://otneosm59.bkt.clouddn.com/sublime_Text3_peizhi.png" alt="sublime_Text3_peizhi"><br>然后输入以下内容:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="string">"workingdir"</span>: <span class="string">"$&#123;folder:$&#123;file&#125;&#125;"</span>,</div><div class="line">    <span class="string">"commandline"</span>: <span class="string">"g++ -g -std=c++11 $&#123;file&#125; -o $&#123;file_base_name&#125; &amp;&amp; gdb --interpreter=mi --args ./$&#123;file_base_name&#125;"</span>,</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><img src="http://otneosm59.bkt.clouddn.com/tiaoshi_1.PNG" alt=""></p>
+<h2 id="功能测试"><a href="#功能测试" class="headerlink" title="功能测试"></a>功能测试</h2><p>测试代码:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">int</span> a = <span class="number">3</span>;</div><div class="line">	<span class="keyword">int</span> b;</div><div class="line">	a = a + <span class="number">2</span>;</div><div class="line">	b = a + <span class="number">2</span>;</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, b);</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><img src="http://otneosm59.bkt.clouddn.com/tiaoshi_2.PNG" alt="tiaoshi_2"><br>相关的快捷键:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">按键</th>
+<th style="text-align:left">功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">F5</td>
+<td style="text-align:left">开始调试</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl+F5</td>
+<td style="text-align:left">停止调试</td>
+</tr>
+<tr>
+<td style="text-align:left">F9</td>
+<td style="text-align:left">设置断点</td>
+</tr>
+<tr>
+<td style="text-align:left">F10</td>
+<td style="text-align:left">Step over，执行一步，不进入函数</td>
+</tr>
+<tr>
+<td style="text-align:left">F11</td>
+<td style="text-align:left">Step into，进入函数</td>
+</tr>
+<tr>
+<td style="text-align:left">Shift+F11</td>
+<td style="text-align:left">Step out，跳出函数</td>
+</tr>
+</tbody>
+</table>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后:"></a>最后:</h2><blockquote>
+<ul>
+<li>这个蛇皮SublimeText是真的强大;</li>
+<li>这个目测是windows下最轻量级的图形化C语言开发环境了; </li>
+<li>再次编译之前, 一定要停止调试(Ctrl+F5)!!!, 不然会报错!!!!</li>
+</ul>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;http://otneosm59.bkt.clouddn.com/sublime_Text.png&quot; alt=&quot;封面&quot;&gt;&lt;br&gt;&lt;a href=&quot;http://www.oez-blog.space/2017/09/14/%E4%BD%BF%E7%94%A
+    
+    </summary>
+    
+      <category term="C语言" scheme="http://www.oez-blog.space/categories/C%E8%AF%AD%E8%A8%80/"/>
+    
+    
+      <category term="C语言" scheme="http://www.oez-blog.space/tags/C%E8%AF%AD%E8%A8%80/"/>
+    
+  </entry>
   
   <entry>
     <title>使用Sublime Text + MinGW 在Windows下搭建轻量级C语言开发环境</title>
