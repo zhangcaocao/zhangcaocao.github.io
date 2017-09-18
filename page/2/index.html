@@ -330,6 +330,180 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.oez-blog.space/2017/07/19/双系统Windows下直接删除Linux分区后解决办法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="机智的小火箭">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小火箭 | Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/19/双系统Windows下直接删除Linux分区后解决办法/" itemprop="url">双系统Windows下直接删除Linux分区后解决办法</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-19T11:08:44+08:00">
+                July 19th 2017
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/07/19/双系统Windows下直接删除Linux分区后解决办法/" class="leancloud_visitors" data-flag-title="双系统Windows下直接删除Linux分区后解决办法">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>昨天晚上凌晨3点左右，发现win7的C盘空间不太够了，于是想删除一个系统，扩大C盘的空间，于是果断百度一下，然后直接删除Linux分区，表示网上那么多教程，怕啥，结果，嗯今天下午才弄好，使用在这里记录一下：</p>
+<h4 id="症状：开机之后面对我的是这样一串文字："><a href="#症状：开机之后面对我的是这样一串文字：" class="headerlink" title="症状：开机之后面对我的是这样一串文字："></a>症状：开机之后面对我的是这样一串文字：</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">GRUB loading </div><div class="line">error: unknow filesystem</div><div class="line">group rescue &gt; _</div></pre></td></tr></table></figure>
+<p>大概就是<code>系统引导</code>什么的出问题了吧，也就是系统文件都还在。</p>
+<h4 id="原因：下面的操作会产生上述症状，更多操作参见这里："><a href="#原因：下面的操作会产生上述症状，更多操作参见这里：" class="headerlink" title="原因：下面的操作会产生上述症状，更多操作参见这里："></a>原因：下面的操作会产生上述症状，更多操作参见<a href="https://zhidao.baidu.com/question/2011441867425456828.html?qq-pf-to=pcqq.c2c" target="_blank" rel="external">这里</a>：</h4><blockquote>
+<p>1，直接下<code>Windows</code>下<code>删除</code>或者<code>格式化</code>掉了Linux所在的分区；<br>2，重新安装了<code>Linux</code>到新的分区，原有的分区已经格式化了，但是没有重装grup2；</p>
+</blockquote>
+<h4 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法:"></a>解决方法:</h4><h6 id="1，工具："><a href="#1，工具：" class="headerlink" title="1，工具："></a>1，工具：</h6><blockquote>
+<ul>
+<li>一个U盘，一台能用的电脑；</li>
+<li><a href="http://www.dabaicai.com/down_135.html" target="_blank" rel="external">大白菜PE修复工具</a></li>
+</ul>
+</blockquote>
+<h6 id="2，具体步骤："><a href="#2，具体步骤：" class="headerlink" title="2，具体步骤："></a>2，具体步骤：</h6><blockquote>
+<p>1，安装大白菜PE修复工具，并且制作到U盘中；<br>2，其他步骤参考<a href="http://www.dabaicai.com/down_135.html" target="_blank" rel="external">链接</a>;</p>
+</blockquote>
+<h4 id="遇到的坑："><a href="#遇到的坑：" class="headerlink" title="遇到的坑："></a>遇到的坑：</h4><blockquote>
+<p>1，使用大白菜的时候报错：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">the bios <span class="keyword">in</span> this system <span class="keyword">is</span> full acpi complicant.....</div></pre></td></tr></table></figure></p>
+</blockquote>
+<p>解决方法： 开机过程中，疯狂的摁<code>F7</code>，大概翻译一下上面的英文，就是在开机过程中摁<code>F7</code>，可以跳过安装那个上面玩意，然后就可以不管”full acpi complicant”这个东西了。</p>
+<blockquote>
+<p>2，删除Linux分区后，增加C盘容量的工具获取：</p>
+</blockquote>
+<p><img src="http://www.oez-blog.space/images/DiskGenius.jpg" alt="DiskGenius"><br><a href="https://pan.baidu.com/s/1nuZok4p" target="_blank" rel="external">获取链接</a></p>
+<h4 id="总结一下："><a href="#总结一下：" class="headerlink" title="总结一下："></a>总结一下：</h4><blockquote>
+<ul>
+<li>之前安装了win7+kali Linux + ubuntu，相比之下，个人感觉还是win7好用。</li>
+<li>软件安装目录保持默认，把C盘的空间分大一点；不安装电脑管家什么的，打开Windows的自动更新，防火墙，妥妥的简单流畅。</li>
+<li>linux什么的，等win7不更新再说吧。</li>
+</ul>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://www.oez-blog.space/2017/07/18/STM32-初识GPIO操作-程序示例/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1046,7 +1220,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

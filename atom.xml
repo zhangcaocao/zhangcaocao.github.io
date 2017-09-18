@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.oez-blog.space/"/>
-  <updated>2017-09-16T04:46:00.664Z</updated>
+  <updated>2017-09-18T11:59:08.927Z</updated>
   <id>http://www.oez-blog.space/</id>
   
   <author>
@@ -16,11 +16,40 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>解决sublime Text3 下运行C语言, scanf函数无法输入的问题</title>
+    <link href="http://www.oez-blog.space/2017/09/18/%E8%A7%A3%E5%86%B3sublime-Text3-%E4%B8%8B%E8%BF%90%E8%A1%8CC%E8%AF%AD%E8%A8%80-scanf%E5%87%BD%E6%95%B0%E6%97%A0%E6%B3%95%E8%BE%93%E5%85%A5%E7%9A%84%E9%97%AE%E9%A2%98/"/>
+    <id>http://www.oez-blog.space/2017/09/18/解决sublime-Text3-下运行C语言-scanf函数无法输入的问题/</id>
+    <published>2017-09-18T11:39:55.000Z</published>
+    <updated>2017-09-18T11:59:08.927Z</updated>
+    
+    <content type="html"><![CDATA[<p><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="530" height="86" src="//music.163.com/outchain/player?type=2&id=460578140&auto=0&height=66"></iframe></p>
+<hr>
+<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述:"></a>问题描述:</h2><p>在Sublime Text3 中运行C语言时,当程序中存在<code>scanf</code>函数的时候, 无法运行,还会卡死在那里;</p>
+<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法:"></a>解决方法:</h2><p>将这个文件<a href="https://pan.baidu.com/s/1eSpLmE2" target="_blank" rel="external"> CPP.sublime-build(点击下载)</a>放到你的配置文件的目录下, 重启软件就可以了:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">C:\Users\Username\AppData\Roaming\Sublime Text <span class="number">3</span>\Packages\User</div></pre></td></tr></table></figure>
+<p><img src="http://otneosm59.bkt.clouddn.com/sublime_scanf.jpg" alt="sublime_scanf"><br>这里可以按照下面的步骤, 找到那个目录, 也可以直接用sublime打开那个文件(CPP.sublime-build),把被人粘贴到新建的那个文件中, 保存为<code>CPP.sublime-build</code>就可以了;<br><img src="http://otneosm59.bkt.clouddn.com/sublime_Text3_pz1" alt="sublime_Text3_pz1"></p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>这个开发环境目前还在完善中, 不过,毕竟是自己一步一步弄起来的,有点小缺陷,当然是选择原谅它….</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;iframe frameborder=&quot;no&quot; border=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; width=&quot;530&quot; height=&quot;86&quot; src=&quot;//music.163.com/outchain/player?type=2&amp;
+    
+    </summary>
+    
+      <category term="C语言" scheme="http://www.oez-blog.space/categories/C%E8%AF%AD%E8%A8%80/"/>
+    
+    
+      <category term="日常填坑" scheme="http://www.oez-blog.space/tags/%E6%97%A5%E5%B8%B8%E5%A1%AB%E5%9D%91/"/>
+    
+  </entry>
+  
+  <entry>
     <title>使用Sublime Text 实现C语言的debug</title>
     <link href="http://www.oez-blog.space/2017/09/15/%E4%BD%BF%E7%94%A8Sublime-Text-%E5%AE%9E%E7%8E%B0C%E8%AF%AD%E8%A8%80%E7%9A%84debug/"/>
     <id>http://www.oez-blog.space/2017/09/15/使用Sublime-Text-实现C语言的debug/</id>
     <published>2017-09-15T10:17:23.000Z</published>
-    <updated>2017-09-16T04:46:00.664Z</updated>
+    <updated>2017-09-18T11:43:48.938Z</updated>
     
     <content type="html"><![CDATA[<p><img src="http://otneosm59.bkt.clouddn.com/sublime_Text.png" alt="封面"><br><a href="http://www.oez-blog.space/2017/09/14/%E4%BD%BF%E7%94%A8Sublime-Text-MinGW-%E5%9C%A8Windows%E4%B8%8B%E6%90%AD%E5%BB%BA%E8%BD%BB%E9%87%8F%E7%BA%A7C%E8%AF%AD%E8%A8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/">上一篇文章</a>总结了在windows下搭建C语言编译的过程,但是没有办法打断点Debug, 那天FPGA课上搞了一下, 然后在这里总结一下</p>
 <h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><blockquote>
