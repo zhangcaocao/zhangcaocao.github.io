@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next pisces use-motion" lang="zh-Hans">
+<html class="theme-next mist use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -113,20 +113,20 @@
 
 
 
-<meta name="description" content="前几天,想在Windows下弄一只轻量级的C语言开发环境,然后配置了一天的Vscode(别问我为毛线,惊了),那些教程,甚至那只插件的官方文档,都和那个玩意有很大的区别,反正惊了,一气之下,决定弄一只虚拟机Linux: 结果,他喵的,开始安装,启动的时候就出问题了:123456789The virtual machine &amp;apos;Ubuntu&amp;apos; has terminated unex">
+<meta name="description" content="前几天,想在Windows下弄一只轻量级的C语言开发环境,然后配置了一天的Vscode(别问我为毛线,惊了),那些教程,甚至那只插件的官方文档,都和那个玩意有很大的区别,反正惊了,一气之下,决定弄一只虚拟机Linux: 结果,他喵的,开始安装,启动的时候就出问题了:">
 <meta name="keywords" content="日常填坑">
 <meta property="og:type" content="article">
 <meta property="og:title" content="记使用VirtualBox+Windows7安装ubuntu,开机异常处理办法">
 <meta property="og:url" content="http://www.oez-blog.space/2017/07/26/记使用VirtualBox-Windows7安装ubuntu-开机异常处理办法/index.html">
 <meta property="og:site_name" content="小火箭 | Blog">
-<meta property="og:description" content="前几天,想在Windows下弄一只轻量级的C语言开发环境,然后配置了一天的Vscode(别问我为毛线,惊了),那些教程,甚至那只插件的官方文档,都和那个玩意有很大的区别,反正惊了,一气之下,决定弄一只虚拟机Linux: 结果,他喵的,开始安装,启动的时候就出问题了:123456789The virtual machine &amp;apos;Ubuntu&amp;apos; has terminated unex">
+<meta property="og:description" content="前几天,想在Windows下弄一只轻量级的C语言开发环境,然后配置了一天的Vscode(别问我为毛线,惊了),那些教程,甚至那只插件的官方文档,都和那个玩意有很大的区别,反正惊了,一气之下,决定弄一只虚拟机Linux: 结果,他喵的,开始安装,启动的时候就出问题了:">
 <meta property="og:image" content="http://otneosm59.bkt.clouddn.com/fm_blog_2.jpg">
 <meta property="og:image" content="http://otneosm59.bkt.clouddn.com/2017_7_27_8.png">
 <meta property="og:image" content="http://otneosm59.bkt.clouddn.com/2017_7_27_11.png">
-<meta property="og:updated_time" content="2017-07-27T07:24:15.725Z">
+<meta property="og:updated_time" content="2017-09-26T14:15:26.330Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="记使用VirtualBox+Windows7安装ubuntu,开机异常处理办法">
-<meta name="twitter:description" content="前几天,想在Windows下弄一只轻量级的C语言开发环境,然后配置了一天的Vscode(别问我为毛线,惊了),那些教程,甚至那只插件的官方文档,都和那个玩意有很大的区别,反正惊了,一气之下,决定弄一只虚拟机Linux: 结果,他喵的,开始安装,启动的时候就出问题了:123456789The virtual machine &amp;apos;Ubuntu&amp;apos; has terminated unex">
+<meta name="twitter:description" content="前几天,想在Windows下弄一只轻量级的C语言开发环境,然后配置了一天的Vscode(别问我为毛线,惊了),那些教程,甚至那只插件的官方文档,都和那个玩意有很大的区别,反正惊了,一气之下,决定弄一只虚拟机Linux: 结果,他喵的,开始安装,启动的时候就出问题了:">
 <meta name="twitter:image" content="http://otneosm59.bkt.clouddn.com/fm_blog_2.jpg">
 
 
@@ -135,7 +135,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Pisces',
+    scheme: 'Mist',
     sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     motion: true,
@@ -235,8 +235,6 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
             首页
           </a>
         </li>
@@ -244,8 +242,6 @@
         
         <li class="menu-item menu-item-categories">
           <a href="/categories/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
             分类
           </a>
@@ -255,8 +251,6 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archives"></i> <br />
-            
             归档
           </a>
         </li>
@@ -264,8 +258,6 @@
         
         <li class="menu-item menu-item-tags">
           <a href="/tags/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
             标签
           </a>
@@ -278,8 +270,6 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
-            
             搜索
           </a>
         </li>
@@ -290,22 +280,26 @@
   
     <div class="site-search">
       
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
     <span class="popup-btn-close">
       <i class="fa fa-times-circle"></i>
     </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
-    </div>
   </div>
-  <div id="local-search-result"></div>
-</div>
+
 
 
 
@@ -399,6 +393,17 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/07/26/记使用VirtualBox-Windows7安装ubuntu-开机异常处理办法/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/07/26/记使用VirtualBox-Windows7安装ubuntu-开机异常处理办法/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -432,7 +437,7 @@
 
       
         <p><img src="http://otneosm59.bkt.clouddn.com/fm_blog_2.jpg" alt="封面"><br>前几天,想在Windows下弄一只轻量级的C语言开发环境,然后配置了一天的<code>Vscode</code>(别问我为毛线,惊了),那些教程,甚至那只插件的官方文档,都和那个玩意有很大的区别,反正惊了,一气之下,决定弄一只虚拟机Linux:</p>
-<p>结果,他喵的,开始安装,启动的时候就出问题了:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">The virtual machine &apos;Ubuntu&apos; has terminated unexpectedly during startup with exit code 1 (0x1). More details may be available in &apos;C:\Users\pamela\VirtualBox VMs\Ubuntu\Logs\VBoxHardening.log&apos;.</div><div class="line"></div><div class="line"></div><div class="line">返回 代码:</div><div class="line">E_FAIL (0x80004005)</div><div class="line">组件:</div><div class="line">MachineWrap</div><div class="line">界面:</div><div class="line">IMachine &#123;b2547866-a0a1-4391-8b86-6952d82efaa0&#125;</div></pre></td></tr></table></figure></p>
+<p>结果,他喵的,开始安装,启动的时候就出问题了:<br><a id="more"></a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">The virtual machine &apos;Ubuntu&apos; has terminated unexpectedly during startup with exit code 1 (0x1). More details may be available in &apos;C:\Users\pamela\VirtualBox VMs\Ubuntu\Logs\VBoxHardening.log&apos;.</div><div class="line"></div><div class="line"></div><div class="line">返回 代码:</div><div class="line">E_FAIL (0x80004005)</div><div class="line">组件:</div><div class="line">MachineWrap</div><div class="line">界面:</div><div class="line">IMachine &#123;b2547866-a0a1-4391-8b86-6952d82efaa0&#125;</div></pre></td></tr></table></figure></p>
 <p><img src="http://otneosm59.bkt.clouddn.com/2017_7_27_8.png" alt="问题"></p>
 <h4 id="这个相似问题的问题-网上剧他喵的多的教程"><a href="#这个相似问题的问题-网上剧他喵的多的教程" class="headerlink" title="这个相似问题的问题,网上剧他喵的多的教程:"></a>这个相似问题的问题,网上剧他喵的多的教程:</h4><blockquote>
 <ul>
@@ -524,27 +529,10 @@
 
     <div class="post-spread">
       
-        <!-- JiaThis Button BEGIN -->
-<div class="jiathis_style">
-  <a class="jiathis_button_tsina"></a>
-  <a class="jiathis_button_tqq"></a>
-  <a class="jiathis_button_weixin"></a>
-  <a class="jiathis_button_cqq"></a>
-  <a class="jiathis_button_douban"></a>
-  <a class="jiathis_button_renren"></a>
-  <a class="jiathis_button_qzone"></a>
-  <a class="jiathis_button_kaixin001"></a>
-  <a class="jiathis_button_copy"></a>
-  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
-  <a class="jiathis_counter_style"></a>
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-59cb1e1aae525c27" async = "async" ></script>
 </div>
-<script type="text/javascript" >
-  var jiathis_config={
-    hideMore:false
-  }
-</script>
-<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
-<!-- JiaThis Button END -->
 
       
     </div>
@@ -558,7 +546,12 @@
           
   <div class="comments" id="comments">
     
-      <div id="lv-container" data-id="city" data-uid="MTAyMC8yOTU2My82MTMx"></div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
     
   </div>
 
@@ -683,10 +676,6 @@
             <ul class="links-of-blogroll-list">
               
                 <li class="links-of-blogroll-item">
-                  <a href="http://www.pemale.studio/" title="YQ_Gallery" target="_blank">YQ_Gallery</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
                   <a href="http://cuiqingcai.com/" title="静觅" target="_blank">静觅</a>
                 </li>
               
@@ -747,7 +736,7 @@
 <div class="theme-info">
   主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Pisces
+    NexT.Mist
   </a>
 </div>
 
@@ -832,13 +821,6 @@
   
   
 
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
-
-
-
   
   <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
 <script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
@@ -857,6 +839,26 @@
 
   
 
+    
+      <script id="dsq-count-scr" src="https://机智的小火箭.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://www.oez-blog.space/2017/07/26/记使用VirtualBox-Windows7安装ubuntu-开机异常处理办法/';
+          this.page.identifier = '2017/07/26/记使用VirtualBox-Windows7安装ubuntu-开机异常处理办法/';
+          this.page.title = '记使用VirtualBox+Windows7安装ubuntu,开机异常处理办法';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://机智的小火箭.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
 
 
 
@@ -869,21 +871,6 @@
   
 
 
-
-
-
-  
-    <script type="text/javascript">
-      (function(d, s) {
-        var j, e = d.getElementsByTagName(s)[0];
-        if (typeof LivereTower === 'function') { return; }
-        j = d.createElement(s);
-        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-        j.async = true;
-        e.parentNode.insertBefore(j, e);
-      })(document, 'script');
-    </script>
-  
 
 
 
@@ -1210,6 +1197,19 @@
   </script>
 
 
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.1"></script>
 
 
 

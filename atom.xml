@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.oez-blog.space/"/>
-  <updated>2017-09-18T11:59:08.927Z</updated>
+  <updated>2017-09-26T14:15:17.481Z</updated>
   <id>http://www.oez-blog.space/</id>
   
   <author>
@@ -20,11 +20,11 @@
     <link href="http://www.oez-blog.space/2017/09/18/%E8%A7%A3%E5%86%B3sublime-Text3-%E4%B8%8B%E8%BF%90%E8%A1%8CC%E8%AF%AD%E8%A8%80-scanf%E5%87%BD%E6%95%B0%E6%97%A0%E6%B3%95%E8%BE%93%E5%85%A5%E7%9A%84%E9%97%AE%E9%A2%98/"/>
     <id>http://www.oez-blog.space/2017/09/18/解决sublime-Text3-下运行C语言-scanf函数无法输入的问题/</id>
     <published>2017-09-18T11:39:55.000Z</published>
-    <updated>2017-09-18T11:59:08.927Z</updated>
+    <updated>2017-09-26T14:15:17.481Z</updated>
     
     <content type="html"><![CDATA[<p><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="530" height="86" src="//music.163.com/outchain/player?type=2&id=460578140&auto=0&height=66"></iframe></p>
 <hr>
-<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述:"></a>问题描述:</h2><p>在Sublime Text3 中运行C语言时,当程序中存在<code>scanf</code>函数的时候, 无法运行,还会卡死在那里;</p>
+<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述:"></a>问题描述:</h2><p>在Sublime Text3 中运行C语言时,当程序中存在<code>scanf</code>函数的时候, 无法运行,还会卡死在那里;<br><a id="more"></a></p>
 <h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法:"></a>解决方法:</h2><p>将这个文件<a href="https://pan.baidu.com/s/1eSpLmE2" target="_blank" rel="external"> CPP.sublime-build(点击下载)</a>放到你的配置文件的目录下, 重启软件就可以了:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">C:\Users\Username\AppData\Roaming\Sublime Text <span class="number">3</span>\Packages\User</div></pre></td></tr></table></figure>
 <p><img src="http://otneosm59.bkt.clouddn.com/sublime_scanf.jpg" alt="sublime_scanf"><br>这里可以按照下面的步骤, 找到那个目录, 也可以直接用sublime打开那个文件(CPP.sublime-build),把被人粘贴到新建的那个文件中, 保存为<code>CPP.sublime-build</code>就可以了;<br><img src="http://otneosm59.bkt.clouddn.com/sublime_Text3_pz1" alt="sublime_Text3_pz1"></p>
@@ -33,7 +33,9 @@
     
     <summary type="html">
     
-      &lt;p&gt;&lt;iframe frameborder=&quot;no&quot; border=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; width=&quot;530&quot; height=&quot;86&quot; src=&quot;//music.163.com/outchain/player?type=2&amp;
+      &lt;p&gt;&lt;iframe frameborder=&quot;no&quot; border=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; width=&quot;530&quot; height=&quot;86&quot; src=&quot;//music.163.com/outchain/player?type=2&amp;id=460578140&amp;auto=0&amp;height=66&quot;&gt;&lt;/iframe&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;问题描述&quot;&gt;&lt;a href=&quot;#问题描述&quot; class=&quot;headerlink&quot; title=&quot;问题描述:&quot;&gt;&lt;/a&gt;问题描述:&lt;/h2&gt;&lt;p&gt;在Sublime Text3 中运行C语言时,当程序中存在&lt;code&gt;scanf&lt;/code&gt;函数的时候, 无法运行,还会卡死在那里;&lt;br&gt;
     
     </summary>
     
@@ -49,9 +51,9 @@
     <link href="http://www.oez-blog.space/2017/09/15/%E4%BD%BF%E7%94%A8Sublime-Text-%E5%AE%9E%E7%8E%B0C%E8%AF%AD%E8%A8%80%E7%9A%84debug/"/>
     <id>http://www.oez-blog.space/2017/09/15/使用Sublime-Text-实现C语言的debug/</id>
     <published>2017-09-15T10:17:23.000Z</published>
-    <updated>2017-09-18T11:43:48.938Z</updated>
+    <updated>2017-09-26T14:16:35.553Z</updated>
     
-    <content type="html"><![CDATA[<p><img src="http://otneosm59.bkt.clouddn.com/sublime_Text.png" alt="封面"><br><a href="http://www.oez-blog.space/2017/09/14/%E4%BD%BF%E7%94%A8Sublime-Text-MinGW-%E5%9C%A8Windows%E4%B8%8B%E6%90%AD%E5%BB%BA%E8%BD%BB%E9%87%8F%E7%BA%A7C%E8%AF%AD%E8%A8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/">上一篇文章</a>总结了在windows下搭建C语言编译的过程,但是没有办法打断点Debug, 那天FPGA课上搞了一下, 然后在这里总结一下</p>
+    <content type="html"><![CDATA[<p><img src="http://otneosm59.bkt.clouddn.com/sublime_Text.png" alt="封面"><br><a href="http://www.oez-blog.space/2017/09/14/%E4%BD%BF%E7%94%A8Sublime-Text-MinGW-%E5%9C%A8Windows%E4%B8%8B%E6%90%AD%E5%BB%BA%E8%BD%BB%E9%87%8F%E7%BA%A7C%E8%AF%AD%E8%A8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/">上一篇文章</a>总结了在windows下搭建C语言编译的过程,但是没有办法打断点Debug, 那天FPGA课上搞了一下, 然后在这里总结一下<br><a id="more"></a></p>
 <h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><blockquote>
 <p>和上一篇所用的工具相同,只是要安装两个插件而已;</p>
 </blockquote>
@@ -106,7 +108,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;&lt;img src=&quot;http://otneosm59.bkt.clouddn.com/sublime_Text.png&quot; alt=&quot;封面&quot;&gt;&lt;br&gt;&lt;a href=&quot;http://www.oez-blog.space/2017/09/14/%E4%BD%BF%E7%94%A
+      &lt;p&gt;&lt;img src=&quot;http://otneosm59.bkt.clouddn.com/sublime_Text.png&quot; alt=&quot;封面&quot;&gt;&lt;br&gt;&lt;a href=&quot;http://www.oez-blog.space/2017/09/14/%E4%BD%BF%E7%94%A8Sublime-Text-MinGW-%E5%9C%A8Windows%E4%B8%8B%E6%90%AD%E5%BB%BA%E8%BD%BB%E9%87%8F%E7%BA%A7C%E8%AF%AD%E8%A8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/&quot;&gt;上一篇文章&lt;/a&gt;总结了在windows下搭建C语言编译的过程,但是没有办法打断点Debug, 那天FPGA课上搞了一下, 然后在这里总结一下&lt;br&gt;
     
     </summary>
     
@@ -122,10 +124,10 @@
     <link href="http://www.oez-blog.space/2017/09/14/%E4%BD%BF%E7%94%A8Sublime-Text-MinGW-%E5%9C%A8Windows%E4%B8%8B%E6%90%AD%E5%BB%BA%E8%BD%BB%E9%87%8F%E7%BA%A7C%E8%AF%AD%E8%A8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/"/>
     <id>http://www.oez-blog.space/2017/09/14/使用Sublime-Text-MinGW-在Windows下搭建轻量级C语言开发环境/</id>
     <published>2017-09-14T04:31:46.000Z</published>
-    <updated>2017-09-14T05:47:04.565Z</updated>
+    <updated>2017-09-26T14:15:04.730Z</updated>
     
     <content type="html"><![CDATA[<p><img src="http://otneosm59.bkt.clouddn.com/china-2592294__340.jpg" alt="封面"></p>
-<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>迫于Windows下的各种IDE太’强大’, 对于一个只会写点’hello world’的C语言菜鸟的我来说,那些功能确实用不了,于是想搭建一个轻量级的,不占用我这个渣渣电脑太多资源的C语言开发环境,嗯昨天终于成功了,今天在这里分享一下;</p>
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>迫于Windows下的各种IDE太’强大’, 对于一个只会写点’hello world’的C语言菜鸟的我来说,那些功能确实用不了,于是想搭建一个轻量级的,不占用我这个渣渣电脑太多资源的C语言开发环境,嗯昨天终于成功了,今天在这里分享一下;<br><a id="more"></a></p>
 <h2 id="工具-点击下载"><a href="#工具-点击下载" class="headerlink" title="工具(点击下载)"></a>工具(点击下载)</h2><blockquote>
 <ul>
 <li><a href="http://www.sublimetext.com/" target="_blank" rel="external">Sublime Text3</a></li>
@@ -184,7 +186,7 @@
     <summary type="html">
     
       &lt;p&gt;&lt;img src=&quot;http://otneosm59.bkt.clouddn.com/china-2592294__340.jpg&quot; alt=&quot;封面&quot;&gt;&lt;/p&gt;
-&lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;
+&lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h2&gt;&lt;p&gt;迫于Windows下的各种IDE太’强大’, 对于一个只会写点’hello world’的C语言菜鸟的我来说,那些功能确实用不了,于是想搭建一个轻量级的,不占用我这个渣渣电脑太多资源的C语言开发环境,嗯昨天终于成功了,今天在这里分享一下;&lt;br&gt;
     
     </summary>
     
@@ -200,7 +202,7 @@
     <link href="http://www.oez-blog.space/2017/08/25/STM32-TIM%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B/"/>
     <id>http://www.oez-blog.space/2017/08/25/STM32-TIM学习总结-代码示例/</id>
     <published>2017-08-25T11:42:29.000Z</published>
-    <updated>2017-08-25T13:25:01.888Z</updated>
+    <updated>2017-09-26T14:16:32.885Z</updated>
     
     <content type="html"><![CDATA[<p>安利一首歌 。。。。</p>
 <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="530" height="86" src="//music.163.com/outchain/player?type=2&id=442016694&auto=0&height=66"></iframe>
@@ -208,6 +210,7 @@
 <hr>
 <p><a href="http://www.oez-blog.space/2017/08/08/STM32-TIM%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">上一篇文章</a> 说好的“结合代码示例，理解一下”，所以这里就不错废话啦/(神他喵的逻辑/滑稽)<br>下面直接讲一下代码逻辑：</p>
 <hr>
+<a id="more"></a>
 <h2 id="实验描述："><a href="#实验描述：" class="headerlink" title="实验描述："></a>实验描述：</h2><blockquote>
 <ul>
 <li>目的： </li>
@@ -287,7 +290,11 @@
     <summary type="html">
     
       &lt;p&gt;安利一首歌 。。。。&lt;/p&gt;
-&lt;iframe frameborder=&quot;no&quot; border=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; width=&quot;530&quot; height=&quot;86&quot; src=&quot;//music.163.com/outchain
+&lt;iframe frameborder=&quot;no&quot; border=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; width=&quot;530&quot; height=&quot;86&quot; src=&quot;//music.163.com/outchain/player?type=2&amp;id=442016694&amp;auto=0&amp;height=66&quot;&gt;&lt;/iframe&gt;
+
+&lt;hr&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.oez-blog.space/2017/08/08/STM32-TIM%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/&quot;&gt;上一篇文章&lt;/a&gt; 说好的“结合代码示例，理解一下”，所以这里就不错废话啦/(神他喵的逻辑/滑稽)&lt;br&gt;下面直接讲一下代码逻辑：&lt;/p&gt;
+&lt;hr&gt;
     
     </summary>
     
@@ -303,12 +310,12 @@
     <link href="http://www.oez-blog.space/2017/08/08/STM32-TIM%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/"/>
     <id>http://www.oez-blog.space/2017/08/08/STM32-TIM学习总结/</id>
     <published>2017-08-08T11:09:26.000Z</published>
-    <updated>2017-08-14T02:56:32.462Z</updated>
+    <updated>2017-09-26T14:16:35.892Z</updated>
     
     <content type="html"><![CDATA[<p>安利一首歌 。。。。</p>
 <p><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="530" height="86" src="//music.163.com/outchain/player?type=2&id=32408263&auto=0&height=66"></iframe></p>
 <hr>
-<p>STM32  的定时器外设功能强大得1P, “STM32参考手册”中对定时器的介绍就已经占了100多页.由于在下能力有限，对高级定时器的理解与运用几乎为0，所以这里就没有总结了。</p>
+<p>STM32  的定时器外设功能强大得1P, “STM32参考手册”中对定时器的介绍就已经占了100多页.由于在下能力有限，对高级定时器的理解与运用几乎为0，所以这里就没有总结了。<br><a id="more"></a></p>
 <h2 id="分类"><a href="#分类" class="headerlink" title="分类:"></a>分类:</h2><p>STM32一个有8个都为<code>16</code>位的定时器:</p>
 <blockquote>
 <p>基本定时器: TIM6, TIM7<br>通用定时器: TIM2, TIM3, TIM4, TIM5<br>高级定时器: TIM1, TIM8</p>
@@ -361,7 +368,9 @@
     <summary type="html">
     
       &lt;p&gt;安利一首歌 。。。。&lt;/p&gt;
-&lt;p&gt;&lt;iframe frameborder=&quot;no&quot; border=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; width=&quot;530&quot; height=&quot;86&quot; src=&quot;//music.163.com/outch
+&lt;p&gt;&lt;iframe frameborder=&quot;no&quot; border=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; width=&quot;530&quot; height=&quot;86&quot; src=&quot;//music.163.com/outchain/player?type=2&amp;id=32408263&amp;auto=0&amp;height=66&quot;&gt;&lt;/iframe&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;STM32  的定时器外设功能强大得1P, “STM32参考手册”中对定时器的介绍就已经占了100多页.由于在下能力有限，对高级定时器的理解与运用几乎为0，所以这里就没有总结了。&lt;br&gt;
     
     </summary>
     
@@ -377,9 +386,9 @@
     <link href="http://www.oez-blog.space/2017/07/27/linux%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84C%E8%AF%AD%E8%A8%80%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/"/>
     <id>http://www.oez-blog.space/2017/07/27/linux环境下的C语言开发基础操作总结/</id>
     <published>2017-07-27T02:01:52.000Z</published>
-    <updated>2017-07-28T00:18:33.413Z</updated>
+    <updated>2017-09-26T14:16:35.784Z</updated>
     
-    <content type="html"><![CDATA[<p><img src="http://otneosm59.bkt.clouddn.com/fem_blog_3.jpg" alt="封面"><br>前几天安装了<code>Linux</code>下的C语言开发环境,并且复习了一下<a href="http://www.imooc.com/learn/248" target="_blank" rel="external">慕课网</a>(传送门)上面的相关教程,良心老师,干货很多,因此在这里总结一下,以便于以后查看:</p>
+    <content type="html"><![CDATA[<p><img src="http://otneosm59.bkt.clouddn.com/fem_blog_3.jpg" alt="封面"><br>前几天安装了<code>Linux</code>下的C语言开发环境,并且复习了一下<a href="http://www.imooc.com/learn/248" target="_blank" rel="external">慕课网</a>(传送门)上面的相关教程,良心老师,干货很多,因此在这里总结一下,以便于以后查看:<br><a id="more"></a></p>
 <h2 id="vim的多文件编辑"><a href="#vim的多文件编辑" class="headerlink" title="/vim的多文件编辑"></a>/<em>vim的多文件编辑</em></h2><blockquote>
 <ul>
 <li>:sp : 打开多个文件;</li>
@@ -433,7 +442,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;&lt;img src=&quot;http://otneosm59.bkt.clouddn.com/fem_blog_3.jpg&quot; alt=&quot;封面&quot;&gt;&lt;br&gt;前几天安装了&lt;code&gt;Linux&lt;/code&gt;下的C语言开发环境,并且复习了一下&lt;a href=&quot;http://www.imoo
+      &lt;p&gt;&lt;img src=&quot;http://otneosm59.bkt.clouddn.com/fem_blog_3.jpg&quot; alt=&quot;封面&quot;&gt;&lt;br&gt;前几天安装了&lt;code&gt;Linux&lt;/code&gt;下的C语言开发环境,并且复习了一下&lt;a href=&quot;http://www.imooc.com/learn/248&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;慕课网&lt;/a&gt;(传送门)上面的相关教程,良心老师,干货很多,因此在这里总结一下,以便于以后查看:&lt;br&gt;
     
     </summary>
     
@@ -449,10 +458,10 @@
     <link href="http://www.oez-blog.space/2017/07/26/%E8%AE%B0%E4%BD%BF%E7%94%A8VirtualBox-Windows7%E5%AE%89%E8%A3%85ubuntu-%E5%BC%80%E6%9C%BA%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E5%8A%9E%E6%B3%95/"/>
     <id>http://www.oez-blog.space/2017/07/26/记使用VirtualBox-Windows7安装ubuntu-开机异常处理办法/</id>
     <published>2017-07-26T10:57:27.000Z</published>
-    <updated>2017-07-27T07:24:15.725Z</updated>
+    <updated>2017-09-26T14:15:26.330Z</updated>
     
     <content type="html"><![CDATA[<p><img src="http://otneosm59.bkt.clouddn.com/fm_blog_2.jpg" alt="封面"><br>前几天,想在Windows下弄一只轻量级的C语言开发环境,然后配置了一天的<code>Vscode</code>(别问我为毛线,惊了),那些教程,甚至那只插件的官方文档,都和那个玩意有很大的区别,反正惊了,一气之下,决定弄一只虚拟机Linux:</p>
-<p>结果,他喵的,开始安装,启动的时候就出问题了:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">The virtual machine &apos;Ubuntu&apos; has terminated unexpectedly during startup with exit code 1 (0x1). More details may be available in &apos;C:\Users\pamela\VirtualBox VMs\Ubuntu\Logs\VBoxHardening.log&apos;.</div><div class="line"></div><div class="line"></div><div class="line">返回 代码:</div><div class="line">E_FAIL (0x80004005)</div><div class="line">组件:</div><div class="line">MachineWrap</div><div class="line">界面:</div><div class="line">IMachine &#123;b2547866-a0a1-4391-8b86-6952d82efaa0&#125;</div></pre></td></tr></table></figure></p>
+<p>结果,他喵的,开始安装,启动的时候就出问题了:<br><a id="more"></a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">The virtual machine &apos;Ubuntu&apos; has terminated unexpectedly during startup with exit code 1 (0x1). More details may be available in &apos;C:\Users\pamela\VirtualBox VMs\Ubuntu\Logs\VBoxHardening.log&apos;.</div><div class="line"></div><div class="line"></div><div class="line">返回 代码:</div><div class="line">E_FAIL (0x80004005)</div><div class="line">组件:</div><div class="line">MachineWrap</div><div class="line">界面:</div><div class="line">IMachine &#123;b2547866-a0a1-4391-8b86-6952d82efaa0&#125;</div></pre></td></tr></table></figure></p>
 <p><img src="http://otneosm59.bkt.clouddn.com/2017_7_27_8.png" alt="问题"></p>
 <h4 id="这个相似问题的问题-网上剧他喵的多的教程"><a href="#这个相似问题的问题-网上剧他喵的多的教程" class="headerlink" title="这个相似问题的问题,网上剧他喵的多的教程:"></a>这个相似问题的问题,网上剧他喵的多的教程:</h4><blockquote>
 <ul>
@@ -479,7 +488,8 @@
     
     <summary type="html">
     
-      &lt;p&gt;&lt;img src=&quot;http://otneosm59.bkt.clouddn.com/fm_blog_2.jpg&quot; alt=&quot;封面&quot;&gt;&lt;br&gt;前几天,想在Windows下弄一只轻量级的C语言开发环境,然后配置了一天的&lt;code&gt;Vscode&lt;/code&gt;(别问我为毛线,惊了
+      &lt;p&gt;&lt;img src=&quot;http://otneosm59.bkt.clouddn.com/fm_blog_2.jpg&quot; alt=&quot;封面&quot;&gt;&lt;br&gt;前几天,想在Windows下弄一只轻量级的C语言开发环境,然后配置了一天的&lt;code&gt;Vscode&lt;/code&gt;(别问我为毛线,惊了),那些教程,甚至那只插件的官方文档,都和那个玩意有很大的区别,反正惊了,一气之下,决定弄一只虚拟机Linux:&lt;/p&gt;
+&lt;p&gt;结果,他喵的,开始安装,启动的时候就出问题了:&lt;br&gt;
     
     </summary>
     
@@ -495,9 +505,9 @@
     <link href="http://www.oez-blog.space/2017/07/26/%E8%AE%B0%E5%86%99%E6%9F%90%E5%8F%AA%E5%B0%8F%E7%88%AC%E8%99%AB%E6%98%AF%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/"/>
     <id>http://www.oez-blog.space/2017/07/26/记写某只小爬虫是遇到的坑及解决方法/</id>
     <published>2017-07-26T08:12:59.000Z</published>
-    <updated>2017-07-27T05:38:03.754Z</updated>
+    <updated>2017-09-26T14:16:35.606Z</updated>
     
-    <content type="html"><![CDATA[<p><img src="http://otneosm59.bkt.clouddn.com/fem_blog_1.jpg" alt="封面"><br>某日,发现一只挺好的<a href="http://sj.zol.com.cn/mobilesoft/good_1.html" target="_blank" rel="external">网址</a>,于是很想把上面的信息爬下来,练练手,过程中发现几处坑,在这里总结一下:</p>
+    <content type="html"><![CDATA[<p><img src="http://otneosm59.bkt.clouddn.com/fem_blog_1.jpg" alt="封面"><br>某日,发现一只挺好的<a href="http://sj.zol.com.cn/mobilesoft/good_1.html" target="_blank" rel="external">网址</a>,于是很想把上面的信息爬下来,练练手,过程中发现几处坑,在这里总结一下:<br><a id="more"></a></p>
 <h2 id="那个网站的样子"><a href="#那个网站的样子" class="headerlink" title="那个网站的样子:"></a>那个网站的样子:</h2><p><img src="http://otneosm59.bkt.clouddn.com/2017_7_27_9.png" alt="网站的样子:"></p>
 <h2 id="爬虫目的与思路"><a href="#爬虫目的与思路" class="headerlink" title="爬虫目的与思路:"></a>爬虫目的与思路:</h2><blockquote>
 <ul>
@@ -540,7 +550,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;&lt;img src=&quot;http://otneosm59.bkt.clouddn.com/fem_blog_1.jpg&quot; alt=&quot;封面&quot;&gt;&lt;br&gt;某日,发现一只挺好的&lt;a href=&quot;http://sj.zol.com.cn/mobilesoft/good_1.html&quot; t
+      &lt;p&gt;&lt;img src=&quot;http://otneosm59.bkt.clouddn.com/fem_blog_1.jpg&quot; alt=&quot;封面&quot;&gt;&lt;br&gt;某日,发现一只挺好的&lt;a href=&quot;http://sj.zol.com.cn/mobilesoft/good_1.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;网址&lt;/a&gt;,于是很想把上面的信息爬下来,练练手,过程中发现几处坑,在这里总结一下:&lt;br&gt;
     
     </summary>
     
@@ -556,9 +566,9 @@
     <link href="http://www.oez-blog.space/2017/07/24/django%E5%AD%A6%E4%B9%A0%E4%B9%8B%E5%88%9D%E8%AF%86%E8%A1%A8%E5%8D%95%E6%8F%90%E4%BA%A4/"/>
     <id>http://www.oez-blog.space/2017/07/24/django学习之初识表单提交/</id>
     <published>2017-07-24T02:09:11.000Z</published>
-    <updated>2017-07-24T04:06:14.959Z</updated>
+    <updated>2017-09-26T14:16:35.645Z</updated>
     
-    <content type="html"><![CDATA[<p>生活所迫，学习web；人生苦短，我用Python。<br><a href="www.oez-blog.space/2017/07/22/django学习之环境搭建与工具准备/">上一篇文章</a>总结了Django环境的搭建，今天来使用Django实现表单的提交功能。</p>
+    <content type="html"><![CDATA[<p>生活所迫，学习web；人生苦短，我用Python。<br><a href="www.oez-blog.space/2017/07/22/django学习之环境搭建与工具准备/">上一篇文章</a>总结了Django环境的搭建，今天来使用Django实现表单的提交功能。<br><a id="more"></a></p>
 <h2 id="一，环境说明"><a href="#一，环境说明" class="headerlink" title="一，环境说明:"></a>一，环境说明:</h2><blockquote>
 <ul>
 <li>windows 7</li>
@@ -633,7 +643,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;生活所迫，学习web；人生苦短，我用Python。&lt;br&gt;&lt;a href=&quot;www.oez-blog.space/2017/07/22/django学习之环境搭建与工具准备/&quot;&gt;上一篇文章&lt;/a&gt;总结了Django环境的搭建，今天来使用Django实现表单的提交功能。&lt;/p
+      &lt;p&gt;生活所迫，学习web；人生苦短，我用Python。&lt;br&gt;&lt;a href=&quot;www.oez-blog.space/2017/07/22/django学习之环境搭建与工具准备/&quot;&gt;上一篇文章&lt;/a&gt;总结了Django环境的搭建，今天来使用Django实现表单的提交功能。&lt;br&gt;
     
     </summary>
     
@@ -649,9 +659,9 @@
     <link href="http://www.oez-blog.space/2017/07/22/django%E5%AD%A6%E4%B9%A0%E4%B9%8B%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E4%B8%8E%E5%B7%A5%E5%85%B7%E5%87%86%E5%A4%87/"/>
     <id>http://www.oez-blog.space/2017/07/22/django学习之环境搭建与工具准备/</id>
     <published>2017-07-22T05:28:00.000Z</published>
-    <updated>2017-07-22T08:40:19.629Z</updated>
+    <updated>2017-09-26T14:16:35.692Z</updated>
     
-    <content type="html"><![CDATA[<p>生活所迫，学习web；人生苦短，我用Python。<br>这篇文章总结的是学习Python的django框架之前所做的准备，主要包括两方面:</p>
+    <content type="html"><![CDATA[<p>生活所迫，学习web；人生苦短，我用Python。<br>这篇文章总结的是学习Python的django框架之前所做的准备，主要包括两方面:<br><a id="more"></a></p>
 <blockquote>
 <ul>
 <li>环境搭建</li>
@@ -697,13 +707,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;生活所迫，学习web；人生苦短，我用Python。&lt;br&gt;这篇文章总结的是学习Python的django框架之前所做的准备，主要包括两方面:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;环境搭建&lt;/li&gt;
-&lt;li&gt;工具准备&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquo
+      &lt;p&gt;生活所迫，学习web；人生苦短，我用Python。&lt;br&gt;这篇文章总结的是学习Python的django框架之前所做的准备，主要包括两方面:&lt;br&gt;
     
     </summary>
     
@@ -719,11 +723,11 @@
     <link href="http://www.oez-blog.space/2017/07/19/%E5%8F%8C%E7%B3%BB%E7%BB%9FWindows%E4%B8%8B%E7%9B%B4%E6%8E%A5%E5%88%A0%E9%99%A4Linux%E5%88%86%E5%8C%BA%E5%90%8E%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/"/>
     <id>http://www.oez-blog.space/2017/07/19/双系统Windows下直接删除Linux分区后解决办法/</id>
     <published>2017-07-19T03:08:44.000Z</published>
-    <updated>2017-07-27T22:04:19.644Z</updated>
+    <updated>2017-09-26T14:15:11.562Z</updated>
     
     <content type="html"><![CDATA[<p>昨天晚上凌晨3点左右，发现win7的C盘空间不太够了，于是想删除一个系统，扩大C盘的空间，于是果断百度一下，然后直接删除Linux分区，表示网上那么多教程，怕啥，结果，嗯今天下午才弄好，使用在这里记录一下：</p>
 <h4 id="症状：开机之后面对我的是这样一串文字："><a href="#症状：开机之后面对我的是这样一串文字：" class="headerlink" title="症状：开机之后面对我的是这样一串文字："></a>症状：开机之后面对我的是这样一串文字：</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">GRUB loading </div><div class="line">error: unknow filesystem</div><div class="line">group rescue &gt; _</div></pre></td></tr></table></figure>
-<p>大概就是<code>系统引导</code>什么的出问题了吧，也就是系统文件都还在。</p>
+<p>大概就是<code>系统引导</code>什么的出问题了吧，也就是系统文件都还在。<br><a id="more"></a></p>
 <h4 id="原因：下面的操作会产生上述症状，更多操作参见这里："><a href="#原因：下面的操作会产生上述症状，更多操作参见这里：" class="headerlink" title="原因：下面的操作会产生上述症状，更多操作参见这里："></a>原因：下面的操作会产生上述症状，更多操作参见<a href="https://zhidao.baidu.com/question/2011441867425456828.html?qq-pf-to=pcqq.c2c" target="_blank" rel="external">这里</a>：</h4><blockquote>
 <p>1，直接下<code>Windows</code>下<code>删除</code>或者<code>格式化</code>掉了Linux所在的分区；<br>2，重新安装了<code>Linux</code>到新的分区，原有的分区已经格式化了，但是没有重装grup2；</p>
 </blockquote>
@@ -756,7 +760,8 @@
     <summary type="html">
     
       &lt;p&gt;昨天晚上凌晨3点左右，发现win7的C盘空间不太够了，于是想删除一个系统，扩大C盘的空间，于是果断百度一下，然后直接删除Linux分区，表示网上那么多教程，怕啥，结果，嗯今天下午才弄好，使用在这里记录一下：&lt;/p&gt;
-&lt;h4 id=&quot;症状：开机之后面对我的是这样一串文字：&quot;&gt;
+&lt;h4 id=&quot;症状：开机之后面对我的是这样一串文字：&quot;&gt;&lt;a href=&quot;#症状：开机之后面对我的是这样一串文字：&quot; class=&quot;headerlink&quot; title=&quot;症状：开机之后面对我的是这样一串文字：&quot;&gt;&lt;/a&gt;症状：开机之后面对我的是这样一串文字：&lt;/h4&gt;&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;GRUB loading &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;error: unknow filesystem&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;group rescue &amp;gt; _&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;大概就是&lt;code&gt;系统引导&lt;/code&gt;什么的出问题了吧，也就是系统文件都还在。&lt;br&gt;
     
     </summary>
     
@@ -772,9 +777,9 @@
     <link href="http://www.oez-blog.space/2017/07/18/STM32-%E5%88%9D%E8%AF%86GPIO%E6%93%8D%E4%BD%9C-%E7%A8%8B%E5%BA%8F%E7%A4%BA%E4%BE%8B/"/>
     <id>http://www.oez-blog.space/2017/07/18/STM32-初识GPIO操作-程序示例/</id>
     <published>2017-07-17T20:40:57.000Z</published>
-    <updated>2017-07-17T23:15:13.578Z</updated>
+    <updated>2017-09-26T14:16:35.833Z</updated>
     
-    <content type="html"><![CDATA[<p><a href="http://www.oez-blog.space/2017/07/17/STM32_GPIO_%E6%80%BB%E7%BB%93/">上一篇文章</a>讲解了<code>GPIO</code>和相对应的<code>寄存器</code>的基础知识，这一篇则是对上一篇知识点的应用：</p>
+    <content type="html"><![CDATA[<p><a href="http://www.oez-blog.space/2017/07/17/STM32_GPIO_%E6%80%BB%E7%BB%93/">上一篇文章</a>讲解了<code>GPIO</code>和相对应的<code>寄存器</code>的基础知识，这一篇则是对上一篇知识点的应用：<br><a id="more"></a></p>
 <h4 id="几点说明："><a href="#几点说明：" class="headerlink" title="几点说明："></a>几点说明：</h4><blockquote>
 <p>1, 由于硬件上的不统一，加之GPIO口的通用性，此处采用模拟仿真的方法，观察内部寄存器的数据变化；<br>2，本次实验所用到的操作主要有：<code>位绑定</code>，<code>寄存器的操作</code>，<code>基本的位运算</code><br>3，本次实验的目的是：控制GPIOA低8位的输出，并且使高8位的对应位输入相同的电平：<br>E.g： 若2位输出 0，则对应的10位输入 0；</p>
 </blockquote>
@@ -804,7 +809,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;&lt;a href=&quot;http://www.oez-blog.space/2017/07/17/STM32_GPIO_%E6%80%BB%E7%BB%93/&quot;&gt;上一篇文章&lt;/a&gt;讲解了&lt;code&gt;GPIO&lt;/code&gt;和相对应的&lt;code&gt;寄存器&lt;/code&gt;的基础知识，这一篇
+      &lt;p&gt;&lt;a href=&quot;http://www.oez-blog.space/2017/07/17/STM32_GPIO_%E6%80%BB%E7%BB%93/&quot;&gt;上一篇文章&lt;/a&gt;讲解了&lt;code&gt;GPIO&lt;/code&gt;和相对应的&lt;code&gt;寄存器&lt;/code&gt;的基础知识，这一篇则是对上一篇知识点的应用：&lt;br&gt;
     
     </summary>
     
@@ -820,7 +825,7 @@
     <link href="http://www.oez-blog.space/2017/07/17/STM32_GPIO_%E6%80%BB%E7%BB%93/"/>
     <id>http://www.oez-blog.space/2017/07/17/STM32_GPIO_总结/</id>
     <published>2017-07-17T15:26:22.000Z</published>
-    <updated>2017-07-17T08:51:34.814Z</updated>
+    <updated>2017-09-26T14:16:27.596Z</updated>
     
     <content type="html"><![CDATA[<h4 id="一，GPIO寄存器"><a href="#一，GPIO寄存器" class="headerlink" title="一，GPIO寄存器"></a>一，GPIO寄存器</h4><p><img src="http://www.oez-blog.space/images/GPIO_2.PNG" alt="I/O端口位的基本结构"></p>
 <h5 id="由图我们可以知道下面一些信息："><a href="#由图我们可以知道下面一些信息：" class="headerlink" title="由图我们可以知道下面一些信息："></a>由图我们可以知道下面一些信息：</h5><h6 id="1，输出驱动电路："><a href="#1，输出驱动电路：" class="headerlink" title="1，输出驱动电路："></a>1，输出驱动电路：</h6><blockquote>
@@ -828,11 +833,8 @@
 <li><code>输出数据寄存器</code>有2种方式改变：一种是通过<code>直接读/写</code>，另一种是通过<code>位设置/位清除寄存器</code>来进行改变；</li>
 <li><code>选择开关</code>：选择的是复用功能 or GPIO的输出功能；</li>
 <li><code>输出控制</code>：一个<a href="http://blog.csdn.net/surgeddd/article/details/4683657" target="_blank" rel="external">锁存器</a>的电路</li>
-<li><code>CMOS管</code>: 正向的P-MOS &amp; N-MOS；二者输出相反01/10；VDD 通常为3.3V；通过<code>输出控制</code>的输出值，改变P_MOS和C_MOS的导通关系，从而改变整个的输出&lt;高电平/低电平&gt;；</li>
-</ul>
-</blockquote>
-<h6 id="2，输入驱动电路："><a href="#2，输入驱动电路：" class="headerlink" title="2，输入驱动电路："></a>2，输入驱动电路：</h6><blockquote>
-<ul>
+<li><code>CMOS管</code>: 正向的P-MOS &amp; N-MOS；二者输出相反01/10；VDD 通常为3.3V；通过<code>输出控制</code>的输出值，改变P_MOS和C_MOS的导通关系，从而改变整个的输出&lt;高电平/低电平&gt;；<a id="more"></a>
+<h6 id="2，输入驱动电路："><a href="#2，输入驱动电路：" class="headerlink" title="2，输入驱动电路："></a>2，输入驱动电路：</h6></li>
 <li><code>上拉电阻</code>：上拉/下拉可以通过开关控制，通过<code>配置寄存器</code>里面进行设置；上拉/下拉开关都可以打开，也就是浮空： 模拟输入不希望有任何一点变化被上拉/下拉所修改；</li>
 <li><code>TTL施密特触发器</code>: 可以进行一定的滤波，整形，开关；</li>
 </ul>
@@ -863,7 +865,13 @@
     
     <summary type="html">
     
-      &lt;h4 id=&quot;一，GPIO寄存器&quot;&gt;&lt;a href=&quot;#一，GPIO寄存器&quot; class=&quot;headerlink&quot; title=&quot;一，GPIO寄存器&quot;&gt;&lt;/a&gt;一，GPIO寄存器&lt;/h4&gt;&lt;p&gt;&lt;img src=&quot;http://www.oez-blog.space/images
+      &lt;h4 id=&quot;一，GPIO寄存器&quot;&gt;&lt;a href=&quot;#一，GPIO寄存器&quot; class=&quot;headerlink&quot; title=&quot;一，GPIO寄存器&quot;&gt;&lt;/a&gt;一，GPIO寄存器&lt;/h4&gt;&lt;p&gt;&lt;img src=&quot;http://www.oez-blog.space/images/GPIO_2.PNG&quot; alt=&quot;I/O端口位的基本结构&quot;&gt;&lt;/p&gt;
+&lt;h5 id=&quot;由图我们可以知道下面一些信息：&quot;&gt;&lt;a href=&quot;#由图我们可以知道下面一些信息：&quot; class=&quot;headerlink&quot; title=&quot;由图我们可以知道下面一些信息：&quot;&gt;&lt;/a&gt;由图我们可以知道下面一些信息：&lt;/h5&gt;&lt;h6 id=&quot;1，输出驱动电路：&quot;&gt;&lt;a href=&quot;#1，输出驱动电路：&quot; class=&quot;headerlink&quot; title=&quot;1，输出驱动电路：&quot;&gt;&lt;/a&gt;1，输出驱动电路：&lt;/h6&gt;&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;输出数据寄存器&lt;/code&gt;有2种方式改变：一种是通过&lt;code&gt;直接读/写&lt;/code&gt;，另一种是通过&lt;code&gt;位设置/位清除寄存器&lt;/code&gt;来进行改变；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;选择开关&lt;/code&gt;：选择的是复用功能 or GPIO的输出功能；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;输出控制&lt;/code&gt;：一个&lt;a href=&quot;http://blog.csdn.net/surgeddd/article/details/4683657&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;锁存器&lt;/a&gt;的电路&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;CMOS管&lt;/code&gt;: 正向的P-MOS &amp;amp; N-MOS；二者输出相反01/10；VDD 通常为3.3V；通过&lt;code&gt;输出控制&lt;/code&gt;的输出值，改变P_MOS和C_MOS的导通关系，从而改变整个的输出&amp;lt;高电平/低电平&amp;gt;；
     
     </summary>
     
@@ -879,9 +887,9 @@
     <link href="http://www.oez-blog.space/2017/07/17/Hexo+GitHub%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%80%BB%E7%BB%93/"/>
     <id>http://www.oez-blog.space/2017/07/17/Hexo+GitHub博客搭建总结/</id>
     <published>2017-07-17T12:20:06.000Z</published>
-    <updated>2017-07-17T05:25:16.399Z</updated>
+    <updated>2017-09-26T14:16:35.739Z</updated>
     
-    <content type="html"><![CDATA[<p>经过这几天的捣鼓，我的第一个正式的博客已经初显雏形了，鉴于网上教程很多，所以具体细节不再叙述，可以看看下面的几个参考链接，这里只是简单的总结一下：</p>
+    <content type="html"><![CDATA[<p>经过这几天的捣鼓，我的第一个正式的博客已经初显雏形了，鉴于网上教程很多，所以具体细节不再叙述，可以看看下面的几个参考链接，这里只是简单的总结一下：<br><a id="more"></a></p>
 <h4 id="1，工具准备"><a href="#1，工具准备" class="headerlink" title="1，工具准备"></a>1，工具准备</h4><blockquote>
 <ul>
 <li><a href="https://git-scm.com/downloads" target="_blank" rel="external">Git</a></li>
@@ -911,8 +919,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;经过这几天的捣鼓，我的第一个正式的博客已经初显雏形了，鉴于网上教程很多，所以具体细节不再叙述，可以看看下面的几个参考链接，这里只是简单的总结一下：&lt;/p&gt;
-&lt;h4 id=&quot;1，工具准备&quot;&gt;&lt;a href=&quot;#1，工具准备&quot; class=&quot;headerlink&quot; title=
+      &lt;p&gt;经过这几天的捣鼓，我的第一个正式的博客已经初显雏形了，鉴于网上教程很多，所以具体细节不再叙述，可以看看下面的几个参考链接，这里只是简单的总结一下：&lt;br&gt;
     
     </summary>
     
@@ -928,9 +935,10 @@
     <link href="http://www.oez-blog.space/2017/07/17/%E4%BD%BF%E7%94%A8%E4%B8%80%E6%A0%B9%E7%BD%91%E7%BA%BF-%E7%AC%94%E8%AE%B0%E6%9C%AC%E8%BF%9E%E6%8E%A5%E6%A0%91%E8%8E%93%E6%B4%BE-%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/"/>
     <id>http://www.oez-blog.space/2017/07/17/使用一根网线-笔记本连接树莓派-技术总结/</id>
     <published>2017-07-16T20:16:21.000Z</published>
-    <updated>2017-07-16T22:09:26.544Z</updated>
+    <updated>2017-09-26T14:14:48.056Z</updated>
     
     <content type="html"><![CDATA[<p>之前在学校一股脑弄了只树莓派，他喵的，结果摁是机都没开，昨天回家之后，捣鼓了一会，使用开机，因此，在这里总结一下遇到的坑：</p>
+<a id="more"></a>
 <h6 id="ssh连接是时候出现“拒绝连接”"><a href="#ssh连接是时候出现“拒绝连接”" class="headerlink" title="ssh连接是时候出现“拒绝连接”:"></a>ssh连接是时候出现“拒绝连接”:</h6><blockquote>
 <p> 在树莓派SD卡的根目录新建一个ssh的空文件，打开ssh</p>
 </blockquote>
@@ -945,7 +953,6 @@
     <summary type="html">
     
       &lt;p&gt;之前在学校一股脑弄了只树莓派，他喵的，结果摁是机都没开，昨天回家之后，捣鼓了一会，使用开机，因此，在这里总结一下遇到的坑：&lt;/p&gt;
-&lt;h6 id=&quot;ssh连接是时候出现“拒绝连接”&quot;&gt;&lt;a href=&quot;#ssh连接是时候出现“拒绝连接”&quot; class=&quot;headerlink
     
     </summary>
     

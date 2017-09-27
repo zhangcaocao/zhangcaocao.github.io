@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next pisces use-motion" lang="zh-Hans">
+<html class="theme-next mist use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -113,13 +113,13 @@
 
 
 
-<meta name="description" content="背景迫于Windows下的各种IDE太’强大’, 对于一个只会写点’hello world’的C语言菜鸟的我来说,那些功能确实用不了,于是想搭建一个轻量级的,不占用我这个渣渣电脑太多资源的C语言开发环境,嗯昨天终于成功了,今天在这里分享一下; 工具(点击下载)  Sublime Text3 MinGW   工具介绍Sublime Text   IDE界的颜值担当, 支持多种主题; 轻量级, 不会">
+<meta name="description" content="背景迫于Windows下的各种IDE太’强大’, 对于一个只会写点’hello world’的C语言菜鸟的我来说,那些功能确实用不了,于是想搭建一个轻量级的,不占用我这个渣渣电脑太多资源的C语言开发环境,嗯昨天终于成功了,今天在这里分享一下;">
 <meta name="keywords" content="C语言">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用Sublime Text + MinGW 在Windows下搭建轻量级C语言开发环境">
 <meta property="og:url" content="http://www.oez-blog.space/2017/09/14/使用Sublime-Text-MinGW-在Windows下搭建轻量级C语言开发环境/index.html">
 <meta property="og:site_name" content="小火箭 | Blog">
-<meta property="og:description" content="背景迫于Windows下的各种IDE太’强大’, 对于一个只会写点’hello world’的C语言菜鸟的我来说,那些功能确实用不了,于是想搭建一个轻量级的,不占用我这个渣渣电脑太多资源的C语言开发环境,嗯昨天终于成功了,今天在这里分享一下; 工具(点击下载)  Sublime Text3 MinGW   工具介绍Sublime Text   IDE界的颜值担当, 支持多种主题; 轻量级, 不会">
+<meta property="og:description" content="背景迫于Windows下的各种IDE太’强大’, 对于一个只会写点’hello world’的C语言菜鸟的我来说,那些功能确实用不了,于是想搭建一个轻量级的,不占用我这个渣渣电脑太多资源的C语言开发环境,嗯昨天终于成功了,今天在这里分享一下;">
 <meta property="og:image" content="http://otneosm59.bkt.clouddn.com/china-2592294__340.jpg">
 <meta property="og:image" content="http://otneosm59.bkt.clouddn.com/sublime%20Text3.png">
 <meta property="og:image" content="http://otneosm59.bkt.clouddn.com/MinGW.PNG">
@@ -130,10 +130,10 @@
 <meta property="og:image" content="http://otneosm59.bkt.clouddn.com/sublime_Text3_pz2">
 <meta property="og:image" content="http://otneosm59.bkt.clouddn.com/s.jpg">
 <meta property="og:image" content="http://otneosm59.bkt.clouddn.com/C_kezhixing.png">
-<meta property="og:updated_time" content="2017-09-14T05:47:04.565Z">
+<meta property="og:updated_time" content="2017-09-26T14:15:04.730Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用Sublime Text + MinGW 在Windows下搭建轻量级C语言开发环境">
-<meta name="twitter:description" content="背景迫于Windows下的各种IDE太’强大’, 对于一个只会写点’hello world’的C语言菜鸟的我来说,那些功能确实用不了,于是想搭建一个轻量级的,不占用我这个渣渣电脑太多资源的C语言开发环境,嗯昨天终于成功了,今天在这里分享一下; 工具(点击下载)  Sublime Text3 MinGW   工具介绍Sublime Text   IDE界的颜值担当, 支持多种主题; 轻量级, 不会">
+<meta name="twitter:description" content="背景迫于Windows下的各种IDE太’强大’, 对于一个只会写点’hello world’的C语言菜鸟的我来说,那些功能确实用不了,于是想搭建一个轻量级的,不占用我这个渣渣电脑太多资源的C语言开发环境,嗯昨天终于成功了,今天在这里分享一下;">
 <meta name="twitter:image" content="http://otneosm59.bkt.clouddn.com/china-2592294__340.jpg">
 
 
@@ -142,7 +142,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Pisces',
+    scheme: 'Mist',
     sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     motion: true,
@@ -242,8 +242,6 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
             首页
           </a>
         </li>
@@ -251,8 +249,6 @@
         
         <li class="menu-item menu-item-categories">
           <a href="/categories/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
             分类
           </a>
@@ -262,8 +258,6 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archives"></i> <br />
-            
             归档
           </a>
         </li>
@@ -271,8 +265,6 @@
         
         <li class="menu-item menu-item-tags">
           <a href="/tags/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
             标签
           </a>
@@ -285,8 +277,6 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
-            
             搜索
           </a>
         </li>
@@ -297,22 +287,26 @@
   
     <div class="site-search">
       
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
     <span class="popup-btn-close">
       <i class="fa fa-times-circle"></i>
     </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
-    </div>
   </div>
-  <div id="local-search-result"></div>
-</div>
+
 
 
 
@@ -406,6 +400,17 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/09/14/使用Sublime-Text-MinGW-在Windows下搭建轻量级C语言开发环境/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/09/14/使用Sublime-Text-MinGW-在Windows下搭建轻量级C语言开发环境/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -439,7 +444,7 @@
 
       
         <p><img src="http://otneosm59.bkt.clouddn.com/china-2592294__340.jpg" alt="封面"></p>
-<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>迫于Windows下的各种IDE太’强大’, 对于一个只会写点’hello world’的C语言菜鸟的我来说,那些功能确实用不了,于是想搭建一个轻量级的,不占用我这个渣渣电脑太多资源的C语言开发环境,嗯昨天终于成功了,今天在这里分享一下;</p>
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>迫于Windows下的各种IDE太’强大’, 对于一个只会写点’hello world’的C语言菜鸟的我来说,那些功能确实用不了,于是想搭建一个轻量级的,不占用我这个渣渣电脑太多资源的C语言开发环境,嗯昨天终于成功了,今天在这里分享一下;<br><a id="more"></a></p>
 <h2 id="工具-点击下载"><a href="#工具-点击下载" class="headerlink" title="工具(点击下载)"></a>工具(点击下载)</h2><blockquote>
 <ul>
 <li><a href="http://www.sublimetext.com/" target="_blank" rel="external">Sublime Text3</a></li>
@@ -562,27 +567,10 @@
 
     <div class="post-spread">
       
-        <!-- JiaThis Button BEGIN -->
-<div class="jiathis_style">
-  <a class="jiathis_button_tsina"></a>
-  <a class="jiathis_button_tqq"></a>
-  <a class="jiathis_button_weixin"></a>
-  <a class="jiathis_button_cqq"></a>
-  <a class="jiathis_button_douban"></a>
-  <a class="jiathis_button_renren"></a>
-  <a class="jiathis_button_qzone"></a>
-  <a class="jiathis_button_kaixin001"></a>
-  <a class="jiathis_button_copy"></a>
-  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
-  <a class="jiathis_counter_style"></a>
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-59cb1e1aae525c27" async = "async" ></script>
 </div>
-<script type="text/javascript" >
-  var jiathis_config={
-    hideMore:false
-  }
-</script>
-<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
-<!-- JiaThis Button END -->
 
       
     </div>
@@ -596,7 +584,12 @@
           
   <div class="comments" id="comments">
     
-      <div id="lv-container" data-id="city" data-uid="MTAyMC8yOTU2My82MTMx"></div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
     
   </div>
 
@@ -721,10 +714,6 @@
             <ul class="links-of-blogroll-list">
               
                 <li class="links-of-blogroll-item">
-                  <a href="http://www.pemale.studio/" title="YQ_Gallery" target="_blank">YQ_Gallery</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
                   <a href="http://cuiqingcai.com/" title="静觅" target="_blank">静觅</a>
                 </li>
               
@@ -785,7 +774,7 @@
 <div class="theme-info">
   主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Pisces
+    NexT.Mist
   </a>
 </div>
 
@@ -870,13 +859,6 @@
   
   
 
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
-
-
-
   
   <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
 <script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
@@ -895,6 +877,26 @@
 
   
 
+    
+      <script id="dsq-count-scr" src="https://机智的小火箭.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://www.oez-blog.space/2017/09/14/使用Sublime-Text-MinGW-在Windows下搭建轻量级C语言开发环境/';
+          this.page.identifier = '2017/09/14/使用Sublime-Text-MinGW-在Windows下搭建轻量级C语言开发环境/';
+          this.page.title = '使用Sublime Text + MinGW 在Windows下搭建轻量级C语言开发环境';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://机智的小火箭.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
 
 
 
@@ -907,21 +909,6 @@
   
 
 
-
-
-
-  
-    <script type="text/javascript">
-      (function(d, s) {
-        var j, e = d.getElementsByTagName(s)[0];
-        if (typeof LivereTower === 'function') { return; }
-        j = d.createElement(s);
-        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-        j.async = true;
-        e.parentNode.insertBefore(j, e);
-      })(document, 'script');
-    </script>
-  
 
 
 
@@ -1248,6 +1235,19 @@
   </script>
 
 
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.1"></script>
 
 
 

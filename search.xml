@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[解决sublime Text3 下运行C语言, scanf函数无法输入的问题]]></title>
+    <url>%2F2017%2F09%2F18%2F%E8%A7%A3%E5%86%B3sublime-Text3-%E4%B8%8B%E8%BF%90%E8%A1%8CC%E8%AF%AD%E8%A8%80-scanf%E5%87%BD%E6%95%B0%E6%97%A0%E6%B3%95%E8%BE%93%E5%85%A5%E7%9A%84%E9%97%AE%E9%A2%98%2F</url>
+    <content type="text"><![CDATA[问题描述:在Sublime Text3 中运行C语言时,当程序中存在scanf函数的时候, 无法运行,还会卡死在那里; 解决方法:将这个文件 CPP.sublime-build(点击下载)放到你的配置文件的目录下, 重启软件就可以了: 1C:\Users\Username\AppData\Roaming\Sublime Text 3\Packages\User 这里可以按照下面的步骤, 找到那个目录, 也可以直接用sublime打开那个文件(CPP.sublime-build),把被人粘贴到新建的那个文件中, 保存为CPP.sublime-build就可以了; 最后这个开发环境目前还在完善中, 不过,毕竟是自己一步一步弄起来的,有点小缺陷,当然是选择原谅它….]]></content>
+      <categories>
+        <category>C语言</category>
+      </categories>
+      <tags>
+        <tag>日常填坑</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[使用Sublime Text 实现C语言的debug]]></title>
+    <url>%2F2017%2F09%2F15%2F%E4%BD%BF%E7%94%A8Sublime-Text-%E5%AE%9E%E7%8E%B0C%E8%AF%AD%E8%A8%80%E7%9A%84debug%2F</url>
+    <content type="text"><![CDATA[上一篇文章总结了在windows下搭建C语言编译的过程,但是没有办法打断点Debug, 那天FPGA课上搞了一下, 然后在这里总结一下 工具 和上一篇所用的工具相同,只是要安装两个插件而已; 配置过程安装Package Control这里可以直接在Python控制台中粘贴代码, 也可以直接下载离线包;参考官网的安装方法 安装SublimeGDB插件安装好Package Control之后, 通过菜单Preferneces -&gt; Package Control打开， 选择 Install Package 安装好之后是这样子的:输入”SublimeGDB”, 选择安装; 并且配置相应的配置文件:依次选择Preferneces -&gt; Package Settings -&gt; SublimeGDB -&gt; Settings – User然后输入以下内容:1234&#123; "workingdir": "$&#123;folder:$&#123;file&#125;&#125;", "commandline": "g++ -g -std=c++11 $&#123;file&#125; -o $&#123;file_base_name&#125; &amp;&amp; gdb --interpreter=mi --args ./$&#123;file_base_name&#125;",&#125; 功能测试测试代码:1234567891011#include &lt;stdio.h&gt; int main()&#123; int a = 3; int b; a = a + 2; b = a + 2; printf("%d\n", b); return 0;&#125; 相关的快捷键: 按键 功能 F5 开始调试 Ctrl+F5 停止调试 F9 设置断点 F10 Step over，执行一步，不进入函数 F11 Step into，进入函数 Shift+F11 Step out，跳出函数 最后: 这个蛇皮SublimeText是真的强大; 这个目测是windows下最轻量级的图形化C语言开发环境了; 再次编译之前, 一定要停止调试(Ctrl+F5)!!!, 不然会报错!!!!]]></content>
+      <categories>
+        <category>C语言</category>
+      </categories>
+      <tags>
+        <tag>C语言</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[使用Sublime Text + MinGW 在Windows下搭建轻量级C语言开发环境]]></title>
+    <url>%2F2017%2F09%2F14%2F%E4%BD%BF%E7%94%A8Sublime-Text-MinGW-%E5%9C%A8Windows%E4%B8%8B%E6%90%AD%E5%BB%BA%E8%BD%BB%E9%87%8F%E7%BA%A7C%E8%AF%AD%E8%A8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%2F</url>
+    <content type="text"><![CDATA[背景迫于Windows下的各种IDE太’强大’, 对于一个只会写点’hello world’的C语言菜鸟的我来说,那些功能确实用不了,于是想搭建一个轻量级的,不占用我这个渣渣电脑太多资源的C语言开发环境,嗯昨天终于成功了,今天在这里分享一下; 工具(点击下载) Sublime Text3 MinGW 工具介绍Sublime Text IDE界的颜值担当, 支持多种主题; 轻量级, 不会给你的电脑造成很大的负担; 可以自定义任何东西, 快捷键, 菜单, 代码段等; 这个IDE需要注册码, 不过可以永久试用, 而且功能一样; MinGW 我们知道, windows下的大部分C语言IDE都是试用的gcc编译器;因此我们只需要在Windows下安装gcc/g++即可; MinGW就是一个为Windows提供这些工具的一个项目, 你可以在它的官网免费的下载; 目测有些同志需要科学上网才能访问那个网址,这里我就直接把那个安装包放网盘了,链接(点击下载) 在网上看到有些同志用的DevC++里面的gcc, 个人觉得那个太老了,而且DevC++早就没有维护了,使用MinGW可以获得最新的gcc/g++; 环境搭建安装Sublime Text这个和一般的软件安装方法一样,而且还没有百度全家桶,就不多说了; 安装MinGW以及g++ 1,选择图片里面的几项;2, 点击’Installation’ -&gt; ‘Apply Changes’;3, 等待安装完成; 配置环境变量; 1, 环境变量的基本添加过程如图所示;2, 配置环境变量: 1234- 变量名 变量值- C_INCLUDEDE_PATH C:\MinGW\include - LIBRARY_PATH C:\MinGW\lib - Path C:\MinGW\bin 3, Windows下配置环境变量后,也许需要重启;4, 验证环境变量是否配置成功, 在终端输入’g++ -v’:在这里可以看到g++的版本; Sublime Text3的配置; 主要是实现在Sublime中调用 cmd.exe, 以及配置新的编译文件 C++.sublime-build(图片来自网络) 新的编译文件内容, 复制粘贴即可: 1234567891011121314&#123;"cmd": ["g++", "$&#123;file&#125;", "-o","$&#123;file_path&#125;/$&#123;file_base_name&#125;"],"file_regex": "^(..[^:]*):([0-9]+):?([0-9]+)?:?(.*)$","working_dir": "$&#123;file_path&#125;","encoding":"cp936","selector": "source.c","variants":[&#123;"name": "Run","cmd": ["cmd","/C","start","cmd","/c", "$&#123;file_path&#125;/$&#123;file_base_name&#125;.exe &amp;pause"]&#125;]&#125; 验证是否搭建成功测试程序:123456# include &lt;stdio.h&gt;int main()&#123; printf("hello world\n"); return 0;&#125; 使用快捷键”Ctrl + Shift + B”调出编译命令, 生成最终生成可执行程序;输出”hello world” 完善 1, 这里实现了在命令行调用g++, 其实完全可以不需要在sublime, 可以参考我的那篇在Linux下开发C语言的文章中的命令,直接在命令行中完成编译已经生成可执行文件; 2, 这个只是一个轻量级的,适合新手, 没有强大的debug, debug全靠printf, 嗯 没毛病;3, 我终于可以去卸载掉那个我为了写C语言装的虚拟机了, hhh;]]></content>
+      <categories>
+        <category>C语言</category>
+      </categories>
+      <tags>
+        <tag>C语言</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[STM32_TIM学习总结_代码示例]]></title>
+    <url>%2F2017%2F08%2F25%2FSTM32-TIM%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B%2F</url>
+    <content type="text"><![CDATA[安利一首歌 。。。。 上一篇文章 说好的“结合代码示例，理解一下”，所以这里就不错废话啦/(神他喵的逻辑/滑稽)下面直接讲一下代码逻辑： 实验描述： 目的： 1通过定时器TIM3，输出占空比固定的PWM波形； 使用到的3.5版本固件库： 123456startup/start_stm32f10x_hd.cCMSIS/core_cm3.cCMSIS/system_stm32f103x.cFWlib/stm32f10x_gpio.cFWlib/stm32f10x_rcc.cFWlib/stm32f10x_tim.c 用户文件: 123USER/main.cUSER/stm32f103x_it.cUSER/pwm_output.c 具体的代码分析:main 函数:123456int main()&#123; TIM3_PWM_Init(); while (1) &#123;&#125;&#125; 这个main函数的结构,流程很简单,一个初始化函数初始化之后, 内核将所有的工作都交给了TIM外设,完全由TIM控制GPIO引脚输出PWM波; 定时器的初始化:12345void TIM3_PWM_Init(void)&#123; TIM3_GPIO_Config(); TIM3_Mode_Config();&#125; 这个地方,首先是对TIM外设通道复用的GPIO的引脚初始化,再对TIM外设进行初始化; GPIO 初始化,(TIM3_GPIO_Config函数):12345678910111213141516171819202122/*使能了TIM3的时钟， 并且对GPIO引脚做出了相应的配置，使能了GPIO口的时钟， 配置为复用推挽输出， 翻转频率为50Hz。*/static void TIM3_GPIO_Config(void)&#123; GPIO_InitTyDef GPIO_InitStructure; /*TIM &amp; GPIO CLOCK ENABLE*/ RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE); RCC_APB2PeriphClockCmd(RCC_APB1Periph_GPIOA | RCC_APB1Periph_GPIOB, ENABLE); GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6 | GPIO_Pin_7; GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz; GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP; GPIO_Init(GPIOA, &amp;GPIO_InitStructure); GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_1; GPIO_Init(GPIOB, &amp;GPIO_InitStructure); //数据手册P71页 &#125; 在上面的代码中,我们首先使能了TIM3外设的时钟,GPIO时钟;然后对TIM3通道相应的GPIO口做了相应的配置,也就是PA6, PA7, PB0, PB1;他们的对应关系如下表: PA6 PA7 PB0 PB1 TIM3_CH1 TIM3_CH2 TIM3_CH3 TIM3_CH4 然后是TIM的GPIO模式的配置: TIM2/3/4/5引脚 配置 GPIO配置 TIM2/3/4/5_CHx 输入捕获通道x 浮空输入 TIM2/3/4/5_CHx 输出比较通道x 推挽复用输出 TIM2/3/4/5_ETR 外部触发时钟输入 浮空输入 额,这个玩意的语法还没有玩来,表有点丑,嗯→_→所以上面的配置就是推挽复用输出; TIM3输出的PWM的配置(TIM3_Mode_Config函数)1234567891011121314151617181920212223242526272829303132static void TIM3_Mode_Config(void)&#123; /*捕获/比较x寄存器 TIMx_CCR(capture/compare register)*/ u16 CCR1_Val = 500; TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure; TIM_OCInitTypeDef TIM_OCInitStructure; /*Timbase configuration*/ TIM_TimeBaseStructure.TIM_Period = 999; //重载寄存器TIMx_ARR的数值; TIM_TimeBaseStructure.TIM_Prescaler = 0; //预分频 /*ETRP数字滤波器的作用是对外部时钟 TIMxETR 进行滤波*/ TIM_TimeBaseStructure.TIM_ClockDivision = TIM_CKD_DIV1; //时钟分频系数, 分频后的时钟频率是fDTS, 是被输出到定时器的EFRP数字的滤波器部分, 会影响滤波器的采样频率; TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up; //TIMx_CNT脉冲计数器计数方式 TIM_TimeBaseInit(TIM2, &amp; TIM_TimeBaseStructure); /*PWM1 Mode configuration: Channel1*/ TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_PWM1; //配置为PWM1模式, TIMx_CNT脉冲计数器 和 TIMx_CCRn(比较寄存器, 等于TIM_Pulse成员的内容) TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable TIM_OCInitStructure.TIM_Channel = TIM_Channel_1; TIM_OCInitStructure.TIM_Pulse = CCR1_Val; //设置跳变值, 当计数器计数到这个值时, 电平发生跳变; TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_High; //有效电平的极性; 0/1 TIM_OCInit(TIM3, &amp; TIM_OCInitStructure); /*使能 TIM3 重载寄存器ARR*/ TIM_ARRPreloadConfig(TIM3, ENABLE); /*TIM3 enable counter*/ TIM_Cmd(TIM3, ENABLE);&#125; 首先是配置PWM的工作模式， 选择第一个TIM通道， 设置比较寄存器的值， 有效电平的极性， 占空比： ——.TIM_Period / ——.TIM_Pulse;上面的就是500/1000 == 50%; 最后说的话然后大家可以结合上一篇文章 到讲到的PWM波分析和相关参数的计算方法以及代码中的注释,仔仔细细的推一遍;好啦今天就这样了,,溜溜球…]]></content>
+      <categories>
+        <category>STM32</category>
+      </categories>
+      <tags>
+        <tag>STM32_TIM学习总结</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[STM32_TIM知识点总结]]></title>
+    <url>%2F2017%2F08%2F08%2FSTM32-TIM%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%2F</url>
+    <content type="text"><![CDATA[安利一首歌 。。。。 STM32 的定时器外设功能强大得1P, “STM32参考手册”中对定时器的介绍就已经占了100多页.由于在下能力有限，对高级定时器的理解与运用几乎为0，所以这里就没有总结了。 分类:STM32一个有8个都为16位的定时器: 基本定时器: TIM6, TIM7通用定时器: TIM2, TIM3, TIM4, TIM5高级定时器: TIM1, TIM8 就是这些定时器使得STM32 具有定时, 信号的频率测量, 信号的PWM测量, PWM输出, 三相6步电机控制及编码器接口等功能. 定时器功能分析基本定时器:首先我们先来看这张图: 1, 内部的芯片与DAC外设相连: 基本定时器TIM6 和 TIM7 只具备最基本的定时功能, 即累加的时钟脉冲数超过预定值时, 会触发中断也可以触发DMA请求; 由此便可通过触发输出驱动DAC, 也可作为其他通用定时器的时基标准. 2, 流程图的分析 这两个基本定时器都采用的是TIMxCLK时钟源 , 时钟源经过PSC预分频器输出到脉冲计数器TIMx_CNT,在这里基本定时器只能工作在向上计数模式, 在重载寄存器 TIMx_ARR中保存的是定时器的溢出值. 3, 工作过程: 首先脉冲计数器 TIMx_CNT由时钟触发进行计数, 当TIMx_CNT的计数值 x 等于 重载寄存器 TIMx_ARR中保存的数值 N时, 产生溢出事件, 可触发中断或者DMA请求, 然后TIMx_CNT的值被重新置为0, 重新开始向上计数. 通用定时器:要弄懂通用定时器的功能,结构, 我们当然还是要基于它的结构图来分析, 理解: 1, 在分析结构图之前我们先了解一下通用定时器的功能: 通用定时器的功能除了基本的定时之外, 它主要用在测量输入脉冲的频率, 脉冲宽与输出PWM脉冲的场合, 还具有编码器的接口. 2, 捕获/比较寄存器 由上图可以看出通用定时器的基本计时功能和基本定时器的工作方式一样, 同样是把时钟源经过预分频器输出到脉冲计数器TIMx_CNT累加, 溢出时产生中断或DMA请求；然后从图可以看到， CNT计数器下面还有4个捕获/比较x寄存器，他们分别对应着TIM的4个通道，通用计时器的功能强大于基本定时器也就是因为多了这4个捕获/比较寄存器，下面咱们来详细的讲解一下这只寄存器的工作方式；捕获/比较x寄存器 TIMx_CCR(capture/compare register)顾名思义同时具有捕获， 比较的功能： 捕获可以理解为“捕捉”，“获取”相对于寄存器即为“储存”， TIMx_CCR通过在时刻a储存只进行计数的脉冲计数器TIMx_CNT的值x1， 并且在时刻b储存脉冲计数器TIMx_CNT的值x2， 如此若知道脉冲计数器TIMx_CNT的计数频率f1，并且选择的是合适的时间点a,b （E.g：选择输入脉冲在电平翻转时刻），如此便可测量计算出目标脉冲的周期； 比较则是让TIMx_CCR在输出时储存一个脉冲值N， 并且与脉冲计数器TIMx_CNT的当前计数值进行比较，根据比较结果进行不同的电平输出； 总之，脉冲计数器TIMx_CNT就是一个计数功能，一直在一个范围（0 到重载寄存器TIMx_ARR配置的值N）内，从0开始循环增加；而在捕获/比较x寄存TIMx_CCR(capture/compare register)捕获阶段， TIMx_CCR存储的是脉冲计数器TIMx_CNT的值，目的是计算脉冲周期； 比较阶段储存的是脉冲值， 目的是确定输出的电平高低； 3, PWM 输出/输入过程分析： 只要认真理解了上面捕获/比较寄存器的功能，理解PWM的输入/输出过程都不会太难，下面我们以一个示例着重讲解几个基本物理量的计算方法和意义： 在PWM输出过程中，若采用向上计数模式，重载寄存器TIMx_ARR设置的值为N，则得到的输出脉冲周期为（N+1）乘以触发脉冲的时钟周期； 脉冲宽度为比较寄存器TIMx_CCR的值A乘以触发脉冲的时钟周期，由此可得到PWM输出的占空比为 A/(N+1); 在PWM输入过程中， 采用捕获/比较寄存器的捕获功能， 在第一个上升沿到达时，触发捕获中断，将TIMx_CNT的计数值复位为0， 于是TIMx_CNT开始从0开始计数， 直到出现第一个下降沿时，触发捕获事件，捕获寄存器将此时TIMx_CNT的值x1储存起来；直到出现第二个上升沿，储存x2；由此可以得到，（X1+1）若为高电平，则可以得到高电平持续的时间为（x1+1）* TIMx_CCR的周期，而 （X2+1） 乘TIMx_CCR的周期即为待检测的PWM波的输入周期， 由此便可以测量计算出占空比。 重要名词的解释:相信很多同学像我一样已经被上面的各种寄存器，各种名词弄晕了吧，弄晕了没关系，好好罗列一下，也可以对应他们的英文，就清楚了嘛：12345678TIMxCLK时钟源；PSC预分频器；捕获/比较x寄存器 TIMx_CCR(capture/compare register)；脉冲计数器TIMx_CNT / CNT计数器；重载寄存器TIMx_ARR；脉冲宽度；脉冲周期；PWM的占空比； 好啦，上面已经很详细的讲解了基本定时器和通用定时器的功能了，下一篇再结合代码，理解一下。]]></content>
+      <categories>
+        <category>STM32</category>
+      </categories>
+      <tags>
+        <tag>STM32_TIM学习总结</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[linux环境下的C语言开发基础操作总结]]></title>
+    <url>%2F2017%2F07%2F27%2Flinux%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84C%E8%AF%AD%E8%A8%80%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93%2F</url>
+    <content type="text"><![CDATA[前几天安装了Linux下的C语言开发环境,并且复习了一下慕课网(传送门)上面的相关教程,良心老师,干货很多,因此在这里总结一下,以便于以后查看: /vim的多文件编辑 :sp : 打开多个文件; Ctrl + w + ↑/↓: 移动光标; :wqa : 保存所有文件,并退出; dd : 复制; p: 粘贴; / make_file文件的创建首先创建Makefile文件 vi Makefile 123456hello.out:max.o min.o hello.c gcc max.o min.o hello.omax.o:max.c gcc -c max.cmin.o:min.c gcc -c min.c 然后完善文件结构:此时当前文件夹内应该有以下文件:main.c, max.c, max.h, Makefile(注意,M是大写)若缺少max.h文件,程序依然可以运行,但是会存在warning,如图所示: warning解决方案:捕捉到一只博客上将得很清楚:传送门 最后直接运行make命令: make /main 函数万万没想到,main函数还可以这样操作: 1,命令连接1gcc main.c -o main.out &amp;&amp; ./main.out 2,输出return后面的那个数字:1echo $? 3,main函数的参数:123456int main(int argv, char* argv[])&#123; printf("argv is %d \n", argv); //参数数量 printf("%s", argc[i]); return 0;&#125; argv就是总的参数的数目, argc[]则存储的是具体的参数: /标准输出流,输入流,错误流1, 标准的输出,输入:12345678#include &lt;stdio.h&gt; int main() &#123; int a; printf("hello word"); scanf("%d", &amp;a); return 0; &#125; 2, 头文件stdio.h包含的3部分: stdin: 标准的输入流, 键盘; stdout: 标准的输出流, 显示器; stderr: 标准的错误流; 这里提供一只菜鸟教程的参考链接:传送门 3, 输入输出流的解释:1234//printf("hello word");fprintf(stdout, "hello word"); // 第一个参数,选择的是输出流;//scanf("%d", &amp;a);fscanf(stdin, "%d", &amp;a); //第一个参数,选择的是输入流; 由此可见,第一个参数选择的是输出/输入的地址什么的,只需要改变第一个参数,便可以实现重定向. 4,重定向: 1,输出:12345./a.out (1)&gt;&gt; a.txt //将标准输出流重定向到&quot;a.txt&quot;文件;括号表示可有可无cat a.txt //查看a.txt文件内容ls /etc &gt;&gt; etc.txtcat etc.txtls /etc &gt;&gt; etc.txt //单箭头,覆盖原内容 2,输入:12./a.out &lt; input.txt;./a.out 1&gt;t.txt 2.&gt;f.txt //分开各处,标准输出流,错误流; /Linux C语言,管道原理及应用123ls /etc/ | grep abps -e | grep ssh // 查看进程./intput.out | ./avg.out // 将`./input.out`的输入数据,传送到`./avg.out`这个进程 这个地方,就是利用|符号,增加一只管道,进行数据的传输; /源码上面所用到的代码你可以在这里找到: Github上]]></content>
+      <categories>
+        <category>C语言</category>
+      </categories>
+      <tags>
+        <tag>linux环境下的C语言开发</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[记使用VirtualBox+Windows7安装ubuntu,开机异常处理办法]]></title>
+    <url>%2F2017%2F07%2F26%2F%E8%AE%B0%E4%BD%BF%E7%94%A8VirtualBox-Windows7%E5%AE%89%E8%A3%85ubuntu-%E5%BC%80%E6%9C%BA%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E5%8A%9E%E6%B3%95%2F</url>
+    <content type="text"><![CDATA[前几天,想在Windows下弄一只轻量级的C语言开发环境,然后配置了一天的Vscode(别问我为毛线,惊了),那些教程,甚至那只插件的官方文档,都和那个玩意有很大的区别,反正惊了,一气之下,决定弄一只虚拟机Linux: 结果,他喵的,开始安装,启动的时候就出问题了:123456789The virtual machine &apos;Ubuntu&apos; has terminated unexpectedly during startup with exit code 1 (0x1). More details may be available in &apos;C:\Users\pamela\VirtualBox VMs\Ubuntu\Logs\VBoxHardening.log&apos;.返回 代码:E_FAIL (0x80004005)组件:MachineWrap界面:IMachine &#123;b2547866-a0a1-4391-8b86-6952d82efaa0&#125; 这个相似问题的问题,网上剧他喵的多的教程: 大概就是找到安装目录下的vboxdrv文件夹， 如D:\Program Files\Oracle\VirtualBox\drivers\vboxdrv， 右击VBoxDrv.inf，选安装，然后重启。 历史的教训告诉我,没什么卵用(反正我的不行), 然后发现,这只VirtualBox的启动还有几个选项: 正常启动(N) 无界面启动(H) 分离式启动(D) 随后果断放弃正常启动(N), 选择无界面启动(H),然后,妥妥的,哈哈哈,机智如我看图就知道啦,点显示就可以了 这也许就是男人的直觉吧…. 说明一下嗷: 此次异常原因不明,看一只慕课网上的教程,貌似可以重装系统;不过,我这样操作确实可以解决问题.]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>日常填坑</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[记写某只小爬虫是遇到的坑及解决方法]]></title>
+    <url>%2F2017%2F07%2F26%2F%E8%AE%B0%E5%86%99%E6%9F%90%E5%8F%AA%E5%B0%8F%E7%88%AC%E8%99%AB%E6%98%AF%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95%2F</url>
+    <content type="text"><![CDATA[某日,发现一只挺好的网址,于是很想把上面的信息爬下来,练练手,过程中发现几处坑,在这里总结一下: 那个网站的样子: 爬虫目的与思路: 目的: 爬取各个app的信息,包括图片,名字,系统要求,大小,人气,简介; 思路: 没啥思路,一条正则表达式完了; 源代码获取: 这只代码,毫无面向对象,在下新手,大佬砸砖轻点; Github上 重点,遇到的坑:1, 在好不容易匹配成功之后,输出一波如下图所示的乱码,惊了: 分析一波: 1,首先: 这些字符都在一个小括号“()”里面,说明这是一只元组,嗯,里面的东西是不能修改的.2,然后: 可以发现这是unicode编码,怪不得看不懂,把它转换为utf-8就可以了. 解决方法: 这是一只元组,不能进行直接.encode(&#39;utf-8&#39;),应该一个元素一个的操作,中间用加号+连接: 2,那啥,为了提升用户体验(虽然用户就我一个),也为了爬取很多页(一万多页的那种)的数据,我决定把,每一页的URL构造出来,为了表达我的意思,先来一张剧他喵的”形象”的代码: 很明显,这是有问题的: 分析一波: 这里的坑就是:raw_input()进来的是一只char,而range里面的确是一只int,这样x就很尴尬了,然后就出错了; 解决方法: 解决方法很简单,(能力有限,暂时只想到这只弱智的方法.),大家看一下就可以明白了,就是进行两下进制转换就可以了; 输出的结果,大概就是这样, 妥妥的: 总结一下:这篇文章,重点并不是爬虫技术(其实这篇也没什么技术),而是python的基础知识,在下在群里看到过很多次这种问题,碰巧自己也遇到了,所有在这里总结一下.]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>python_基础知识</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[django学习之初识表单提交]]></title>
+    <url>%2F2017%2F07%2F24%2Fdjango%E5%AD%A6%E4%B9%A0%E4%B9%8B%E5%88%9D%E8%AF%86%E8%A1%A8%E5%8D%95%E6%8F%90%E4%BA%A4%2F</url>
+    <content type="text"><![CDATA[生活所迫，学习web；人生苦短，我用Python。上一篇文章总结了Django环境的搭建，今天来使用Django实现表单的提交功能。 一，环境说明: windows 7 python 2.1.13 Django 1.9.8 MySQL 数据库 二，素材及源代码获取链接:Github上 三，实现过程:1，Django的配置:&gt; 1，完善目录结构: 新增的各个目录的作用: log : 保存的是项目产生的一些日志文件； media: 用户上传的文件； static: 静态文件{图片，css， js文件}； &gt; 2，新建一个App:1，运行manage.py文件: Tools -&gt; Run manage.py Task并且运行如下命令: 2， 在setting文件中注册新增加的APP； &gt; 3，导入模板文件&amp;css文件:1，将HTML文件放入templates文件夹中；2，在static文件夹下新建一个css文件夹，并且将style.css文件放入此文件夹中；3，配置好HTML文件和CSS文件的路径: 1，首先是找到setting文件中的BASE_DIR，这是该项目的根目录: 1BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) 2，配置HTML文件的路径: 1234TEMPLATES = [ &#123; 'BACKEND': 'django.template.backends.django.DjangoTemplates', 'DIRS': [os.path.join(BASE_DIR, 'templates')] 3，配置Css文件的路径: 1234STATIC_URL = '/static/'STATICFILES_DIRS = [ os.path.join(BASE_DIR, 'static')] &gt; 4，数据库的配置，并生成一些Django需要的基本的表:1，新建一个数据库:test_django: 2，配置setting文件: 3，运行Run manage.py Task， 并生成Django项目所需要的基本的表: 2，表单提交功能的实现:&gt; 1，实现表单提交页面: 1， 配置views.py文件: 2， 配置urls.py文件: 3，如图所示: &gt; 2，实现表单提交功能: 1，根据HTML文件配置models.py文件 12345&lt;label&gt; &lt;span&gt;姓名 :&lt;/span&gt; &lt;input id="name" type="text" name="name" value="&#123;&#123; my_message.name &#125;&#125;" class="error" placeholder="请输入您的姓名"/&gt; &lt;div class="error-msg"&gt;&lt;/div&gt; &lt;/label&gt; 根据代码里面的name=&quot;name&quot;字段，配置models.py文件: 2，同上面生成Django项目所需要的基本的表的操作相同，运行Run manage.py Task，生成相应的所需要的表: 3，实现提交数据的功能: 配置 Views.py文件:12345678910111213141516171819202122from django.shortcuts import renderfrom .models import UserMessage #.(models)，表示当前目录# Create your views here.'''name, email, address, message, object_id'''def get_form(request): if request.method == 'POST': name = request.POST.get('name', '') email = request.POST.get('email', '') address = request.POST.get('address', '') message = request.POST.get('message', '') User_Message = UserMessage() User_Message.message = message User_Message.email = email User_Message.name = name User_Message.address = address User_Message.object_id = "Zcc_Django_blog_test" User_Message.save() return render(request, 'message_form.html') 如此，便可实现表单内容的提交，并且保存到数据库中: 四，总结一下: 上面实现了Django基本的表单提交并且保存到数据库的功能，下一篇文章将以此工程为模板，进行调试，深入探究表单提交的功能实现；]]></content>
+      <categories>
+        <category>Django</category>
+      </categories>
+      <tags>
+        <tag>Django_表单提交</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[django学习之环境搭建与工具准备]]></title>
+    <url>%2F2017%2F07%2F22%2Fdjango%E5%AD%A6%E4%B9%A0%E4%B9%8B%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E4%B8%8E%E5%B7%A5%E5%85%B7%E5%87%86%E5%A4%87%2F</url>
+    <content type="text"><![CDATA[生活所迫，学习web；人生苦短，我用Python。这篇文章总结的是学习Python的django框架之前所做的准备，主要包括两方面: 环境搭建 工具准备 环境搭建:1，Python的安装 版本 2.7.13 下载地址:python2.7.13 python环境变量配置 2，Python虚拟环境的安装:1，virtualenv安装:1pip install virtualenv 2，virtualenvwrapper安装:1pip install virtualenvwrapper-win # linux 不用加上"-win" 3，virtualenvwrapper虚拟环境用法简介:1，创建一个虚拟环境”testvir”:1mkvirtualenv testvir 2，workon指令，查看所有的虚拟环境；3， 进入/退出testvir虚拟环境:12workon testvirdeactivate 4，虚拟环境的所在的目录:1C:\Users\Username\Envs 3，Django的安装:1，创建虚拟环境，并且进入:1mkvirtualenv Django_Demo 2，使用pip命令安装Django == 1.9.81pip install django == 1.9.8 # 注意版本是1.9.8 4，MySQL数据库的安装: 下载地址: MySQL for Windows 工具准备需要以下三个工具: Pycharm专业版 Navicat for MySQL 1，PyCharm注册码的获取:传送门 2，Navicat破解方法:。。。。。大约一小时后。。。。 他喵的，那玩意的Windows版本太难破解了，惊了，不过找到了个更好的.2333 获取链接 –拿走不谢 总结一下本篇文章总结了基本的环境搭建和工具安装，下一篇将带来具体的示例Django的表单提交来总结Django的操作。 最后，如果有娃对Navicat那玩意恋恋不忘的话: 1， 可以选择去弄一只Linux虚拟机，然后配置一下，Linux下的很好破解，教程；2， 当然是一直试用，不关软件啦，23333。]]></content>
+      <categories>
+        <category>Django</category>
+      </categories>
+      <tags>
+        <tag>Python_环境搭建</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[双系统Windows下直接删除Linux分区后解决办法]]></title>
+    <url>%2F2017%2F07%2F19%2F%E5%8F%8C%E7%B3%BB%E7%BB%9FWindows%E4%B8%8B%E7%9B%B4%E6%8E%A5%E5%88%A0%E9%99%A4Linux%E5%88%86%E5%8C%BA%E5%90%8E%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95%2F</url>
+    <content type="text"><![CDATA[昨天晚上凌晨3点左右，发现win7的C盘空间不太够了，于是想删除一个系统，扩大C盘的空间，于是果断百度一下，然后直接删除Linux分区，表示网上那么多教程，怕啥，结果，嗯今天下午才弄好，使用在这里记录一下： 症状：开机之后面对我的是这样一串文字：123GRUB loading error: unknow filesystemgroup rescue &gt; _ 大概就是系统引导什么的出问题了吧，也就是系统文件都还在。 原因：下面的操作会产生上述症状，更多操作参见这里： 1，直接下Windows下删除或者格式化掉了Linux所在的分区；2，重新安装了Linux到新的分区，原有的分区已经格式化了，但是没有重装grup2； 解决方法:1，工具： 一个U盘，一台能用的电脑； 大白菜PE修复工具 2，具体步骤： 1，安装大白菜PE修复工具，并且制作到U盘中；2，其他步骤参考链接; 遇到的坑： 1，使用大白菜的时候报错：1the bios in this system is full acpi complicant..... 解决方法： 开机过程中，疯狂的摁F7，大概翻译一下上面的英文，就是在开机过程中摁F7，可以跳过安装那个上面玩意，然后就可以不管”full acpi complicant”这个东西了。 2，删除Linux分区后，增加C盘容量的工具获取： 获取链接 总结一下： 之前安装了win7+kali Linux + ubuntu，相比之下，个人感觉还是win7好用。 软件安装目录保持默认，把C盘的空间分大一点；不安装电脑管家什么的，打开Windows的自动更新，防火墙，妥妥的简单流畅。 linux什么的，等win7不更新再说吧。]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>双系统的坑</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[STM32_初识GPIO操作_程序示例]]></title>
+    <url>%2F2017%2F07%2F18%2FSTM32-%E5%88%9D%E8%AF%86GPIO%E6%93%8D%E4%BD%9C-%E7%A8%8B%E5%BA%8F%E7%A4%BA%E4%BE%8B%2F</url>
+    <content type="text"><![CDATA[上一篇文章讲解了GPIO和相对应的寄存器的基础知识，这一篇则是对上一篇知识点的应用： 几点说明： 1, 由于硬件上的不统一，加之GPIO口的通用性，此处采用模拟仿真的方法，观察内部寄存器的数据变化；2，本次实验所用到的操作主要有：位绑定，寄存器的操作，基本的位运算3，本次实验的目的是：控制GPIOA低8位的输出，并且使高8位的对应位输入相同的电平：E.g： 若2位输出 0，则对应的10位输入 0； 实验内容：1，参考文档中对GPIO口的基本配置： 文档中对STM32的IO口的配置： 文档中对端口配置低寄存器(GPIOx_CRL)的配置： 2，程序的大致思路： PA.0 ~ PA.7 为通用的推挽输出，速度为50MHz， PA.8 ~ PA.15位浮空输入； 12GPIOA-&gt;CRL = 0x33333333; //通用的退挽输出 00； 50MHz 11； 0011 -&gt; 3 -&gt; 0x3333 3333;GPIOA-&gt;CRH = 0x44444444; //浮空输入 0100 -&gt; 4 -&gt; 0x4444 4444; 输入状态反映到对应的引脚的输出； 123456789101112131415161718192021222324252627282930313233343536373839404142434445while(1) &#123; if ((GPIOA-&gt;IDR &amp; 0x0100)== 0x0100) GPIOA-&gt;BSRR = 0x01; else GPIOA-&gt;BRR = 0x01; if ((GPIOA-&gt;IDR &amp; 0x0200)== 0x0200) GPIOA-&gt;BSRR = 0x02; else GPIOA-&gt;BRR =0x02; if ((GPIOA-&gt;IDR &amp; 0x0400)== 0x0400) GPIOA-&gt;ODR = GPIOA-&gt;ODR | 0x04; else GPIOA-&gt;ODR = GPIOA-&gt;ODR &amp; (~0x04); /*位绑定*/ // A = GPIOA_BASE + ODR偏移地址 = GPIOA_BASE + 0x0C ; n = 3 // A = GPIOA_BASE + IDR偏移地址 = GPIOA_BASE + 0x08 ; n = 3 //if ((GPIOA-&gt;IDR &amp; 0x0800)== 0x0800) if(*PA_I_11==1) *PA_0_3 = 3; //只看低位 else *PA_0_3 = 2; /*此处不能使用直接的赋值方法，应该采用位运算的方法进行设置*/ if ((GPIOA-&gt;IDR &amp; 0x1000)== 0x1000) GPIOA-&gt;ODR = GPIOA-&gt;ODR | 0x10; else GPIOA-&gt;ODR = GPIOA-&gt;ODR &amp; (~0x10); if ((GPIOA-&gt;IDR &amp; 0x2000)== 0x2000) GPIOA-&gt;ODR = GPIOA-&gt;ODR | 0x20; else GPIOA-&gt;ODR = GPIOA-&gt;ODR &amp; (~0x20); if ((GPIOA-&gt;IDR &amp; 0x4000)== 0x4000)! GPIOA-&gt;ODR = GPIOA-&gt;ODR | 0x40; else GPIOA-&gt;ODR = GPIOA-&gt;ODR &amp; (~0x40); if ((GPIOA-&gt;IDR &amp; 0x8000)== 0x8000) GPIOA-&gt;ODR = GPIOA-&gt;ODR | 0x80; else GPIOA-&gt;ODR = GPIOA-&gt;ODR &amp; (~0x80); &#125; 3，对上面程序的说明：(1)位清除/位设置寄存器：1,首先是在if判断中，进行与运算，判断相应的位是否为1；2,后面是对位清除/位设置寄存器的具体操作,由文档可以知道：120：对对应的ODRx位不产生影响 1：清除对应的ODRx位为0 3,将GPIOA-&gt;BSRR, GPIOA-&gt;BRR设置为相应的值，即使得相应的位为1，使得BSRR,BRR分别起到置1和置0的作用； (2)基本的位运算：1,通过基本的位运算，使相应的位置1或者清0;2,程序中不能直接的赋值，因此采用位运算的方法;(3)位绑定：1, 位绑定的公式12345678910111213141516公式：&#123; 1，清楚绑定区域：&#123; 1，SPAM； 2，片上外设； &#125; 2，公式：&#123; SPAM；&#123;AliasAddress = 0x2200 0000 + ((A-0x2200 0000) * 8+ n) * 4 # AliasAddress为绑定后的地址， A 为原来的地址 n为第n位； = 0x2200 0000 + (A-0x2200 0000) * 32 + n * 4 &#125; 片上外设；&#123;AliasAddress = 0x4200 0000 + ((A-0x4000 0000) * 8+ n) * 4 # AliasAddress为绑定后的地址， A 为原来的地址 n为第n位；； = 0x4200 0000 + (A-0x4000 0000) * 32 + n * 4 &#125; &#125; 3，运用指针&#123; u32 *PA_O_3 = (u32 *) (GPIOA_BASE + 0x0C) &#125; 2, STM32中提供的位绑定操作可以极大的简化GPIO口的运算，可以向51那样对端口值进行直接的配置(0/1),后面的数字只看低位。 4，调试的结果：首先第一步，打开调试功能和GPIO口的窗口，如图所示：分别设置右下方的勾勾数量和位置，设置相应位的置1和清0;进行调试。 5，源码地址：如果你需要源码，你可以在这里找到他。]]></content>
+      <categories>
+        <category>STM32</category>
+      </categories>
+      <tags>
+        <tag>STM32_GPIO操作与原理</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[STM32_初识GPIO操作]]></title>
+    <url>%2F2017%2F07%2F17%2FSTM32_GPIO_%E6%80%BB%E7%BB%93%2F</url>
+    <content type="text"><![CDATA[一，GPIO寄存器 由图我们可以知道下面一些信息：1，输出驱动电路： 输出数据寄存器有2种方式改变：一种是通过直接读/写，另一种是通过位设置/位清除寄存器来进行改变； 选择开关：选择的是复用功能 or GPIO的输出功能； 输出控制：一个锁存器的电路 CMOS管: 正向的P-MOS &amp; N-MOS；二者输出相反01/10；VDD 通常为3.3V；通过输出控制的输出值，改变P_MOS和C_MOS的导通关系，从而改变整个的输出&lt;高电平/低电平&gt;； 2，输入驱动电路： 上拉电阻：上拉/下拉可以通过开关控制，通过配置寄存器里面进行设置；上拉/下拉开关都可以打开，也就是浮空： 模拟输入不希望有任何一点变化被上拉/下拉所修改； TTL施密特触发器: 可以进行一定的滤波，整形，开关； 3，寄存器： 寄存器中的各个位的具体配置可参见技术手册，这里不再赘述； 端口配置低寄存器(GPIOx_CRL) 端口配置高寄存器(GPIOx_CRH) 端口输入数据寄存器(GPIOx_IDR) 端口输出数据寄存器(GPIOx_ODR) 端口位设置/复位寄存器(GPIOx_BSRR) 端口位复位寄存器(GPIOx_BRR) 端口配置锁定寄存器(GPIOx_LCKR) 二，GPIO输入输出模式：1，在库函数中的定义：12345678910typedef enum&#123; GPIO_Mode_AIN = 0x0, //模拟输入； GPIO_Mode_IN_FLOATING = 0x04, //浮空输入； GPIO_Mode_IPD = 0x28, //下拉输入； GPIO_Mode_IPU = 0x48, //上拉输入； GPIO_Mode_Out_OD = 0x14, //Open-Drain通用开漏输出 GPIO_Mode_Out_PP = 0x10, //Push-Pull通用推挽输出 GPIO_Mode_AF_OD = 0x1C, //复用功能 GPIO_Mode_AF_PP = 0x18&#125;GPIOMode_TypeDef; 2，对每种输入/输出方式的解释，详见逸嵌YuWendong的博客三，重要的库函数：12345678GPIO_Init //根据GPIO_InitStruct中指定的参数初始化外设GPIOx寄存器GPIO_ReadInputDataBit //读取指定端口管脚的输入GPIO_ReadInputData //读取指定的GPIO端口输入GPIO_ReadOutputDataBit //读取指定端口管脚的输出GPIO_ReadOutputData //读取指定的GPIO端口输出GPIO_SetBits //设置指定的数据端口位GPIO_ResetBits //清除指定的数据端口位GPIO_PinRemapConfig //改变指定管脚的映射 这里仍然只是罗列出名字，具体的用法可参见STM32固件库使用手册的中文翻译版.pdf四，总结说明 这篇文章主要是罗列出GPIO的基础知识和一些基本的学习资料，具体的代码运用见下一篇文章]]></content>
+      <categories>
+        <category>STM32</category>
+      </categories>
+      <tags>
+        <tag>STM32_GPIO操作与原理</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Hexo_GitHub博客搭建总结]]></title>
+    <url>%2F2017%2F07%2F17%2FHexo%2BGitHub%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%80%BB%E7%BB%93%2F</url>
+    <content type="text"><![CDATA[经过这几天的捣鼓，我的第一个正式的博客已经初显雏形了，鉴于网上教程很多，所以具体细节不再叙述，可以看看下面的几个参考链接，这里只是简单的总结一下： 1，工具准备 Git Nodejs Hexo Hexo-theme-next 2，常用命令&gt;安装Hexo需要的命令：12345$ npm install hexo-cli -g$ hexo init blog$ cd blog$ npm install$ hexo server &gt;编辑博客常用命令：12345$ hexo generate (hexo g) #生成静态文件，会在当前目录下生成一个新的叫做public的文件夹$ hexo server (hexo s) #启动本地web服务，用于博客的预览$ hexo deploy (hexo d) #部署博客到远端服务器$ hexo new "postName" #新建文章$ hexo new page "pageName" #新建页面 3，遇到的坑&gt;提示ERROR Deployer not found: git1$ sudo npm install hexo-deployer-git --save #在根目录运行 &gt;提示FATAL Port 4000 has been used. Try other port instead.1$ sudo hexo s -p 5000 #在根目录运行 &gt;博客更新上传后CNAME文件丢失 只需要在上传之前将该文件放入public文件夹即可; 4，参考链接 Next 主题配置 Markdown新手入门 Markeditor编辑器 用Hexo-nexT-GitHub搭建个人博客 基于Hexo+GitHub Pages 搭建个人博客教程 使用Hexo在Github上搭建专属博客之技术总结]]></content>
+      <categories>
+        <category>博客完善</category>
+      </categories>
+      <tags>
+        <tag>Hexo_GitHub博客搭建</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[使用一根网线+笔记本连接树莓派--技术总结]]></title>
+    <url>%2F2017%2F07%2F17%2F%E4%BD%BF%E7%94%A8%E4%B8%80%E6%A0%B9%E7%BD%91%E7%BA%BF-%E7%AC%94%E8%AE%B0%E6%9C%AC%E8%BF%9E%E6%8E%A5%E6%A0%91%E8%8E%93%E6%B4%BE-%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93%2F</url>
+    <content type="text"><![CDATA[之前在学校一股脑弄了只树莓派，他喵的，结果摁是机都没开，昨天回家之后，捣鼓了一会，使用开机，因此，在这里总结一下遇到的坑： ssh连接是时候出现“拒绝连接”: 在树莓派SD卡的根目录新建一个ssh的空文件，打开ssh win7的网络共享失败: 在“开始框框”搜索“服务”，并且打开； 找到“Windows Firewall”，双击进入“打开”它，并设置“启动类型”为“自动”； 关于连接的具体教程，参考知乎回答]]></content>
+      <categories>
+        <category>树莓派</category>
+      </categories>
+      <tags>
+        <tag>树莓派--第一次开机</tag>
+      </tags>
+  </entry>
+</search>

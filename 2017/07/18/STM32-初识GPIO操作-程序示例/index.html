@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next pisces use-motion" lang="zh-Hans">
+<html class="theme-next mist use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -113,23 +113,23 @@
 
 
 
-<meta name="description" content="上一篇文章讲解了GPIO和相对应的寄存器的基础知识，这一篇则是对上一篇知识点的应用： 几点说明： 1, 由于硬件上的不统一，加之GPIO口的通用性，此处采用模拟仿真的方法，观察内部寄存器的数据变化；2，本次实验所用到的操作主要有：位绑定，寄存器的操作，基本的位运算3，本次实验的目的是：控制GPIOA低8位的输出，并且使高8位的对应位输入相同的电平：E.g： 若2位输出 0，则对应的10位输入 0；">
+<meta name="description" content="上一篇文章讲解了GPIO和相对应的寄存器的基础知识，这一篇则是对上一篇知识点的应用：">
 <meta name="keywords" content="STM32_GPIO操作与原理">
 <meta property="og:type" content="article">
 <meta property="og:title" content="STM32_初识GPIO操作_程序示例">
 <meta property="og:url" content="http://www.oez-blog.space/2017/07/18/STM32-初识GPIO操作-程序示例/index.html">
 <meta property="og:site_name" content="小火箭 | Blog">
-<meta property="og:description" content="上一篇文章讲解了GPIO和相对应的寄存器的基础知识，这一篇则是对上一篇知识点的应用： 几点说明： 1, 由于硬件上的不统一，加之GPIO口的通用性，此处采用模拟仿真的方法，观察内部寄存器的数据变化；2，本次实验所用到的操作主要有：位绑定，寄存器的操作，基本的位运算3，本次实验的目的是：控制GPIOA低8位的输出，并且使高8位的对应位输入相同的电平：E.g： 若2位输出 0，则对应的10位输入 0；">
+<meta property="og:description" content="上一篇文章讲解了GPIO和相对应的寄存器的基础知识，这一篇则是对上一篇知识点的应用：">
 <meta property="og:image" content="http://www.oez-blog.space/images/GPIO_3.PNG">
 <meta property="og:image" content="http://www.oez-blog.space/images/GPIO_4.PNG">
 <meta property="og:image" content="http://www.oez-blog.space/images/GPIO_5.PNG">
 <meta property="og:image" content="http://www.oez-blog.space/images/GPIO_6.PNG">
 <meta property="og:image" content="http://www.oez-blog.space/images/GPIO_7.PNG">
 <meta property="og:image" content="http://www.oez-blog.space/images/GPIO_8.PNG">
-<meta property="og:updated_time" content="2017-07-17T23:15:13.578Z">
+<meta property="og:updated_time" content="2017-09-26T14:16:35.833Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="STM32_初识GPIO操作_程序示例">
-<meta name="twitter:description" content="上一篇文章讲解了GPIO和相对应的寄存器的基础知识，这一篇则是对上一篇知识点的应用： 几点说明： 1, 由于硬件上的不统一，加之GPIO口的通用性，此处采用模拟仿真的方法，观察内部寄存器的数据变化；2，本次实验所用到的操作主要有：位绑定，寄存器的操作，基本的位运算3，本次实验的目的是：控制GPIOA低8位的输出，并且使高8位的对应位输入相同的电平：E.g： 若2位输出 0，则对应的10位输入 0；">
+<meta name="twitter:description" content="上一篇文章讲解了GPIO和相对应的寄存器的基础知识，这一篇则是对上一篇知识点的应用：">
 <meta name="twitter:image" content="http://www.oez-blog.space/images/GPIO_3.PNG">
 
 
@@ -138,7 +138,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Pisces',
+    scheme: 'Mist',
     sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     motion: true,
@@ -238,8 +238,6 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
             首页
           </a>
         </li>
@@ -247,8 +245,6 @@
         
         <li class="menu-item menu-item-categories">
           <a href="/categories/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
             分类
           </a>
@@ -258,8 +254,6 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archives"></i> <br />
-            
             归档
           </a>
         </li>
@@ -267,8 +261,6 @@
         
         <li class="menu-item menu-item-tags">
           <a href="/tags/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
             标签
           </a>
@@ -281,8 +273,6 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
-            
             搜索
           </a>
         </li>
@@ -293,22 +283,26 @@
   
     <div class="site-search">
       
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
     <span class="popup-btn-close">
       <i class="fa fa-times-circle"></i>
     </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
-    </div>
   </div>
-  <div id="local-search-result"></div>
-</div>
+
 
 
 
@@ -402,6 +396,17 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/07/18/STM32-初识GPIO操作-程序示例/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/07/18/STM32-初识GPIO操作-程序示例/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -434,7 +439,7 @@
       
 
       
-        <p><a href="http://www.oez-blog.space/2017/07/17/STM32_GPIO_%E6%80%BB%E7%BB%93/">上一篇文章</a>讲解了<code>GPIO</code>和相对应的<code>寄存器</code>的基础知识，这一篇则是对上一篇知识点的应用：</p>
+        <p><a href="http://www.oez-blog.space/2017/07/17/STM32_GPIO_%E6%80%BB%E7%BB%93/">上一篇文章</a>讲解了<code>GPIO</code>和相对应的<code>寄存器</code>的基础知识，这一篇则是对上一篇知识点的应用：<br><a id="more"></a></p>
 <h4 id="几点说明："><a href="#几点说明：" class="headerlink" title="几点说明："></a>几点说明：</h4><blockquote>
 <p>1, 由于硬件上的不统一，加之GPIO口的通用性，此处采用模拟仿真的方法，观察内部寄存器的数据变化；<br>2，本次实验所用到的操作主要有：<code>位绑定</code>，<code>寄存器的操作</code>，<code>基本的位运算</code><br>3，本次实验的目的是：控制GPIOA低8位的输出，并且使高8位的对应位输入相同的电平：<br>E.g： 若2位输出 0，则对应的10位输入 0；</p>
 </blockquote>
@@ -529,27 +534,10 @@
 
     <div class="post-spread">
       
-        <!-- JiaThis Button BEGIN -->
-<div class="jiathis_style">
-  <a class="jiathis_button_tsina"></a>
-  <a class="jiathis_button_tqq"></a>
-  <a class="jiathis_button_weixin"></a>
-  <a class="jiathis_button_cqq"></a>
-  <a class="jiathis_button_douban"></a>
-  <a class="jiathis_button_renren"></a>
-  <a class="jiathis_button_qzone"></a>
-  <a class="jiathis_button_kaixin001"></a>
-  <a class="jiathis_button_copy"></a>
-  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
-  <a class="jiathis_counter_style"></a>
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-59cb1e1aae525c27" async = "async" ></script>
 </div>
-<script type="text/javascript" >
-  var jiathis_config={
-    hideMore:false
-  }
-</script>
-<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
-<!-- JiaThis Button END -->
 
       
     </div>
@@ -563,7 +551,12 @@
           
   <div class="comments" id="comments">
     
-      <div id="lv-container" data-id="city" data-uid="MTAyMC8yOTU2My82MTMx"></div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
     
   </div>
 
@@ -688,10 +681,6 @@
             <ul class="links-of-blogroll-list">
               
                 <li class="links-of-blogroll-item">
-                  <a href="http://www.pemale.studio/" title="YQ_Gallery" target="_blank">YQ_Gallery</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
                   <a href="http://cuiqingcai.com/" title="静觅" target="_blank">静觅</a>
                 </li>
               
@@ -752,7 +741,7 @@
 <div class="theme-info">
   主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Pisces
+    NexT.Mist
   </a>
 </div>
 
@@ -837,13 +826,6 @@
   
   
 
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
-
-
-
   
   <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
 <script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
@@ -862,6 +844,26 @@
 
   
 
+    
+      <script id="dsq-count-scr" src="https://机智的小火箭.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://www.oez-blog.space/2017/07/18/STM32-初识GPIO操作-程序示例/';
+          this.page.identifier = '2017/07/18/STM32-初识GPIO操作-程序示例/';
+          this.page.title = 'STM32_初识GPIO操作_程序示例';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://机智的小火箭.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
 
 
 
@@ -874,21 +876,6 @@
   
 
 
-
-
-
-  
-    <script type="text/javascript">
-      (function(d, s) {
-        var j, e = d.getElementsByTagName(s)[0];
-        if (typeof LivereTower === 'function') { return; }
-        j = d.createElement(s);
-        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-        j.async = true;
-        e.parentNode.insertBefore(j, e);
-      })(document, 'script');
-    </script>
-  
 
 
 
@@ -1215,6 +1202,19 @@
   </script>
 
 
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.1"></script>
 
 
 

@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next pisces use-motion" lang="zh-Hans">
+<html class="theme-next mist use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -113,17 +113,17 @@
 
 
 
-<meta name="description" content="之前在学校一股脑弄了只树莓派，他喵的，结果摁是机都没开，昨天回家之后，捣鼓了一会，使用开机，因此，在这里总结一下遇到的坑： ssh连接是时候出现“拒绝连接”:  在树莓派SD卡的根目录新建一个ssh的空文件，打开ssh  win7的网络共享失败:  在“开始框框”搜索“服务”，并且打开； 找到“Windows Firewall”，双击进入“打开”它，并设置“启动类型”为“自动”；   关于连接的具">
+<meta name="description" content="之前在学校一股脑弄了只树莓派，他喵的，结果摁是机都没开，昨天回家之后，捣鼓了一会，使用开机，因此，在这里总结一下遇到的坑：">
 <meta name="keywords" content="树莓派--第一次开机">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用一根网线+笔记本连接树莓派--技术总结">
 <meta property="og:url" content="http://www.oez-blog.space/2017/07/17/使用一根网线-笔记本连接树莓派-技术总结/index.html">
 <meta property="og:site_name" content="小火箭 | Blog">
-<meta property="og:description" content="之前在学校一股脑弄了只树莓派，他喵的，结果摁是机都没开，昨天回家之后，捣鼓了一会，使用开机，因此，在这里总结一下遇到的坑： ssh连接是时候出现“拒绝连接”:  在树莓派SD卡的根目录新建一个ssh的空文件，打开ssh  win7的网络共享失败:  在“开始框框”搜索“服务”，并且打开； 找到“Windows Firewall”，双击进入“打开”它，并设置“启动类型”为“自动”；   关于连接的具">
-<meta property="og:updated_time" content="2017-07-16T22:09:26.544Z">
+<meta property="og:description" content="之前在学校一股脑弄了只树莓派，他喵的，结果摁是机都没开，昨天回家之后，捣鼓了一会，使用开机，因此，在这里总结一下遇到的坑：">
+<meta property="og:updated_time" content="2017-09-26T14:14:48.056Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用一根网线+笔记本连接树莓派--技术总结">
-<meta name="twitter:description" content="之前在学校一股脑弄了只树莓派，他喵的，结果摁是机都没开，昨天回家之后，捣鼓了一会，使用开机，因此，在这里总结一下遇到的坑： ssh连接是时候出现“拒绝连接”:  在树莓派SD卡的根目录新建一个ssh的空文件，打开ssh  win7的网络共享失败:  在“开始框框”搜索“服务”，并且打开； 找到“Windows Firewall”，双击进入“打开”它，并设置“启动类型”为“自动”；   关于连接的具">
+<meta name="twitter:description" content="之前在学校一股脑弄了只树莓派，他喵的，结果摁是机都没开，昨天回家之后，捣鼓了一会，使用开机，因此，在这里总结一下遇到的坑：">
 
 
 
@@ -131,7 +131,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Pisces',
+    scheme: 'Mist',
     sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     motion: true,
@@ -231,8 +231,6 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
             首页
           </a>
         </li>
@@ -240,8 +238,6 @@
         
         <li class="menu-item menu-item-categories">
           <a href="/categories/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
             分类
           </a>
@@ -251,8 +247,6 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archives"></i> <br />
-            
             归档
           </a>
         </li>
@@ -260,8 +254,6 @@
         
         <li class="menu-item menu-item-tags">
           <a href="/tags/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
             标签
           </a>
@@ -274,8 +266,6 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
-            
             搜索
           </a>
         </li>
@@ -286,22 +276,26 @@
   
     <div class="site-search">
       
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
     <span class="popup-btn-close">
       <i class="fa fa-times-circle"></i>
     </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
-    </div>
   </div>
-  <div id="local-search-result"></div>
-</div>
+
 
 
 
@@ -395,6 +389,17 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/07/17/使用一根网线-笔记本连接树莓派-技术总结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/07/17/使用一根网线-笔记本连接树莓派-技术总结/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -428,6 +433,7 @@
 
       
         <p>之前在学校一股脑弄了只树莓派，他喵的，结果摁是机都没开，昨天回家之后，捣鼓了一会，使用开机，因此，在这里总结一下遇到的坑：</p>
+<a id="more"></a>
 <h6 id="ssh连接是时候出现“拒绝连接”"><a href="#ssh连接是时候出现“拒绝连接”" class="headerlink" title="ssh连接是时候出现“拒绝连接”:"></a>ssh连接是时候出现“拒绝连接”:</h6><blockquote>
 <p> 在树莓派SD卡的根目录新建一个ssh的空文件，打开ssh</p>
 </blockquote>
@@ -502,27 +508,10 @@
 
     <div class="post-spread">
       
-        <!-- JiaThis Button BEGIN -->
-<div class="jiathis_style">
-  <a class="jiathis_button_tsina"></a>
-  <a class="jiathis_button_tqq"></a>
-  <a class="jiathis_button_weixin"></a>
-  <a class="jiathis_button_cqq"></a>
-  <a class="jiathis_button_douban"></a>
-  <a class="jiathis_button_renren"></a>
-  <a class="jiathis_button_qzone"></a>
-  <a class="jiathis_button_kaixin001"></a>
-  <a class="jiathis_button_copy"></a>
-  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
-  <a class="jiathis_counter_style"></a>
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-59cb1e1aae525c27" async = "async" ></script>
 </div>
-<script type="text/javascript" >
-  var jiathis_config={
-    hideMore:false
-  }
-</script>
-<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
-<!-- JiaThis Button END -->
 
       
     </div>
@@ -536,7 +525,12 @@
           
   <div class="comments" id="comments">
     
-      <div id="lv-container" data-id="city" data-uid="MTAyMC8yOTU2My82MTMx"></div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
     
   </div>
 
@@ -661,10 +655,6 @@
             <ul class="links-of-blogroll-list">
               
                 <li class="links-of-blogroll-item">
-                  <a href="http://www.pemale.studio/" title="YQ_Gallery" target="_blank">YQ_Gallery</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
                   <a href="http://cuiqingcai.com/" title="静觅" target="_blank">静觅</a>
                 </li>
               
@@ -725,7 +715,7 @@
 <div class="theme-info">
   主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Pisces
+    NexT.Mist
   </a>
 </div>
 
@@ -810,13 +800,6 @@
   
   
 
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
-
-
-
   
   <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
 <script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
@@ -835,6 +818,26 @@
 
   
 
+    
+      <script id="dsq-count-scr" src="https://机智的小火箭.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://www.oez-blog.space/2017/07/17/使用一根网线-笔记本连接树莓派-技术总结/';
+          this.page.identifier = '2017/07/17/使用一根网线-笔记本连接树莓派-技术总结/';
+          this.page.title = '使用一根网线+笔记本连接树莓派--技术总结';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://机智的小火箭.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
 
 
 
@@ -847,21 +850,6 @@
   
 
 
-
-
-
-  
-    <script type="text/javascript">
-      (function(d, s) {
-        var j, e = d.getElementsByTagName(s)[0];
-        if (typeof LivereTower === 'function') { return; }
-        j = d.createElement(s);
-        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-        j.async = true;
-        e.parentNode.insertBefore(j, e);
-      })(document, 'script');
-    </script>
-  
 
 
 
@@ -1188,6 +1176,19 @@
   </script>
 
 
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.1"></script>
 
 
 
