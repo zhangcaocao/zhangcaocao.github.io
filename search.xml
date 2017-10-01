@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[突然感觉自己真的好菜]]></title>
+    <url>%2F2017%2F10%2F01%2F%E7%AA%81%E7%84%B6%E6%84%9F%E8%A7%89%E8%87%AA%E5%B7%B1%E7%9C%9F%E7%9A%84%E5%A5%BD%E8%8F%9C%2F</url>
+    <content type="text"><![CDATA[突然想写点别的东西, 又不想发朋友圈和空间, 有点负面情绪… 怎么说, 很烦, 剧他喵的烦的那种;国庆中秋放两天假,其实都是不存在的;重构一个蛇皮代码, 越看越烦, 据他喵的想全部删掉重新写过;任务的时间线拉得有点长了, 都没什么兴趣了, 这是最恐怖的;我他喵的就想不通;这人不就是没睡午觉,晚上一点过睡的吗,怎么就没精神了嘛;有那么想睡觉吗, 几十年后他喵的要睡安逸好不好;我他喵的是不考研的,考研是不可能的,这辈子都不可能考研的,只有毕业之后找工作才能勉强维持生活;真的想找个娃说说话,吹吹牛,可以说很大声的那种, 可以不用思考很多的那种;要是每天都可以剧他喵的很有精神就好了;哇,是真滴菜…]]></content>
+      <categories>
+        <category>自言自语</category>
+      </categories>
+      <tags>
+        <tag>自然自语</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[解决sublime Text3 下运行C语言, scanf函数无法输入的问题]]></title>
     <url>%2F2017%2F09%2F18%2F%E8%A7%A3%E5%86%B3sublime-Text3-%E4%B8%8B%E8%BF%90%E8%A1%8CC%E8%AF%AD%E8%A8%80-scanf%E5%87%BD%E6%95%B0%E6%97%A0%E6%B3%95%E8%BE%93%E5%85%A5%E7%9A%84%E9%97%AE%E9%A2%98%2F</url>
     <content type="text"><![CDATA[问题描述:在Sublime Text3 中运行C语言时,当程序中存在scanf函数的时候, 无法运行,还会卡死在那里; 解决方法:将这个文件 CPP.sublime-build(点击下载)放到你的配置文件的目录下, 重启软件就可以了: 1C:\Users\Username\AppData\Roaming\Sublime Text 3\Packages\User 这里可以按照下面的步骤, 找到那个目录, 也可以直接用sublime打开那个文件(CPP.sublime-build),把被人粘贴到新建的那个文件中, 保存为CPP.sublime-build就可以了; 最后这个开发环境目前还在完善中, 不过,毕竟是自己一步一步弄起来的,有点小缺陷,当然是选择原谅它….]]></content>

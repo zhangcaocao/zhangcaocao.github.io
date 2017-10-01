@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.oez-blog.space/"/>
-  <updated>2017-09-26T14:15:17.481Z</updated>
+  <updated>2017-10-01T06:42:27.441Z</updated>
   <id>http://www.oez-blog.space/</id>
   
   <author>
@@ -14,6 +14,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>突然感觉自己真的好菜</title>
+    <link href="http://www.oez-blog.space/2017/10/01/%E7%AA%81%E7%84%B6%E6%84%9F%E8%A7%89%E8%87%AA%E5%B7%B1%E7%9C%9F%E7%9A%84%E5%A5%BD%E8%8F%9C/"/>
+    <id>http://www.oez-blog.space/2017/10/01/突然感觉自己真的好菜/</id>
+    <published>2017-10-01T06:23:54.000Z</published>
+    <updated>2017-10-01T06:42:27.441Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="http://otneosm59.bkt.clouddn.com/zyzy_1.jpg" alt="封面的嘛"></p>
+<h4 id="突然想写点别的东西-又不想发朋友圈和空间-有点负面情绪…"><a href="#突然想写点别的东西-又不想发朋友圈和空间-有点负面情绪…" class="headerlink" title="突然想写点别的东西, 又不想发朋友圈和空间, 有点负面情绪…"></a>突然想写点别的东西, 又不想发朋友圈和空间, 有点负面情绪…</h4><a id="more"></a>
+<p>怎么说, 很烦, 剧他喵的烦的那种;<br>国庆中秋放两天假,其实都是不存在的;<br>重构一个蛇皮代码, 越看越烦, 据他喵的想全部删掉重新写过;<br>任务的时间线拉得有点长了, 都没什么兴趣了, 这是最恐怖的;<br>我他喵的就想不通;<br>这人不就是没睡午觉,晚上一点过睡的吗,怎么就没精神了嘛;<br>有那么想睡觉吗, 几十年后他喵的要睡安逸好不好;<br>我他喵的是不考研的,考研是不可能的,这辈子都不可能考研的,只有毕业之后找工作才能勉强维持生活;<br>真的想找个娃说说话,吹吹牛,可以说很大声的那种, 可以不用思考很多的那种;<br>要是每天都可以剧他喵的很有精神就好了;<br>哇,是真滴菜…</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;http://otneosm59.bkt.clouddn.com/zyzy_1.jpg&quot; alt=&quot;封面的嘛&quot;&gt;&lt;/p&gt;
+&lt;h4 id=&quot;突然想写点别的东西-又不想发朋友圈和空间-有点负面情绪…&quot;&gt;&lt;a href=&quot;#突然想写点别的东西-又不想发朋友圈和空间-有点负面情绪…&quot; class=&quot;headerlink&quot; title=&quot;突然想写点别的东西, 又不想发朋友圈和空间, 有点负面情绪…&quot;&gt;&lt;/a&gt;突然想写点别的东西, 又不想发朋友圈和空间, 有点负面情绪…&lt;/h4&gt;
+    
+    </summary>
+    
+      <category term="自言自语" scheme="http://www.oez-blog.space/categories/%E8%87%AA%E8%A8%80%E8%87%AA%E8%AF%AD/"/>
+    
+    
+      <category term="自然自语" scheme="http://www.oez-blog.space/tags/%E8%87%AA%E7%84%B6%E8%87%AA%E8%AF%AD/"/>
+    
+  </entry>
   
   <entry>
     <title>解决sublime Text3 下运行C语言, scanf函数无法输入的问题</title>
