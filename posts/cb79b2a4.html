@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+	<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+	
+	<style>
+    .pace .pace-progress {
+    	background: #1e92fb; /*进度条颜色*/
+    	height: 3px;
+    }
+    .pace .pace-progress-inner {
+     	box-shadow: 0 0 10px #1E92FB, 0 0 5px rgb(30, 251, 104); /*阴影颜色*/
+    }
+    .pace .pace-activity {
+    	border-top-color: #1E92FB;	/*上边框颜色*/
+    	border-left-color: #1E92FB;	/*左边框颜色*/
+    }
+  </style>
+
+  
+  
+    
+    <title>【OpenCvTutorials3.1中文翻译】- 如何使用OpenCV扫描图像，查找表和时间测量 | 一只电工的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="How to scan images, lookup tables and time measurement with OpenCV目标我们将为以下问题寻求答案：  如何通过图像的每个像素？ OpenCV矩阵值如何存储？ 如何衡量我们算法的性能？ 什么是查找表，为什么使用它们？">
+<meta name="keywords" content="OpenCvTutorials3.1中文翻译">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【OpenCvTutorials3.1中文翻译】- 如何使用OpenCV扫描图像，查找表和时间测量">
+<meta property="og:url" content="http://little-rocket.cn/posts/cb79b2a4.html">
+<meta property="og:site_name" content="一只电工的博客">
+<meta property="og:description" content="How to scan images, lookup tables and time measurement with OpenCV目标我们将为以下问题寻求答案：  如何通过图像的每个像素？ OpenCV矩阵值如何存储？ 如何衡量我们算法的性能？ 什么是查找表，为什么使用它们？">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://docs.opencv.org/3.1.0/tutorial_how_matrix_stored_2.png">
+<meta property="og:updated_time" content="2018-02-21T10:28:54.188Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【OpenCvTutorials3.1中文翻译】- 如何使用OpenCV扫描图像，查找表和时间测量">
+<meta name="twitter:description" content="How to scan images, lookup tables and time measurement with OpenCV目标我们将为以下问题寻求答案：  如何通过图像的每个像素？ OpenCV矩阵值如何存储？ 如何衡量我们算法的性能？ 什么是查找表，为什么使用它们？">
+<meta name="twitter:image" content="https://docs.opencv.org/3.1.0/tutorial_how_matrix_stored_2.png">
+    
+
+    
+        <link rel="alternate" href="https://github.com/zhangcaocao" title="一只电工的博客" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/./favicon.ico" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+    <link rel="stylesheet" href="/libs/bootstrap/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="/libs/bootstrap/js/bootstrap.min.js"></script>
+    
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+        <script>
+var _hmt = _hmt || [];
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?f5c5837b80bdedb2d88f7d0ca499a918";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+    
+
+
+
+
+    <script src="https://cdn1.lncld.net/static/js/av-min-1.2.1.js"></script>
+    <script>AV.initialize("r22IMUpbMa36EWP2Mn1gokHe-gzGzoHsz", "NB1VyBI2YCzzPW0sIa0Fol3D");</script>
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">一只电工的博客</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/archives">所有的文章</a>
+                
+                    <a class="main-nav-link" href="/tags/博客/">博客优化</a>
+                
+                    <a class="main-nav-link" href="/tags/OpenCvTutorials3-1中文翻译/">OpenCv</a>
+                
+                    <a class="main-nav-link" href="/tags/项目/">项目</a>
+                
+                    <a class="main-nav-link" href="/tags/持续更新/">持续更新</a>
+                
+                    <a class="main-nav-link" href="/about">关于我</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/logo.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/archives">所有的文章</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags/博客/">博客优化</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags/OpenCvTutorials3-1中文翻译/">OpenCv</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags/项目/">项目</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags/持续更新/">持续更新</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于我</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+
+
+              
+
+        
+            <script type='text/javascript'>
+            $('body').append("<style type='text/css'>@media screen and (min-width: 1200px) { #main {margin: auto; width: 76%; display: block; float:none;}}</style>");
+            </script>
+        
+
+            <section id="main"> <article id="post-【OpenCvTutorials3-1中文翻译】-如何使用OpenCV扫描图像，查找表和时间测量" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            【OpenCvTutorials3.1中文翻译】- 如何使用OpenCV扫描图像，查找表和时间测量
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/posts/cb79b2a4.html">
+            <time datetime="2018-02-04T07:25:09.000Z" itemprop="datePublished">2018-02-04</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-user"></i>
+        <a class="article-category-link" href="/categories/zhangcaocao/">zhangcaocao</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/OpenCvTutorials3-1中文翻译/">OpenCvTutorials3.1中文翻译</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+                <div id="toc" class="toc-article">
+                <strong class="toc-title">文章目录</strong>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#How-to-scan-images-lookup-tables-and-time-measurement-with-OpenCV"><span class="toc-number">1.</span> <span class="toc-text">How to scan images, lookup tables and time measurement with OpenCV</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#目标"><span class="toc-number">1.1.</span> <span class="toc-text">目标</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#我们的测试用例"><span class="toc-number">1.2.</span> <span class="toc-text">我们的测试用例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#图像矩阵如何存储在内存中？"><span class="toc-number">1.3.</span> <span class="toc-text">图像矩阵如何存储在内存中？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#有效的方法"><span class="toc-number">1.4.</span> <span class="toc-text">有效的方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#迭代器（安全）的方法"><span class="toc-number">1.5.</span> <span class="toc-text">迭代器（安全）的方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#带参考返回的实时地址计算"><span class="toc-number">1.6.</span> <span class="toc-text">带参考返回的实时地址计算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#核心函数"><span class="toc-number">1.7.</span> <span class="toc-text">核心函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#性能差异"><span class="toc-number">1.8.</span> <span class="toc-text">性能差异</span></a></li></ol></li></ol>
+                </div>
+            
+            <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-59cb1e1aae525c27"></script>
+
+<h3 id="How-to-scan-images-lookup-tables-and-time-measurement-with-OpenCV"><a href="#How-to-scan-images-lookup-tables-and-time-measurement-with-OpenCV" class="headerlink" title="How to scan images, lookup tables and time measurement with OpenCV"></a><a href="https://docs.opencv.org/3.1.0/db/da5/tutorial_how_to_scan_images.html" target="_blank" rel="noopener">How to scan images, lookup tables and time measurement with OpenCV</a></h3><h4 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h4><p>我们将为以下问题寻求答案：</p>
+<ul>
+<li>如何通过图像的每个像素？</li>
+<li>OpenCV矩阵值如何存储？</li>
+<li>如何衡量我们算法的性能？</li>
+<li>什么是查找表，为什么使用它们？</li>
+</ul>
+<a id="more"></a>
+<h4 id="我们的测试用例"><a href="#我们的测试用例" class="headerlink" title="我们的测试用例"></a>我们的测试用例</h4><p>让我们考虑一个简单的色彩还原方法。. 通过使用无符号字符C和C++矩阵项目存储，一个像素的渠道可能有多达256个不同的值。对于三通道图像这可能允许太多颜色的形成(确切的说是1600万)。工作有这么多颜色的色调可以给我们的算法性能的一个沉重的打击。但是，有时只用更少的工作就可以得到相同的最终结果。</p>
+<p>在这种情况下，我们通常会减少色彩空间。 这意味着我们将色彩空间当前值与一个新的输入值分开，以较少的颜色结束。 例如，0与9之间的每个值都取新值0，10至19之间的每一个值10等等。</p>
+<p>当你用一个int值分割一个uchar（unsigned char - 又名0到255之间的值）值时，结果也是char。 这些值可能只是char值。 因此，任何分数都会被舍入。 利用这个事实，uchar域中的上面的操作可以表示为：</p>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<p><br>  $$In= (\frac {I_{o}}{10}) * 10.$$<br></p>
+
+<blockquote>
+<p>In: I_new; Io: I_old;</p>
+</blockquote>
+<p>一个简单的色彩空间减少算法将包括只是通过一个图像矩阵的每个像素应用这个公式。 值得注意的是，我们做了分裂和乘法运算。 这些操作对于一个系统来说是非常昂贵的。 如果可能的话，通过使用更便宜的操作（例如几次减法，加法或最好的情况下简单的分配）来避免它们是值得的。 此外，请注意，对于上层操作，我们只有有限的输入值。 在uchar系统的情况下，这是256。</p>
+<p>因此，对于较大的图像，事先计算所有可能的值并在分配期间通过使用查找表来进行分配将是明智的。 查找表是简单的数组（具有一个或多个维度），对于给定的输入值变化保存最终的输出值。 它的优势在于我们不需要计算，我们只需要读取结果。</p>
+<p>我们的测试用例程序（和这里提供的示例）将执行以下操作：读取控制台行参数图像（可能是彩色或灰度级 - 控制台行参数），并将缩减应用于给定的控制台行参数整数值。 在OpenCV中，目前，它们是逐个像素地进行图像处理的三种主要方式。 为了使事情变得更有趣，将使用所有这些方法扫描每个图像，并打印出需要多长时间。</p>
+<p>您可以在<a href="https://github.com/Itseez/opencv/tree/master/samples/cpp/tutorial_code/core/how_to_scan_images/how_to_scan_images.cpp" target="_blank" rel="noopener">这里</a>下载完整的源代码，或者在核心部分的cpp教程代码中的OpenCV示例目录中查找它。 其基本用法是：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">how_to_scan_images imageName.jpg intValueToReduce [G]</span><br></pre></td></tr></table></figure>
+<p>最后的参数是可选的。 如果给定图像将以灰度格式加载，否则使用BGR色彩空间。 首先要计算查找表。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> divideWith = <span class="number">0</span>; <span class="comment">// convert our input string to number - C++ style</span></span><br><span class="line"><span class="built_in">stringstream</span> s;</span><br><span class="line">s &lt;&lt; argv[<span class="number">2</span>];</span><br><span class="line">s &gt;&gt; divideWith;</span><br><span class="line"><span class="keyword">if</span> (!s || !divideWith)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Invalid number entered for dividing. "</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line">uchar table[<span class="number">256</span>];</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">256</span>; ++i)</span><br><span class="line">   table[i] = (uchar)(divideWith * (i/divideWith));</span><br></pre></td></tr></table></figure>
+<p>在这里，我们首先使用C ++ stringstream类将第三个命令行参数从文本转换为整数格式。 然后我们简单的使用上面的公式来计算查找表。 在这里没有OpenCV特定的东西。</p>
+<p>另一个问题是我们如何衡量时间？ 那么OpenCV提供了两个简单的函数来实现这个<a href="https://docs.opencv.org/3.1.0/db/de0/group__core__utils.html#gae73f58000611a1af25dd36d496bf4487" target="_blank" rel="noopener">cv::getTickCount（）</a>和<a href="https://docs.opencv.org/3.1.0/db/de0/group__core__utils.html#ga705441a9ef01f47acdc55d87fbe5090c" target="_blank" rel="noopener">cv::getTickFrequency（）</a>。 第一个从特定事件返回系统CPU的滴答数（自引导系统以来）。 第二个返回你的CPU在一秒钟内发出一个刻度的次数。 因此，以秒为单位，两次操作之间的时间间隔很容易得到：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> t = (<span class="keyword">double</span>)getTickCount();</span><br><span class="line"><span class="comment">// do something ...</span></span><br><span class="line">t = ((<span class="keyword">double</span>)getTickCount() - t)/getTickFrequency();</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"Times passed in seconds: "</span> &lt;&lt; t &lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
+<h4 id="图像矩阵如何存储在内存中？"><a href="#图像矩阵如何存储在内存中？" class="headerlink" title="图像矩阵如何存储在内存中？"></a>图像矩阵如何存储在内存中？</h4><p>正如你已经阅读我的<a href="http://little-rocket.cn/2018/02/04/%E3%80%90OpenCvTutorials3-1%E4%B8%AD%E6%96%87%E7%BF%BB%E8%AF%91%E3%80%91-%20Mat-%E5%9F%BA%E6%9C%AC%E7%9A%84%E5%9B%BE%E5%83%8F%E5%AE%B9%E5%99%A8/">Mat-基本的图像容器</a>教程矩阵的大小取决于使用的颜色系统。 更准确地说，这取决于使用的通道数量。 在灰度图像的情况下，我们有这样的东西：</p>
+<p><img src="https://docs.opencv.org/3.1.0/tutorial_how_matrix_stored_1.png" alt="灰度图"></p>
+<p>对于多通道图像，列包含与通道数量一样多的子列。 例如在BGR颜色系统的情况下：<br><img src="https://docs.opencv.org/3.1.0/tutorial_how_matrix_stored_2.png" alt="RGB颜色系统"></p>
+<p>请注意，通道的顺序是相反的：BGR而不是RGB。 因为在许多情况下，存储器足够大以便按照连续的方式存储行，所以行可以一个接一个地跟随，从而创建单个长行。 因为所有东西都在一个接一个地方，这可能有助于加快扫描过程。 我们可以使用<a href="https://docs.opencv.org/3.1.0/d3/d63/classcv_1_1Mat.html#aff83775c7fc1479de5f4a8c4e67fe361" target="_blank" rel="noopener">cv::Mat::isContinuous（）</a>函数来询问矩阵是否属于这种情况。 继续下一节找到一个例子。</p>
+<h4 id="有效的方法"><a href="#有效的方法" class="headerlink" title="有效的方法"></a>有效的方法</h4><p>当谈到性能，你不能击败经典的C风格运算符[]（指针）访问。 因此，我们可以推荐的最有效的方法是：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Mat&amp; <span class="title">ScanImageAndReduceC</span><span class="params">(Mat&amp; I, <span class="keyword">const</span> uchar* <span class="keyword">const</span> table)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// accept only char type matrices</span></span><br><span class="line">    CV_Assert(I.depth() == CV_8U);</span><br><span class="line">    <span class="keyword">int</span> channels = I.channels();</span><br><span class="line">    <span class="keyword">int</span> nRows = I.rows;</span><br><span class="line">    <span class="keyword">int</span> nCols = I.cols * channels;</span><br><span class="line">    <span class="keyword">if</span> (I.isContinuous())</span><br><span class="line">    &#123;</span><br><span class="line">        nCols *= nRows;</span><br><span class="line">        nRows = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> i,j;</span><br><span class="line">    uchar* p;</span><br><span class="line">    <span class="keyword">for</span>( i = <span class="number">0</span>; i &lt; nRows; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        p = I.ptr&lt;uchar&gt;(i);</span><br><span class="line">        <span class="keyword">for</span> ( j = <span class="number">0</span>; j &lt; nCols; ++j)</span><br><span class="line">        &#123;</span><br><span class="line">            p[j] = table[p[j]];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> I;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在这里，我们基本上只是获取一个指向每一行开始的指针并遍历它直到它结束。 在矩阵以连续方式存储的特殊情况下，我们只需要一次指针并一直走到最后。 我们需要注意彩色图像：我们有三个通道，所以我们需要在每一行中通过三次以上的项目(iterm)。</p>
+<p>还有另一种方法。 Mat对象的数据数据成员将指针返回到第一行第一列。 如果这个指针为空，那么在该对象中没有有效的输入。 检查这是检查您的图像加载是否成功的最简单的方法。 如果存储是连续的，我们可以使用这个来遍历整个数据指针。 在灰度图像的情况下，这将看起来像：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">uchar* p = I.data;</span><br><span class="line"><span class="keyword">for</span>( <span class="keyword">unsigned</span> <span class="keyword">int</span> i =<span class="number">0</span>; i &lt; ncol*nrows; ++i)</span><br><span class="line">    *p++ = table[*p];</span><br></pre></td></tr></table></figure>
+<p>你会得到相同的结果。 但是，这个代码在以后很难阅读。 如果你有一些进阶的技巧，那就更难了。 此外，在实践中，我发现你会得到相同的性能结果（因为大多数现代编译器可能会自动为你做这个小优化技巧）。</p>
+<h4 id="迭代器（安全）的方法"><a href="#迭代器（安全）的方法" class="headerlink" title="迭代器（安全）的方法"></a>迭代器（安全）的方法</h4><p>上一个有效的方法（efficient way）可能确定您通过适当数量的uchar字段，而且跳过行之间可能发生的差距是您的责任。 迭代器方法被认为是一个更安全的方式，因为它接管用户的这些任务。 所有你需要做的是要求图像矩阵的开始和结束，然后增加开始迭代器直到你到达最后。 要获取迭代器指向的值，请使用*运算符（在它之前添加它）。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Mat&amp; <span class="title">ScanImageAndReduceIterator</span><span class="params">(Mat&amp; I, <span class="keyword">const</span> uchar* <span class="keyword">const</span> table)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// accept only char type matrices</span></span><br><span class="line">    CV_Assert(I.depth() == CV_8U);</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">int</span> channels = I.channels();</span><br><span class="line">    <span class="keyword">switch</span>(channels)</span><br><span class="line">    &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">        &#123;</span><br><span class="line">            MatIterator_&lt;uchar&gt; it, end;</span><br><span class="line">            <span class="keyword">for</span>( it = I.begin&lt;uchar&gt;(), end = I.end&lt;uchar&gt;(); it != end; ++it)</span><br><span class="line">                *it = table[*it];</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">        &#123;</span><br><span class="line">            MatIterator_&lt;Vec3b&gt; it, end;</span><br><span class="line">            <span class="keyword">for</span>( it = I.begin&lt;Vec3b&gt;(), end = I.end&lt;Vec3b&gt;(); it != end; ++it)</span><br><span class="line">            &#123;</span><br><span class="line">                (*it)[<span class="number">0</span>] = table[(*it)[<span class="number">0</span>]];</span><br><span class="line">                (*it)[<span class="number">1</span>] = table[(*it)[<span class="number">1</span>]];</span><br><span class="line">                (*it)[<span class="number">2</span>] = table[(*it)[<span class="number">2</span>]];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> I;</span><br></pre></td></tr></table></figure>
+<p>在彩色图像的情况下，每列有三个uchar项目。 这可能被认为是一个short的uchar向量，它已经在OpenCV中有了<a href="https://docs.opencv.org/3.1.0/dc/d84/group__core__basic.html#ga7e6060c0b8d48459964df6e1eb524c03" target="_blank" rel="noopener">Vec3b</a>这个名称。 要访问第n个子列，我们使用简单的operator []访问。 记住OpenCV迭代器遍历列并自动跳到下一行是很重要的。 因此，如果使用简单的uchar迭代器，在彩色图像的情况下，您将只能访问蓝色通道值。</p>
+<h4 id="带参考返回的实时地址计算"><a href="#带参考返回的实时地址计算" class="headerlink" title="带参考返回的实时地址计算"></a>带参考返回的实时地址计算</h4><p>最后的方法不建议用于扫描。 它是为了获取或修改图像中的随机元素。 它的基本用法是指定要访问的项目的行号和列号。 在我们早期的扫描方法中，您可能已经注意到，通过我们正在查看图像的类型，这很重要。 这里没有什么不同，因为您需要手动指定在自动查找中使用的类型。 你可以在下面的源代码（+ <a href="https://docs.opencv.org/3.1.0/d5/d50/group__videostab.html#ga64715f89ad837e2b6b5649d0f833172d" target="_blank" rel="noopener">cv::at（）</a>函数的使用）的灰度图像的情况下观察这个：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Mat&amp; <span class="title">ScanImageAndReduceRandomAccess</span><span class="params">(Mat&amp; I, <span class="keyword">const</span> uchar* <span class="keyword">const</span> table)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// accept only char type matrices</span></span><br><span class="line">    CV_Assert(I.depth() == CV_8U);</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">int</span> channels = I.channels();</span><br><span class="line">    <span class="keyword">switch</span>(channels)</span><br><span class="line">    &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; I.rows; ++i)</span><br><span class="line">                <span class="keyword">for</span>( <span class="keyword">int</span> j = <span class="number">0</span>; j &lt; I.cols; ++j )</span><br><span class="line">                    I.at&lt;uchar&gt;(i,j) = table[I.at&lt;uchar&gt;(i,j)];</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">        &#123;</span><br><span class="line">         Mat_&lt;Vec3b&gt; _I = I;</span><br><span class="line">         <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; I.rows; ++i)</span><br><span class="line">            <span class="keyword">for</span>( <span class="keyword">int</span> j = <span class="number">0</span>; j &lt; I.cols; ++j )</span><br><span class="line">               &#123;</span><br><span class="line">                   _I(i,j)[<span class="number">0</span>] = table[_I(i,j)[<span class="number">0</span>]];</span><br><span class="line">                   _I(i,j)[<span class="number">1</span>] = table[_I(i,j)[<span class="number">1</span>]];</span><br><span class="line">                   _I(i,j)[<span class="number">2</span>] = table[_I(i,j)[<span class="number">2</span>]];</span><br><span class="line">            &#125;</span><br><span class="line">         I = _I;</span><br><span class="line">         <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> I;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这些功能将输入您的输入类型和坐标，并实时计算查询项目的地址。 然后返回一个参考。 当您get该值时，这可能是一个常量，而当您set该值时，该值可能是不恒定的。 作为仅在debug模式下的安全步骤*将执行一次检查，确认您的输入坐标是有效的并且确实存在。 如果不是这种情况，你会在标准错误输出流中得到一个很好的输出消息。 与release模式中的高效方式相比，使用这种方法的唯一区别是，对于图像的每个元素，您将获得一个新的行指针，用于我们使用C运算符[]获取列元素。</p>
+<p>如果您需要使用此方法对图像进行多次查找，那么输入每个访问的类型和at关键字可能会很麻烦并且非常耗时。 为了解决这个问题，OpenCV有一个<a href="https://docs.opencv.org/3.1.0/df/dfc/classcv_1_1Mat__.html" target="_blank" rel="noopener">cv::Mat_</a>数据类型。 与Mat相同，额外的需求是在定义时需要通过查看数据矩阵来指定数据类型，但是作为回报，您可以使用operator（）来快速访问项目。 为了使事情更好，这很容易转换到通常的<a href="https://docs.opencv.org/3.1.0/d3/d63/classcv_1_1Mat.html" target="_blank" rel="noopener">cv :: Mat</a>数据类型。 上面的函数的彩色图像的情况下，您可以看到一个示例用法。 不过，需要注意的是，使用<a href="https://docs.opencv.org/3.1.0/d5/d50/group__videostab.html#ga64715f89ad837e2b6b5649d0f833172d" target="_blank" rel="noopener">cv::at（）</a>函数可以完成相同的操作（具有相同的运行时速度）。 这只是懒惰的程序员技巧写的。</p>
+<h4 id="核心函数"><a href="#核心函数" class="headerlink" title="核心函数"></a>核心函数</h4><p>这是一个在图像中实现查找表修改的额外方法。 因为在图像处理中，您想要将所有给定的图像值替换为其他值，这是相当普遍的。OpenCV具有一个功能，无需编写图像扫描即可进行修改。 我们使用核心模块的<a href="https://docs.opencv.org/3.1.0/d2/de8/group__core__array.html#gab55b8d062b7f5587720ede032d34156f" target="_blank" rel="noopener">cv::LUT（）</a>函数。 首先我们建立一个Mat查找表的类型：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Mat <span class="title">lookUpTable</span><span class="params">(<span class="number">1</span>, <span class="number">256</span>, CV_8U)</span></span>;</span><br><span class="line">uchar* p = lookUpTable.ptr();</span><br><span class="line"><span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">256</span>; ++i)</span><br><span class="line">    p[i] = table[i];</span><br></pre></td></tr></table></figure>
+<p>最后调用函数（我是我们的输入图像，J是输出图像）：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LUT(I, lookUpTable, J);</span><br></pre></td></tr></table></figure>
+<h4 id="性能差异"><a href="#性能差异" class="headerlink" title="性能差异"></a>性能差异</h4><p>为了得到最好的结果，编译程序并以你自己的速度运行。 为了展示更好的差异，我使用了一个相当大的（2560 X 1600）图像。 这里介绍的性能是彩色图像。 为了获得更准确的值，我已经从函数调用中获得了数百次的平均值。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">方法</th>
+<th style="text-align:center">时间</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">高效的方式</td>
+<td style="text-align:center">79.4717毫秒</td>
+</tr>
+<tr>
+<td style="text-align:left">迭代器</td>
+<td style="text-align:center">83.7201毫秒</td>
+</tr>
+<tr>
+<td style="text-align:left">实时性计算</td>
+<td style="text-align:center">93.7878毫秒</td>
+</tr>
+<tr>
+<td style="text-align:left">LUT函数</td>
+<td style="text-align:center">32.5759毫秒</td>
+</tr>
+</tbody>
+</table>
+<p>总结一下。 如果可能的话，使用OpenCV已经完成的功能（而不是重新创建这些功能）。 最快的方法就是LUT功能。 这是因为OpenCV库是通过Intel Threaded Building Blocks启用的多线程。 但是，如果您需要编写一个简单的图像扫描更喜欢指针的方法。 迭代器是一个更安全的，但相当慢。 在Debug模式下，使用实时参考访问方法进行全图像扫描是成本最高的。 在release模式下，它可能会打败迭代器的方法，但它肯定会牺牲迭代器的安全特性。</p>
+<p>最后，您可以在<a href="https://www.youtube.com/watch?v=fB3AN5fjgwc" target="_blank" rel="noopener">YouTube频道</a>上发布的视频中观看该节目的示例。</p>
+<p><iframe width="560" height="349" src="https://www.youtube.com/embed/fB3AN5fjgwc" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></p>
+<hr>
+<p><a rel="noopener" href="http://creativecommons.org/licenses/by/2.5/cn/" target="_blank"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by/2.5/cn/88x31.png"></a><br>本作品采用<a rel="noopener" href="http://creativecommons.org/licenses/by/2.5/cn/" target="_blank">知识共享署名 2.5 中国大陆许可协议</a>进行许可。欢迎转载，但是请注明来自<a href="http://little-rocket.cn/">little-rocket-blog</a>，并保证转载后文章的完整性。本人保留所有版权相关权利。</p>
+<p>本文链接：<a href="http://little-rocket.cn/posts/cb79b2a4.html">http://little-rocket.cn/posts/cb79b2a4.html</a></p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+    <div class="a2a_kit a2a_default_style">
+    <a class="a2a_dd" href="https://www.addtoany.com/share">Share</a>
+    <span class="a2a_divider"></span>
+    <a class="a2a_button_facebook"></a>
+    <a class="a2a_button_twitter"></a>
+    <a class="a2a_button_google_plus"></a>
+    <a class="a2a_button_sina_weibo"></a>
+    <a class="a2a_button_qzone"></a>
+    <a class="a2a_button_wechat"></a>
+</div>
+<script type="text/javascript" src="//static.addtoany.com/menu/page.js"></script>
+<style>
+    .a2a_menu {
+        border-radius: 4px;
+    }
+    .a2a_menu a {
+        margin: 2px 0;
+        font-size: 14px;
+        line-height: 16px;
+        border-radius: 4px;
+        color: inherit !important;
+        font-family: 'Microsoft Yahei';
+    }
+    #a2apage_dropdown {
+        margin: 10px 0;
+    }
+    .a2a_mini_services {
+        padding: 10px;
+    }
+    a.a2a_i,
+    i.a2a_i {
+        width: 122px;
+        line-height: 16px;
+    }
+    a.a2a_i .a2a_svg,
+    a.a2a_more .a2a_svg {
+        width: 16px;
+        height: 16px;
+        line-height: 16px;
+        vertical-align: top;
+        background-size: 16px;
+    }
+    a.a2a_i {
+        border: none !important;
+    }
+    a.a2a_menu_show_more_less {
+        margin: 0;
+        padding: 10px 0;
+        line-height: 16px;
+    }
+    .a2a_mini_services:after{content:".";display:block;height:0;clear:both;visibility:hidden}
+    .a2a_mini_services{*+height:1%;}
+</style>
+
+</div>
+
+            
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/posts/359d25e3.html" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    【OpenCvTutorials3.1中文翻译】- 在矩阵上进行掩码操作
+                
+            </div>
+        </a>
+    
+    
+        <a href="/posts/20b9f9f7.html" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">【OpenCvTutorials3.1中文翻译】-[Mat-基本的图像容器]</div>
+        </a>
+    
+</nav>
+
+
+    
+
+
+</article>
+
+
+    
+    
+        <section id="comments">
+	<div id="commentContainer"></div>
+</section>
+    
+
+
+
+
+</section>
+
+            
+            
+
+
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+        <a rel="license" href="http://creativecommons.org/licenses/by/2.5/cn/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by/2.5/cn/88x31.png" /></a><br />本站作品采用<a rel="license" href="http://creativecommons.org/licenses/by/2.5/cn/">知识共享署名 2.5 中国大陆许可协议</a>进行许可。
+            &copy; 最后更新： 2018-04-19 | zhangcaocao<br>
+        
+        <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <span id="busuanzi_container_site_pv">您是第：20<span id="busuanzi_value_site_pv"></span>来到本站的小伙伴</span>
+        <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1272945268'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s22.cnzz.com/z_stat.php%3Fid%3D1272945268%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+        </div>
+    </div>
+
+</footer>
+        
+    
+	<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+	<script src="https://zhangcaocao.github.io/gitment.browser.js"></script>
+	<script>
+		var gitment = new Gitment({
+			owner: 'zhangcaocao',
+			repo: 'My_Blog_Gitment',
+			oauth: {
+				client_id: 'add2fc004407ccb84aeb',
+				client_secret: 'cd82dbaaae9f6a8ca03c8c745fbdf5286aca0cf8',
+			},
+		})
+		gitment.render('commentContainer')
+	</script>
+	
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

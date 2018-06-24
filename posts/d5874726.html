@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+	<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+	
+	<style>
+    .pace .pace-progress {
+    	background: #1e92fb; /*进度条颜色*/
+    	height: 3px;
+    }
+    .pace .pace-progress-inner {
+     	box-shadow: 0 0 10px #1E92FB, 0 0 5px rgb(30, 251, 104); /*阴影颜色*/
+    }
+    .pace .pace-activity {
+    	border-top-color: #1E92FB;	/*上边框颜色*/
+    	border-left-color: #1E92FB;	/*左边框颜色*/
+    }
+  </style>
+
+  
+  
+    
+    <title>利用Robocon2018 比赛地图 + OpenCv + matplotlib拟合贝塞尔曲线，并且生成路径坐标点 | 一只电工的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="(function(){     var bp = document.createElement(&apos;script&apos;);     var curProtocol = window.location.protocol.split(&apos;:&apos;)[0];     if (curProtocol === &apos;https&apos;) {         bp.src = &apos;https://zz.bdstatic.c">
+<meta name="keywords" content="项目">
+<meta property="og:type" content="article">
+<meta property="og:title" content="利用Robocon2018 比赛地图 + OpenCv + matplotlib拟合贝塞尔曲线，并且生成路径坐标点">
+<meta property="og:url" content="http://little-rocket.cn/posts/d5874726.html">
+<meta property="og:site_name" content="一只电工的博客">
+<meta property="og:description" content="(function(){     var bp = document.createElement(&apos;script&apos;);     var curProtocol = window.location.protocol.split(&apos;:&apos;)[0];     if (curProtocol === &apos;https&apos;) {         bp.src = &apos;https://zz.bdstatic.c">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://image.little-rocket.cn/Figure_1.png">
+<meta property="og:updated_time" content="2018-04-19T04:14:11.071Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="利用Robocon2018 比赛地图 + OpenCv + matplotlib拟合贝塞尔曲线，并且生成路径坐标点">
+<meta name="twitter:description" content="(function(){     var bp = document.createElement(&apos;script&apos;);     var curProtocol = window.location.protocol.split(&apos;:&apos;)[0];     if (curProtocol === &apos;https&apos;) {         bp.src = &apos;https://zz.bdstatic.c">
+<meta name="twitter:image" content="http://image.little-rocket.cn/Figure_1.png">
+    
+
+    
+        <link rel="alternate" href="https://github.com/zhangcaocao" title="一只电工的博客" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/./favicon.ico" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+    <link rel="stylesheet" href="/libs/bootstrap/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="/libs/bootstrap/js/bootstrap.min.js"></script>
+    
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+        <script>
+var _hmt = _hmt || [];
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?f5c5837b80bdedb2d88f7d0ca499a918";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+    
+
+
+
+
+    <script src="https://cdn1.lncld.net/static/js/av-min-1.2.1.js"></script>
+    <script>AV.initialize("r22IMUpbMa36EWP2Mn1gokHe-gzGzoHsz", "NB1VyBI2YCzzPW0sIa0Fol3D");</script>
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">一只电工的博客</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/archives">所有的文章</a>
+                
+                    <a class="main-nav-link" href="/tags/博客/">博客优化</a>
+                
+                    <a class="main-nav-link" href="/tags/OpenCvTutorials3-1中文翻译/">OpenCv</a>
+                
+                    <a class="main-nav-link" href="/tags/项目/">项目</a>
+                
+                    <a class="main-nav-link" href="/tags/持续更新/">持续更新</a>
+                
+                    <a class="main-nav-link" href="/about">关于我</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/logo.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/archives">所有的文章</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags/博客/">博客优化</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags/OpenCvTutorials3-1中文翻译/">OpenCv</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags/项目/">项目</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags/持续更新/">持续更新</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于我</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+
+
+              
+
+        
+            <script type='text/javascript'>
+            $('body').append("<style type='text/css'>@media screen and (min-width: 1200px) { #main {margin: auto; width: 76%; display: block; float:none;}}</style>");
+            </script>
+        
+
+            <section id="main"> <article id="post-利用Robocon-比赛地图-OpenCv-matplotlib拟合贝塞尔曲线，并且生成路径坐标点" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            利用Robocon2018 比赛地图 + OpenCv + matplotlib拟合贝塞尔曲线，并且生成路径坐标点
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/posts/d5874726.html">
+            <time datetime="2018-04-19T04:10:58.000Z" itemprop="datePublished">2018-04-19</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-user"></i>
+        <a class="article-category-link" href="/categories/zhangcaocao/">zhangcaocao</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/项目/">项目</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+                <div id="toc" class="toc-article">
+                <strong class="toc-title">文章目录</strong>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#本文内容："><span class="toc-number">1.</span> <span class="toc-text">本文内容：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#贝塞尔曲线简介："><span class="toc-number">2.</span> <span class="toc-text">贝塞尔曲线简介：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#原理："><span class="toc-number">2.1.</span> <span class="toc-text">原理：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#计算公式："><span class="toc-number">2.2.</span> <span class="toc-text">计算公式：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#意义："><span class="toc-number">2.3.</span> <span class="toc-text">意义：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码算法讲解："><span class="toc-number">3.</span> <span class="toc-text">代码算法讲解：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#获取鼠标点击的点："><span class="toc-number">3.1.</span> <span class="toc-text">获取鼠标点击的点：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#坐标点的解算："><span class="toc-number">3.2.</span> <span class="toc-text">坐标点的解算：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#绘制图像"><span class="toc-number">3.3.</span> <span class="toc-text">绘制图像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#增加的功能："><span class="toc-number">3.4.</span> <span class="toc-text">增加的功能：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结："><span class="toc-number">4.</span> <span class="toc-text">总结：</span></a></li></ol>
+                </div>
+            
+            <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-59cb1e1aae525c27"></script>
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+<h2 id="本文内容："><a href="#本文内容：" class="headerlink" title="本文内容："></a>本文内容：</h2><ul>
+<li>贝塞尔曲线简介</li>
+<li>代码算法讲解</li>
+<li>总结</li>
+</ul>
+<h2 id="贝塞尔曲线简介："><a href="#贝塞尔曲线简介：" class="headerlink" title="贝塞尔曲线简介："></a>贝塞尔曲线简介：</h2><a id="more"></a>
+<h3 id="原理："><a href="#原理：" class="headerlink" title="原理："></a>原理：</h3><p>Github上一位大佬已经总结得很详细了, 还有动态图的哦,,我这里就直接引用啦<a href="https://github.com/GcsSloop/AndroidNote/blob/master/CustomView/Advance/%5B06%5DPath_Bezier.md" target="_blank" rel="noopener">Github</a></p>
+<h3 id="计算公式："><a href="#计算公式：" class="headerlink" title="计算公式："></a>计算公式：</h3><p>此处引用简书一位大佬的总结:<a href="https://www.jianshu.com/p/84e845afb1c0" target="_blank" rel="noopener">@L_Xian</a>;<br>该大佬不仅解释了贝塞尔曲线的原理，还详细的推导了贝塞尔曲线各阶公式之间的联系。</p>
+<h3 id="意义："><a href="#意义：" class="headerlink" title="意义："></a>意义：</h3><p>此处只说一下对于全向机器人运动的意义：<br>由于贝塞尔曲线是一条光滑的曲线，即高阶可导。若机器人的运动轨迹可以拟合在这条曲线上，运动转弯将更加顺滑，这就催生了我写这个小程序的想法。利用 Python强大的科学计算，图像处理，绘图能力。将一个标准的场地地图导入，二值化之后，使用在地图上点击的起点与终点已经2个控制点，绘制出3阶贝塞尔曲线，再经过坐标转换，生成适合场地的机器人运动轨迹坐标。</p>
+<h2 id="代码算法讲解："><a href="#代码算法讲解：" class="headerlink" title="代码算法讲解："></a>代码算法讲解：</h2><ul>
+<li><p><a href="https://github.com/zhangcaocao/robocon2018/tree/master/bezier_Py" target="_blank" rel="noopener">Gitub地址</a></p>
+</li>
+<li><p><img src="http://image.little-rocket.cn/bezier.gif" alt="演示"></p>
+</li>
+</ul>
+<h3 id="获取鼠标点击的点："><a href="#获取鼠标点击的点：" class="headerlink" title="获取鼠标点击的点："></a>获取鼠标点击的点：</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Get_Point_</span>:</span></span><br><span class="line">    <span class="comment"># 使用OpenCv对图像进行初步的处理</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 使用 plt获取鼠标点击的坐标</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">Get_Pos</span><span class="params">(src_img)</span>:</span></span><br><span class="line">        plt.imshow(src_img, cmap=plt.get_cmap(<span class="string">"gray"</span>))</span><br><span class="line">        pos = plt.ginput(<span class="number">4</span>)</span><br><span class="line">        <span class="keyword">return</span> pos</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">Get_Point</span><span class="params">()</span>:</span></span><br><span class="line">        <span class="keyword">return</span> Points_List_</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">Get_Image</span><span class="params">()</span>:</span></span><br><span class="line">        src_img = cv.imread(<span class="string">'./img/changdi2.png'</span>)</span><br><span class="line">        src_Gray_Image = cv.cvtColor(src_img, cv.COLOR_BGR2GRAY)</span><br><span class="line">        ret, dst_Image = cv.threshold(src_Gray_Image, <span class="number">98</span>, <span class="number">255</span>, cv.THRESH_BINARY)</span><br><span class="line">        <span class="keyword">return</span> dst_Image</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Get_Pos(src_img): </li>
+</ul>
+<p>使用plt显示图像，并且利用<code>.ginput(n)</code>获取n个鼠标点击的点的坐标，这样子的好处是，matplotlib可以很容易的放大缩小图像，且坐标轴方向相对使用OpenCv与实际更为接近。</p>
+<ul>
+<li>Get_Image():</li>
+</ul>
+<p>使用OpenCV将图像灰度化然后二值化,便于观察绘制的曲线。</p>
+<h3 id="坐标点的解算："><a href="#坐标点的解算：" class="headerlink" title="坐标点的解算："></a>坐标点的解算：</h3><p>这里直接使用的3阶贝塞尔曲线的方程,解算出各个坐标点</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 解算Bezier方程的系数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Build_Bezier</span><span class="params">(Point_0, Point_1, Point_2, Point_3, t)</span>:</span></span><br><span class="line">    A_0 = (<span class="number">1</span> - t) ** <span class="number">3</span></span><br><span class="line">    A_1 = ((<span class="number">1</span> - t) ** <span class="number">2</span>) * <span class="number">3</span> * t</span><br><span class="line">    A_2 = (t ** <span class="number">2</span>) * (<span class="number">1</span> - t) * <span class="number">3</span></span><br><span class="line">    A_3 = t ** <span class="number">3</span></span><br><span class="line"></span><br><span class="line">    x = Point_0[<span class="number">0</span>] * A_0 + Point_1[<span class="number">0</span>] * A_1 + Point_2[<span class="number">0</span>] * A_2 + Point_3[<span class="number">0</span>] * A_3</span><br><span class="line">    y = Point_0[<span class="number">1</span>] * A_0 + Point_1[<span class="number">1</span>] * A_1 + Point_2[<span class="number">1</span>] * A_2 + Point_3[<span class="number">1</span>] * A_3</span><br><span class="line">    <span class="keyword">return</span> [int(x), int(y)]  <span class="comment"># 坐标转换</span></span><br></pre></td></tr></table></figure>
+<p><code>return [int(x), int(y)]</code>可以根据自己的需要对x， y进行转换之后再返回。</p>
+<h3 id="绘制图像"><a href="#绘制图像" class="headerlink" title="绘制图像"></a>绘制图像</h3><p>此处我绘制了未拟合的坐标点(红色)，已经我们拟合出的路径(绿色)。<br>可见上面的<code>演示图</code></p>
+<h3 id="增加的功能："><a href="#增加的功能：" class="headerlink" title="增加的功能："></a>增加的功能：</h3><p>既然已经生成了理想的运动轨迹，大可再绘制实际的运动轨迹，只需要利用无线串口之类的模块将机器人的运动轨迹实时传回电脑，然后在场地上绘制出轨迹。如<code>演示图</code>中左上角的绿色的，不太和谐的绿色曲线，，emm，，那个只是我作的一个小实验，，随便弄的几个点，然后画在同一张图中这样子。。</p>
+<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>其实吧，，这个程序挺简单的，但是这个至少可以说明，自己完全可以利用程序实现自己的想法了。</p>
+<p><a href="https://github.com/zhangcaocao/robocon2018/tree/master/bezier_Py" target="_blank" rel="noopener">GitHub</a></p>
+<hr>
+<p><a rel="noopener" href="http://creativecommons.org/licenses/by/2.5/cn/" target="_blank"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by/2.5/cn/88x31.png"></a><br>本作品采用<a rel="noopener" href="http://creativecommons.org/licenses/by/2.5/cn/" target="_blank">知识共享署名 2.5 中国大陆许可协议</a>进行许可。欢迎转载，但是请注明来自<a href="http://little-rocket.cn/">little-rocket-blog</a>，并保证转载后文章的完整性。本人保留所有版权相关权利。</p>
+<p>本文链接：<a href="http://little-rocket.cn/posts/d5874726.html">http://little-rocket.cn/posts/d5874726.html</a></p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+    <div class="a2a_kit a2a_default_style">
+    <a class="a2a_dd" href="https://www.addtoany.com/share">Share</a>
+    <span class="a2a_divider"></span>
+    <a class="a2a_button_facebook"></a>
+    <a class="a2a_button_twitter"></a>
+    <a class="a2a_button_google_plus"></a>
+    <a class="a2a_button_sina_weibo"></a>
+    <a class="a2a_button_qzone"></a>
+    <a class="a2a_button_wechat"></a>
+</div>
+<script type="text/javascript" src="//static.addtoany.com/menu/page.js"></script>
+<style>
+    .a2a_menu {
+        border-radius: 4px;
+    }
+    .a2a_menu a {
+        margin: 2px 0;
+        font-size: 14px;
+        line-height: 16px;
+        border-radius: 4px;
+        color: inherit !important;
+        font-family: 'Microsoft Yahei';
+    }
+    #a2apage_dropdown {
+        margin: 10px 0;
+    }
+    .a2a_mini_services {
+        padding: 10px;
+    }
+    a.a2a_i,
+    i.a2a_i {
+        width: 122px;
+        line-height: 16px;
+    }
+    a.a2a_i .a2a_svg,
+    a.a2a_more .a2a_svg {
+        width: 16px;
+        height: 16px;
+        line-height: 16px;
+        vertical-align: top;
+        background-size: 16px;
+    }
+    a.a2a_i {
+        border: none !important;
+    }
+    a.a2a_menu_show_more_less {
+        margin: 0;
+        padding: 10px 0;
+        line-height: 16px;
+    }
+    .a2a_mini_services:after{content:".";display:block;height:0;clear:both;visibility:hidden}
+    .a2a_mini_services{*+height:1%;}
+</style>
+
+</div>
+
+            
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/posts/f1d480e5.html" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">记安装pyspectator填坑记</div>
+        </a>
+    
+</nav>
+
+
+    
+
+
+</article>
+
+
+    
+    
+        <section id="comments">
+	<div id="commentContainer"></div>
+</section>
+    
+
+
+
+
+</section>
+
+            
+            
+
+
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+        <a rel="license" href="http://creativecommons.org/licenses/by/2.5/cn/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by/2.5/cn/88x31.png" /></a><br />本站作品采用<a rel="license" href="http://creativecommons.org/licenses/by/2.5/cn/">知识共享署名 2.5 中国大陆许可协议</a>进行许可。
+            &copy; 最后更新： 2018-04-19 | zhangcaocao<br>
+        
+        <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <span id="busuanzi_container_site_pv">您是第：20<span id="busuanzi_value_site_pv"></span>来到本站的小伙伴</span>
+        <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1272945268'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s22.cnzz.com/z_stat.php%3Fid%3D1272945268%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+        </div>
+    </div>
+
+</footer>
+        
+    
+	<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+	<script src="https://zhangcaocao.github.io/gitment.browser.js"></script>
+	<script>
+		var gitment = new Gitment({
+			owner: 'zhangcaocao',
+			repo: 'My_Blog_Gitment',
+			oauth: {
+				client_id: 'add2fc004407ccb84aeb',
+				client_secret: 'cd82dbaaae9f6a8ca03c8c745fbdf5286aca0cf8',
+			},
+		})
+		gitment.render('commentContainer')
+	</script>
+	
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
