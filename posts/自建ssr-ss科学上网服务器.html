@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+	<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+	
+	<style>
+    .pace .pace-progress {
+    	background: #1e92fb; /*进度条颜色*/
+    	height: 3px;
+    }
+    .pace .pace-progress-inner {
+     	box-shadow: 0 0 10px #1E92FB, 0 0 5px rgb(30, 251, 104); /*阴影颜色*/
+    }
+    .pace .pace-activity {
+    	border-top-color: #1E92FB;	/*上边框颜色*/
+    	border-left-color: #1E92FB;	/*左边框颜色*/
+    }
+  </style>
+
+  
+  
+    
+    <title>自建ssr/ss科学上网服务器 | 一只电工的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="VPS服务器甚至被墙了：是的， 服务器他喵的甚至被墙了，作为一只Google重度依赖者，表示无法科学上网，这日子没法过呀。在这里， 较为详细的总结一下搭建过程，已经服务商的选择。 具体搭建过程：">
+<meta name="keywords" content="科学上网">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自建ssr&#x2F;ss科学上网服务器">
+<meta property="og:url" content="http://little-rocket.cn/posts/自建ssr-ss科学上网服务器.html">
+<meta property="og:site_name" content="一只电工的博客">
+<meta property="og:description" content="VPS服务器甚至被墙了：是的， 服务器他喵的甚至被墙了，作为一只Google重度依赖者，表示无法科学上网，这日子没法过呀。在这里， 较为详细的总结一下搭建过程，已经服务商的选择。 具体搭建过程：">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://image.little-rocket.cn/18_2_15_03.png">
+<meta property="og:updated_time" content="2018-07-05T09:03:29.296Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="自建ssr&#x2F;ss科学上网服务器">
+<meta name="twitter:description" content="VPS服务器甚至被墙了：是的， 服务器他喵的甚至被墙了，作为一只Google重度依赖者，表示无法科学上网，这日子没法过呀。在这里， 较为详细的总结一下搭建过程，已经服务商的选择。 具体搭建过程：">
+<meta name="twitter:image" content="http://image.little-rocket.cn/18_2_15_03.png">
+    
+
+    
+        <link rel="alternate" href="https://github.com/zhangcaocao" title="一只电工的博客" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/./favicon.ico" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+    <link rel="stylesheet" href="/libs/bootstrap/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="/libs/bootstrap/js/bootstrap.min.js"></script>
+    
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+        <script>
+var _hmt = _hmt || [];
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?f5c5837b80bdedb2d88f7d0ca499a918";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+    
+
+
+
+
+    <script src="https://cdn1.lncld.net/static/js/av-min-1.2.1.js"></script>
+    <script>AV.initialize("r22IMUpbMa36EWP2Mn1gokHe-gzGzoHsz", "NB1VyBI2YCzzPW0sIa0Fol3D");</script>
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">一只电工的博客</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/archives">所有的文章</a>
+                
+                    <a class="main-nav-link" href="/tags/博客/">博客优化</a>
+                
+                    <a class="main-nav-link" href="/tags/OpenCvTutorials3-1中文翻译/">OpenCv</a>
+                
+                    <a class="main-nav-link" href="/tags/项目/">项目</a>
+                
+                    <a class="main-nav-link" href="/tags/持续更新/">持续更新</a>
+                
+                    <a class="main-nav-link" href="/about">关于我</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/logo.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/archives">所有的文章</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags/博客/">博客优化</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags/OpenCvTutorials3-1中文翻译/">OpenCv</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags/项目/">项目</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags/持续更新/">持续更新</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于我</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+
+
+              
+
+        
+            <script type='text/javascript'>
+            $('body').append("<style type='text/css'>@media screen and (min-width: 1200px) { #main {margin: auto; width: 76%; display: block; float:none;}}</style>");
+            </script>
+        
+
+            <section id="main"> <article id="post-自建ssr-ss科学上网服务器" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            自建ssr/ss科学上网服务器
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/posts/自建ssr-ss科学上网服务器.html">
+            <time datetime="2018-02-15T13:51:12.000Z" itemprop="datePublished">2018-02-15</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-user"></i>
+        <a class="article-category-link" href="/categories/zhangcaocao/">zhangcaocao</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/科学上网/">科学上网</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+                <div id="toc" class="toc-article">
+                <strong class="toc-title">文章目录</strong>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#VPS服务器甚至被墙了："><span class="toc-number">1.</span> <span class="toc-text">VPS服务器甚至被墙了：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#具体搭建过程："><span class="toc-number">2.</span> <span class="toc-text">具体搭建过程：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#购买服务器："><span class="toc-number">2.1.</span> <span class="toc-text">购买服务器：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#服务商的选择："><span class="toc-number">2.1.1.</span> <span class="toc-text">服务商的选择：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#服务器的选购："><span class="toc-number">2.1.2.</span> <span class="toc-text">服务器的选购：</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#首先是充-10美元："><span class="toc-number">2.1.2.1.</span> <span class="toc-text">首先是充 10美元：</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#然后直接点击右上方的那个-“-”-号，开始选择服务器："><span class="toc-number">2.1.2.2.</span> <span class="toc-text">然后直接点击右上方的那个  “+” 号，开始选择服务器：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SSR服务的安装："><span class="toc-number">2.2.</span> <span class="toc-text">SSR服务的安装：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#本地工具："><span class="toc-number">2.2.1.</span> <span class="toc-text">本地工具：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#安装过程："><span class="toc-number">2.2.2.</span> <span class="toc-text">安装过程：</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#打开Git-运行："><span class="toc-number">2.2.2.1.</span> <span class="toc-text">打开Git,运行：</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#安装SSR软件："><span class="toc-number">2.2.2.2.</span> <span class="toc-text">安装SSR软件：</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#查看SSR状态："><span class="toc-number">2.2.2.3.</span> <span class="toc-text">查看SSR状态：</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#安装SSR谷歌BBR加速："><span class="toc-number">2.2.3.</span> <span class="toc-text">安装SSR谷歌BBR加速：</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#依次运行下面的命令："><span class="toc-number">2.2.3.1.</span> <span class="toc-text">依次运行下面的命令：</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#重启服务器"><span class="toc-number">2.2.3.2.</span> <span class="toc-text">重启服务器.</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SSR客户端下载："><span class="toc-number">3.</span> <span class="toc-text">SSR客户端下载：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考链接："><span class="toc-number">4.</span> <span class="toc-text">参考链接：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#最后，-科学上网。。"><span class="toc-number">5.</span> <span class="toc-text">最后， 科学上网。。</span></a></li></ol>
+                </div>
+            
+            <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<p><script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-59cb1e1aae525c27"></script></p>
+<h3 id="VPS服务器甚至被墙了："><a href="#VPS服务器甚至被墙了：" class="headerlink" title="VPS服务器甚至被墙了："></a>VPS服务器甚至被墙了：</h3><p>是的， 服务器他喵的甚至被墙了，作为一只<code>Google</code>重度依赖者，表示无法科学上网，这日子没法过呀。<br>在这里， 较为详细的总结一下搭建过程，已经服务商的选择。</p>
+<h3 id="具体搭建过程："><a href="#具体搭建过程：" class="headerlink" title="具体搭建过程："></a>具体搭建过程：</h3><a id="more"></a>
+<h4 id="购买服务器："><a href="#购买服务器：" class="headerlink" title="购买服务器："></a>购买服务器：</h4><h5 id="服务商的选择："><a href="#服务商的选择：" class="headerlink" title="服务商的选择："></a>服务商的选择：</h5><p>首先， 选国外的不用说。然后，那个，服务器的地址，尽量别选日本，美国洛杉矶那些 “很火的地方”，因为那些地方能够买到可以使用的服务器的概率不大，，啊，你懂我意思吧。<br><img src="http://image.little-rocket.cn/18_2_15_01.jpg" alt="表情包"></p>
+<p>我选择的是这个服务器商，可以点击<a href="https://www.vultr.com/?ref=7300823" target="_blank" rel="noopener">链接</a>注册；<br><a href="https://www.vultr.com/?ref=7300823" target="_blank" rel="noopener">Vultr.com</a><br>优点：</p>
+<ul>
+<li>这个服务商最大的优点就是它的计费方式：</li>
+</ul>
+<p>就是说， 它这个类似于网吧开机， 按照的是你创建服务器之后的时间来计费的， 注意是创建服务器， 不是服务器开机运行的时间。这样子的好处就是，若IP被墙了，只需要销毁掉之前那个重新开一个就是了。<br>而且，可以在你不需要的时候，销毁掉你的服务器，这样也就停止扣费了。</p>
+<ul>
+<li>支持  <code>Alipay</code> 也就是支付宝支付。</li>
+</ul>
+<h5 id="服务器的选购："><a href="#服务器的选购：" class="headerlink" title="服务器的选购："></a>服务器的选购：</h5><h6 id="首先是充-10美元："><a href="#首先是充-10美元：" class="headerlink" title="首先是充 10美元："></a>首先是充 10美元：</h6><p><img src="http://image.little-rocket.cn/18_2_15_02.jpg" alt="Alipay"></p>
+<h6 id="然后直接点击右上方的那个-“-”-号，开始选择服务器："><a href="#然后直接点击右上方的那个-“-”-号，开始选择服务器：" class="headerlink" title="然后直接点击右上方的那个  “+” 号，开始选择服务器："></a>然后直接点击右上方的那个  “+” 号，开始选择服务器：</h6><p><img src="http://image.little-rocket.cn/18_2_15_03.png" alt="选择服务器"><br>这里我选择的是 <strong>“Eueope”</strong> -&gt; <strong>“Frankfurt”</strong> -&gt; <strong>“Ubuntu 16.04 x64”</strong><br>然后几个选项，自己有需要就选吧，不选也可以。</p>
+<p><img src="http://image.little-rocket.cn/18_2_15_04.png" alt="选择完毕"><br>点击 <strong> deploy Now</strong>就开始创建了</p>
+<h4 id="SSR服务的安装："><a href="#SSR服务的安装：" class="headerlink" title="SSR服务的安装："></a>SSR服务的安装：</h4><h5 id="本地工具："><a href="#本地工具：" class="headerlink" title="本地工具："></a>本地工具：</h5><ul>
+<li>Git for win</li>
+</ul>
+<h5 id="安装过程："><a href="#安装过程：" class="headerlink" title="安装过程："></a>安装过程：</h5><h6 id="打开Git-运行："><a href="#打开Git-运行：" class="headerlink" title="打开Git,运行："></a>打开Git,运行：</h6><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh root@ip</span><br></pre></td></tr></table></figure>
+<p>输入密码，等待连接成功</p>
+<h6 id="安装SSR软件："><a href="#安装SSR软件：" class="headerlink" title="安装SSR软件："></a>安装SSR软件：</h6><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -N --no-check-certificate https:<span class="comment">//softs.fun/Bash/ssr.sh &amp;&amp; chmod +x ssr.sh &amp;&amp; bash ssr.sh</span></span><br></pre></td></tr></table></figure>
+<p>然后，，惊了，设置是中文的，所以直接点击数字1， 开始安装</p>
+<ul>
+<li>自己设置密码， 端口号默认就行。</li>
+<li>加密选择 、协议插件、随意就好。我选择的是：<code>caes-256-cfb</code> +  <code>auth_sha1_v4</code></li>
+<li>是否兼容原版， 按照自己需求选择 <code>y/n</code>。</li>
+<li>混淆插件： 随意，我选择的是 <code>plain</code>.</li>
+<li>然后是一些设备数，端口数限速什么的，，按照需求自己设置吧。</li>
+</ul>
+<p>稍等片刻，安装完成。</p>
+<h6 id="查看SSR状态："><a href="#查看SSR状态：" class="headerlink" title="查看SSR状态："></a>查看SSR状态：</h6><p>输入：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash ssr.sh</span><br></pre></td></tr></table></figure></p>
+<p>即可输入相应的选项，查看相关信息了。<br><img src="http://image.little-rocket.cn/18_2_15_05.png" alt="管理面板"></p>
+<h5 id="安装SSR谷歌BBR加速："><a href="#安装SSR谷歌BBR加速：" class="headerlink" title="安装SSR谷歌BBR加速："></a>安装SSR谷歌BBR加速：</h5><h6 id="依次运行下面的命令："><a href="#依次运行下面的命令：" class="headerlink" title="依次运行下面的命令："></a>依次运行下面的命令：</h6><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wget --no-check-certificate https:<span class="comment">//github.com/teddysun/across/raw/master/bbr.sh</span></span><br><span class="line"></span><br><span class="line">chmod +x bbr.sh</span><br><span class="line"></span><br><span class="line">./bbr.sh</span><br></pre></td></tr></table></figure>
+<h6 id="重启服务器"><a href="#重启服务器" class="headerlink" title="重启服务器."></a>重启服务器.</h6><h3 id="SSR客户端下载："><a href="#SSR客户端下载：" class="headerlink" title="SSR客户端下载："></a>SSR客户端下载：</h3><p>Github上的一个项目， 提供 linux， Windows， 安卓， MacOs客户端。<br>地址：<a href="https://github.com/shadowsocksr-backup" target="_blank" rel="noopener">Github</a></p>
+<h3 id="参考链接："><a href="#参考链接：" class="headerlink" title="参考链接："></a>参考链接：</h3><ul>
+<li><a href="https://github.com/Alvin9999/new-pac/wiki/%E8%87%AA%E5%BB%BAss%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%95%99%E7%A8%8B" target="_blank" rel="noopener">Alvin9999_Github</a></li>
+</ul>
+<h3 id="最后，-科学上网。。"><a href="#最后，-科学上网。。" class="headerlink" title="最后， 科学上网。。"></a>最后， 科学上网。。</h3><hr>
+<p><a rel="noopener" href="http://creativecommons.org/licenses/by/2.5/cn/" target="_blank"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by/2.5/cn/88x31.png"></a><br>本作品采用<a rel="noopener" href="http://creativecommons.org/licenses/by/2.5/cn/" target="_blank">知识共享署名 2.5 中国大陆许可协议</a>进行许可。欢迎转载，但是请注明来自<a href="http://little-rocket.cn/">little-rocket-blog</a>，并保证转载后文章的完整性。本人保留所有版权相关权利。</p>
+<p>本文链接：<a href="http://little-rocket.cn/posts/自建ssr-ss科学上网服务器.html">http://little-rocket.cn/posts/自建ssr-ss科学上网服务器.html</a></p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+    <div class="a2a_kit a2a_default_style">
+    <a class="a2a_dd" href="https://www.addtoany.com/share">Share</a>
+    <span class="a2a_divider"></span>
+    <a class="a2a_button_facebook"></a>
+    <a class="a2a_button_twitter"></a>
+    <a class="a2a_button_google_plus"></a>
+    <a class="a2a_button_sina_weibo"></a>
+    <a class="a2a_button_qzone"></a>
+    <a class="a2a_button_wechat"></a>
+</div>
+<script type="text/javascript" src="//static.addtoany.com/menu/page.js"></script>
+<style>
+    .a2a_menu {
+        border-radius: 4px;
+    }
+    .a2a_menu a {
+        margin: 2px 0;
+        font-size: 14px;
+        line-height: 16px;
+        border-radius: 4px;
+        color: inherit !important;
+        font-family: 'Microsoft Yahei';
+    }
+    #a2apage_dropdown {
+        margin: 10px 0;
+    }
+    .a2a_mini_services {
+        padding: 10px;
+    }
+    a.a2a_i,
+    i.a2a_i {
+        width: 122px;
+        line-height: 16px;
+    }
+    a.a2a_i .a2a_svg,
+    a.a2a_more .a2a_svg {
+        width: 16px;
+        height: 16px;
+        line-height: 16px;
+        vertical-align: top;
+        background-size: 16px;
+    }
+    a.a2a_i {
+        border: none !important;
+    }
+    a.a2a_menu_show_more_less {
+        margin: 0;
+        padding: 10px 0;
+        line-height: 16px;
+    }
+    .a2a_mini_services:after{content:".";display:block;height:0;clear:both;visibility:hidden}
+    .a2a_mini_services{*+height:1%;}
+</style>
+
+</div>
+
+            
+    
+        <a href="http://little-rocket.cn/posts/自建ssr-ss科学上网服务器.html#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://little-rocket.cn/posts/自建ssr-ss科学上网服务器.html">评论</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/posts/给默认不支持add-this的博客添加add-this分享服务.html" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    给默认不支持Add This的博客添加Add This分享服务
+                
+            </div>
+        </a>
+    
+    
+        <a href="/posts/迁移自己搭建在虚拟主机上的hexo-博客.html" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">迁移自己搭建在虚拟主机上的hexo 博客</div>
+        </a>
+    
+</nav>
+
+
+    
+
+
+</article>
+
+
+    
+    
+        <section id="comments">
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+</section>
+    
+
+
+
+
+</section>
+
+            
+            
+
+
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+        <a rel="license" href="http://creativecommons.org/licenses/by/2.5/cn/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by/2.5/cn/88x31.png" /></a><br />本站作品采用<a rel="license" href="http://creativecommons.org/licenses/by/2.5/cn/">知识共享署名 2.5 中国大陆许可协议</a>进行许可。
+            &copy; 最后更新： 2018-07-15 | zhangcaocao<br>
+        
+        <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <span id="busuanzi_container_site_pv">您是第：20<span id="busuanzi_value_site_pv"></span>来到本站的小伙伴</span>
+        <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1272945268'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s22.cnzz.com/z_stat.php%3Fid%3D1272945268%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+        </div>
+    </div>
+
+</footer>
+        
+    
+    <script>
+    var disqus_config = function () {
+        
+            this.page.url = 'http://little-rocket.cn/posts/自建ssr-ss科学上网服务器.html';
+        
+        this.page.identifier = '自建ssr-ss科学上网服务器';
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'oez-blog-1' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
