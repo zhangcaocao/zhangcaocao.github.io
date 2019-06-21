@@ -6,15 +6,28 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives | Hexo</title>
+  <title>Location Overview | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/archives/page/2/index.html">
+  <meta name="description" content="Hello 大家好，今天给大家带来一份关于定位的概述入门性质的文章，看完这篇文章，你将了解Location的意义，以及一个最基本1D直方图滤波的Demo，如果你只是需要源代码，请直接往下翻！ 一、Location的意义在机器人导航任务中，location 可以告诉机器人目前位置，以方便闭环控制或者轨迹规划。一般情况下，Location 可以通过GPS，WIFI 等方式完成。GPS的定位精度在3.5">
+<meta name="keywords" content="Location">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Location Overview">
+<meta property="og:url" content="http://yoursite.com/2019/06/21/20181004 Location Overview/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Hello 大家好，今天给大家带来一份关于定位的概述入门性质的文章，看完这篇文章，你将了解Location的意义，以及一个最基本1D直方图滤波的Demo，如果你只是需要源代码，请直接往下翻！ 一、Location的意义在机器人导航任务中，location 可以告诉机器人目前位置，以方便闭环控制或者轨迹规划。一般情况下，Location 可以通过GPS，WIFI 等方式完成。GPS的定位精度在3.5">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://image.little-rocket.cn/lidar.png">
+<meta property="og:image" content="http://image.little-rocket.cn/numbered_grid.png">
+<meta property="og:image" content="http://image.little-rocket.cn/motion_1.png">
+<meta property="og:image" content="http://image.little-rocket.cn/robot_sensing.png">
+<meta property="og:image" content="http://image.little-rocket.cn/uncertain_motion.png">
+<meta property="og:image" content="http://image.little-rocket.cn/Move_once.gif">
+<meta property="og:image" content="http://image.little-rocket.cn/Peek%202018-10-09%2004-10.gif">
+<meta property="og:updated_time" content="2019-06-21T16:16:04.659Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="Location Overview">
+<meta name="twitter:description" content="Hello 大家好，今天给大家带来一份关于定位的概述入门性质的文章，看完这篇文章，你将了解Location的意义，以及一个最基本1D直方图滤波的Demo，如果你只是需要源代码，请直接往下翻！ 一、Location的意义在机器人导航任务中，location 可以告诉机器人目前位置，以方便闭环控制或者轨迹规划。一般情况下，Location 可以通过GPS，WIFI 等方式完成。GPS的定位精度在3.5">
+<meta name="twitter:image" content="http://image.little-rocket.cn/lidar.png">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -150,394 +163,245 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-20181004 Location Overview" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Location Overview
+    </h1>
+  
+
+        
+        <a href="/2019/06/21/20181004 Location Overview/" class="archive-article-date">
+  	<time datetime="2019-06-21T13:58:39.631Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-21</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Hello 大家好，今天给大家带来一份关于定位的概述入门性质的文章，看完这篇文章，你将了解Location的意义，以及一个最基本1D直方图滤波的Demo，如果你只是需要源代码，请直接往下翻！</p>
+<h2 id="一、Location的意义"><a href="#一、Location的意义" class="headerlink" title="一、Location的意义"></a>一、Location的意义</h2><p>在机器人导航任务中，location 可以告诉机器人目前位置，以方便闭环控制或者轨迹规划。一般情况下，Location 可以通过<br>GPS，WIFI 等方式完成。GPS的定位精度在3.5米左右，WIFI则大于10米。对于机器人、无人汽车而言，这样的精度显然是不可接受的。激光雷达在10m的距离可以达到cm的精度，双目视觉在4m可以达到10cm的精度，与GPS相比有一定优势，此外，这种非在线的定位方式可以在室内使用。</p>
+<p>Location 最大的难度来自于测量误差。里程计的计数误差，测量与里程计的不统一等。所以我们需要一种算法，能够较高精度的确定机器人的位姿。</p>
+<p><img src="http://image.little-rocket.cn/lidar.png" alt></p>
+<p>如上图所示，那些环境的网格是一个个离散的单元，将连续的环境离散化，面对的是一个离散的概率分布，这样子就意味着机器人可能处于的位置总数是有限的。下面我们将实例讲解一个最基本的基于一维空间的网格Location的直方图滤波算法，以初步定性的理解机器人Location算法。</p>
+<blockquote>
+<p>下面的列子Udacity上的课程 <a href="https://cn.udacity.com/course/artificial-intelligence-for-robotics–cs373/" target="_blank" rel="noopener">https://cn.udacity.com/course/artificial-intelligence-for-robotics–cs373/</a> </p>
+</blockquote>
+ <a id="more"></a> 
+
+<h2 id="二、直方图滤波"><a href="#二、直方图滤波" class="headerlink" title="二、直方图滤波"></a>二、直方图滤波</h2><h3 id="定义一个一维的网格空间"><a href="#定义一个一维的网格空间" class="headerlink" title="定义一个一维的网格空间"></a>定义一个一维的网格空间</h3><p>首先我们定义一个一维的网格空间，如下图所示, 机器人就在这里纠结自己处于哪一个格子;</p>
+<p><img src="http://image.little-rocket.cn/numbered_grid.png" alt></p>
+<h3 id="初始化概率分布"><a href="#初始化概率分布" class="headerlink" title="初始化概率分布"></a>初始化概率分布</h3><p>接着我们需要初始化相应的概率分布：</p>
+<h4 id="初始概率"><a href="#初始概率" class="headerlink" title="初始概率"></a>初始概率</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">p=[<span class="number">0.2</span>, <span class="number">0.2</span>, <span class="number">0.2</span>, <span class="number">0.2</span>, <span class="number">0.2</span>]</span><br><span class="line">world=[<span class="string">'green'</span>, <span class="string">'red'</span>, <span class="string">'red'</span>, <span class="string">'green'</span>, <span class="string">'green'</span>]</span><br></pre></td></tr></table></figure>
+
+<p>我们首先初始化没一个网格的概率都占 <code>0.2</code>的均匀分布，定义每一个网格的颜色，这样子这个一维的网格地图就初始化完毕了。</p>
+<p>接着我们需要加入传感器的信息，以及机器人运动概率信息。</p>
+<h4 id="加入传感器与运动"><a href="#加入传感器与运动" class="headerlink" title="加入传感器与运动"></a>加入传感器与运动</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">measurements = [<span class="string">'red'</span>, <span class="string">'red'</span>] </span><br><span class="line">motions = [<span class="number">1</span>,<span class="number">1</span>]</span><br><span class="line">pHit    = <span class="number">0.6</span></span><br><span class="line">pMiss   = <span class="number">0.2</span></span><br><span class="line">pExact      = <span class="number">0.8</span></span><br><span class="line">pOvershoot  = <span class="number">0.1</span></span><br><span class="line">pUndershoot = <span class="number">0.1</span></span><br></pre></td></tr></table></figure>
+
+<p>在机器人运动过程中，我们首先定义机器人的运动模式 <code>motions</code> 分别是 -1 和 1,即移动方向左（-）右（+），假定格子是循环的(首尾联通); </p>
+<p><img src="http://image.little-rocket.cn/motion_1.png" alt></p>
+<p>接着我们定义<code>pHit</code>和<code>pMiss</code>，他们分别代表的是实际值与测量值相同的概率和不同的概率，这个怎么理解喃，我们来看一下下面这张图：</p>
+<p><img src="http://image.little-rocket.cn/robot_sensing.png" alt></p>
+<p>如图所示，机器人测量到的信息是<code>red</code>， 真实的颜色分别是 <code>[&#39;green&#39;, &#39;red&#39;, &#39;red&#39;, &#39;green&#39;, &#39;green&#39;]</code>，那么机器人处于各个位置的概率就应该这样计算，首先如果处于第一个网格，那么表示机器人检测错了，则处于一个网格的值应该为：<code>0.2 * 0.2 = 0.04</code>，那么同理可得，若处于第二个网格，就表明检测对了，则相应的网格值为：<code>0.6 * 0.2 = 0.12</code>。
+最终得到下面的数值分布：<br><code>[&#39;0.04&#39;, &#39;0.12&#39;, &#39;0.12&#39;, &#39;0.04&#39;, &#39;0.04&#39;, &#39;0.04&#39;]</code>;</p>
+<p><strong>注意</strong>,这里还不是概率分布，因为和不等于1,我们需要进行归一化处理，需要知道具体的代码实现请继续往下看。</p>
+<p>然后，我们定义了机器人自己运动正确到达每个位置的概率, 即使我们已经可以预测他到达的位置，但是实际运动总是存在误差，可能是轮子打滑，遇到障碍物，中途没电，等等，因此我们有不足/超调的三种情况：</p>
+<p><img src="http://image.little-rocket.cn/uncertain_motion.png" alt></p>
+<ul>
+<li>pExact      = 0.8 </li>
+<li>pOvershoot  = 0.1 </li>
+<li>pUndershoot = 0.1 </li>
+</ul>
+<p>就这样我们定义了所有的概率分布，接着让我们实现具体的算法吧。</p>
+<p>算法主体包含两个部分，测量值的更新和运动更新，最终得到各个网格的概率分布。</p>
+<h3 id="测量值更新"><a href="#测量值更新" class="headerlink" title="测量值更新"></a>测量值更新</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#  update measurement</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sense</span><span class="params">(p, Z)</span>:</span></span><br><span class="line">    q=[]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(p)):</span><br><span class="line">        hit = (Z == world[i])</span><br><span class="line">        q.append(p[i] * (hit * pHit + (<span class="number">1</span>-hit) * pMiss))</span><br><span class="line">    s = sum(q)</span><br><span class="line">    <span class="comment"># Normalized Sense</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(q)):</span><br><span class="line">        q[i] = q[i] / s</span><br><span class="line">    <span class="keyword">return</span> q</span><br></pre></td></tr></table></figure>
+
+<p>我们首先需要获取所有的测量值： <code>for i in range(len(p)):</code>，之后分别与实际的<code>world[i]</code>比较，之后乘上相应的<code>pHit / pMiss</code>。
+之后通过<code>sum</code>函数获取总和用于皈依化处理，得到测量的概率分布。</p>
+<h3 id="运动更新"><a href="#运动更新" class="headerlink" title="运动更新"></a>运动更新</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">move</span><span class="params">(p, U)</span>:</span></span><br><span class="line">    q = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(p)):</span><br><span class="line">        s = pExact * p[(i-U) % len(p)]</span><br><span class="line">        s = s + pOvershoot * p[(i-U<span class="number">-1</span>) % len(p)]</span><br><span class="line">        s = s + pUndershoot * p[(i-U+<span class="number">1</span>) % len(p)]</span><br><span class="line">        q.append(s)</span><br><span class="line">    <span class="keyword">return</span> q</span><br></pre></td></tr></table></figure>
+
+<p>我们通过<code>len(p)</code>获取运动的次数，之后分别计算正确/超调/不足的概率，并且求和以得到运动之后的概率分布。</p>
+<h3 id="可视化："><a href="#可视化：" class="headerlink" title="可视化："></a>可视化：</h3><p>然后我们需要可视化我们的得到的分布：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">display_map</span><span class="params">(grid, bar_width=<span class="number">1</span>)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(len(grid) &gt; <span class="number">0</span>):</span><br><span class="line">        x_labels = range(len(grid))</span><br><span class="line">        plt.bar(x_labels, height=grid, width=bar_width, color=<span class="string">'b'</span>)</span><br><span class="line">        plt.xlabel(<span class="string">'Grid Cell'</span>)</span><br><span class="line">        plt.ylabel(<span class="string">'Probability'</span>)</span><br><span class="line">        plt.ylim(<span class="number">0</span>, <span class="number">1</span>) <span class="comment"># range of 0-1 for probability values </span></span><br><span class="line">        plt.title(<span class="string">'Probability of the robot being at each cell in the grid'</span>)</span><br><span class="line">        plt.xticks(np.arange(min(x_labels), max(x_labels)+<span class="number">1</span>, <span class="number">1</span>))</span><br><span class="line">        plt.show()</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(<span class="string">'Grid is empty'</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://image.little-rocket.cn/Move_once.gif" alt></p>
+<p>通过python的<code>matplotlib</code>库可以轻松的实现可视化，我们可以通过定义如下的<code>main</code>函数，整合上述的工作：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">global</span> p</span><br><span class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> range(len(measurements)):</span><br><span class="line">        p = sense(p, measurements[k])</span><br><span class="line">        </span><br><span class="line">        p = move(p, motions[k])</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">print</span> (p)   </span><br><span class="line">    display_map(p)   </span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+
+<p>我们甚至可以开启matplotlib实时显示功能，观察如果我们运动1000次会有什么结果：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">global</span> p</span><br><span class="line">    plt.ion()</span><br><span class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> range(len(measurements)):</span><br><span class="line">        p = sense(p, measurements[k])</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1000</span>):</span><br><span class="line">            p = move(p, motions[k])</span><br><span class="line">            plt.pause(<span class="number">0.05</span>)</span><br><span class="line">            display_map(p, <span class="number">0.9</span>)</span><br><span class="line">    <span class="keyword">print</span> (p)</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://image.little-rocket.cn/Peek%202018-10-09%2004-10.gif" alt></p>
+<h2 id="三、总结一下"><a href="#三、总结一下" class="headerlink" title="三、总结一下"></a>三、总结一下</h2><p>通过今天的这篇文章，我们介绍了一个最基本用于机器人定位的算法模型，并且使用结合了<code>Python</code>与<code>概率论</code>的只是具体实现了它，别小看这个算法，他可是自动驾驶汽车定位的核心思想！<br>如果这篇文章帮助到了你，，请务必分享！！</p>
+<h2 id="四、源代码获取"><a href="#四、源代码获取" class="headerlink" title="四、源代码获取"></a>四、源代码获取</h2><p>请在下面留言邮箱或者关注公众号后台回复邮箱即可。</p>
+<blockquote>
+<p>不足之处，敬请斧正; 若你觉得文章还不错，请关注微信公众号“SLAM 技术交流”继续支持我们，笔芯：D。</p>
+</blockquote>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/21/181016在机器人电子产品中有用的资源，项目和产品列表/" class="archive-article-date">
-  	<time datetime="2019-06-21T13:58:39.561Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/21/181016在机器人电子产品中有用的资源，项目和产品列表/">在机器人电子产品中有用的资源，项目和产品列表</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">iopen-source</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Location</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/06/21/20181004 Location Overview/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/21/180911视觉里程计和视觉SLAM 概述[6]/" class="archive-article-date">
-  	<time datetime="2019-06-21T13:58:39.552Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-21</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2019/06/21/20181009 基于OpenCv的实用的车道线检测方案/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          基于OpenCv车道线检测的实用方案
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/06/21/20181004 A star 算法介绍与代码实现/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">A star 算法介绍与可视化代码实现</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/21/180911视觉里程计和视觉SLAM 概述[6]/">视觉里程计和视觉SLAM 概述[6]</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">iopen-source</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、Location的意义"><span class="toc-number">1.</span> <span class="toc-text">一、Location的意义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、直方图滤波"><span class="toc-number">2.</span> <span class="toc-text">二、直方图滤波</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义一个一维的网格空间"><span class="toc-number">2.1.</span> <span class="toc-text">定义一个一维的网格空间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#初始化概率分布"><span class="toc-number">2.2.</span> <span class="toc-text">初始化概率分布</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#初始概率"><span class="toc-number">2.2.1.</span> <span class="toc-text">初始概率</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#加入传感器与运动"><span class="toc-number">2.2.2.</span> <span class="toc-text">加入传感器与运动</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#测量值更新"><span class="toc-number">2.3.</span> <span class="toc-text">测量值更新</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#运动更新"><span class="toc-number">2.4.</span> <span class="toc-text">运动更新</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#可视化："><span class="toc-number">2.5.</span> <span class="toc-text">可视化：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、总结一下"><span class="toc-number">3.</span> <span class="toc-text">三、总结一下</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、源代码获取"><span class="toc-number">4.</span> <span class="toc-text">四、源代码获取</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/21/180910视觉里程计和视觉SLAM 概述[5]/" class="archive-article-date">
-  	<time datetime="2019-06-21T13:58:39.543Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-21</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/21/180910视觉里程计和视觉SLAM 概述[5]/">视觉里程计和视觉SLAM 概述[5]</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">iopen-source</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/21/180908视觉里程计和视觉SLAM 概述[4]/" class="archive-article-date">
-  	<time datetime="2019-06-21T13:58:39.530Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/21/180908视觉里程计和视觉SLAM 概述[4]/">视觉里程计和视觉SLAM 概述[4]</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">iopen-source</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/21/180903[iopen source] 推荐一款开源的实用的串口调试助手/" class="archive-article-date">
-  	<time datetime="2019-06-21T13:58:39.517Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/21/180903[iopen source] 推荐一款开源的实用的串口调试助手/">【iopen source】推荐一款的实用的串口调试助手</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">iopen-source</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/21/180902视觉里程计和视觉SLAM 概述[3]/" class="archive-article-date">
-  	<time datetime="2019-06-21T13:58:39.511Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/21/180902视觉里程计和视觉SLAM 概述[3]/">180901视觉里程计和视觉SLAM 概述[3]</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">视觉SLAM</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/21/180902视觉里程计和视觉SLAM 概述[2]/" class="archive-article-date">
-  	<time datetime="2019-06-21T13:58:39.504Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/21/180902视觉里程计和视觉SLAM 概述[2]/">180901视觉里程计和视觉SLAM 概述[2]</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">视觉SLAM</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/21/180901视觉里程计和视觉SLAM 概述[1]/" class="archive-article-date">
-  	<time datetime="2019-06-21T13:58:39.499Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/21/180901视觉里程计和视觉SLAM 概述[1]/">180901视觉里程计和视觉SLAM 概述[1]</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">视觉SLAM</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/21/20190305 动态窗口算法运动规划/" class="archive-article-date">
-  	<time datetime="2019-06-21T13:58:39.487Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/21/20190305 动态窗口算法运动规划/">基于一维网格地图的直方图滤波算法</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">pathplan</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/21/hello-world/" class="archive-article-date">
-  	<time datetime="2019-06-21T05:41:36.724Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/21/hello-world/">Hello World</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/">&laquo; Prev</a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span>
-    </nav>
   
 
 
@@ -561,8 +425,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,

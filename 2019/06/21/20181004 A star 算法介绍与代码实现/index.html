@@ -6,15 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives | Hexo</title>
+  <title>A star 算法介绍与可视化代码实现 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/archives/page/2/index.html">
+  <meta name="description" content="A star 算法介绍与可视化代码实现今天给大家带来的是寻路算法中常用的一个算法：A star。阅读今天的这篇文章，你将了解A star算法的基本原理，在文章的后半部分，你将学到使用Python的matplotlib进行可视化模拟A star 算法的寻路过程。  如果你只需要源代码，请直接往下翻。">
+<meta name="keywords" content="pathplan">
+<meta property="og:type" content="article">
+<meta property="og:title" content="A star 算法介绍与可视化代码实现">
+<meta property="og:url" content="http://yoursite.com/2019/06/21/20181004 A star 算法介绍与代码实现/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="A star 算法介绍与可视化代码实现今天给大家带来的是寻路算法中常用的一个算法：A star。阅读今天的这篇文章，你将了解A star算法的基本原理，在文章的后半部分，你将学到使用Python的matplotlib进行可视化模拟A star 算法的寻路过程。  如果你只需要源代码，请直接往下翻。">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://image.little-rocket.cn/Astar_Demo.png">
+<meta property="og:image" content="http://image.little-rocket.cn/Obstacles.png">
+<meta property="og:image" content="http://image.little-rocket.cn/Astar_Demo.png">
+<meta property="og:updated_time" content="2019-06-21T16:15:57.797Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="A star 算法介绍与可视化代码实现">
+<meta name="twitter:description" content="A star 算法介绍与可视化代码实现今天给大家带来的是寻路算法中常用的一个算法：A star。阅读今天的这篇文章，你将了解A star算法的基本原理，在文章的后半部分，你将学到使用Python的matplotlib进行可视化模拟A star 算法的寻路过程。  如果你只需要源代码，请直接往下翻。">
+<meta name="twitter:image" content="http://image.little-rocket.cn/Astar_Demo.png">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -150,340 +159,134 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-20181004 A star 算法介绍与代码实现" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      A star 算法介绍与可视化代码实现
+    </h1>
+  
+
+        
+        <a href="/2019/06/21/20181004 A star 算法介绍与代码实现/" class="archive-article-date">
+  	<time datetime="2019-06-21T13:58:39.614Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-21</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="A-star-算法介绍与可视化代码实现"><a href="#A-star-算法介绍与可视化代码实现" class="headerlink" title="A star 算法介绍与可视化代码实现"></a>A star 算法介绍与可视化代码实现</h2><p>今天给大家带来的是寻路算法中常用的一个算法：A star。阅读今天的这篇文章，你将了解A star算法的基本原理，在文章的后半部分，你将学到使用Python的matplotlib进行可视化模拟A star 算法的寻路过程。</p>
+<p><img src="http://image.little-rocket.cn/Astar_Demo.png" alt="A star Demo"></p>
+<p>如果你只需要源代码，请直接往下翻。</p>
+ <a id="more"></a> 
+
+<h3 id="A-star-算法介绍"><a href="#A-star-算法介绍" class="headerlink" title="A star 算法介绍"></a>A star 算法介绍</h3><p>A star 算法是一种在图形平面上，有多个节点的路径，求出最低成本的算法。该算法综合了Best-First Search和Dijkstra算法的优点：在进行启发式搜索提高算法效率的同时，可以保证找到一条基于评估函数的最优路径。</p>
+<p>在此算法中，g(n)表示从起点到任意顶点n的实际距离，h(n)表示任意顶点n到目标顶点的估算距离（根据所采用的评估函数的不同而变化），那么A*算法的估算函数为：</p>
+<p>f(n)=g(n)+h(n)</p>
+<p>由以上公式可以得到：</p>
+<ul>
+<li><p>如果g(n)为0，即只计算任意顶点n到目标的评估函数h(n)，而不计算起点到顶点n的距离，则算法转化为使用贪心策略的 <code>Best-First Search</code>，速度最快，但可能得不出最优解；</p>
+</li>
+<li><p>如果 h(n)不高于顶点n到目标顶点的实际距离，则一定可以求出最优解，而且h(n)越小，需要计算的节点越多，算法效率越低，常见的评估函数有——欧几里得距离、曼哈顿距离、切比雪夫距离；</p>
+</li>
+<li><p>如果h(n)为0，即只需求出起点到任意顶点 n的最短路径g(n)，而不计算任何评估函数h(n)，则转化为单源最短路径问题，即<a href="https://zh.wikipedia.org/wiki/Dijkstra%E7%AE%97%E6%B3%95" target="_blank" rel="noopener">Dijkstra</a>算法，此时需要计算最多的定点；</p>
+</li>
+</ul>
+<p>关于 A star算法更加详尽的解释，可以参考文章下面的参考链接，此处就不再进行过多的叙述（强烈推荐<a href="https://www.cnblogs.com/zhoug2020/p/3468167.html" target="_blank" rel="noopener">生动的寻路猫</a>这篇博客）。</p>
+<h3 id="可视化代码实现"><a href="#可视化代码实现" class="headerlink" title="可视化代码实现"></a>可视化代码实现</h3><h4 id="导入所需要的包"><a href="#导入所需要的包" class="headerlink" title="导入所需要的包"></a>导入所需要的包</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> math</span><br></pre></td></tr></table></figure>
+
+<p>matplotlib是一个python的2D绘图库，可以很轻易的绘制优美的图表。在这个工程中，我们将使用它来实时的可视化A star寻路算法的寻路过程。</p>
+<h4 id="创建我们的节点类"><a href="#创建我们的节点类" class="headerlink" title="创建我们的节点类"></a>创建我们的节点类</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, x, y, cost, pind)</span>:</span></span><br><span class="line">        self.x = x</span><br><span class="line">        self.y = y</span><br><span class="line">        self.cost = cost</span><br><span class="line">        self.pind = pind</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> str(self.x) + <span class="string">","</span> + str(self.y) + <span class="string">","</span> + str(self.cost) + <span class="string">","</span> + str(self.pind)</span><br></pre></td></tr></table></figure>
+
+<p>我们这个工程是使用A star算法在2D网格图中进行路径规划，因此首先我们需要构建一个<code>class</code>用以表示构成网格地图的每一个节点。<br>接着我们需要设定障碍物节点的集合，然后计算出网格地图。</p>
+<h4 id="设置障碍物"><a href="#设置障碍物" class="headerlink" title="设置障碍物"></a>设置障碍物</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Create the Obstacles node list</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">60</span>):</span><br><span class="line">    ox.append(i)</span><br><span class="line">    oy.append(<span class="number">0.0</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">60</span>):</span><br><span class="line">    ox.append(<span class="number">60.0</span>)</span><br><span class="line">    oy.append(i)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">61</span>):</span><br><span class="line">    ox.append(i)</span><br><span class="line">    oy.append(<span class="number">60.0</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">61</span>):</span><br><span class="line">    ox.append(<span class="number">0.0</span>)</span><br><span class="line">    oy.append(i)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">40</span>):</span><br><span class="line">    ox.append(<span class="number">20.0</span>)</span><br><span class="line">    oy.append(i)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">40</span>):</span><br><span class="line">    ox.append(<span class="number">40.0</span>)</span><br><span class="line">    oy.append(<span class="number">60.0</span> - i)</span><br></pre></td></tr></table></figure>
+
+<p>ox，oy分别表示障碍物（Obstacles）的位置坐标，最终生成的障碍物如下图所示：</p>
+<p><img src="http://image.little-rocket.cn/Obstacles.png" alt="Obstacles"></p>
+<h4 id="让计算机理解我们的地图"><a href="#让计算机理解我们的地图" class="headerlink" title="让计算机理解我们的地图"></a>让计算机理解我们的地图</h4><p>在前面我们设置了障碍物是哪些坐标，并且可视化了输出的地图，貌似挺帅的，下面我们得让计算机理解我们这个图是什么含义，即地图的大小，地图每一小块的是否可以行走。<br>我们定义了下面的函数用以完成上述功能：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">calc_obstacle_map</span><span class="params">(ox, oy, reso, vr)</span>:</span></span><br><span class="line"></span><br><span class="line">    print(<span class="string">"[INFO] generating obstacle map"</span>)</span><br><span class="line">    minx = round(min(ox))</span><br><span class="line">    miny = round(min(oy))</span><br><span class="line">    maxx = round(max(ox))</span><br><span class="line">    maxy = round(max(oy))</span><br><span class="line"></span><br><span class="line">    print(<span class="string">"[INFO] minx:"</span>, minx)</span><br><span class="line">    print(<span class="string">"[INFO] miny:"</span>, miny)</span><br><span class="line">    print(<span class="string">"[INFO] maxx:"</span>, maxx)</span><br><span class="line">    print(<span class="string">"[INFO] maxy:"</span>, maxy)</span><br><span class="line"></span><br><span class="line">    xwidth = round(maxx - minx)</span><br><span class="line">    ywidth = round(maxy - miny)</span><br><span class="line"></span><br><span class="line">    print(<span class="string">"[INFO] xwidth:"</span>, xwidth)</span><br><span class="line">    print(<span class="string">"[INFO] ywidth:"</span>, ywidth)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># obstacle map generation</span></span><br><span class="line">    obmap = [[<span class="literal">False</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(xwidth)] <span class="keyword">for</span> i <span class="keyword">in</span> range(ywidth)]</span><br><span class="line">    <span class="keyword">for</span> ix <span class="keyword">in</span> range(xwidth):</span><br><span class="line">        x = ix + minx</span><br><span class="line">        <span class="keyword">for</span> iy <span class="keyword">in</span> range(ywidth):</span><br><span class="line">            y = iy + miny</span><br><span class="line">            <span class="comment">#  print(x, y)</span></span><br><span class="line">            <span class="keyword">for</span> iox, ioy <span class="keyword">in</span> zip(ox, oy):</span><br><span class="line">                d = math.sqrt((iox - x)**<span class="number">2</span> + (ioy - y)**<span class="number">2</span>)</span><br><span class="line">                <span class="keyword">if</span> d &lt;= vr / reso:</span><br><span class="line">                    obmap[ix][iy] = <span class="literal">True</span></span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># print ("[INFO] obmap: \n&#123;0&#125;".format(obmap))</span></span><br><span class="line">    print(<span class="string">"[INFO] generated the obstacle map"</span>)</span><br><span class="line">    <span class="keyword">return</span> obmap, minx, miny, maxx, maxy, xwidth, ywidth</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">verify_node</span><span class="params">(node, obmap, minx, miny, maxx, maxy)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> node.x &lt; minx:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">elif</span> node.y &lt; miny:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">elif</span> node.x &gt;= maxx:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">elif</span> node.y &gt;= maxy:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> obmap[node.x][node.y]:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="运行A-star算法"><a href="#运行A-star算法" class="headerlink" title="运行A star算法"></a>运行A star算法</h3><h4 id="计算节点索引"><a href="#计算节点索引" class="headerlink" title="计算节点索引"></a>计算节点索引</h4><p>最终得到的<code>obmap</code>是由<code>True</code>和<code>False</code>组成的一串编码，用于描述地图的障碍物。由此计算机便理解了我们构建的地图，接下来我们就可以开始实现我们的A star寻路算法啦。<br>在正式运行A star算法之前，我们需要给得到没一个节点的索引，于是我们定义了下面的这个函数用于计算每一个点的索引。可以看出，几点索引的范围是[0, 36660]。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">calc_index</span><span class="params">(node, xwidth, xmin, ymin)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># （0, 60x60+60 = 3660）。</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> (node.y - ymin) * xwidth + (node.x - xmin)</span><br></pre></td></tr></table></figure>
+
+<h4 id="定义运动模式"><a href="#定义运动模式" class="headerlink" title="定义运动模式"></a>定义运动模式</h4><p>在前面我们定义了一些静态的东西，接下来我们需要定义与运动相关的–运动模式，由于采用的是Euclid距离计算H值，因此这里需要定义8个方向的运动模式以及相应的代价。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_motion_model</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="comment"># dx, dy, cost</span></span><br><span class="line">    motion = [[<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>],</span><br><span class="line">              [<span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>],</span><br><span class="line">              [<span class="number">-1</span>, <span class="number">0</span>, <span class="number">1</span>],</span><br><span class="line">              [<span class="number">0</span>, <span class="number">-1</span>, <span class="number">1</span>],</span><br><span class="line">              [<span class="number">-1</span>, <span class="number">-1</span>, math.sqrt(<span class="number">2</span>)],</span><br><span class="line">              [<span class="number">-1</span>, <span class="number">1</span>, math.sqrt(<span class="number">2</span>)],</span><br><span class="line">              [<span class="number">1</span>, <span class="number">-1</span>, math.sqrt(<span class="number">2</span>)],</span><br><span class="line">              [<span class="number">1</span>, <span class="number">1</span>, math.sqrt(<span class="number">2</span>)]]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> motion</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">calc_heuristic</span><span class="params">(n1, n2)</span>:</span></span><br><span class="line">    <span class="comment"># 2D Euclid distance</span></span><br><span class="line">    w = <span class="number">1.0</span>  <span class="comment"># weight of heuristic</span></span><br><span class="line">    d = w * math.sqrt((n1.x - n2.x)**<span class="number">2</span> + (n1.y - n2.y)**<span class="number">2</span>)</span><br><span class="line">    <span class="keyword">return</span> d</span><br></pre></td></tr></table></figure>
+
+<h4 id="执行A-star！"><a href="#执行A-star！" class="headerlink" title="执行A star！"></a>执行A star！</h4><p>在作好了相应从准备之后，我们开始正式的执行A star算法，接下来i的代码都被封装在一个 <code>a_star_planning</code>函数中，下面让我们一步步完成它。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">a_star_planning</span><span class="params">(sx, sy, gx, gy, ox, oy, reso, rr)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    gx: goal x position [m]</span></span><br><span class="line"><span class="string">    gy: goal y position [m]</span></span><br><span class="line"><span class="string">    ox: x position list of Obstacles [m]</span></span><br><span class="line"><span class="string">    oy: y position list of Obstacles [m]</span></span><br><span class="line"><span class="string">    reso: grid resolution [m] </span></span><br><span class="line"><span class="string">    rr: robot radius[m]</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line"></span><br><span class="line">    nstart = Node(round(sx / reso), round(sy / reso), <span class="number">0.0</span>, <span class="number">-1</span>)</span><br><span class="line">    ngoal  = Node(round(gx / reso), round(gy / reso), <span class="number">0.0</span>, <span class="number">-1</span>)</span><br><span class="line">    ox = [iox / reso <span class="keyword">for</span> iox <span class="keyword">in</span> ox]</span><br><span class="line">    oy = [ioy / reso <span class="keyword">for</span> ioy <span class="keyword">in</span> oy]</span><br><span class="line"></span><br><span class="line">    obmap, minx, miny, maxx, maxy, xw, yw = calc_obstacle_map(ox, oy, reso, rr)</span><br><span class="line"></span><br><span class="line">    motion = get_motion_model()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">print</span> (<span class="string">"[INFO] motion: &#123;0&#125;"</span>.format(motion))</span><br><span class="line"></span><br><span class="line">    openset, closedset = dict(), dict()</span><br><span class="line">    openset[calc_index(nstart, xw, minx, miny)] = nstart</span><br></pre></td></tr></table></figure>
+
+<p>我们首先是将 起始节点（<code>nstart</code>）和目标节点（<code>ngoal</code>）实例化，并且通过<code>calc_obstacle_map</code>加载我们构建好了的网格地图，通过<code>get_motion_model</code>得到我们定义好了的运动模式。随后定义两个空dict <code>openset, closedset</code>，其中<code>openset</code>中的点是会被考虑的点而<code>closedset</code>中的点是不会被考虑的。最后并且将起始节点放入 <code>openset</code>中。</p>
+<p>不言而喻，最终我们将进入一个死循环，直到找到最优路径：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    <span class="comment"># min (F)</span></span><br><span class="line">    c_id = min(</span><br><span class="line">        openset, key=<span class="keyword">lambda</span> o: openset[o].cost + calc_heuristic(ngoal, openset[o]))</span><br><span class="line">    current = openset[c_id]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># show graph</span></span><br><span class="line">    <span class="keyword">if</span> show_animation:</span><br><span class="line">        plt.plot(current.x * reso, current.y * reso, <span class="string">"xc"</span>)</span><br><span class="line">        <span class="keyword">if</span> len(closedset.keys()) % <span class="number">10</span> == <span class="number">0</span>:</span><br><span class="line">            plt.pause(<span class="number">0.001</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># goal</span></span><br><span class="line">    <span class="keyword">if</span> current.x == ngoal.x <span class="keyword">and</span> current.y == ngoal.y:</span><br><span class="line">        print(<span class="string">"Find goal"</span>)</span><br><span class="line">        ngoal.pind = current.pind</span><br><span class="line">        ngoal.cost = current.cost</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Remove the item from the open set</span></span><br><span class="line">    <span class="keyword">del</span> openset[c_id]</span><br><span class="line">    <span class="comment"># Add it to the closed set</span></span><br><span class="line">    closedset[c_id] = current</span><br><span class="line"></span><br><span class="line">    <span class="comment"># expand search grid based on motion model</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(motion)):</span><br><span class="line">        node = Node(current.x + motion[i][<span class="number">0</span>],</span><br><span class="line">                    current.y + motion[i][<span class="number">1</span>],</span><br><span class="line">                    current.cost + motion[i][<span class="number">2</span>], c_id)</span><br><span class="line">        n_id = calc_index(node, xw, minx, miny)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> n_id <span class="keyword">in</span> closedset:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 位置是否合法</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> verify_node(node, obmap, minx, miny, maxx, maxy):</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> n_id <span class="keyword">not</span> <span class="keyword">in</span> openset:</span><br><span class="line">            openset[n_id] = node  <span class="comment"># Discover a new node</span></span><br><span class="line"></span><br><span class="line">        tcost = current.cost + calc_heuristic(current, node)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> tcost &gt;= node.cost:</span><br><span class="line">            <span class="keyword">continue</span>  <span class="comment"># this is not a better path</span></span><br><span class="line"></span><br><span class="line">        node.cost = tcost</span><br><span class="line">        openset[n_id] = node  <span class="comment"># This path is the best unitl now. record it!</span></span><br><span class="line"></span><br><span class="line">rx, ry = calc_fianl_path(ngoal, closedset, reso)</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> rx, ry</span><br></pre></td></tr></table></figure>
+
+<p>我们首先是通过以下代码段计算最小的F， 并且不断绘制图像。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># min (F)</span></span><br><span class="line">c_id = min(</span><br><span class="line">    openset, key=<span class="keyword">lambda</span> o: openset[o].cost + calc_heuristic(ngoal, openset[o]))</span><br><span class="line">current = openset[c_id]</span><br><span class="line"></span><br><span class="line"><span class="comment"># show graph</span></span><br><span class="line"><span class="keyword">if</span> show_animation:</span><br><span class="line">    plt.plot(current.x * reso, current.y * reso, <span class="string">"xc"</span>)</span><br><span class="line">    <span class="keyword">if</span> len(closedset.keys()) % <span class="number">10</span> == <span class="number">0</span>:</span><br><span class="line">        plt.pause(<span class="number">0.001</span>)</span><br></pre></td></tr></table></figure>
+
+<p>每一次循环，都会判断是否是目标节点：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># goal</span></span><br><span class="line"><span class="keyword">if</span> current.x == ngoal.x <span class="keyword">and</span> current.y == ngoal.y:</span><br><span class="line">    print(<span class="string">"Find goal"</span>)</span><br><span class="line">    ngoal.pind = current.pind</span><br><span class="line">    ngoal.cost = current.cost</span><br><span class="line">    <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+
+<p>在找到最小F值所对应的当前节点索引<code>c_id</code>之后，需要将他从<code>openset</code>中删除，并且加入到<code>closedset</code>中。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Remove the item from the open set</span></span><br><span class="line"><span class="keyword">del</span> openset[c_id]</span><br><span class="line"><span class="comment"># Add it to the closed set</span></span><br><span class="line">closedset[c_id] = current</span><br></pre></td></tr></table></figure>
+
+<p>随后我们会依据运动模式，进行搜索节点，以获取新的节点，得到新的节点的索引<code>n_id</code>，在位置合法并且不在<code>closedset</code>情况下，加入到<code>openset</code>中，随后进行cost的判断与更新。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># expand search grid based on motion model</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(motion)):</span><br><span class="line">    node = Node(current.x + motion[i][<span class="number">0</span>],</span><br><span class="line">                current.y + motion[i][<span class="number">1</span>],</span><br><span class="line">                current.cost + motion[i][<span class="number">2</span>], c_id)</span><br><span class="line">    n_id = calc_index(node, xw, minx, miny)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> n_id <span class="keyword">in</span> closedset:</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 位置是否合法</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> verify_node(node, obmap, minx, miny, maxx, maxy):</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> n_id <span class="keyword">not</span> <span class="keyword">in</span> openset:</span><br><span class="line">        openset[n_id] = node  <span class="comment"># Discover a new node</span></span><br><span class="line"></span><br><span class="line">    tcost = current.cost + calc_heuristic(current, node)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> tcost &gt;= node.cost:</span><br><span class="line">        <span class="keyword">continue</span>  <span class="comment"># this is not a better path</span></span><br><span class="line"></span><br><span class="line">    node.cost = tcost</span><br><span class="line">    openset[n_id] = node  <span class="comment"># This path is the best unitl now. record it!</span></span><br></pre></td></tr></table></figure>
+
+<p>如此循环，不断的依据运动模型扩展新的节点，不断的更新新的cost的值，最终得到<code>closeset</code>。随后我们定义一个函数来计算最终生成的路径。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">calc_fianl_path</span><span class="params">(ngoal, closedset, reso)</span>:</span></span><br><span class="line">    <span class="comment"># generate final course</span></span><br><span class="line">    rx, ry = [ngoal.x * reso], [ngoal.y * reso]</span><br><span class="line">    pind = ngoal.pind</span><br><span class="line">    <span class="keyword">while</span> pind != <span class="number">-1</span>:</span><br><span class="line">        n = closedset[pind]</span><br><span class="line">        rx.append(n.x * reso)</span><br><span class="line">        ry.append(n.y * reso)</span><br><span class="line">        pind = n.pind</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> rx, ry</span><br></pre></td></tr></table></figure>
+
+<p>由此我们便找到了最终生成的路径点的集合，接下来我们需要在<code>main</code>函数中将它们绘制出来</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    print(__file__ + <span class="string">" start!!"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># start and goal position</span></span><br><span class="line">    sx = <span class="number">10.0</span>  <span class="comment"># [m]</span></span><br><span class="line">    sy = <span class="number">10.0</span>  <span class="comment"># [m]</span></span><br><span class="line">    gx = <span class="number">50.0</span>  <span class="comment"># [m]</span></span><br><span class="line">    gy = <span class="number">50.0</span>  <span class="comment"># [m]</span></span><br><span class="line">    grid_size = <span class="number">1.0</span>  <span class="comment"># [m]</span></span><br><span class="line">    robot_size = <span class="number">1.0</span>  <span class="comment"># [m]</span></span><br><span class="line"></span><br><span class="line">    ox, oy = [], []</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Create the Obstacles node list</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">60</span>):</span><br><span class="line">        ox.append(i)</span><br><span class="line">        oy.append(<span class="number">0.0</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">60</span>):</span><br><span class="line">        ox.append(<span class="number">60.0</span>)</span><br><span class="line">        oy.append(i)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">61</span>):</span><br><span class="line">        ox.append(i)</span><br><span class="line">        oy.append(<span class="number">60.0</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">61</span>):</span><br><span class="line">        ox.append(<span class="number">0.0</span>)</span><br><span class="line">        oy.append(i)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">40</span>):</span><br><span class="line">        ox.append(<span class="number">20.0</span>)</span><br><span class="line">        oy.append(i)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">40</span>):</span><br><span class="line">        ox.append(<span class="number">40.0</span>)</span><br><span class="line">        oy.append(<span class="number">60.0</span> - i)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> show_animation:</span><br><span class="line">        plt.plot(ox, oy, <span class="string">".k"</span>)</span><br><span class="line">        plt.plot(sx, sy, <span class="string">"xr"</span>)</span><br><span class="line">        plt.plot(gx, gy, <span class="string">"xb"</span>)</span><br><span class="line">        plt.grid(<span class="literal">True</span>)</span><br><span class="line">        plt.axis(<span class="string">"equal"</span>)</span><br><span class="line"></span><br><span class="line">    rx, ry = a_star_planning(sx, sy, gx, gy, ox, oy, grid_size, robot_size)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> show_animation:</span><br><span class="line">        plt.plot(rx, ry, <span class="string">"-r"</span>)</span><br><span class="line">        plt.show()</span><br></pre></td></tr></table></figure>
+
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>最终实现的效果图如下图所示：</p>
+<p><img src="http://image.little-rocket.cn/Astar_Demo.png" alt="A star Demo"></p>
+<p>其中红色是最终生成的路径，黑色为障碍物，蓝色为寻路算法寻找的节点。由此，通过这篇文章，我们介绍了A star算法的基本原理，计算过程，并提供和分析了一个用于可视化的Python工程。源代码可以访问 <a href="https://github.com/AtsushiSakai/PythonRobotics/blob/master/PathPlanning/AStar/a_star.py" target="_blank" rel="noopener">源代码</a></p>
+<p>如果你觉得这篇文章对你有用，请务必分享！</p>
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ul>
+<li><a href="https://www.cnblogs.com/zhoug2020/p/3468167.html" target="_blank" rel="noopener">生动的寻路猫</a></li>
+<li><a href="https://github.com/llSourcell/path_planning_demo_live" target="_blank" rel="noopener">如何轻松制作路径规划算法Github</a></li>
+<li><a href="https://rosettacode.org/wiki/A*_search_algorithm" target="_blank" rel="noopener">各个语言版本的A star算法实例</a></li>
+<li><a href="https://github.com/AtsushiSakai/PythonRobotics/blob/master/PathPlanning/AStar/a_star.py" target="_blank" rel="noopener">源代码</a></li>
+</ul>
+<blockquote>
+<p>不足之处，敬请斧正; 若你觉得文章还不错，请关注微信公众号“SLAM 技术交流”继续支持我们，笔芯：D。</p>
+</blockquote>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/21/181016在机器人电子产品中有用的资源，项目和产品列表/" class="archive-article-date">
-  	<time datetime="2019-06-21T13:58:39.561Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/21/181016在机器人电子产品中有用的资源，项目和产品列表/">在机器人电子产品中有用的资源，项目和产品列表</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">iopen-source</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/21/180911视觉里程计和视觉SLAM 概述[6]/" class="archive-article-date">
-  	<time datetime="2019-06-21T13:58:39.552Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/21/180911视觉里程计和视觉SLAM 概述[6]/">视觉里程计和视觉SLAM 概述[6]</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">iopen-source</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/21/180910视觉里程计和视觉SLAM 概述[5]/" class="archive-article-date">
-  	<time datetime="2019-06-21T13:58:39.543Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/21/180910视觉里程计和视觉SLAM 概述[5]/">视觉里程计和视觉SLAM 概述[5]</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">iopen-source</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/21/180908视觉里程计和视觉SLAM 概述[4]/" class="archive-article-date">
-  	<time datetime="2019-06-21T13:58:39.530Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/21/180908视觉里程计和视觉SLAM 概述[4]/">视觉里程计和视觉SLAM 概述[4]</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">iopen-source</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/21/180903[iopen source] 推荐一款开源的实用的串口调试助手/" class="archive-article-date">
-  	<time datetime="2019-06-21T13:58:39.517Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/21/180903[iopen source] 推荐一款开源的实用的串口调试助手/">【iopen source】推荐一款的实用的串口调试助手</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">iopen-source</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/21/180902视觉里程计和视觉SLAM 概述[3]/" class="archive-article-date">
-  	<time datetime="2019-06-21T13:58:39.511Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/21/180902视觉里程计和视觉SLAM 概述[3]/">180901视觉里程计和视觉SLAM 概述[3]</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">视觉SLAM</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/21/180902视觉里程计和视觉SLAM 概述[2]/" class="archive-article-date">
-  	<time datetime="2019-06-21T13:58:39.504Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/21/180902视觉里程计和视觉SLAM 概述[2]/">180901视觉里程计和视觉SLAM 概述[2]</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">视觉SLAM</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/21/180901视觉里程计和视觉SLAM 概述[1]/" class="archive-article-date">
-  	<time datetime="2019-06-21T13:58:39.499Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/21/180901视觉里程计和视觉SLAM 概述[1]/">180901视觉里程计和视觉SLAM 概述[1]</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">视觉SLAM</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/21/20190305 动态窗口算法运动规划/" class="archive-article-date">
-  	<time datetime="2019-06-21T13:58:39.487Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/21/20190305 动态窗口算法运动规划/">基于一维网格地图的直方图滤波算法</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -495,49 +298,127 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/06/21/20181004 A star 算法介绍与代码实现/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/21/hello-world/" class="archive-article-date">
-  	<time datetime="2019-06-21T05:41:36.724Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-21</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2019/06/21/20181004 Location Overview/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Location Overview
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/06/21/20180926 英语提高技巧/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">英语提高技巧</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/21/hello-world/">Hello World</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#A-star-算法介绍与可视化代码实现"><span class="toc-number">1.</span> <span class="toc-text">A star 算法介绍与可视化代码实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#A-star-算法介绍"><span class="toc-number">1.1.</span> <span class="toc-text">A star 算法介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#可视化代码实现"><span class="toc-number">1.2.</span> <span class="toc-text">可视化代码实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#导入所需要的包"><span class="toc-number">1.2.1.</span> <span class="toc-text">导入所需要的包</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创建我们的节点类"><span class="toc-number">1.2.2.</span> <span class="toc-text">创建我们的节点类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#设置障碍物"><span class="toc-number">1.2.3.</span> <span class="toc-text">设置障碍物</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#让计算机理解我们的地图"><span class="toc-number">1.2.4.</span> <span class="toc-text">让计算机理解我们的地图</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#运行A-star算法"><span class="toc-number">1.3.</span> <span class="toc-text">运行A star算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#计算节点索引"><span class="toc-number">1.3.1.</span> <span class="toc-text">计算节点索引</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#定义运动模式"><span class="toc-number">1.3.2.</span> <span class="toc-text">定义运动模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#执行A-star！"><span class="toc-number">1.3.3.</span> <span class="toc-text">执行A star！</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-number">1.4.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考链接"><span class="toc-number">1.5.</span> <span class="toc-text">参考链接</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
   
-    </div></section>
   
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/">&laquo; Prev</a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span>
-    </nav>
+  
+
+  
+
   
 
 
@@ -561,8 +442,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,

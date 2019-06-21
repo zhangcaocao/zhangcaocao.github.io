@@ -6,15 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives | Hexo</title>
+  <title>Optical Flow介绍与代码实现 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/archives/page/2/index.html">
+  <meta name="description" content="Optical Flow介绍与代码实现在视觉里程计中，常用的方法包括特征点法、直接法、光流法，光流法凭借其不需要计算描述子，基于特征点，稠密稀疏均使用的优点而适用于很多场景。可以在前面的这篇文章的Visual Odometry Based on Optical Flow Methods部分了解到更多的细节。通过今天的这篇文章，你将理解到光流的含义，以及他的代码实现。 介绍首先我们先来介绍一下Opt">
+<meta name="keywords" content="视觉SLAM">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Optical Flow介绍与代码实现">
+<meta property="og:url" content="http://yoursite.com/2019/06/21/20180918 Optical Flow 介绍与代码实现/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Optical Flow介绍与代码实现在视觉里程计中，常用的方法包括特征点法、直接法、光流法，光流法凭借其不需要计算描述子，基于特征点，稠密稀疏均使用的优点而适用于很多场景。可以在前面的这篇文章的Visual Odometry Based on Optical Flow Methods部分了解到更多的细节。通过今天的这篇文章，你将理解到光流的含义，以及他的代码实现。 介绍首先我们先来介绍一下Opt">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://image.little-rocket.cn/optical%20flow_1.png">
+<meta property="og:image" content="http://image.little-rocket.cn/2018-09-18%2021-48-58%20.png">
+<meta property="og:updated_time" content="2019-06-21T16:17:21.882Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="Optical Flow介绍与代码实现">
+<meta name="twitter:description" content="Optical Flow介绍与代码实现在视觉里程计中，常用的方法包括特征点法、直接法、光流法，光流法凭借其不需要计算描述子，基于特征点，稠密稀疏均使用的优点而适用于很多场景。可以在前面的这篇文章的Visual Odometry Based on Optical Flow Methods部分了解到更多的细节。通过今天的这篇文章，你将理解到光流的含义，以及他的代码实现。 介绍首先我们先来介绍一下Opt">
+<meta name="twitter:image" content="http://image.little-rocket.cn/optical%20flow_1.png">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -150,226 +158,141 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-20180918 Optical Flow 介绍与代码实现" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Optical Flow介绍与代码实现
+    </h1>
+  
+
+        
+        <a href="/2019/06/21/20180918 Optical Flow 介绍与代码实现/" class="archive-article-date">
+  	<time datetime="2019-06-21T13:58:39.595Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-21</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Optical-Flow介绍与代码实现"><a href="#Optical-Flow介绍与代码实现" class="headerlink" title="Optical Flow介绍与代码实现"></a>Optical Flow介绍与代码实现</h2><p>在视觉里程计中，常用的方法包括特征点法、直接法、光流法，光流法凭借其不需要计算描述子，基于特征点，稠密稀疏均使用的优点而适用于很多场景。可以在<a href="http://little-rocket.cn/2018/09/28/an-overview-to-visual-odometry-and-visual-slam-applications-to-mobile-robotics-%E7%AC%AC%E4%BA%94%E9%83%A8%E5%88%86/" target="_blank" rel="noopener">前面的这篇文章</a>的<code>Visual Odometry Based on Optical Flow Methods</code>部分了解到更多的细节。通过今天的这篇文章，你将理解到光流的含义，以及他的代码实现。</p>
+<h4 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h4><p>首先我们先来介绍一下Optical Flow是个什么东西, 在浏览器的搜索框框里面我们输入”Optical flow”可以看到维基百科的解释:</p>
+<blockquote>
+<p>光流(Optical flow or optic flow)是关于视域中的物体运动检测中的概念。用来描述相对于观察者的运动所造成的观测目标、表面或边缘的运动。</p>
+</blockquote>
+<p>哦 <code>Optical flow</code> 是一个概念, 描述的是一个相对于观测者的运动,这个运动是观测造成的,就是说,我们眼睛的目光和物体保持相对静止就没有光流运动啦.<br>似乎是个物理上面的东西, 这个网址 “<a href="http://people.csail.mit.edu/celiu/motionAnnotation/whatismotion.html&quot;提出了一个问题" target="_blank" rel="noopener">http://people.csail.mit.edu/celiu/motionAnnotation/whatismotion.html&quot;提出了一个问题</a> “:</p>
+ <a id="more"></a> 
+
+<p><strong>What is motion?</strong>“对两个观点进行了辩论:</p>
+<ul>
+<li>1, “ motion is the physical movement of pixels, and therefore motion has to be measured in a physical way. “</li>
+<li>2, “ motion is human percept–motion is what we perceive in our brain, something we can sense and communicate.”</li>
+</ul>
+<p>然后贴了下面这个图</p>
+<p><img src alt="image"></p>
+<blockquote>
+<p>Fig1 <a href="http://www.ritsumei.ac.jp/~akitaoka/index-e.html" target="_blank" rel="noopener">http://www.ritsumei.ac.jp/~akitaoka/index-e.html</a></p>
+</blockquote>
+<p>我们人类可以从上面的静态图中感受到运动! 由此联想到计算机视觉系统是如何做的?</p>
+<blockquote>
+<p>If the ultimate goal of computer vision is to let the computer see what humans perceive, then it is certainly the right way to let humans teach computer how to see the world. Our human-assisted motion annotation serves exactly for this purpose. Indeed, we shall show you that (a) humans’ annotations are very consistent, and (b) human’s annotations are consistent with other ground-truth data.</p>
+</blockquote>
+<p>很容易发现, 只有在我们的眼睛(准确的是目光)移动的时候,我们才能感受到运动,那么眼睛移动引起了什么变化喃, 貌似有亮度, (角度)视角,这样子我们岂不是就可以估计相对运动啦. 是的嘛, 光流就是来估计运动的的嘛,,(这么简单的原理,为什么我就没有提出来喃 233).</p>
+<h4 id="言归正传"><a href="#言归正传" class="headerlink" title="言归正传"></a>言归正传</h4><p>光流的概念是Gibson在1950年首先提出来的。它是空间运动物体在观察成像平面上的像素运动的瞬时速度，是利用图像序列中像素在时间域上的变化以及相邻帧之间的相关性来找到上一帧跟当前帧之间存在的对应关系，从而计算出相邻帧之间物体的运动信息的一种方法。一般而言，光流是由于场景中前景目标本身的移动、相机的运动，或者两者的共同运动所产生的。</p>
+<p>当人的眼睛观察运动物体时，物体的景象在人眼的视网膜上形成一系列连续变化的图像，这一系列连续变化的信息不断“流过”视网膜（即图像平面），好像一种光的“流”，故称之为光流（optical flow）。光流表达了图像的变化，由于它包含了目标运动的信息，因此可被观察者用来确定目标的运动情况。研究光流场的目的就是为了从图片序列中近似得到不能直接得到的运动场。运动场，其实就是物体在三维真实世界中的运动；光流场，是运动场在二维图像平面上（人的眼睛或者摄像头）的投影。那通俗的讲就是通过一个图片序列，把每张图像中每个像素的运动速度和运动方向找出来就是光流场。那怎么找呢？咱们直观理解肯定是：第t帧的时候A点的位置是(x1, y1)，那么我们在第t+1帧的时候再找到A点，假如它的位置是(x2,y2)，那么我们就可以确定A点的运动了：</p>
+<p>(ux, vy) = (x2, y2) - (x1,y1)。</p>
+<p>那怎么知道第t+1帧的时候A点的位置呢？ 这就存在很多的光流计算方法了。<br>1981年，Horn和Schunck创造性地将二维速度场与灰度相联系，引入光流约束方程，得到光流计算的基本算法。人们基于不同的理论基础提出各种光流计算方法，算法性能各有不同。Barron等人对多种光流计算技术进行了总结，按照理论基础与数学方法的区别把它们分成四种：基于梯度的方法、基于匹配的方法、基于能量的方法、基于相位的方法。近年来神经动力学方法也颇受学者重视。</p>
+<blockquote>
+<p>贴自 <a href="https://blog.csdn.net/zouxy09/article/details/8683859" target="_blank" rel="noopener">https://blog.csdn.net/zouxy09/article/details/8683859</a></p>
+</blockquote>
+<h4 id="光流的测量"><a href="#光流的测量" class="headerlink" title="光流的测量"></a>光流的测量</h4><p><img src="http://image.little-rocket.cn/optical%20flow_1.png" alt="光流的测算"></p>
+<blockquote>
+<p>贴自 <a href="https://zh.wikipedia.org/wiki/%E5%85%89%E6%B5%81%E6%B3%95" target="_blank" rel="noopener">https://zh.wikipedia.org/wiki/%E5%85%89%E6%B5%81%E6%B3%95</a></p>
+</blockquote>
+<h4 id="几种测定方法"><a href="#几种测定方法" class="headerlink" title="几种测定方法"></a>几种测定方法</h4><p>这里列举几个OpenCv实现了的测定算法:</p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Lucas%E2%80%93Kanade_method" target="_blank" rel="noopener">Lucas–Kanade method</a></li>
+</ul>
+<p>Lucas-Kanade方法是由Bruce D. Lucas和Takeo Kanade开发的一种广泛使用的光流估计差分方法.它假设流在所考虑的像素的局部邻域中基本恒定，并且通过最小二乘准则解出该邻域中的所有像素的基本光流方程.<br>openCV 的API是 <strong>calcOpticalFlowPyrLK</strong>.</p>
+<blockquote>
+<p><a href="https://en.wikipedia.org/wiki/Lucas%E2%80%93Kanade_method" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Lucas%E2%80%93Kanade_method</a></p>
+</blockquote>
+<blockquote>
+<p>点这个链接，不错的理论解释（中文）<a href="http://image.sciencenet.cn/olddata/kexue.com.cn/upload/blog/file/2010/9/2010929122517964628.pdf" target="_blank" rel="noopener">http://image.sciencenet.cn/olddata/kexue.com.cn/upload/blog/file/2010/9/2010929122517964628.pdf</a></p>
+</blockquote>
+<ul>
+<li>The Gunnar-Farneback optical flow </li>
+</ul>
+<p>用Gunnar Farneback 的算法计算稠密光流（即图像上所有像素点的光流都计算出来）。它的相关论文是：”Two-Frame Motion Estimation Based on PolynomialExpansion”<br>opencv 的API 是 <strong>calcOpticalFlowFarneback</strong>.</p>
+<blockquote>
+<p>论文地址： <a href="http://www.diva-portal.org/smash/get/diva2:273847/FULLTEXT01.pdf" target="_blank" rel="noopener">http://www.diva-portal.org/smash/get/diva2:273847/FULLTEXT01.pdf</a></p>
+</blockquote>
+<ul>
+<li>block matching method</li>
+</ul>
+<p>依赖于块匹配方法，OpenCv的API 是： <strong>CalcOpticalFlowBM</strong>.</p>
+<ul>
+<li>Horn–Schunck method<br>用Horn-Schunck 的算法计算稠密光流。OpenCv的API是 <strong>CalcOpticalFlowHS</strong>.</li>
+</ul>
+<ul>
+<li>SimpleFlow</li>
+</ul>
+<blockquote>
+<p>项目网站（源代码）<a href="http://graphics.berkeley.edu/papers/Tao-SAN-2012-05/" target="_blank" rel="noopener">http://graphics.berkeley.edu/papers/Tao-SAN-2012-05/</a></p>
+</blockquote>
+<p>OpenCv的API是 <strong>calcOpticalFlowSF</strong>.</p>
+<h4 id="代码演示"><a href="#代码演示" class="headerlink" title="代码演示"></a>代码演示</h4><p>对于代码，这里只演示计算量更少，更加适用于SLAM系统的Lucas–Kanade method. 我们首先需要使用 <strong>cv2.goodFeaturesToTrack()</strong>来寻找角点，然后在使用Lucas–Kanade method进行运动跟踪。</p>
+<h5 id="python"><a href="#python" class="headerlink" title="python"></a>python</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line"><span class="comment"># opencv-3.1.0/samples/data/768x576.avi</span></span><br><span class="line">cap = cv2.VideoCapture(<span class="string">'768x576.avi'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># params for ShiTomasi corner detection</span></span><br><span class="line">feature_params = dict( maxCorners = <span class="number">100</span>,</span><br><span class="line">                       qualityLevel = <span class="number">0.3</span>,</span><br><span class="line">                       minDistance = <span class="number">7</span>,</span><br><span class="line">                       blockSize = <span class="number">7</span> )</span><br><span class="line"></span><br><span class="line"><span class="comment"># Parameters for lucas kanade optical flow</span></span><br><span class="line">lk_params = dict( winSize  = (<span class="number">15</span>,<span class="number">15</span>),</span><br><span class="line">                  maxLevel = <span class="number">2</span>,</span><br><span class="line">                  criteria = (cv2.TERM_CRITERIA_EPS | cv2.TERM_CRITERIA_COUNT, <span class="number">10</span>, <span class="number">0.03</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># Create some random colors</span></span><br><span class="line">color = np.random.randint(<span class="number">0</span>,<span class="number">255</span>,(<span class="number">100</span>,<span class="number">3</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># Take first frame and find corners in it</span></span><br><span class="line">ret, old_frame = cap.read()</span><br><span class="line">old_gray = cv2.cvtColor(old_frame, cv2.COLOR_BGR2GRAY)</span><br><span class="line">p0 = cv2.goodFeaturesToTrack(old_gray, mask = <span class="literal">None</span>, **feature_params)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Create a mask image for drawing purposes</span></span><br><span class="line">mask = np.zeros_like(old_frame)</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(<span class="number">1</span>):</span><br><span class="line">    ret,frame = cap.read()</span><br><span class="line">    <span class="keyword">if</span> ret <span class="keyword">is</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="keyword">print</span> ret</span><br><span class="line">        frame_gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># calculate optical flow</span></span><br><span class="line">        p1, st, err = cv2.calcOpticalFlowPyrLK(old_gray, frame_gray, p0, <span class="literal">None</span>, **lk_params)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Select good points</span></span><br><span class="line">        good_new = p1[st==<span class="number">1</span>]</span><br><span class="line">        good_old = p0[st==<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">        <span class="comment"># draw the tracks</span></span><br><span class="line">        <span class="keyword">for</span> i,(new,old) <span class="keyword">in</span> enumerate(zip(good_new,good_old)):</span><br><span class="line">            a,b = new.ravel()</span><br><span class="line">            c,d = old.ravel()</span><br><span class="line">            mask = cv2.line(mask, (a,b),(c,d), color[i].tolist(), <span class="number">2</span>)</span><br><span class="line">            frame = cv2.circle(frame,(a,b),<span class="number">5</span>,color[i].tolist(),<span class="number">-1</span>)</span><br><span class="line">        img = cv2.add(frame,mask)</span><br><span class="line"></span><br><span class="line">        cv2.imshow(<span class="string">'frame'</span>,img)</span><br><span class="line">        k = cv2.waitKey(<span class="number">30</span>) &amp; <span class="number">0xff</span></span><br><span class="line">        <span class="keyword">if</span> k == <span class="number">27</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># Now update the previous frame and previous points</span></span><br><span class="line">        old_gray = frame_gray.copy()</span><br><span class="line">        p0 = good_new.reshape(<span class="number">-1</span>,<span class="number">1</span>,<span class="number">2</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line">cap.release()</span><br></pre></td></tr></table></figure>
+
+<h4 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h4><p><img src="http://image.little-rocket.cn/2018-09-18%2021-48-58%20.png" alt="效果图"></p>
+<p>这个理论由于基于一个很强的亮度不变的假设，因此具有较大的局限性，只能用于估计很小的运动。</p>
+<h4 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h4><blockquote>
+<p>Application of local optical flow methods to high-velocity free-surface flows:<br>Validation and application to stepped chutes ：<a href="http://staff.civil.uq.edu.au/h.chanson/reprints/Zhang_Chanson_etfs_2018.pdf" target="_blank" rel="noopener">http://staff.civil.uq.edu.au/h.chanson/reprints/Zhang_Chanson_etfs_2018.pdf</a> (介绍了主流的几种光流算法)</p>
+</blockquote>
+<blockquote>
+<p><a href="https://blog.csdn.net/zouxy09/article/details/8683859（光流Optical" target="_blank" rel="noopener">https://blog.csdn.net/zouxy09/article/details/8683859（光流Optical</a> Flow介绍与OpenCV实现）</p>
+</blockquote>
+<blockquote>
+<p><a href="http://image.sciencenet.cn/olddata/kexue.com.cn/upload/blog/file/2010/9/2010929122517964628.pdf" target="_blank" rel="noopener">http://image.sciencenet.cn/olddata/kexue.com.cn/upload/blog/file/2010/9/2010929122517964628.pdf</a>  (Lucas–Kanade method的中文理论推导)</p>
+</blockquote>
+<blockquote>
+<p><a href="http://vision.middlebury.edu/flow/floweval-ijcv2011.pdf" target="_blank" rel="noopener">http://vision.middlebury.edu/flow/floweval-ijcv2011.pdf</a> (同一)</p>
+</blockquote>
+<h4 id="最后的最后"><a href="#最后的最后" class="headerlink" title="最后的最后"></a>最后的最后</h4><blockquote>
+<p>不足之处，敬请斧正; 若你觉得文章还不错,请分享哦，笔芯：D。</p>
+</blockquote>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/21/181016在机器人电子产品中有用的资源，项目和产品列表/" class="archive-article-date">
-  	<time datetime="2019-06-21T13:58:39.561Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/21/181016在机器人电子产品中有用的资源，项目和产品列表/">在机器人电子产品中有用的资源，项目和产品列表</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">iopen-source</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/21/180911视觉里程计和视觉SLAM 概述[6]/" class="archive-article-date">
-  	<time datetime="2019-06-21T13:58:39.552Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/21/180911视觉里程计和视觉SLAM 概述[6]/">视觉里程计和视觉SLAM 概述[6]</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">iopen-source</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/21/180910视觉里程计和视觉SLAM 概述[5]/" class="archive-article-date">
-  	<time datetime="2019-06-21T13:58:39.543Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/21/180910视觉里程计和视觉SLAM 概述[5]/">视觉里程计和视觉SLAM 概述[5]</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">iopen-source</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/21/180908视觉里程计和视觉SLAM 概述[4]/" class="archive-article-date">
-  	<time datetime="2019-06-21T13:58:39.530Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/21/180908视觉里程计和视觉SLAM 概述[4]/">视觉里程计和视觉SLAM 概述[4]</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">iopen-source</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/21/180903[iopen source] 推荐一款开源的实用的串口调试助手/" class="archive-article-date">
-  	<time datetime="2019-06-21T13:58:39.517Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/21/180903[iopen source] 推荐一款开源的实用的串口调试助手/">【iopen source】推荐一款的实用的串口调试助手</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">iopen-source</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/21/180902视觉里程计和视觉SLAM 概述[3]/" class="archive-article-date">
-  	<time datetime="2019-06-21T13:58:39.511Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/21/180902视觉里程计和视觉SLAM 概述[3]/">180901视觉里程计和视觉SLAM 概述[3]</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -381,163 +304,127 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/06/21/20180918 Optical Flow 介绍与代码实现/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/21/180902视觉里程计和视觉SLAM 概述[2]/" class="archive-article-date">
-  	<time datetime="2019-06-21T13:58:39.504Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-21</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2019/06/21/20180926 使用OpenCv+ENet实现语义分割/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          使用OpenCv+ENet实现语义分割
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/06/21/20180916 深度学习开源PDF/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">深度学习开源PDF</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/21/180902视觉里程计和视觉SLAM 概述[2]/">180901视觉里程计和视觉SLAM 概述[2]</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">视觉SLAM</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Optical-Flow介绍与代码实现"><span class="toc-number">1.</span> <span class="toc-text">Optical Flow介绍与代码实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#介绍"><span class="toc-number">1.0.1.</span> <span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#言归正传"><span class="toc-number">1.0.2.</span> <span class="toc-text">言归正传</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#光流的测量"><span class="toc-number">1.0.3.</span> <span class="toc-text">光流的测量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#几种测定方法"><span class="toc-number">1.0.4.</span> <span class="toc-text">几种测定方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#代码演示"><span class="toc-number">1.0.5.</span> <span class="toc-text">代码演示</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#python"><span class="toc-number">1.0.5.1.</span> <span class="toc-text">python</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#效果图"><span class="toc-number">1.0.6.</span> <span class="toc-text">效果图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#参考文献"><span class="toc-number">1.0.7.</span> <span class="toc-text">参考文献</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#最后的最后"><span class="toc-number">1.0.8.</span> <span class="toc-text">最后的最后</span></a></li></ol></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/21/180901视觉里程计和视觉SLAM 概述[1]/" class="archive-article-date">
-  	<time datetime="2019-06-21T13:58:39.499Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-21</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/21/180901视觉里程计和视觉SLAM 概述[1]/">180901视觉里程计和视觉SLAM 概述[1]</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">视觉SLAM</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/21/20190305 动态窗口算法运动规划/" class="archive-article-date">
-  	<time datetime="2019-06-21T13:58:39.487Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/21/20190305 动态窗口算法运动规划/">基于一维网格地图的直方图滤波算法</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">pathplan</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/21/hello-world/" class="archive-article-date">
-  	<time datetime="2019-06-21T05:41:36.724Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/21/hello-world/">Hello World</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/">&laquo; Prev</a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span>
-    </nav>
   
 
 
@@ -561,8 +448,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,

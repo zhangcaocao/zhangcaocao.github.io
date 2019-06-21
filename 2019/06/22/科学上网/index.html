@@ -6,15 +6,26 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives | Hexo</title>
+  <title>自建ssr/ss科学上网服务器 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/archives/page/2/index.html">
+  <meta name="description" content="VPS服务器甚至被墙了：是的， 服务器他喵的甚至被墙了，作为一只Google重度依赖者，表示无法科学上网，这日子没法过呀。在这里， 较为详细的总结一下搭建过程，以及服务商的选择。">
+<meta name="keywords" content="ssr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自建ssr&#x2F;ss科学上网服务器">
+<meta property="og:url" content="http://yoursite.com/2019/06/22/科学上网/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="VPS服务器甚至被墙了：是的， 服务器他喵的甚至被墙了，作为一只Google重度依赖者，表示无法科学上网，这日子没法过呀。在这里， 较为详细的总结一下搭建过程，以及服务商的选择。">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://image.little-rocket.cn/18_2_15_01.jpg">
+<meta property="og:image" content="http://image.little-rocket.cn/18_2_15_02.jpg">
+<meta property="og:image" content="http://image.little-rocket.cn/18_2_15_03.png">
+<meta property="og:image" content="http://image.little-rocket.cn/18_2_15_04.png">
+<meta property="og:image" content="http://image.little-rocket.cn/18_2_15_05.png">
+<meta property="og:updated_time" content="2019-06-21T16:38:05.772Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="自建ssr&#x2F;ss科学上网服务器">
+<meta name="twitter:description" content="VPS服务器甚至被墙了：是的， 服务器他喵的甚至被墙了，作为一只Google重度依赖者，表示无法科学上网，这日子没法过呀。在这里， 较为详细的总结一下搭建过程，以及服务商的选择。">
+<meta name="twitter:image" content="http://image.little-rocket.cn/18_2_15_01.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -150,394 +161,241 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-科学上网" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      自建ssr/ss科学上网服务器
+    </h1>
+  
+
+        
+        <a href="/2019/06/22/科学上网/" class="archive-article-date">
+  	<time datetime="2019-06-21T16:35:32.796Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-22</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="VPS服务器甚至被墙了："><a href="#VPS服务器甚至被墙了：" class="headerlink" title="VPS服务器甚至被墙了："></a>VPS服务器甚至被墙了：</h3><p>是的， 服务器他喵的甚至被墙了，作为一只<code>Google</code>重度依赖者，表示无法科学上网，这日子没法过呀。<br>在这里， 较为详细的总结一下搭建过程，以及服务商的选择。</p>
+ <a id="more"></a> 
+
+<h3 id="具体搭建过程："><a href="#具体搭建过程：" class="headerlink" title="具体搭建过程："></a>具体搭建过程：</h3><h4 id="购买服务器："><a href="#购买服务器：" class="headerlink" title="购买服务器："></a>购买服务器：</h4><p>服务商的选择：</p>
+<p>首先， 选国外的不用说。然后，那个，服务器的地址，尽量别选日本，美国洛杉矶那些 “很火的地方”，因为那些地方能够买到可以使用的服务器的概率不大，，啊，你懂我意思吧。<br><a href="http://image.little-rocket.cn/18_2_15_01.jpg" target="_blank" rel="noopener"><img src="http://image.little-rocket.cn/18_2_15_01.jpg" alt="表情包"></a>表情包</p>
+<p>我选择的是这个服务器商，可以点击<a href="https://www.vultr.com/?ref=7300823" target="_blank" rel="noopener">链接</a>注册；<br><a href="https://www.vultr.com/?ref=7300823" target="_blank" rel="noopener">Vultr.com</a><br>优点：</p>
+<ul>
+<li>这个服务商最大的优点就是它的计费方式：</li>
+</ul>
+<p>就是说， 它这个类似于网吧开机， 按照的是你创建服务器之后的时间来计费的， 注意是创建服务器， 不是服务器开机运行的时间。这样子的好处就是，若IP被墙了，只需要销毁掉之前那个重新开一个就是了。<br>而且，可以在你不需要的时候，销毁掉你的服务器，这样也就停止扣费了。</p>
+<ul>
+<li>支持 <code>Alipay</code> 也就是支付宝支付。</li>
+</ul>
+<p>服务器的选购：</p>
+<p>首先是充 10美元：</p>
+<p><a href="http://image.little-rocket.cn/18_2_15_02.jpg" target="_blank" rel="noopener"><img src="http://image.little-rocket.cn/18_2_15_02.jpg" alt="Alipay"></a>Alipay</p>
+<p>然后直接点击右上方的那个 “+” 号，开始选择服务器：</p>
+<p><a href="http://image.little-rocket.cn/18_2_15_03.png" target="_blank" rel="noopener"><img src="http://image.little-rocket.cn/18_2_15_03.png" alt="选择服务器"></a>选择服务器<br>这里我选择的是 <strong>“Eueope”</strong> -&gt; <strong>“Frankfurt”</strong> -&gt; <strong>“Ubuntu 16.04 x64”</strong><br>然后几个选项，自己有需要就选吧，不选也可以。</p>
+<p><a href="http://image.little-rocket.cn/18_2_15_04.png" target="_blank" rel="noopener"><img src="http://image.little-rocket.cn/18_2_15_04.png" alt="选择完毕"></a>选择完毕<br>点击 <strong>deploy Now</strong>就开始创建了</p>
+<h4 id="SSR服务的安装："><a href="#SSR服务的安装：" class="headerlink" title="SSR服务的安装："></a>SSR服务的安装：</h4><p>本地工具：</p>
+<ul>
+<li>Git for win</li>
+</ul>
+<p>安装过程：</p>
+<p>打开Git,运行：</p>
+<blockquote>
+<p>$ ssh root@ip</p>
+</blockquote>
+<p>输入密码，等待连接成功</p>
+<p>安装SSR软件：</p>
+<blockquote>
+<p>wget -N –no-check-certificate <a href="https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/ssr.sh" target="_blank" rel="noopener">https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/ssr.sh</a> &amp;&amp; chmod +x ssr.sh &amp;&amp; bash ssr.sh</p>
+</blockquote>
+<p>然后，，惊了，设置是中文的，所以直接点击数字1， 开始安装</p>
+<ul>
+<li>自己设置密码， 端口号默认就行。</li>
+<li>加密选择 、协议插件、随意就好。我选择的是：<code>caes-256-cfb</code> + <code>auth_sha1_v4</code></li>
+<li>是否兼容原版， 按照自己需求选择 <code>y/n</code>。</li>
+<li>混淆插件： 随意，我选择的是 <code>plain</code>.</li>
+<li>然后是一些设备数，端口数限速什么的，，按照需求自己设置吧。</li>
+</ul>
+<p>稍等片刻，安装完成。</p>
+<p>查看SSR状态：</p>
+<p>输入：</p>
+<blockquote>
+<p>bash ssr.sh</p>
+</blockquote>
+<p>即可输入相应的选项，查看相关信息了。<br><a href="http://image.little-rocket.cn/18_2_15_05.png" target="_blank" rel="noopener"><img src="http://image.little-rocket.cn/18_2_15_05.png" alt="管理面板"></a>管理面板</p>
+<p>安装SSR谷歌BBR加速：</p>
+<p>依次运行下面的命令：</p>
+<blockquote>
+<p>wget –no-check-certificate <a href="https://github.com/teddysun/across/raw/master/bbr.sh" target="_blank" rel="noopener">https://github.com/teddysun/across/raw/master/bbr.sh</a></p>
+</blockquote>
+<blockquote>
+<p>chmod +x bbr.sh</p>
+</blockquote>
+<blockquote>
+<p>./bbr.sh<br>重启服务器.</p>
+</blockquote>
+<h3 id="SSR客户端下载："><a href="#SSR客户端下载：" class="headerlink" title="SSR客户端下载："></a>SSR客户端下载：</h3><p>Github上的一个项目， 提供 linux， Windows， 安卓， MacOs客户端。<br>地址：<a href="https://github.com/shadowsocksr-backup" target="_blank" rel="noopener">Github</a></p>
+<h3 id="参考链接："><a href="#参考链接：" class="headerlink" title="参考链接："></a>参考链接：</h3><ul>
+<li><a href="https://github.com/Alvin9999/new-pac/wiki/%E8%87%AA%E5%BB%BAss%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%95%99%E7%A8%8B" target="_blank" rel="noopener">Alvin9999_Github</a></li>
+</ul>
+<h3 id="最后，-科学上网。。"><a href="#最后，-科学上网。。" class="headerlink" title="最后， 科学上网。。"></a>最后， 科学上网。。</h3>
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/21/181016在机器人电子产品中有用的资源，项目和产品列表/" class="archive-article-date">
-  	<time datetime="2019-06-21T13:58:39.561Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/21/181016在机器人电子产品中有用的资源，项目和产品列表/">在机器人电子产品中有用的资源，项目和产品列表</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">iopen-source</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ssr</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/06/22/科学上网/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/21/180911视觉里程计和视觉SLAM 概述[6]/" class="archive-article-date">
-  	<time datetime="2019-06-21T13:58:39.552Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-21</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/06/21/20181012 Location Overview 2D 直方图滤波/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">基于一维网格地图的直方图滤波算法</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/21/180911视觉里程计和视觉SLAM 概述[6]/">视觉里程计和视觉SLAM 概述[6]</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">iopen-source</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#VPS服务器甚至被墙了："><span class="toc-number">1.</span> <span class="toc-text">VPS服务器甚至被墙了：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#具体搭建过程："><span class="toc-number">2.</span> <span class="toc-text">具体搭建过程：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#购买服务器："><span class="toc-number">2.1.</span> <span class="toc-text">购买服务器：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SSR服务的安装："><span class="toc-number">2.2.</span> <span class="toc-text">SSR服务的安装：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SSR客户端下载："><span class="toc-number">3.</span> <span class="toc-text">SSR客户端下载：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考链接："><span class="toc-number">4.</span> <span class="toc-text">参考链接：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#最后，-科学上网。。"><span class="toc-number">5.</span> <span class="toc-text">最后， 科学上网。。</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/21/180910视觉里程计和视觉SLAM 概述[5]/" class="archive-article-date">
-  	<time datetime="2019-06-21T13:58:39.543Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-21</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/21/180910视觉里程计和视觉SLAM 概述[5]/">视觉里程计和视觉SLAM 概述[5]</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">iopen-source</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/21/180908视觉里程计和视觉SLAM 概述[4]/" class="archive-article-date">
-  	<time datetime="2019-06-21T13:58:39.530Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/21/180908视觉里程计和视觉SLAM 概述[4]/">视觉里程计和视觉SLAM 概述[4]</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">iopen-source</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/21/180903[iopen source] 推荐一款开源的实用的串口调试助手/" class="archive-article-date">
-  	<time datetime="2019-06-21T13:58:39.517Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/21/180903[iopen source] 推荐一款开源的实用的串口调试助手/">【iopen source】推荐一款的实用的串口调试助手</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">iopen-source</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/21/180902视觉里程计和视觉SLAM 概述[3]/" class="archive-article-date">
-  	<time datetime="2019-06-21T13:58:39.511Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/21/180902视觉里程计和视觉SLAM 概述[3]/">180901视觉里程计和视觉SLAM 概述[3]</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">视觉SLAM</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/21/180902视觉里程计和视觉SLAM 概述[2]/" class="archive-article-date">
-  	<time datetime="2019-06-21T13:58:39.504Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/21/180902视觉里程计和视觉SLAM 概述[2]/">180901视觉里程计和视觉SLAM 概述[2]</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">视觉SLAM</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/21/180901视觉里程计和视觉SLAM 概述[1]/" class="archive-article-date">
-  	<time datetime="2019-06-21T13:58:39.499Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/21/180901视觉里程计和视觉SLAM 概述[1]/">180901视觉里程计和视觉SLAM 概述[1]</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">视觉SLAM</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/21/20190305 动态窗口算法运动规划/" class="archive-article-date">
-  	<time datetime="2019-06-21T13:58:39.487Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/21/20190305 动态窗口算法运动规划/">基于一维网格地图的直方图滤波算法</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">pathplan</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/21/hello-world/" class="archive-article-date">
-  	<time datetime="2019-06-21T05:41:36.724Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/21/hello-world/">Hello World</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/">&laquo; Prev</a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span>
-    </nav>
   
 
 
@@ -561,8 +419,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,

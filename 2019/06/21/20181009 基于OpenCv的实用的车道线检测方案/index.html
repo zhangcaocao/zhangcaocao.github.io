@@ -6,15 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives | Hexo</title>
+  <title>基于OpenCv车道线检测的实用方案 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/archives/page/2/index.html">
+  <meta name="description" content="今天给大家带来的是基于OpenCv车道线检测的实用方案，即使已经有基于深度学习的车道线检测方案，但是实际应用中大规模使用的仍然是传统的计算机视觉的方案，并且大部分深度学习方案都依赖于传统计算机视觉技术对图像进行预处理，下面是一些基于深度学习的解决方案。  DeepLanes: End-To-End Lane Position Estimation using Deep Neural Network">
+<meta name="keywords" content="车道线检测">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于OpenCv车道线检测的实用方案">
+<meta property="og:url" content="http://yoursite.com/2019/06/21/20181009 基于OpenCv的实用的车道线检测方案/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="今天给大家带来的是基于OpenCv车道线检测的实用方案，即使已经有基于深度学习的车道线检测方案，但是实际应用中大规模使用的仍然是传统的计算机视觉的方案，并且大部分深度学习方案都依赖于传统计算机视觉技术对图像进行预处理，下面是一些基于深度学习的解决方案。  DeepLanes: End-To-End Lane Position Estimation using Deep Neural Network">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="https://pydata.org/images/logo.png">
+<meta property="og:updated_time" content="2019-06-21T16:16:09.558Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="基于OpenCv车道线检测的实用方案">
+<meta name="twitter:description" content="今天给大家带来的是基于OpenCv车道线检测的实用方案，即使已经有基于深度学习的车道线检测方案，但是实际应用中大规模使用的仍然是传统的计算机视觉的方案，并且大部分深度学习方案都依赖于传统计算机视觉技术对图像进行预处理，下面是一些基于深度学习的解决方案。  DeepLanes: End-To-End Lane Position Estimation using Deep Neural Network">
+<meta name="twitter:image" content="https://pydata.org/images/logo.png">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -150,394 +157,207 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-20181009 基于OpenCv的实用的车道线检测方案" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      基于OpenCv车道线检测的实用方案
+    </h1>
+  
+
+        
+        <a href="/2019/06/21/20181009 基于OpenCv的实用的车道线检测方案/" class="archive-article-date">
+  	<time datetime="2019-06-21T13:58:39.640Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-21</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天给大家带来的是基于OpenCv车道线检测的实用方案，即使已经有基于深度学习的车道线检测方案，但是实际应用中大规模使用的仍然是传统的计算机视觉的方案，并且大部分深度学习方案都依赖于传统计算机视觉技术对图像进行预处理，下面是一些基于深度学习的解决方案。</p>
+<ul>
+<li><p><a href="https://www.cv-foundation.org/openaccess/content_cvpr_2016_workshops/w3/papers/Gurghian_DeepLanes_End-To-End_Lane_CVPR_2016_paper.pdf" target="_blank" rel="noopener">DeepLanes: End-To-End Lane Position Estimation using Deep Neural Networks</a></p>
+</li>
+<li><p><a href="https://arxiv.org/pdf/1802.05591.pdf" target="_blank" rel="noopener">Towards End-to-End Lane Detection: an Instance Segmentation Approach</a></p>
+</li>
+<li><p><a href="https://github.com/mvirgo/MLND-Capstone" target="_blank" rel="noopener">Github 深度学习中的车道检测</a></p>
+</li>
+<li><p><a href="https://towardsdatascience.com/lane-detection-with-deep-learning-part-1-9e096f3320b7" target="_blank" rel="noopener">一步一步完成深度学习的车道检测</a></p>
+<a id="more"></a> 
+
+</li>
+</ul>
+<p>关于基于传统计算机视觉的解决方案的方法，我此处直接引用了pydata berlin 2017的一个演讲的课件：</p>
+<p><img src="https://pydata.org/images/logo.png" alt="pydata"><br><code>Ross Kippenbrock - Finding Lane Lines for Self Driving Cars</code></p>
+<ul>
+<li>视频地址： “<a href="https://youtu.be/VyLihutdsPk?list=LL9-Kgsh8sv3lDR046dIjn_A”" target="_blank" rel="noopener">https://youtu.be/VyLihutdsPk?list=LL9-Kgsh8sv3lDR046dIjn_A”</a></li>
+</ul>
+<p>ok 下面请欣赏课件吧：</p>
+<p>如果你觉得文章对你有帮助请务必分享！那是我继续的动力！</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/21/181016在机器人电子产品中有用的资源，项目和产品列表/" class="archive-article-date">
-  	<time datetime="2019-06-21T13:58:39.561Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/21/181016在机器人电子产品中有用的资源，项目和产品列表/">在机器人电子产品中有用的资源，项目和产品列表</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">iopen-source</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">车道线检测</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/06/21/20181009 基于OpenCv的实用的车道线检测方案/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/21/180911视觉里程计和视觉SLAM 概述[6]/" class="archive-article-date">
-  	<time datetime="2019-06-21T13:58:39.552Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-21</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2019/06/21/20181012 Location Overview 2D 直方图滤波/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          基于一维网格地图的直方图滤波算法
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/06/21/20181004 Location Overview/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Location Overview</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/21/180911视觉里程计和视觉SLAM 概述[6]/">视觉里程计和视觉SLAM 概述[6]</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">iopen-source</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    目录，不存在的…
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/21/180910视觉里程计和视觉SLAM 概述[5]/" class="archive-article-date">
-  	<time datetime="2019-06-21T13:58:39.543Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-21</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/21/180910视觉里程计和视觉SLAM 概述[5]/">视觉里程计和视觉SLAM 概述[5]</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">iopen-source</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/21/180908视觉里程计和视觉SLAM 概述[4]/" class="archive-article-date">
-  	<time datetime="2019-06-21T13:58:39.530Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/21/180908视觉里程计和视觉SLAM 概述[4]/">视觉里程计和视觉SLAM 概述[4]</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">iopen-source</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/21/180903[iopen source] 推荐一款开源的实用的串口调试助手/" class="archive-article-date">
-  	<time datetime="2019-06-21T13:58:39.517Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/21/180903[iopen source] 推荐一款开源的实用的串口调试助手/">【iopen source】推荐一款的实用的串口调试助手</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">iopen-source</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/21/180902视觉里程计和视觉SLAM 概述[3]/" class="archive-article-date">
-  	<time datetime="2019-06-21T13:58:39.511Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/21/180902视觉里程计和视觉SLAM 概述[3]/">180901视觉里程计和视觉SLAM 概述[3]</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">视觉SLAM</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/21/180902视觉里程计和视觉SLAM 概述[2]/" class="archive-article-date">
-  	<time datetime="2019-06-21T13:58:39.504Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/21/180902视觉里程计和视觉SLAM 概述[2]/">180901视觉里程计和视觉SLAM 概述[2]</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">视觉SLAM</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/21/180901视觉里程计和视觉SLAM 概述[1]/" class="archive-article-date">
-  	<time datetime="2019-06-21T13:58:39.499Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/21/180901视觉里程计和视觉SLAM 概述[1]/">180901视觉里程计和视觉SLAM 概述[1]</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">视觉SLAM</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/21/20190305 动态窗口算法运动规划/" class="archive-article-date">
-  	<time datetime="2019-06-21T13:58:39.487Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/21/20190305 动态窗口算法运动规划/">基于一维网格地图的直方图滤波算法</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">pathplan</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/21/hello-world/" class="archive-article-date">
-  	<time datetime="2019-06-21T05:41:36.724Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/21/hello-world/">Hello World</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/">&laquo; Prev</a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span>
-    </nav>
   
 
 
@@ -561,8 +381,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,
