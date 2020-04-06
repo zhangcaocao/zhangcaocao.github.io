@@ -20,23 +20,26 @@
     <meta name="keywords" content="deeplearning,SLAM,robot">
     
     <meta name="description" content="Good judgment comes from experience ，and a lot of that comes from bad judgment.">
-    <meta name="description" content="主要是记一些理解之内的东西，没理解的东西，记下来也没用，这是一个初步的总结。 更加详细的信息参考cplusplus.com  1、题目：剑指offer 找出数组中重复的数字在一个长度为 n 的数组 nums 里的所有数字都在 0～n-1 的范围内。数组中某些数字是重复的，但不知道有几个数字重复了，也不知道每个数字重复了几次。请找出数组中任意一个重复的数字。 示例 1：  输入：  1[2, 3,">
+    <meta name="description" content="1、题目 2、解决方案12345678910111213141516class Solution &amp;#123;public:    string replaceSpace(string s) &amp;#123;        string temp_s;        for (auto str:s)        &amp;#123;            if (str &#x3D;&#x3D; &#39; &#39;) &amp;#123;temp">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CPP set 简介">
-<meta property="og:url" content="http://www.cao-lin.top/2020/04/02/std-set%E7%9A%84%E7%94%A8%E6%B3%95%E5%88%9D%E6%AD%A5%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:title" content="CPP string 简介">
+<meta property="og:url" content="http://www.cao-lin.top/2020/04/06/CPP%20string/index.html">
 <meta property="og:site_name" content="Cao Lin Blog">
-<meta property="og:description" content="主要是记一些理解之内的东西，没理解的东西，记下来也没用，这是一个初步的总结。 更加详细的信息参考cplusplus.com  1、题目：剑指offer 找出数组中重复的数字在一个长度为 n 的数组 nums 里的所有数字都在 0～n-1 的范围内。数组中某些数字是重复的，但不知道有几个数字重复了，也不知道每个数字重复了几次。请找出数组中任意一个重复的数字。 示例 1：  输入：  1[2, 3,">
+<meta property="og:description" content="1、题目 2、解决方案12345678910111213141516class Solution &amp;#123;public:    string replaceSpace(string s) &amp;#123;        string temp_s;        for (auto str:s)        &amp;#123;            if (str &#x3D;&#x3D; &#39; &#39;) &amp;#123;temp">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-04-02T06:57:22.407Z">
-<meta property="article:modified_time" content="2020-04-06T01:46:42.909Z">
+<meta property="og:image" content="https://i.loli.net/2020/04/06/6S9YMiFXCqTrB5n.png">
+<meta property="og:image" content="https://i.loli.net/2020/04/06/65eMtuglnvzW9fq.png">
+<meta property="article:published_time" content="2020-04-06T02:39:43.195Z">
+<meta property="article:modified_time" content="2020-04-06T02:38:26.754Z">
 <meta property="article:author" content="Cao Lin">
 <meta property="article:tag" content="C++">
 <meta property="article:tag" content="剑指offer">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2020/04/06/6S9YMiFXCqTrB5n.png">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     
-    <title>CPP set 简介 · Cao Lin&#39;s Blog</title>
+    <title>CPP string 简介 · Cao Lin&#39;s Blog</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -231,7 +234,7 @@
                 <a href="/" >Cao Lin&#39;s Blog.</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">CPP set 简介</a>
+                <a href="#" class="post-name">CPP string 简介</a>
             </div>
     </div>
     
@@ -261,7 +264,7 @@ height:70vh;
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            CPP set 简介
+            CPP string 简介
             <!-- 404 -->
             
         </h1>
@@ -288,12 +291,12 @@ height:70vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">654</span>Reading time: <span class="post-count reading-time">3 min</span></span>
+                        <span>Word count: <span class="post-count word-count">732</span>Reading time: <span class="post-count reading-time">3 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
                     <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                    <span class="post-intro-time">2020/04/02</span>
+                    <span class="post-intro-time">2020/04/06</span>
                     
                     <span id="busuanzi_container_page_pv" class="busuanzi-pv">
                         <span class="iconfont-archer">&#xe602;</span>
@@ -417,147 +420,200 @@ height:70vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <blockquote>
-<p>主要是记一些理解之内的东西，没理解的东西，记下来也没用，这是一个初步的总结。</p>
-<p>更加详细的信息参考<a href="http://www.cplusplus.com/reference/set/set/" target="_blank" rel="noopener">cplusplus.com</a></p>
-</blockquote>
-<h4 id="1、题目："><a href="#1、题目：" class="headerlink" title="1、题目："></a>1、题目：</h4><p><a href="https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof/" target="_blank" rel="noopener">剑指offer</a></p>
-<h5 id="找出数组中重复的数字"><a href="#找出数组中重复的数字" class="headerlink" title="找出数组中重复的数字"></a>找出数组中重复的数字</h5><p>在一个长度为 n 的数组 nums 里的所有数字都在 0～n-1 的范围内。数组中某些数字是重复的，但不知道有几个数字重复了，也不知道每个数字重复了几次。请找出数组中任意一个重复的数字。</p>
-<p>示例 1：</p>
+        <h4 id="1、题目"><a href="#1、题目" class="headerlink" title="1、题目"></a>1、题目</h4><p><img src="https://i.loli.net/2020/04/06/6S9YMiFXCqTrB5n.png" alt="image-20200406094953830"></p>
+<h4 id="2、解决方案"><a href="#2、解决方案" class="headerlink" title="2、解决方案"></a>2、解决方案</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">replaceSpace</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">string</span> temp_s;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> str:s)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (str == <span class="string">' '</span>) &#123;temp_s += <span class="string">"%20"</span>;&#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;temp_s += str;&#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> temp_s;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">执行用时 :4 ms, 在所有 C++ 提交中击败了55.34%的用户</span></span><br><span class="line"><span class="comment">内存消耗 :6.2 MB, 在所有 C++ 提交中击败了100.00%的用户</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p>思路很简单，使用了C 11的特性，可以十分简洁的对string进行遍历；</p>
+<p>需要注意的是<code>&quot; &quot;</code>表示的是 <code>string</code>而<code>&#39; &#39;</code>表示的是<code>str</code>也就是说%20这个string包含了3个str，所以这里使用 <code>+=</code>直接添加。</p>
+<h4 id="3、讲讲string"><a href="#3、讲讲string" class="headerlink" title="3、讲讲string"></a>3、讲讲string</h4><h5 id="3-1-Overview-and-feature"><a href="#3-1-Overview-and-feature" class="headerlink" title="3.1 Overview and feature"></a>3.1 Overview and feature</h5><p><a href="http://www.cplusplus.com/reference/string/string/" target="_blank" rel="noopener">c plus plus.com</a></p>
 <ul>
-<li>输入：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[2, 3, 1, 0, 2, 5, 3]</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>输出：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2 或 3</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>限制：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2 &lt;&#x3D; n &lt;&#x3D; 100000</span><br></pre></td></tr></table></figure>
-
-<h5 id="我的解决方案"><a href="#我的解决方案" class="headerlink" title="我的解决方案"></a>我的解决方案</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findRepeatNumber</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt; s;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> i : nums)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (!s.insert(i).second)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">return</span> i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">执行用时 :148 ms, 在所有 C++ 提交中击败了6.67% 的用户</span></span><br><span class="line"><span class="comment">内存消耗 :28.6 MB, 在所有 C++ 提交中击败了100.00%的用户</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p>直接使用<code>set</code>的<code>insert()</code>方法来进行判断当前插入的值是否已经存在，然后就此总结一下<code>set</code>的相关用法。</p>
-<h4 id="2、关于set"><a href="#2、关于set" class="headerlink" title="2、关于set"></a>2、关于<code>set</code></h4><h5 id="2-1、Overview-and-feature"><a href="#2-1、Overview-and-feature" class="headerlink" title="2.1、Overview and feature"></a>2.1、Overview and feature</h5><ul>
-<li><p>Sets are containers that store unique elements following a specific order.</p>
+<li><p>字符串是代表字符序列的对象;</p>
 </li>
-<li><p>In a <code>set</code>, the value of an element also identifies it (the value is itself the <em>key</em>, of type <code>T</code>), and each value must be unique. The value of the elements in a <code>set</code> cannot be modified once in the container (<strong>the elements are always const</strong>), but they can be inserted or removed from the container.</p>
+<li><p>在<code>char_traits</code>中字符类型包括主要有以下几类：</p>
+<p><img src="https://i.loli.net/2020/04/06/65eMtuglnvzW9fq.png" alt="image-20200406100931327"></p>
 </li>
-<li><p>Internally, the elements in a <code>set</code> are always sorted following a specific <strong>strict weak ordering</strong> criterion indicated by its internal <a href="http://www.cplusplus.com/set::key_comp" target="_blank" rel="noopener">comparison object</a> (of type <code>Compare</code>).</p>
+<li><p>string类是basic_string类模板的实例化，该模板使用char（即字节 1byte）作为其字符类型；</p>
 </li>
-<li><p><code>set</code> containers <strong>are generally slower than</strong> <a href="http://www.cplusplus.com/unordered_set" target="_blank" rel="noopener">unordered_set</a> containers to access individual elements by their <em>key</em>, but they allow the direct iteration on subsets based on their order.</p>
-</li>
-<li><p>Sets are typically implemented as <em>binary search trees</em>.</p>
+<li><p>需要注意的是，string类对字节的处理独立于编码的形式，例如<strong>utf-8</strong>（有1个字节，有两个字节的（大多数中文），也有三个字节的（少部分其他国家字符））举个栗子：</p>
 </li>
 </ul>
-<h5 id="2-2、-Member-functions"><a href="#2-2、-Member-functions" class="headerlink" title="2.2、 Member functions"></a>2.2、 Member functions</h5><ul>
-<li><p><a href="http://www.cplusplus.com/reference/set/set/set/" target="_blank" rel="noopener"><strong>(constructor)</strong></a></p>
-<p>Construct set (public member function )</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">string</span> s = <span class="string">"abcd你好"</span>;</span><br><span class="line"><span class="comment">// 长度是8个字节</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; s.length() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
+
+<h5 id="3-2、-Member-functions"><a href="#3-2、-Member-functions" class="headerlink" title="3.2、 Member functions"></a>3.2、 Member functions</h5><ul>
+<li><p><a href="http://www.cplusplus.com/reference/string/string/string/" target="_blank" rel="noopener"><strong>(constructor)</strong></a></p>
+<p>Construct string object (public member function )</p>
 </li>
-<li><p><a href="http://www.cplusplus.com/reference/set/set/~set/" target="_blank" rel="noopener"><strong>(destructor)</strong></a></p>
-<p>Set destructor (public member function )</p>
+<li><p><a href="http://www.cplusplus.com/reference/string/string/~string/" target="_blank" rel="noopener"><strong>(destructor)</strong></a></p>
+<p>String destructor (public member function )</p>
 </li>
-<li><p><a href="http://www.cplusplus.com/reference/set/set/operator=/" target="_blank" rel="noopener"><strong>operator=</strong></a></p>
-<p>Copy container content (public member function )</p>
+<li><p><a href="http://www.cplusplus.com/reference/string/string/operator=/" target="_blank" rel="noopener"><strong>operator=</strong></a></p>
+<p>String assignment (public member function )</p>
 </li>
 </ul>
 <p><strong>Iterators</strong>:</p>
 <ul>
-<li><p><a href="http://www.cplusplus.com/reference/set/set/begin/" target="_blank" rel="noopener"><strong>begin</strong></a></p>
+<li><p><a href="http://www.cplusplus.com/reference/string/string/begin/" target="_blank" rel="noopener"><strong>begin</strong></a></p>
 <p>Return iterator to beginning (public member function )</p>
 </li>
-<li><p><a href="http://www.cplusplus.com/reference/set/set/end/" target="_blank" rel="noopener"><strong>end</strong></a></p>
+<li><p><a href="http://www.cplusplus.com/reference/string/string/end/" target="_blank" rel="noopener"><strong>end</strong></a></p>
 <p>Return iterator to end (public member function )</p>
 </li>
-<li><p><a href="http://www.cplusplus.com/reference/set/set/rbegin/" target="_blank" rel="noopener"><strong>rbegin</strong></a></p>
+<li><p><a href="http://www.cplusplus.com/reference/string/string/rbegin/" target="_blank" rel="noopener"><strong>rbegin</strong></a></p>
 <p>Return reverse iterator to reverse beginning (public member function )</p>
 </li>
-<li><p><a href="http://www.cplusplus.com/reference/set/set/rend/" target="_blank" rel="noopener"><strong>rend</strong></a></p>
+<li><p><a href="http://www.cplusplus.com/reference/string/string/rend/" target="_blank" rel="noopener"><strong>rend</strong></a></p>
 <p>Return reverse iterator to reverse end (public member function )</p>
 </li>
-<li><p><a href="http://www.cplusplus.com/reference/set/set/cbegin/" target="_blank" rel="noopener"><strong>cbegin</strong> </a></p>
+<li><p><a href="http://www.cplusplus.com/reference/string/string/cbegin/" target="_blank" rel="noopener"><strong>cbegin</strong> </a></p>
 <p>Return const_iterator to beginning (public member function )</p>
 </li>
-<li><p><a href="http://www.cplusplus.com/reference/set/set/cend/" target="_blank" rel="noopener"><strong>cend</strong> </a></p>
+<li><p><a href="http://www.cplusplus.com/reference/string/string/cend/" target="_blank" rel="noopener"><strong>cend</strong> </a></p>
 <p>Return const_iterator to end (public member function )</p>
 </li>
-<li><p><a href="http://www.cplusplus.com/reference/set/set/crbegin/" target="_blank" rel="noopener"><strong>crbegin</strong> </a></p>
+<li><p><a href="http://www.cplusplus.com/reference/string/string/crbegin/" target="_blank" rel="noopener"><strong>crbegin</strong> </a></p>
 <p>Return const_reverse_iterator to reverse beginning (public member function )</p>
 </li>
-<li><p><a href="http://www.cplusplus.com/reference/set/set/crend/" target="_blank" rel="noopener"><strong>crend</strong> </a></p>
+<li><p><a href="http://www.cplusplus.com/reference/string/string/crend/" target="_blank" rel="noopener"><strong>crend</strong> </a></p>
 <p>Return const_reverse_iterator to reverse end (public member function )</p>
 </li>
 </ul>
 <p><strong>Capacity</strong>:</p>
 <ul>
-<li><p><a href="http://www.cplusplus.com/reference/set/set/empty/" target="_blank" rel="noopener"><strong>empty</strong></a></p>
-<p>Test whether container is empty (public member function )</p>
+<li><p><a href="http://www.cplusplus.com/reference/string/string/size/" target="_blank" rel="noopener"><strong>size</strong></a></p>
+<p>Return length of string (public member function )</p>
 </li>
-<li><p><a href="http://www.cplusplus.com/reference/set/set/size/" target="_blank" rel="noopener"><strong>size</strong></a></p>
-<p>Return container size (public member function )</p>
+<li><p><a href="http://www.cplusplus.com/reference/string/string/length/" target="_blank" rel="noopener"><strong>length</strong></a></p>
+<p>Return length of string (public member function )</p>
 </li>
-<li><p><a href="http://www.cplusplus.com/reference/set/set/max_size/" target="_blank" rel="noopener"><strong>max_size</strong></a></p>
-<p>Return maximum size (public member function )</p>
+<li><p><a href="http://www.cplusplus.com/reference/string/string/max_size/" target="_blank" rel="noopener"><strong>max_size</strong></a></p>
+<p>Return maximum size of string (public member function )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/string/string/resize/" target="_blank" rel="noopener"><strong>resize</strong></a></p>
+<p>Resize string (public member function )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/string/string/capacity/" target="_blank" rel="noopener"><strong>capacity</strong></a></p>
+<p>Return size of allocated storage (public member function )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/string/string/reserve/" target="_blank" rel="noopener"><strong>reserve</strong></a></p>
+<p>Request a change in capacity (public member function )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/string/string/clear/" target="_blank" rel="noopener"><strong>clear</strong></a></p>
+<p>Clear string (public member function )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/string/string/empty/" target="_blank" rel="noopener"><strong>empty</strong></a></p>
+<p>Test if string is empty (public member function )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/string/string/shrink_to_fit/" target="_blank" rel="noopener"><strong>shrink_to_fit</strong> </a></p>
+<p>Shrink to fit (public member function )</p>
+</li>
+</ul>
+<p><strong>Element access</strong>:</p>
+<ul>
+<li><p><a href="http://www.cplusplus.com/reference/string/string/operator[]/" target="_blank" rel="noopener"><strong>operator</strong></a></p>
+<p>Get character of string (public member function )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/string/string/at/" target="_blank" rel="noopener"><strong>at</strong></a></p>
+<p>Get character in string (public member function )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/string/string/back/" target="_blank" rel="noopener"><strong>back</strong> </a></p>
+<p>Access last character (public member function )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/string/string/front/" target="_blank" rel="noopener"><strong>front</strong> </a></p>
+<p>Access first character (public member function )</p>
 </li>
 </ul>
 <p><strong>Modifiers</strong>:</p>
 <ul>
-<li><p><a href="http://www.cplusplus.com/reference/set/set/insert/" target="_blank" rel="noopener"><strong>insert</strong></a></p>
-<p>Insert element (public member function )</p>
+<li><p><a href="http://www.cplusplus.com/reference/string/string/operator+=/" target="_blank" rel="noopener"><strong>operator+=</strong></a></p>
+<p>Append to string (public member function )</p>
 </li>
-<li><p><a href="http://www.cplusplus.com/reference/set/set/erase/" target="_blank" rel="noopener"><strong>erase</strong></a></p>
-<p>Erase elements (public member function )</p>
+<li><p><a href="http://www.cplusplus.com/reference/string/string/append/" target="_blank" rel="noopener"><strong>append</strong></a></p>
+<p>Append to string (public member function )</p>
 </li>
-<li><p><a href="http://www.cplusplus.com/reference/set/set/swap/" target="_blank" rel="noopener"><strong>swap</strong></a></p>
-<p>Swap content (public member function )</p>
+<li><p><a href="http://www.cplusplus.com/reference/string/string/push_back/" target="_blank" rel="noopener"><strong>push_back</strong></a></p>
+<p>Append character to string (public member function )</p>
 </li>
-<li><p><a href="http://www.cplusplus.com/reference/set/set/clear/" target="_blank" rel="noopener"><strong>clear</strong></a></p>
-<p>Clear content (public member function )</p>
+<li><p><a href="http://www.cplusplus.com/reference/string/string/assign/" target="_blank" rel="noopener"><strong>assign</strong></a></p>
+<p>Assign content to string (public member function )</p>
 </li>
-<li><p><a href="http://www.cplusplus.com/reference/set/set/emplace/" target="_blank" rel="noopener"><strong>emplace</strong> </a></p>
-<p>Construct and insert element (public member function )</p>
+<li><p><a href="http://www.cplusplus.com/reference/string/string/insert/" target="_blank" rel="noopener"><strong>insert</strong></a></p>
+<p>Insert into string (public member function )</p>
 </li>
-<li><p><a href="http://www.cplusplus.com/reference/set/set/emplace_hint/" target="_blank" rel="noopener"><strong>emplace_hint</strong> </a></p>
-<p>Construct and insert element with hint (public member function )</p>
+<li><p><a href="http://www.cplusplus.com/reference/string/string/erase/" target="_blank" rel="noopener"><strong>erase</strong></a></p>
+<p>Erase characters from string (public member function )</p>
 </li>
-</ul>
-<p><strong>Observers</strong>:</p>
-<ul>
-<li><p><a href="http://www.cplusplus.com/reference/set/set/key_comp/" target="_blank" rel="noopener"><strong>key_comp</strong></a></p>
-<p>Return comparison object (public member function )</p>
+<li><p><a href="http://www.cplusplus.com/reference/string/string/replace/" target="_blank" rel="noopener"><strong>replace</strong></a></p>
+<p>Replace portion of string (public member function )</p>
 </li>
-<li><p><a href="http://www.cplusplus.com/reference/set/set/value_comp/" target="_blank" rel="noopener"><strong>value_comp</strong></a></p>
-<p>Return comparison object (public member function )</p>
+<li><p><a href="http://www.cplusplus.com/reference/string/string/swap/" target="_blank" rel="noopener"><strong>swap</strong></a></p>
+<p>Swap string values (public member function )</p>
 </li>
-</ul>
-<p><strong>Operations</strong>:</p>
-<ul>
-<li><p><a href="http://www.cplusplus.com/reference/set/set/find/" target="_blank" rel="noopener"><strong>find</strong></a></p>
-<p>Get iterator to element (public member function )</p>
-</li>
-<li><p><a href="http://www.cplusplus.com/reference/set/set/count/" target="_blank" rel="noopener"><strong>count</strong></a></p>
-<p>Count elements with a specific value (public member function )</p>
-</li>
-<li><p><a href="http://www.cplusplus.com/reference/set/set/lower_bound/" target="_blank" rel="noopener"><strong>lower_bound</strong></a></p>
-<p>Return iterator to lower bound (public member function )</p>
-</li>
-<li><p><a href="http://www.cplusplus.com/reference/set/set/upper_bound/" target="_blank" rel="noopener"><strong>upper_bound</strong></a></p>
-<p>Return iterator to upper bound (public member function )</p>
-</li>
-<li><p><a href="http://www.cplusplus.com/reference/set/set/equal_range/" target="_blank" rel="noopener"><strong>equal_range</strong></a></p>
-<p>Get range of equal elements (public member function )</p>
+<li><p><a href="http://www.cplusplus.com/reference/string/string/pop_back/" target="_blank" rel="noopener"><strong>pop_back</strong> </a></p>
+<p>Delete last character (public member function )</p>
 </li>
 </ul>
-<p><strong>Allocator</strong>:</p>
+<p><strong>String operations</strong>:</p>
 <ul>
-<li><p><a href="http://www.cplusplus.com/reference/set/set/get_allocator/" target="_blank" rel="noopener"><strong>get_allocator</strong></a></p>
+<li><p><a href="http://www.cplusplus.com/reference/string/string/c_str/" target="_blank" rel="noopener"><strong>c_str</strong></a></p>
+<p>Get C string equivalent (public member function )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/string/string/data/" target="_blank" rel="noopener"><strong>data</strong></a></p>
+<p>Get string data (public member function )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/string/string/get_allocator/" target="_blank" rel="noopener"><strong>get_allocator</strong></a></p>
 <p>Get allocator (public member function )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/string/string/copy/" target="_blank" rel="noopener"><strong>copy</strong></a></p>
+<p>Copy sequence of characters from string (public member function )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/string/string/find/" target="_blank" rel="noopener"><strong>find</strong></a></p>
+<p>Find content in string (public member function )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/string/string/rfind/" target="_blank" rel="noopener"><strong>rfind</strong></a></p>
+<p>Find last occurrence of content in string (public member function )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/string/string/find_first_of/" target="_blank" rel="noopener"><strong>find_first_of</strong></a></p>
+<p>Find character in string (public member function )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/string/string/find_last_of/" target="_blank" rel="noopener"><strong>find_last_of</strong></a></p>
+<p>Find character in string from the end (public member function )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/string/string/find_first_not_of/" target="_blank" rel="noopener"><strong>find_first_not_of</strong></a></p>
+<p>Find absence of character in string (public member function )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/string/string/find_last_not_of/" target="_blank" rel="noopener"><strong>find_last_not_of</strong></a></p>
+<p>Find non-matching character in string from the end (public member function )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/string/string/substr/" target="_blank" rel="noopener"><strong>substr</strong></a></p>
+<p>Generate substring (public member function )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/string/string/compare/" target="_blank" rel="noopener"><strong>compare</strong></a></p>
+<p>Compare strings (public member function )</p>
+</li>
+</ul>
+<h3 id="Member-constants"><a href="#Member-constants" class="headerlink" title="Member constants"></a>Member constants</h3><ul>
+<li><p><a href="http://www.cplusplus.com/reference/string/string/npos/" target="_blank" rel="noopener"><strong>npos</strong></a></p>
+<p>Maximum value for size_t (public static member constant )</p>
+</li>
+</ul>
+<h3 id="Non-member-function-overloads"><a href="#Non-member-function-overloads" class="headerlink" title="Non-member function overloads"></a>Non-member function overloads</h3><ul>
+<li><p><a href="http://www.cplusplus.com/reference/string/string/operator+/" target="_blank" rel="noopener"><strong>operator+</strong></a></p>
+<p>Concatenate strings (function )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/string/string/operators/" target="_blank" rel="noopener"><strong>relational operators</strong></a></p>
+<p>Relational operators for string (function )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/string/string/swap-free/" target="_blank" rel="noopener"><strong>swap</strong></a></p>
+<p>Exchanges the values of two strings (function )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/string/string/operator>>/" target="_blank" rel="noopener"><strong>operator&gt;&gt;</strong></a></p>
+<p>Extract string from stream (function )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/string/string/operator" target="_blank" rel="noopener"><strong>operator&lt;&lt;</strong></a></p>
+<p>Insert string into stream (function )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/string/string/getline/" target="_blank" rel="noopener"><strong>getline</strong></a></p>
+<p>Get line from stream into string (function )</p>
 </li>
 </ul>
 
@@ -566,9 +622,9 @@ height:70vh;
     
         <div class="license-wrapper">
             <p>Author：<a href="http://www.cao-lin.top">Cao Lin</a>
-            <p>原文链接：<a href="http://www.cao-lin.top/2020/04/02/std-set%E7%9A%84%E7%94%A8%E6%B3%95%E5%88%9D%E6%AD%A5%E6%80%BB%E7%BB%93/">http://www.cao-lin.top/2020/04/02/std-set%E7%9A%84%E7%94%A8%E6%B3%95%E5%88%9D%E6%AD%A5%E6%80%BB%E7%BB%93/</a>
-            <p>发表日期：<a href="http://www.cao-lin.top/2020/04/02/std-set%E7%9A%84%E7%94%A8%E6%B3%95%E5%88%9D%E6%AD%A5%E6%80%BB%E7%BB%93/">April 2nd 2020, 2:57:22 pm</a>
-            <p>更新日期：<a href="http://www.cao-lin.top/2020/04/02/std-set%E7%9A%84%E7%94%A8%E6%B3%95%E5%88%9D%E6%AD%A5%E6%80%BB%E7%BB%93/">April 6th 2020, 9:46:42 am</a>
+            <p>原文链接：<a href="http://www.cao-lin.top/2020/04/06/CPP%20string/">http://www.cao-lin.top/2020/04/06/CPP%20string/</a>
+            <p>发表日期：<a href="http://www.cao-lin.top/2020/04/06/CPP%20string/">April 6th 2020, 10:39:43 am</a>
+            <p>更新日期：<a href="http://www.cao-lin.top/2020/04/06/CPP%20string/">April 6th 2020, 10:38:26 am</a>
             <p>版权声明：本文采用<a rel="license noopener" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -576,17 +632,12 @@ height:70vh;
     <ul class="post-paginator">
         <li class="next">
             
-                <div class="nextSlogan">Next Post</div>
-                <a href= "/2020/04/03/CPPvector%E6%93%8D%E4%BD%9C/" title= "CPP vector 简介">
-                    <div class="nextTitle">CPP vector 简介</div>
-                </a>
-            
         </li>
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href= "/2020/04/01/hello-world/" title= "Hello World">
-                    <div class="prevTitle">Hello World</div>
+                <a href= "/2020/04/03/CPPvector%E6%93%8D%E4%BD%9C/" title= "CPP vector 简介">
+                    <div class="prevTitle">CPP vector 简介</div>
                 </a>
             
         </li>
@@ -719,7 +770,7 @@ top:70vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、题目："><span class="toc-number">1.</span> <span class="toc-text">1、题目：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#找出数组中重复的数字"><span class="toc-number">1.1.</span> <span class="toc-text">找出数组中重复的数字</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#我的解决方案"><span class="toc-number">1.2.</span> <span class="toc-text">我的解决方案</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、关于set"><span class="toc-number">2.</span> <span class="toc-text">2、关于set</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-1、Overview-and-feature"><span class="toc-number">2.1.</span> <span class="toc-text">2.1、Overview and feature</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2、-Member-functions"><span class="toc-number">2.2.</span> <span class="toc-text">2.2、 Member functions</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、题目"><span class="toc-number">1.</span> <span class="toc-text">1、题目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、解决方案"><span class="toc-number">2.</span> <span class="toc-text">2、解决方案</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3、讲讲string"><span class="toc-number">3.</span> <span class="toc-text">3、讲讲string</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#3-1-Overview-and-feature"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 Overview and feature</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-2、-Member-functions"><span class="toc-number">3.2.</span> <span class="toc-text">3.2、 Member functions</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Member-constants"><span class="toc-number"></span> <span class="toc-text">Member constants</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Non-member-function-overloads"><span class="toc-number"></span> <span class="toc-text">Non-member function overloads</span></a>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
