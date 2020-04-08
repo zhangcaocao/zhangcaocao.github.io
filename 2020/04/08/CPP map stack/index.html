@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- title -->
+
+
+
+
+<!-- keywords -->
+
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" >
+    <meta name="author" content="Cao Lin">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="Cao Lin">
+    
+    <meta name="keywords" content="deeplearning,SLAM,robot">
+    
+    <meta name="description" content="Good judgment comes from experience ，and a lot of that comes from bad judgment.">
+    <meta name="description" content="1、题目 2、解决方案123456789101112131415161718192021222324252627282930313233343536373839404142434445&#x2F;** * Definition for a binary tree node. * struct TreeNode &amp;#123; *     int val; *     TreeNode *left; *">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CPP map 和 stack">
+<meta property="og:url" content="http://www.cao-lin.top/2020/04/08/CPP%20map%20stack/index.html">
+<meta property="og:site_name" content="Cao Lin Blog">
+<meta property="og:description" content="1、题目 2、解决方案123456789101112131415161718192021222324252627282930313233343536373839404142434445&#x2F;** * Definition for a binary tree node. * struct TreeNode &amp;#123; *     int val; *     TreeNode *left; *">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.loli.net/2020/04/08/SHIvQm47lctF1T3.png">
+<meta property="article:published_time" content="2020-04-08T08:41:51.802Z">
+<meta property="article:modified_time" content="2020-04-08T08:41:10.593Z">
+<meta property="article:author" content="Cao Lin">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="剑指offer">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2020/04/08/SHIvQm47lctF1T3.png">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    
+    <title>CPP map 和 stack · Cao Lin&#39;s Blog</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href= "/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <link rel="stylesheet" href= "/css/mobile.css?v=20180824" media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+    <link rel="icon" href= "/assets/favicon.ico" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script" />
+    <link rel="preload" href="/scripts/main.js" as="script" />
+    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin>
+    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin>
+    
+    <!-- fancybox -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >Cao Lin&#39;s Blog.</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">CPP map 和 stack</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>Cao Lin's Blog.</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style="
+
+
+
+
+
+
+
+height:70vh;
+">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            CPP map 和 stack
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "C++">C++</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "剑指offer">剑指offer</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count word-count">1.3k</span>Reading time: <span class="post-count reading-time">6 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2020/04/08</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <h4 id="1、题目"><a href="#1、题目" class="headerlink" title="1、题目"></a>1、题目</h4><p><img src="https://i.loli.net/2020/04/08/SHIvQm47lctF1T3.png" alt="image-20200408161022984"></p>
+<h4 id="2、解决方案"><a href="#2、解决方案" class="headerlink" title="2、解决方案"></a>2、解决方案</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(NULL), right(NULL) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 详细的解释参考：https://blog.csdn.net/Yeoman92/article/details/77868367</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator ir;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">buildTree</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; preorder, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; inorder)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (ir iter = inorder.<span class="built_in">begin</span>(); iter != inorder.<span class="built_in">end</span>(); ++iter) &#123;</span><br><span class="line">            umap[*iter] = iter;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> SweapLR(preorder.<span class="built_in">begin</span>(), preorder.<span class="built_in">end</span>(), inorder.<span class="built_in">begin</span>(), inorder.<span class="built_in">end</span>());</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">SweapLR</span><span class="params">(ir pbegin, ir pend, ir ibegin, ir iend)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (ibegin == iend) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">        <span class="comment">// 新建一个节点  preorder 的第一个结点一定是根节点</span></span><br><span class="line">        TreeNode* cur = <span class="keyword">new</span> TreeNode(*pbegin);</span><br><span class="line">        <span class="keyword">if</span>(pend - pbegin == <span class="number">1</span>) <span class="keyword">return</span> cur;</span><br><span class="line">        <span class="comment">//vector&lt;int&gt;::iterator root = find(ibegin, iend, *pbegin);</span></span><br><span class="line">        ir root = umap[*pbegin];</span><br><span class="line">        <span class="keyword">int</span> len = root - ibegin;</span><br><span class="line">        cur-&gt;left  = SweapLR(pbegin+<span class="number">1</span>, pbegin+<span class="number">1</span>+len, ibegin, root);</span><br><span class="line">        cur-&gt;right = SweapLR(pbegin+<span class="number">1</span>+len, pend, root+<span class="number">1</span>, iend);</span><br><span class="line">        <span class="keyword">return</span> cur;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">unordered_map</span>&lt;<span class="keyword">int</span>, ir&gt; umap;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">执行用时 :20 ms, 在所有 C++ 提交中击败了82.71%的用户</span></span><br><span class="line"><span class="comment">内存消耗 :26.6 MB, 在所有 C++ 提交中击败了100.00%的用户</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p><code>前序遍历</code>可以很容易找到根节点，然后在<code>中序排列</code>中查找这个根节点的索引位置；</p>
+<p>这个位置把<code>中序排序</code>分为了左右部分的树，然后递归遍历即可；</p>
+<p><strong>需要注意的是</strong>一开始我利用</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator root = <span class="built_in">find</span>(ibegin, iend, *pbegin);</span><br></pre></td></tr></table></figure>
+
+<p>来查找索引，很耗时间，每次都要找一次；</p>
+<p>然后看了一下提交的答案，可以使用一个<code>map</code>，利用结点作为<code>key</code>然后索引作为<code>value</code>，可以考虑为在程序开始前提前把数据读到缓存中，后续可以很快的获取索引，对于需要频繁查找的程序很有用；</p>
+<p>但是内存消耗感觉有点大，毕竟把数据重新复制了一遍，不过这种利用map/array，消耗一部分内存以大幅度提高时间的思想值得学习。</p>
+<h4 id="3、讲讲map"><a href="#3、讲讲map" class="headerlink" title="3、讲讲map"></a>3、讲讲map</h4><p><a href="http://www.cplusplus.com/reference/map/map/" target="_blank" rel="noopener">http://www.cplusplus.com/reference/map/map/</a></p>
+<h5 id="3-1-Overview-and-feature"><a href="#3-1-Overview-and-feature" class="headerlink" title="3.1 Overview and feature"></a>3.1 Overview and feature</h5><ul>
+<li><p><code>std::map</code>是一种数据关联的容器，存储按特定顺序由键（key）和值（value）的组合形成的元素。</p>
+</li>
+<li><p>在map中，key通常用于对元素进行排序和唯一标识，而value存储与该key关联的内容。</p>
+</li>
+<li><p>map通常比unordered_map通过key访问value要慢，但是map允许基于map的顺序直接对子集进行迭代。</p>
+</li>
+<li><p>可以使用方括号运算符（（operator []）通过对应的键直接访问map中的映射值。</p>
+</li>
+<li><p>map通常实现为二进制搜索树。</p>
+</li>
+</ul>
+<h5 id="3-2、-Member-functions"><a href="#3-2、-Member-functions" class="headerlink" title="3.2、 Member functions"></a>3.2、 Member functions</h5><ul>
+<li><p><a href="http://www.cplusplus.com/reference/map/map/map/" target="_blank" rel="noopener"><strong>(constructor)</strong></a></p>
+<p>Construct map (public member function )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/map/map/~map/" target="_blank" rel="noopener"><strong>(destructor)</strong></a></p>
+<p>Map destructor (public member function )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/map/map/operator=/" target="_blank" rel="noopener"><strong>operator=</strong></a></p>
+<p>Copy container content (public member function )</p>
+</li>
+</ul>
+<p><strong>Iterators</strong>:</p>
+<ul>
+<li><p><a href="http://www.cplusplus.com/reference/map/map/begin/" target="_blank" rel="noopener"><strong>begin</strong></a></p>
+<p>Return iterator to beginning (public member function )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/map/map/end/" target="_blank" rel="noopener"><strong>end</strong></a></p>
+<p>Return iterator to end (public member function )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/map/map/rbegin/" target="_blank" rel="noopener"><strong>rbegin</strong></a></p>
+<p>Return reverse iterator to reverse beginning (public member function )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/map/map/rend/" target="_blank" rel="noopener"><strong>rend</strong></a></p>
+<p>Return reverse iterator to reverse end (public member function )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/map/map/cbegin/" target="_blank" rel="noopener"><strong>cbegin</strong> </a></p>
+<p>Return const_iterator to beginning (public member function )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/map/map/cend/" target="_blank" rel="noopener"><strong>cend</strong> </a></p>
+<p>Return const_iterator to end (public member function )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/map/map/crbegin/" target="_blank" rel="noopener"><strong>crbegin</strong> </a></p>
+<p>Return const_reverse_iterator to reverse beginning (public member function )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/map/map/crend/" target="_blank" rel="noopener"><strong>crend</strong> </a></p>
+<p>Return const_reverse_iterator to reverse end (public member function )</p>
+</li>
+</ul>
+<p><strong>Capacity</strong>:</p>
+<ul>
+<li><p><a href="http://www.cplusplus.com/reference/map/map/empty/" target="_blank" rel="noopener"><strong>empty</strong></a></p>
+<p>Test whether container is empty (public member function )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/map/map/size/" target="_blank" rel="noopener"><strong>size</strong></a></p>
+<p>Return container size (public member function )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/map/map/max_size/" target="_blank" rel="noopener"><strong>max_size</strong></a></p>
+<p>Return maximum size (public member function )</p>
+</li>
+</ul>
+<p><strong>Element access</strong>:</p>
+<ul>
+<li><p><a href="http://www.cplusplus.com/reference/map/map/operator[]/" target="_blank" rel="noopener"> <strong>operator [ \ ]</strong> </a></p>
+<p>Access element (public member function )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/map/map/at/" target="_blank" rel="noopener"><strong>at</strong> </a></p>
+<p>Access element (public member function )</p>
+</li>
+</ul>
+<p><strong>Modifiers</strong>:</p>
+<ul>
+<li><p><a href="http://www.cplusplus.com/reference/map/map/insert/" target="_blank" rel="noopener"><strong>insert</strong></a></p>
+<p>Insert elements (public member function )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/map/map/erase/" target="_blank" rel="noopener"><strong>erase</strong></a></p>
+<p>Erase elements (public member function )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/map/map/swap/" target="_blank" rel="noopener"><strong>swap</strong></a></p>
+<p>Swap content (public member function )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/map/map/clear/" target="_blank" rel="noopener"><strong>clear</strong></a></p>
+<p>Clear content (public member function )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/map/map/emplace/" target="_blank" rel="noopener"><strong>emplace</strong> </a></p>
+<p>Construct and insert element (public member function )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/map/map/emplace_hint/" target="_blank" rel="noopener"><strong>emplace_hint</strong> </a></p>
+<p>Construct and insert element with hint (public member function )</p>
+</li>
+</ul>
+<p><strong>Observers</strong>:</p>
+<ul>
+<li><p><a href="http://www.cplusplus.com/reference/map/map/key_comp/" target="_blank" rel="noopener"><strong>key_comp</strong></a></p>
+<p>Return key comparison object (public member function )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/map/map/value_comp/" target="_blank" rel="noopener"><strong>value_comp</strong></a></p>
+<p>Return value comparison object (public member function )</p>
+</li>
+</ul>
+<p><strong>Operations</strong>:</p>
+<ul>
+<li><p><a href="http://www.cplusplus.com/reference/map/map/find/" target="_blank" rel="noopener"><strong>find</strong></a></p>
+<p>Get iterator to element (public member function )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/map/map/count/" target="_blank" rel="noopener"><strong>count</strong></a></p>
+<p>Count elements with a specific key (public member function )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/map/map/lower_bound/" target="_blank" rel="noopener"><strong>lower_bound</strong></a></p>
+<p>Return iterator to lower bound (public member function )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/map/map/upper_bound/" target="_blank" rel="noopener"><strong>upper_bound</strong></a></p>
+<p>Return iterator to upper bound (public member function )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/map/map/equal_range/" target="_blank" rel="noopener"><strong>equal_range</strong></a></p>
+<p>Get range of equal elements (public member function )</p>
+</li>
+</ul>
+<p><strong>Allocator</strong>:</p>
+<ul>
+<li><p><a href="http://www.cplusplus.com/reference/map/map/get_allocator/" target="_blank" rel="noopener"><strong>get_allocator</strong></a></p>
+<p>Get allocator (public member function )</p>
+</li>
+</ul>
+<h4 id="4、讲讲stack"><a href="#4、讲讲stack" class="headerlink" title="4、讲讲stack"></a>4、讲讲stack</h4><p><a href="http://www.cplusplus.com/reference/stack/stack/" target="_blank" rel="noopener">http://www.cplusplus.com/reference/stack/stack/</a></p>
+<h5 id="4-1-Overview-and-feature"><a href="#4-1-Overview-and-feature" class="headerlink" title="4.1 Overview and feature"></a>4.1 Overview and feature</h5><p>基础容器可以是任何标准容器类模板或某些其他专门设计的容器类。容器应支持以下操作:</p>
+<ul>
+<li>empty</li>
+<li>size</li>
+<li>back</li>
+<li>push_back</li>
+<li>pop_back</li>
+</ul>
+<p>标准容器类vector，deque和list满足这些要求。默认情况下，如果没有为特定的stack类实例指定容器类，则使用标准容器deque。</p>
+<h5 id="4-2、-Member-functions"><a href="#4-2、-Member-functions" class="headerlink" title="4.2、 Member functions"></a>4.2、 Member functions</h5><ul>
+<li><p><a href="http://www.cplusplus.com/reference/stack/stack/stack/" target="_blank" rel="noopener"><strong>(constructor)</strong></a></p>
+<p>Construct stack (public member function )</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// constructing stacks</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;       // std::cout</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;          // std::stack</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;         // std::vector</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;deque&gt;          // std::deque</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">deque</span>&lt;<span class="keyword">int</span>&gt; <span class="title">mydeque</span> <span class="params">(<span class="number">3</span>,<span class="number">100</span>)</span></span>;          <span class="comment">// deque with 3 elements</span></span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">myvector</span> <span class="params">(<span class="number">2</span>,<span class="number">200</span>)</span></span>;        <span class="comment">// vector with 2 elements</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; first;                    <span class="comment">// empty stack</span></span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; <span class="title">second</span> <span class="params">(mydeque)</span></span>;         <span class="comment">// stack initialized to copy of deque</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">stack</span>&lt;<span class="keyword">int</span>,<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; third;  <span class="comment">// empty stack using vector</span></span><br><span class="line">  std::stack&lt;int,std::vector&lt;int&gt; &gt; fourth (myvector);</span><br><span class="line"></span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"size of first: "</span> &lt;&lt; first.<span class="built_in">size</span>() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"size of second: "</span> &lt;&lt; second.<span class="built_in">size</span>() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"size of third: "</span> &lt;&lt; third.<span class="built_in">size</span>() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"size of fourth: "</span> &lt;&lt; fourth.<span class="built_in">size</span>() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Output:</span></span><br><span class="line"><span class="comment">size of first: 0</span></span><br><span class="line"><span class="comment">size of second: 3</span></span><br><span class="line"><span class="comment">size of third: 0</span></span><br><span class="line"><span class="comment">size of fourth: 2</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<ul>
+<li><p><a href="http://www.cplusplus.com/reference/stack/stack/empty/" target="_blank" rel="noopener"><strong>empty</strong></a></p>
+<p>Test whether container is empty (public member function )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/stack/stack/size/" target="_blank" rel="noopener"><strong>size</strong></a></p>
+<p>Return size (public member function )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/stack/stack/top/" target="_blank" rel="noopener"><strong>top</strong></a></p>
+<p>Access next element (public member function )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/stack/stack/push/" target="_blank" rel="noopener"><strong>push</strong></a></p>
+<p>Insert element (public member function )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/stack/stack/emplace/" target="_blank" rel="noopener"><strong>emplace</strong> </a></p>
+<p>Construct and insert element (public member function )</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// stack::emplace</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;       // std::cin, std::cout</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;          // std::stack</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;         // std::string, std::getline(string)</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">stack</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>&gt; mystack;</span><br><span class="line"></span><br><span class="line">  mystack.emplace (<span class="string">"First sentence"</span>);</span><br><span class="line">  mystack.emplace (<span class="string">"Second sentence"</span>);</span><br><span class="line"></span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"mystack contains:\n"</span>;</span><br><span class="line">  <span class="keyword">while</span> (!mystack.empty())</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; mystack.top() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">    mystack.pop();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Output:</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">mystack contains:</span></span><br><span class="line"><span class="comment">Second sentence</span></span><br><span class="line"><span class="comment">First sentence</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<ul>
+<li><p><a href="http://www.cplusplus.com/reference/stack/stack/pop/" target="_blank" rel="noopener"><strong>pop</strong></a></p>
+<p>Remove top element (public member function )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/stack/stack/swap/" target="_blank" rel="noopener"><strong>swap</strong> </a></p>
+<p>Swap contents (public member function )</p>
+</li>
+</ul>
+<h3 id="Non-member-function-overloads"><a href="#Non-member-function-overloads" class="headerlink" title="Non-member function overloads"></a>Non-member function overloads</h3><ul>
+<li><p><a href="http://www.cplusplus.com/reference/stack/stack/operators/" target="_blank" rel="noopener"><strong>relational operators</strong></a></p>
+<p>Relational operators for stack (function )</p>
+</li>
+<li><p><a href="http://www.cplusplus.com/reference/stack/stack/swap-free/" target="_blank" rel="noopener"><strong>swap (stack)</strong> </a></p>
+<p>Exchange contents of stacks (public member function )</p>
+</li>
+</ul>
+<h3 id="Non-member-class-specializations"><a href="#Non-member-class-specializations" class="headerlink" title="Non-member class specializations"></a>Non-member class specializations</h3><ul>
+<li><p><a href="http://www.cplusplus.com/reference/stack/stack/uses_allocator/" target="_blank" rel="noopener"><strong>uses_allocator</strong> </a></p>
+<p>Uses allocator for stack (class template )</p>
+</li>
+</ul>
+
+    </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>Author：<a href="http://www.cao-lin.top">Cao Lin</a>
+            <p>原文链接：<a href="http://www.cao-lin.top/2020/04/08/CPP%20map%20stack/">http://www.cao-lin.top/2020/04/08/CPP%20map%20stack/</a>
+            <p>发表日期：<a href="http://www.cao-lin.top/2020/04/08/CPP%20map%20stack/">April 8th 2020, 4:41:51 pm</a>
+            <p>更新日期：<a href="http://www.cao-lin.top/2020/04/08/CPP%20map%20stack/">April 8th 2020, 4:41:10 pm</a>
+            <p>版权声明：本文采用<a rel="license noopener" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    
+    <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2020/04/06/CPP%20string/" title= "CPP string 简介">
+                    <div class="prevTitle">CPP string 简介</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+    <div id="lv-container" data-id="city" data-uid= MTAyMC80OTQwMy8yNTg5NQ>
+        <script type="text/javascript">
+            (function (d, s) {
+                var j, e = d.getElementsByTagName(s)[0];
+                if (typeof LivereTower === 'function') { return; }
+                j = d.createElement(s);
+                j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+                j.async = true;
+
+                e.parentNode.insertBefore(j, e);
+            })(document, 'script');
+        </script>
+        <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+    </div>
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!-- gitalk评论 -->
+
+    <!-- utteranc评论 -->
+
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:zhangcaocao66@gmail.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/zhangcaocao" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            
+                <a href="https://space.bilibili.com/82217945" class="iconfont-archer bilibili" target="_blank" title=bilibili></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+    
+     
+    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+    
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:70vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、题目"><span class="toc-number">1.</span> <span class="toc-text">1、题目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、解决方案"><span class="toc-number">2.</span> <span class="toc-text">2、解决方案</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3、讲讲map"><span class="toc-number">3.</span> <span class="toc-text">3、讲讲map</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#3-1-Overview-and-feature"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 Overview and feature</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-2、-Member-functions"><span class="toc-number">3.2.</span> <span class="toc-text">3.2、 Member functions</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4、讲讲stack"><span class="toc-number">4.</span> <span class="toc-text">4、讲讲stack</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#4-1-Overview-and-feature"><span class="toc-number">4.1.</span> <span class="toc-text">4.1 Overview and feature</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-2、-Member-functions"><span class="toc-number">4.2.</span> <span class="toc-text">4.2、 Member functions</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Non-member-function-overloads"><span class="toc-number"></span> <span class="toc-text">Non-member function overloads</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Non-member-class-specializations"><span class="toc-number"></span> <span class="toc-text">Non-member class specializations</span></a>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 5
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/04/03/CPPvector%E6%93%8D%E4%BD%9C/" >CPP vector 简介</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2020 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/01</span><a class="archive-post-title" href= "/2020/04/01/hello-world/" >Hello World</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/04/08/CPP%20map%20stack/" >CPP map 和 stack</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2020 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/06</span><a class="archive-post-title" href= "/2020/04/06/CPP%20string/" >CPP string 简介</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/02</span><a class="archive-post-title" href= "/2020/04/02/std-set%E7%9A%84%E7%94%A8%E6%B3%95%E5%88%9D%E6%AD%A5%E6%80%BB%E7%BB%93/" >CPP set 简介</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name" data-tags="C++"><span class="iconfont-archer">&#xe606;</span>C++</span>
+    
+        <span class="sidebar-tag-name" data-tags="剑指offer"><span class="iconfont-archer">&#xe606;</span>剑指offer</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: "/",
+        author: "Cao Lin"
+    }
+</script>
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/scripts/main.js"></script>
+    <!-- algolia -->
+    
+    <!-- busuanzi  -->
+    
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
+     
+    </body>
+</html>
+
+
