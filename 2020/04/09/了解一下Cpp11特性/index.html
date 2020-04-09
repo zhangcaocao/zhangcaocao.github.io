@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- title -->
+
+
+
+
+<!-- keywords -->
+
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" >
+    <meta name="author" content="Cao Lin">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="Cao Lin">
+    
+    <meta name="keywords" content="deeplearning,SLAM,robot">
+    
+    <meta name="description" content="Good judgment comes from experience ，and a lot of that comes from bad judgment.">
+    <meta name="description" content="关于CPP的更多资料可以访问：nemoTyrant&#x2F;manong&#x2F;blob&#x2F;master&#x2F;category&#x2F;C_C++.md 这里只是记录【C++11】30分钟了解C++11新特性 这篇文章的一些重要点和代码。 C++11包括大量的新特性：包括lambda表达式，类型推导关键字auto、decltype，和模板的大量改进。 autoauto实际上实在编译时对变量进行了类型推导，所以不会对程序的运行">
+<meta property="og:type" content="article">
+<meta property="og:title" content="了解一下Cpp11特性">
+<meta property="og:url" content="http://www.cao-lin.top/2020/04/09/%E4%BA%86%E8%A7%A3%E4%B8%80%E4%B8%8BCpp11%E7%89%B9%E6%80%A7/index.html">
+<meta property="og:site_name" content="Cao Lin Blog">
+<meta property="og:description" content="关于CPP的更多资料可以访问：nemoTyrant&#x2F;manong&#x2F;blob&#x2F;master&#x2F;category&#x2F;C_C++.md 这里只是记录【C++11】30分钟了解C++11新特性 这篇文章的一些重要点和代码。 C++11包括大量的新特性：包括lambda表达式，类型推导关键字auto、decltype，和模板的大量改进。 autoauto实际上实在编译时对变量进行了类型推导，所以不会对程序的运行">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-04-09T08:18:04.505Z">
+<meta property="article:modified_time" content="2020-04-09T08:18:43.995Z">
+<meta property="article:author" content="Cao Lin">
+<meta property="article:tag" content="C++">
+<meta name="twitter:card" content="summary">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    
+    <title>了解一下Cpp11特性 · Cao Lin&#39;s Blog</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href= "/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <link rel="stylesheet" href= "/css/mobile.css?v=20180824" media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+    <link rel="icon" href= "/assets/favicon.ico" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script" />
+    <link rel="preload" href="/scripts/main.js" as="script" />
+    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin>
+    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin>
+    
+    <!-- fancybox -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >Cao Lin&#39;s Blog.</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">了解一下Cpp11特性</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>Cao Lin's Blog.</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style="
+
+
+
+
+
+
+
+height:70vh;
+">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            了解一下Cpp11特性
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "C++">C++</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count word-count">2.1k</span>Reading time: <span class="post-count reading-time">9 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2020/04/09</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <p>关于CPP的更多资料可以访问：<a href="https://github.com/nemoTyrant/manong/blob/master/category/C_C%2B%2B.md" target="_blank" rel="noopener">nemoTyrant/manong/blob/master/category/C_C++.md</a></p>
+<p>这里只是记录<a href="https://my.oschina.net/wangxuanyihaha/blog/183151" target="_blank" rel="noopener">【C++11】30分钟了解C++11新特性 </a>这篇文章的一些重要点和代码。</p>
+<p>C++11包括大量的新特性：包括lambda表达式，类型推导关键字auto、decltype，和模板的大量改进。</p>
+<h3 id="auto"><a href="#auto" class="headerlink" title="auto"></a>auto</h3><p>auto实际上实在<strong>编译时</strong>对变量进行了类型推导，所以不会对程序的运行效率造成不良影响。</p>
+<p>这是一个关于在哪些地方使用auto的讨论：</p>
+<p><a href="https://stackoverflow.com/questions/6434971/how-much-is-too-much-with-c11-auto-keyword" target="_blank" rel="noopener">https://stackoverflow.com/questions/6434971/how-much-is-too-much-with-c11-auto-keyword</a></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> foo = <span class="built_in">std</span>::make_shared&lt;Foo&gt;();   <span class="comment">// obvious</span></span><br><span class="line"><span class="keyword">auto</span> foo = bla();                     <span class="comment">// unclear. don't know which type `foo` has</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">size_t</span> max_size = <span class="number">100</span>;</span><br><span class="line"><span class="keyword">for</span> ( <span class="keyword">auto</span> x = max_size; x &gt; <span class="number">0</span>; --x ) <span class="comment">// unclear. could lead to the errors</span></span><br><span class="line">                                      <span class="comment">// since max_size is unsigned</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;some_class&gt; v;			  </span><br><span class="line"><span class="keyword">for</span> ( <span class="keyword">auto</span> it = v.<span class="built_in">begin</span>(); it != v.<span class="built_in">end</span>(); ++it )</span><br><span class="line">    						<span class="comment">// ok, since I know that `it` has an iterator type</span></span><br><span class="line">    						<span class="comment">// (don't really care which one in this context)</span></span><br></pre></td></tr></table></figure>
+
+<p>除了进行类型推导外，auto也可以用于模板中，以简化麻烦的模板参数：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 不使用cuto， 必须添加Product参数</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Product, <span class="keyword">typename</span> Creator&gt;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">processProduct</span><span class="params">(<span class="keyword">const</span> Creator&amp; creator)</span> </span>&#123;</span><br><span class="line">    Product* val = creator.makeObject();</span><br><span class="line">    <span class="comment">// do somthing with val</span></span><br><span class="line">&#125;		</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用auto，  省略Product参数</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Creator&gt;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">processProduct</span><span class="params">(<span class="keyword">const</span> Creator&amp; creator)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">auto</span> val = creator.makeObject();</span><br><span class="line">    <span class="comment">// do somthing with val</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="decltype"><a href="#decltype" class="headerlink" title="decltype"></a>decltype</h3><p>decltype与auto相对应， 可以从一个变量或表达式中得到类型：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> x = <span class="number">3</span>;</span><br><span class="line"><span class="keyword">decltype</span>(x) y = x;</span><br></pre></td></tr></table></figure>
+
+<p> 当上文中的模板需要返回值的时候，可以结合auto和deltype简洁实现：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用auto，  省略Product参数</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Creator&gt;</span><br><span class="line">void processProduct(const Creator&amp; creator) -&gt; decltype(creator.makeObject()) &#123;</span><br><span class="line">    <span class="keyword">auto</span> val = creator.makeObject();</span><br><span class="line">    <span class="comment">// do somthing with val</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="nullptr"><a href="#nullptr" class="headerlink" title="nullptr"></a>nullptr</h3><p>nullptr用于解决原来C++中NULL的二义性而引入的一种新的类型，因为NULL实际上代表的是0。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> NULL</span></span><br><span class="line">    <span class="meta">#<span class="meta-keyword">ifdef</span> __cplusplus</span></span><br><span class="line">        <span class="meta">#<span class="meta-keyword">define</span> NULL 0</span></span><br><span class="line">    <span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line">        <span class="meta">#<span class="meta-keyword">define</span> NULL ((void *)0)</span></span><br><span class="line">    <span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;assert.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">F</span><span class="params">(<span class="keyword">int</span> a)</span></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"a: "</span> &lt;&lt; a&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">F</span><span class="params">(<span class="keyword">int</span> *p)</span></span>&#123;</span><br><span class="line">    assert(p != <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt; <span class="string">"p: "</span>&lt;&lt; p &lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> *p = <span class="literal">nullptr</span>;</span><br><span class="line">    <span class="keyword">int</span> *q = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">bool</span> equal = ( p == q ); <span class="comment">// equal的值为true，说明p和q都是空指针</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"equal: "</span>&lt;&lt; equal &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">   <span class="comment">// int a = nullptr; // 编译失败，nullptr不能转型为int</span></span><br><span class="line">    F(<span class="number">0</span>); <span class="comment">// 在C++98中编译失败，有二义性；在C++11中调用F（int）</span></span><br><span class="line">    F(<span class="literal">nullptr</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//OUTPUT:</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">equal: 1</span></span><br><span class="line"><span class="comment">a: 0</span></span><br><span class="line"><span class="comment">Assertion failed: p != NULL</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="序列for循环"><a href="#序列for循环" class="headerlink" title="序列for循环"></a>序列for循环</h3><p>在C++中for循环可以使用简化的for循环，可以用于遍历数组，容器，string以及由begin和end函数定义的序列（即有Iterator），示例代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">map</span>&lt;<span class="built_in">string</span>, <span class="keyword">int</span>&gt; m&#123;&#123;<span class="string">"a"</span>, <span class="number">1</span>&#125;, &#123;<span class="string">"b"</span>, <span class="number">2</span>&#125;, &#123;<span class="string">"c"</span>, <span class="number">3</span>&#125;&#125;;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span> p : m)&#123;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;p.first&lt;&lt;<span class="string">" : "</span>&lt;&lt;p.second&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Lambda表达式"><a href="#Lambda表达式" class="headerlink" title="Lambda表达式"></a>Lambda表达式</h3><p>lambda表达式与python的lambda相似，它可以用于创建并定义匿名的函数对象，以简化编程工作。</p>
+<h4 id="Lambda的简单语法如下："><a href="#Lambda的简单语法如下：" class="headerlink" title="Lambda的简单语法如下："></a>Lambda的简单语法如下：</h4><p><strong>以下内容基本和这篇文章相同</strong>：<a href="https://www.jianshu.com/p/d686ad9de817" target="_blank" rel="noopener">https://www.jianshu.com/p/d686ad9de817</a></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 定义简单的lambda表达式 */</span></span><br><span class="line"><span class="keyword">auto</span> basicLambda = [] &#123; <span class="built_in">cout</span> &lt;&lt; <span class="string">"Hello, world!"</span> &lt;&lt; <span class="built_in">endl</span>; &#125;;</span><br><span class="line"><span class="comment">// 调用</span></span><br><span class="line">basicLambda();   <span class="comment">// 输出：Hello, world!</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/* 携带参数 参数放在（ ）内*/</span></span><br><span class="line">								<span class="comment">// 指明返回类型</span></span><br><span class="line"><span class="keyword">auto</span> add = [](<span class="keyword">int</span> a, <span class="keyword">int</span> b) -&gt; <span class="keyword">int</span> &#123; <span class="keyword">return</span> a + b; &#125;;</span><br><span class="line"><span class="comment">// 自动推断返回类型</span></span><br><span class="line"><span class="keyword">auto</span> multiply = [](<span class="keyword">int</span> a, <span class="keyword">int</span> b) &#123; <span class="keyword">return</span> a * b; &#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> sum = add(<span class="number">2</span>, <span class="number">5</span>);   <span class="comment">// 输出：7</span></span><br><span class="line"><span class="keyword">int</span> product = multiply(<span class="number">2</span>, <span class="number">5</span>);  <span class="comment">// 输出：10</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/* 中括号[] 实现闭包，用于捕获变量*/</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x = <span class="number">10</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">auto</span> add_x = [x](<span class="keyword">int</span> a) &#123; <span class="keyword">return</span> a + x; &#125;;  		<span class="comment">// 复制捕捉x</span></span><br><span class="line">    <span class="keyword">auto</span> multiply_x = [&amp;x](<span class="keyword">int</span> a) &#123; <span class="keyword">return</span> a * x; &#125;;  	<span class="comment">// 引用捕捉x</span></span><br><span class="line">    </span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; add_x(<span class="number">10</span>) &lt;&lt; <span class="string">" "</span> &lt;&lt; multiply_x(<span class="number">10</span>) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="comment">// 输出：20 100</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* lambda 表达式无法改变复制捕获的变量，需要使用 mutable 改动传值方式捕获的值*/</span></span><br><span class="line"><span class="comment">//对于引用捕获方式，无论是否标记mutable，都可以在lambda表达式中修改捕获的值。</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x = <span class="number">10</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">auto</span> add_x = [x](<span class="keyword">int</span> a) <span class="keyword">mutable</span> &#123; x *= <span class="number">2</span>; <span class="keyword">return</span> a + x; &#125;;  <span class="comment">// 复制捕捉x</span></span><br><span class="line">    </span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; add_x(<span class="number">10</span>) &lt;&lt; <span class="built_in">endl</span>; <span class="comment">// 输出 30</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* lambda 表达式禁用了赋值操作符，因此无法进行赋值操作；但是可以进行复制构造，可以利用一个 -*/</span></span><br><span class="line"><span class="comment">// lambda 表达式去初始化另一个lambda 表达式，产生副本。</span></span><br><span class="line"><span class="keyword">auto</span> a = [] &#123; <span class="built_in">cout</span> &lt;&lt; <span class="string">"A"</span> &lt;&lt; <span class="built_in">endl</span>; &#125;;</span><br><span class="line"><span class="keyword">auto</span> b = [] &#123; <span class="built_in">cout</span> &lt;&lt; <span class="string">"B"</span> &lt;&lt; <span class="built_in">endl</span>; &#125;;</span><br><span class="line"></span><br><span class="line">a = b;   <span class="comment">// 非法，lambda无法赋值</span></span><br><span class="line"><span class="keyword">auto</span> c = a;   <span class="comment">// 合法，生成一个副本</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="捕获的方式具体有以下几类："><a href="#捕获的方式具体有以下几类：" class="headerlink" title="捕获的方式具体有以下几类："></a>捕获的方式具体有以下几类：</h4><ul>
+<li>[]：默认不捕获任何变量；</li>
+<li>[=]：默认以值捕获所有变量；</li>
+<li>[&amp;]：默认以引用捕获所有变量；</li>
+<li>[x]：仅以值捕获x，其它变量不捕获；</li>
+<li>[&amp;x]：仅以引用捕获x，其它变量不捕获；</li>
+<li>[=, &amp;x]：默认以值捕获所有变量，但是x是例外，通过引用捕获；</li>
+<li>[&amp;, x]：默认以引用捕获所有变量，但是x是例外，通过值捕获；</li>
+<li>[this]：通过引用捕获当前对象（其实是复制指针）；</li>
+<li>[*this]：通过传值方式捕获当前对象；</li>
+</ul>
+<p>采用默认值捕获所有变量仍然有风险:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 无法捕获divisor变量，数据成员divisor对lambda表达式并不可见</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Filter</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Filter(<span class="keyword">int</span> divisorVal):</span><br><span class="line">        divisor&#123;divisorVal&#125;</span><br><span class="line">    &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="built_in">std</span>::function&lt;<span class="title">bool</span><span class="params">(<span class="keyword">int</span>)</span>&gt; <span class="title">getFilter</span><span class="params">()</span> </span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> [=](<span class="keyword">int</span> value) &#123;<span class="keyword">return</span> value % divisor == <span class="number">0</span>; &#125;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> divisor;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 【验证】类的方法，下面无法编译，因为divisor并不在lambda捕捉的范围</span></span><br><span class="line"><span class="function"><span class="built_in">std</span>::function&lt;<span class="title">bool</span><span class="params">(<span class="keyword">int</span>)</span>&gt; <span class="title">getFilter</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> [divisor](<span class="keyword">int</span> value) &#123;<span class="keyword">return</span> value % divisor == <span class="number">0</span>; &#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 使用this指针变量，捕获this指针的副本，此时采用默认值捕捉所有变量仍然是不安全的，主要是由于指针变量的复制，实际上还是按引用传值。</span></span><br><span class="line"><span class="function"><span class="built_in">std</span>::function&lt;<span class="title">bool</span><span class="params">(<span class="keyword">int</span>)</span>&gt; <span class="title">getFilter</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> [<span class="keyword">this</span>](<span class="keyword">int</span> value) &#123;<span class="keyword">return</span> value % <span class="keyword">this</span>-&gt;divisor == <span class="number">0</span>; &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="相关应用，-大部分STL算法，可以非常灵活地搭配lambda表达式来实现想要的效果："><a href="#相关应用，-大部分STL算法，可以非常灵活地搭配lambda表达式来实现想要的效果：" class="headerlink" title="相关应用， 大部分STL算法，可以非常灵活地搭配lambda表达式来实现想要的效果："></a>相关应用， 大部分<code>STL</code>算法，可以非常灵活地搭配<code>lambda</code>表达式来实现想要的效果：</h4><ul>
+<li>用于函数的参数，通过这种方式可以实现回调函数，比如你要统计一个数组中满足特定条件的元素数量，通过<code>lambda</code>表达式给出条件，传递给<code>count_if</code>函数：</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> value = <span class="number">3</span>;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v &#123;<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">2</span>, <span class="number">6</span>, <span class="number">10</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> count = <span class="built_in">std</span>::count_if(v.beigin(), v.<span class="built_in">end</span>(), [value](<span class="keyword">int</span> x) &#123; <span class="keyword">return</span> x &gt; value; &#125;);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>再比如你想生成斐波那契数列，然后保存在数组中，此时你可以使用<code>generate</code>函数，并辅助<code>lambda</code>表达式：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">v</span><span class="params">(<span class="number">10</span>)</span></span>;</span><br><span class="line"><span class="keyword">int</span> a = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> b = <span class="number">1</span>;</span><br><span class="line"><span class="built_in">std</span>::generate(v.begin(), v.end(), [&amp;a, &amp;b] &#123; <span class="keyword">int</span> value = b; b = b + a; a = value; <span class="keyword">return</span> value; &#125;);</span><br><span class="line"><span class="comment">// 此时v &#123;1, 1, 2, 3, 5, 8, 13, 21, 34, 55&#125;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>对象排序</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Person(<span class="keyword">const</span> <span class="built_in">string</span>&amp; first, <span class="keyword">const</span> <span class="built_in">string</span>&amp; last):</span><br><span class="line">        firstName&#123;first&#125;, lastName&#123;last&#125;</span><br><span class="line">    &#123;&#125;</span><br><span class="line"></span><br><span class="line">    Person() = <span class="keyword">default</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">first</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> firstName; &#125;</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">last</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> lastName; &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">string</span> firstName;</span><br><span class="line">    <span class="built_in">string</span> lastName;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;Person&gt; vp;</span><br><span class="line">    <span class="comment">// ... 添加Person信息</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 按照姓名排序</span></span><br><span class="line">    <span class="built_in">std</span>::sort(vp.begin(), vp.end(), [](<span class="keyword">const</span> Person&amp; p1, <span class="keyword">const</span> Person&amp; p2)</span><br><span class="line">    &#123; <span class="keyword">return</span> p1.last() &lt; p2.last() || (p1.last() == p2.last() &amp;&amp; p1.first() &lt; p2.first()); &#125;);</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="lambda的完整语法"><a href="#lambda的完整语法" class="headerlink" title="lambda的完整语法"></a>lambda的完整语法</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 完整语法</span></span><br><span class="line">[ capture-<span class="built_in">list</span> ] ( params ) <span class="keyword">mutable</span>(optional) <span class="keyword">constexpr</span>(optional)(c++<span class="number">17</span>) exception attribute -&gt; ret &#123; body &#125; </span><br><span class="line"></span><br><span class="line"><span class="comment">// 可选的简化语法</span></span><br><span class="line">[ capture-<span class="built_in">list</span> ] ( params ) -&gt; ret &#123; body &#125;     </span><br><span class="line">[ capture-<span class="built_in">list</span> ] ( params ) &#123; body &#125;    </span><br><span class="line">[ capture-<span class="built_in">list</span> ] &#123; body &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>capture-list</strong>：捕捉列表，这个不用多说，前面已经讲过，记住它不能省略；</p>
+</li>
+<li><p><strong>params</strong>：参数列表，可以省略（但是后面必须紧跟函数体）；</p>
+</li>
+<li><p><strong>mutable</strong>：可选，将<code>lambda</code>表达式标记为<code>mutable</code>后，函数体就可以修改传值方式捕获的变量；</p>
+</li>
+<li><p><strong>constexpr</strong>：可选，C++17，可以指定<code>lambda</code>表达式是一个常量函数；</p>
+</li>
+<li><p><strong>exception</strong>：可选，指定<code>lambda</code>表达式可以抛出的异常；</p>
+</li>
+<li><p><strong>attribute</strong>：可选，指定<code>lambda</code>表达式的特性；</p>
+</li>
+<li><p><strong>ret</strong>：可选，返回值类型；</p>
+</li>
+<li><p><strong>body</strong>：函数执行体。</p>
+</li>
+</ul>
+<p><a href="https://en.cppreference.com/w/cpp/language/lambda" target="_blank" rel="noopener">https://en.cppreference.com/w/cpp/language/lambda</a></p>
+<h3 id="变长参数的模板"><a href="#变长参数的模板" class="headerlink" title="变长参数的模板"></a>变长参数的模板</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> p = make_pair(<span class="number">1</span>, <span class="string">"C++ 11"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> t1 = make_tuple(<span class="number">1</span>, <span class="number">2.0</span>, <span class="string">"C++ 11"</span>);</span><br><span class="line"><span class="keyword">auto</span> t2 = make_tuple(<span class="number">1</span>, <span class="number">2.0</span>, <span class="string">"C++ 11"</span>, &#123;<span class="number">1</span>, <span class="number">0</span>, <span class="number">2</span>&#125;);</span><br><span class="line"></span><br><span class="line">Print(<span class="number">1</span>, <span class="number">1.0</span>, <span class="string">"C++11"</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="更加优雅的初始化方法"><a href="#更加优雅的初始化方法" class="headerlink" title="更加优雅的初始化方法"></a>更加优雅的初始化方法</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// c++11 以前</span></span><br><span class="line"><span class="keyword">int</span> arr[<span class="number">3</span>] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v(arr, arr + <span class="number">3</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// c++11 以后</span></span><br><span class="line"><span class="keyword">int</span> arr[<span class="number">3</span>]&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; iv&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;;</span><br><span class="line"><span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="built_in">string</span>&gt;&#123;&#123;<span class="number">1</span>, <span class="string">"a"</span>&#125;, &#123;<span class="number">2</span>, <span class="string">"b"</span>&#125;&#125;;</span><br><span class="line"><span class="built_in">string</span> str&#123;<span class="string">"Hello World"</span>&#125;;</span><br></pre></td></tr></table></figure>
+
+
+    </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>Author：<a href="http://www.cao-lin.top">Cao Lin</a>
+            <p>原文链接：<a href="http://www.cao-lin.top/2020/04/09/%E4%BA%86%E8%A7%A3%E4%B8%80%E4%B8%8BCpp11%E7%89%B9%E6%80%A7/">http://www.cao-lin.top/2020/04/09/%E4%BA%86%E8%A7%A3%E4%B8%80%E4%B8%8BCpp11%E7%89%B9%E6%80%A7/</a>
+            <p>发表日期：<a href="http://www.cao-lin.top/2020/04/09/%E4%BA%86%E8%A7%A3%E4%B8%80%E4%B8%8BCpp11%E7%89%B9%E6%80%A7/">April 9th 2020, 4:18:04 pm</a>
+            <p>更新日期：<a href="http://www.cao-lin.top/2020/04/09/%E4%BA%86%E8%A7%A3%E4%B8%80%E4%B8%8BCpp11%E7%89%B9%E6%80%A7/">April 9th 2020, 4:18:43 pm</a>
+            <p>版权声明：本文采用<a rel="license noopener" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    
+    <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2020/04/08/CPP%20map%20stack/" title= "CPP map 和 stack">
+                    <div class="prevTitle">CPP map 和 stack</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+    <div id="lv-container" data-id="city" data-uid= MTAyMC80OTQwMy8yNTg5NQ>
+        <script type="text/javascript">
+            (function (d, s) {
+                var j, e = d.getElementsByTagName(s)[0];
+                if (typeof LivereTower === 'function') { return; }
+                j = d.createElement(s);
+                j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+                j.async = true;
+
+                e.parentNode.insertBefore(j, e);
+            })(document, 'script');
+        </script>
+        <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+    </div>
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!-- gitalk评论 -->
+
+    <!-- utteranc评论 -->
+
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:zhangcaocao66@gmail.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/zhangcaocao" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            
+                <a href="https://space.bilibili.com/82217945" class="iconfont-archer bilibili" target="_blank" title=bilibili></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+    
+     
+    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+    
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:70vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#auto"><span class="toc-number">1.</span> <span class="toc-text">auto</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#decltype"><span class="toc-number">2.</span> <span class="toc-text">decltype</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#nullptr"><span class="toc-number">3.</span> <span class="toc-text">nullptr</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#序列for循环"><span class="toc-number">4.</span> <span class="toc-text">序列for循环</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lambda表达式"><span class="toc-number">5.</span> <span class="toc-text">Lambda表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Lambda的简单语法如下："><span class="toc-number">5.1.</span> <span class="toc-text">Lambda的简单语法如下：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#捕获的方式具体有以下几类："><span class="toc-number">5.2.</span> <span class="toc-text">捕获的方式具体有以下几类：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#相关应用，-大部分STL算法，可以非常灵活地搭配lambda表达式来实现想要的效果："><span class="toc-number">5.3.</span> <span class="toc-text">相关应用， 大部分STL算法，可以非常灵活地搭配lambda表达式来实现想要的效果：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#lambda的完整语法"><span class="toc-number">5.4.</span> <span class="toc-text">lambda的完整语法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#变长参数的模板"><span class="toc-number">6.</span> <span class="toc-text">变长参数的模板</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#更加优雅的初始化方法"><span class="toc-number">7.</span> <span class="toc-text">更加优雅的初始化方法</span></a></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 6
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/04/08/CPP%20map%20stack/" >CPP map 和 stack</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/04/03/CPPvector%E6%93%8D%E4%BD%9C/" >CPP vector 简介</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2020 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/09</span><a class="archive-post-title" href= "/2020/04/09/%E4%BA%86%E8%A7%A3%E4%B8%80%E4%B8%8BCpp11%E7%89%B9%E6%80%A7/" >了解一下Cpp11特性</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/06</span><a class="archive-post-title" href= "/2020/04/06/CPP%20string/" >CPP string 简介</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/02</span><a class="archive-post-title" href= "/2020/04/02/std-set%E7%9A%84%E7%94%A8%E6%B3%95%E5%88%9D%E6%AD%A5%E6%80%BB%E7%BB%93/" >CPP set 简介</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/01</span><a class="archive-post-title" href= "/2020/04/01/hello-world/" >Hello World</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name" data-tags="C++"><span class="iconfont-archer">&#xe606;</span>C++</span>
+    
+        <span class="sidebar-tag-name" data-tags="剑指offer"><span class="iconfont-archer">&#xe606;</span>剑指offer</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: "/",
+        author: "Cao Lin"
+    }
+</script>
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/scripts/main.js"></script>
+    <!-- algolia -->
+    
+    <!-- busuanzi  -->
+    
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
+     
+    </body>
+</html>
+
+
