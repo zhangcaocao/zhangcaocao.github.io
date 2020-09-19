@@ -369,12 +369,35 @@ height:70vh;
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2020/09/19/Python%20yield%E7%94%A8%E6%B3%95/" >
+            
+                <span>Python yield用法</span>
+        </a>
+        <div class="abstract-content">
+            <p>yield 的作用是把一个函数变成一个generator，带有 yield 的函数不再是一个普通函数，Python 解释器会将其视为一个 generator。</p>
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/09/19</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2020/04/13/DFC%E9%81%8D%E5%8E%86%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5%E4%B8%8E%E4%BA%8C%E7%BB%B4vector%E7%9A%84%E9%81%8D%E5%8E%86%E6%96%B9%E6%B3%95/" >
             
                 <span>二维vector的遍历方法与DFC遍历邻接矩阵</span>
         </a>
         <div class="abstract-content">
-            二维数组的遍历方法使用auto1234567891011121314151617181920#include&lt;iostream&gt;#include&lt;vector&gt;using namespace std;int main()&#123;	vector&lt;vector&lt;int&gt;&gt; vec;	vector&lt;int&gt; a&#123; 1, 2, 3 &#125;;	vector&lt;int&gt; b&#123; 2, 4, 5, 6 &#125;;	vec.push_back(a);	vec.push_back(b);    for(a...
+            <h3 id="二维数组的遍历方法"><a href="#二维数组的遍历方法" class="headerlink" title="二维数组的遍历方法"></a>二维数组的遍历方法</h3><h4 id="使用auto"><a href="#使用auto" class="headerlink" title="使用auto"></a>使用auto</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; vec;</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; a&#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span> &#125;;</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; b&#123; <span class="number">2</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span> &#125;;</span><br><span class="line"></span><br><span class="line">	vec.push_back(a);</span><br><span class="line">	vec.push_back(b);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> it : vec)&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">auto</span> i : it)&#123;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; i &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -441,12 +464,9 @@ PS: hexo 的公式支持太麻烦了，所以使用pdf的形式显示，这样�
                 <span>了解一下Cpp11特性</span>
         </a>
         <div class="abstract-content">
-            关于CPP的更多资料可以访问：nemoTyrant/manong/blob/master/category/C_C++.md
-这里只是记录【C++11】30分钟了解C++11新特性 这篇文章的一些重要点和代码。
-C++11包括大量的新特性：包括lambda表达式，类型推导关键字auto、decltype，和模板的大量改进。
-autoauto实际上实在编译时对变量进行了类型推导，所以不会对程序的运行效率造成不良影响。
-这是一个关于在哪些地方使用auto的讨论：
-https://stackoverflow.com/questions/6434971/how-much-is-too-much-...
+            <p>关于CPP的更多资料可以访问：<a href="https://github.com/nemoTyrant/manong/blob/master/category/C_C%2B%2B.md" target="_blank" rel="noopener">nemoTyrant/manong/blob/master/category/C_C++.md</a></p>
+<p>这里只是记录<a href="https://my.oschina.net/wangxuanyihaha/blog/183151" target="_blank" rel="noopener">【C++11】30分钟了解C++11新特性 </a>这篇文章的一些重要点和代码。</p>
+<p>C++11包括大量的新特性：包括lambda表达式，类型推导关键字auto、decltype，和模板的大量改进。</p>
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -475,8 +495,8 @@ https://stackoverflow.com/questions/6434971/how-much-is-too-much-...
                 <span>CPP map 和 stack</span>
         </a>
         <div class="abstract-content">
-            1、题目
-2、解决方案123456789101112131415161718192021222324252627282930313233343536373839404142434445/** * Definition for a binary tree node. * struct TreeNode &#123; *     int val; *     TreeNode *left; *     TreeNode *right; *     TreeNode(int x) : val(x), left(NULL), right(NULL) &#123;&#125; * &#125;; ...
+            <h4 id="1、题目"><a href="#1、题目" class="headerlink" title="1、题目"></a>1、题目</h4><p><img src="https://i.loli.net/2020/04/08/SHIvQm47lctF1T3.png" alt="image-20200408161022984"></p>
+<h4 id="2、解决方案"><a href="#2、解决方案" class="headerlink" title="2、解决方案"></a>2、解决方案</h4>
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -507,8 +527,8 @@ https://stackoverflow.com/questions/6434971/how-much-is-too-much-...
                 <span>CPP string 简介</span>
         </a>
         <div class="abstract-content">
-            1、题目
-2、解决方案12345678910111213141516class Solution &#123;public:    string replaceSpace(string s) &#123;        string temp_s;        for (auto str:s)        &#123;            if (str == ' ') &#123;temp_s += "%20";&#125;            else &#123;temp_s += str;&#125;        &#125;        return temp_s;...
+            <h4 id="1、题目"><a href="#1、题目" class="headerlink" title="1、题目"></a>1、题目</h4><p><img src="https://i.loli.net/2020/04/06/6S9YMiFXCqTrB5n.png" alt="image-20200406094953830"></p>
+<h4 id="2、解决方案"><a href="#2、解决方案" class="headerlink" title="2、解决方案"></a>2、解决方案</h4>
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -539,17 +559,17 @@ https://stackoverflow.com/questions/6434971/how-much-is-too-much-...
                 <span>CPP vector 简介</span>
         </a>
         <div class="abstract-content">
-            1、题目
+            <h4 id="1、题目"><a href="#1、题目" class="headerlink" title="1、题目"></a>1、题目</h4><img src="https://i.loli.net/2020/04/03/pFEGAYkXDdN4Mju.png" alt="image-20200403134846769" />
 
-如上题所示，我们可以观察到右上角和左下角是有规律的；
-例如左下角：
-
-若当前vector的值比target大，那么就应该往上移动，这一行都不可能查找到target；
-
-若当前vector的值比target小，则应该往右边移动，这一列都不可能查找到target；
-
-
-2、解决方案12345678910111213141516171819202122232425class Solution &#123;public:    // 利用 w++(右)/--(左) , h++(下)/--(上)控制遍历方向；    bool findNumberIn2DArray(vector&lt;...
+<p>如上题所示，我们可以观察到右上角和左下角是有规律的；</p>
+<p>例如<strong>左下角</strong>：</p>
+<ul>
+<li><p>若当前vector的值比target大，那么就应该往上移动，这一行都不可能查找到target；</p>
+</li>
+<li><p>若当前vector的值比target小，则应该往右边移动，这一列都不可能查找到target；</p>
+</li>
+</ul>
+<h4 id="2、解决方案"><a href="#2、解决方案" class="headerlink" title="2、解决方案"></a>2、解决方案</h4>
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -580,29 +600,29 @@ https://stackoverflow.com/questions/6434971/how-much-is-too-much-...
                 <span>CPP set 简介</span>
         </a>
         <div class="abstract-content">
-            
-主要是记一些理解之内的东西，没理解的东西，记下来也没用，这是一个初步的总结。
-更加详细的信息参考cplusplus.com
+            <blockquote>
+<p>主要是记一些理解之内的东西，没理解的东西，记下来也没用，这是一个初步的总结。</p>
+<p>更加详细的信息参考<a href="http://www.cplusplus.com/reference/set/set/" target="_blank" rel="noopener">cplusplus.com</a></p>
+</blockquote>
+<h4 id="1、题目："><a href="#1、题目：" class="headerlink" title="1、题目："></a>1、题目：</h4><p><a href="https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof/" target="_blank" rel="noopener">剑指offer</a></p>
+<h5 id="找出数组中重复的数字"><a href="#找出数组中重复的数字" class="headerlink" title="找出数组中重复的数字"></a>找出数组中重复的数字</h5><p>在一个长度为 n 的数组 nums 里的所有数字都在 0～n-1 的范围内。数组中某些数字是重复的，但不知道有几个数字重复了，也不知道每个数字重复了几次。请找出数组中任意一个重复的数字。</p>
+<p>示例 1：</p>
+<ul>
+<li>输入：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[2, 3, 1, 0, 2, 5, 3]</span><br></pre></td></tr></table></figure>
 
-1、题目：剑指offer
-找出数组中重复的数字在一个长度为 n 的数组 nums 里的所有数字都在 0～n-1 的范围内。数组中某些数字是重复的，但不知道有几个数字重复了，也不知道每个数字重复了几次。请找出数组中任意一个重复的数字。
-示例 1：
+<ul>
+<li>输出：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2 或 3</span><br></pre></td></tr></table></figure>
 
-输入：
+<ul>
+<li>限制：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2 &lt;&#x3D; n &lt;&#x3D; 100000</span><br></pre></td></tr></table></figure>
 
-1[2, 3, 1, 0, 2, 5, 3]
-
-
-输出：
-
-12 或 3
-
-
-限制：
-
-12 &lt;&#x3D; n &lt;&#x3D; 100000
-
-我的解决方案1234567891011121314...
+<h5 id="我的解决方案"><a href="#我的解决方案" class="headerlink" title="我的解决方案"></a>我的解决方案</h5>
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -890,9 +910,12 @@ Mo...
     
     
     
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 8
+        Total : 9
         </div>
         <!-- search  -->
         
@@ -902,6 +925,48 @@ Mo...
     
     
     
+    
+    <div class="archive-year"> 2020 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/06</span><a class="archive-post-title" href= "/2020/04/06/CPP%20string/" >CPP string 简介</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/04/08/CPP%20map%20stack/" >CPP map 和 stack</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/09/19/Python%20yield%E7%94%A8%E6%B3%95/" >Python yield用法</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
     
     <div class="archive-year"> Invalid date </div>
     <ul class="year-list">
@@ -937,31 +1002,12 @@ Mo...
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">04/06</span><a class="archive-post-title" href= "/2020/04/06/CPP%20string/" >CPP string 简介</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
             <span class="archive-post-date">04/02</span><a class="archive-post-title" href= "/2020/04/02/std-set%E7%9A%84%E7%94%A8%E6%B3%95%E5%88%9D%E6%AD%A5%E6%80%BB%E7%BB%93/" >CPP set 简介</a>
         </li>
     
     
         <li class="archive-post-item">
             <span class="archive-post-date">04/01</span><a class="archive-post-title" href= "/2020/04/01/hello-world/" >Hello World</a>
-        </li>
-    
-    
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> Invalid date </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/04/08/CPP%20map%20stack/" >CPP map 和 stack</a>
         </li>
     
     </div>
